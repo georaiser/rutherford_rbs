@@ -1,0 +1,314 @@
+/* ═══════════════════════════════════════════════════════════════
+   styles.css — Rutherford → RBS App
+   Teoría Cuántica Temprana · Evaluación 2 · Módulo 2
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Tokens de diseño ── */
+:root {
+  --bg:        #070c14;
+  --panel:     #0d1525;
+  --panel2:    #111d30;
+  --border:    #1c2e45;
+  --border2:   #243a55;
+  --text:      #dce8f5;
+  --muted:     #6a8aaa;
+  --amber:     #e8a833;
+  --amber-bg:  rgba(232,168,51,0.1);
+  --cyan:      #2dd4cc;
+  --green:     #3fcf82;
+  --red:       #e85252;
+  --blue:      #5c9cf8;
+  --purple:    #a97af5;
+  --radius:    14px;
+}
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 28px 14px 56px;
+  line-height: 1.65;
+}
+
+/* ══════════════════ HEADER ══════════════════ */
+header {
+  max-width: 840px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  background: var(--amber-bg);
+  border: 1px solid rgba(232,168,51,0.28);
+  border-radius: 4px;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+
+header h1 {
+  font-size: clamp(1.4rem, 3.8vw, 2.05rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: #edf5ff;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: var(--muted);
+  font-size: 0.875rem;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ══════════════════ LAYOUT ══════════════════ */
+main {
+  max-width: 840px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ══════════════════ PANEL ══════════════════ */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--amber);
+  color: #000;
+  flex-shrink: 0;
+}
+
+.panel-header h2 {
+  font-size: 0.93rem;
+  font-weight: 600;
+  flex: 1;
+  min-width: 100px;
+}
+
+.panel-body { padding: 18px 20px; }
+
+/* ══════════════════ CANVAS ══════════════════ */
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #04080f;
+}
+
+/* ══════════════════ TOGGLE DE MODO ══════════════════ */
+.mode-toggle {
+  display: flex;
+  gap: 3px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px;
+  margin-left: auto;
+}
+
+.mode-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 4px 11px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.15s;
+}
+
+.mode-btn.active {
+  background: var(--amber);
+  color: #000;
+  font-weight: 600;
+}
+
+.mode-btn:not(.active):hover { color: var(--text); }
+
+/* ══════════════════ CONTROLES / SLIDER ══════════════════ */
+.controls { margin-top: 14px; }
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.slider-label {
+  font-size: 0.79rem;
+  color: var(--muted);
+  width: 155px;
+  flex-shrink: 0;
+}
+
+input[type=range] {
+  flex: 1;
+  accent-color: var(--amber);
+  cursor: pointer;
+  min-width: 0;
+  height: 4px;
+}
+
+.slider-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--cyan);
+  width: 88px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Marcas de elementos bajo el slider M₂ */
+.el-marks {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0 0;
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  user-select: none;
+}
+
+/* ══════════════════ TARJETAS DE MÉTRICAS ══════════════════ */
+.metrics {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.metric-card {
+  flex: 1;
+  min-width: 105px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: border-color 0.2s;
+}
+
+.metric-card:hover { border-color: var(--border2); }
+
+.metric-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.metric-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.metric-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin-left: 2px;
+}
+
+/* ══════════════════ CAJA DE FÓRMULA ══════════════════ */
+.formula-box {
+  margin: 14px 0;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  overflow-x: auto;
+}
+
+.formula-box .flabel {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  margin-bottom: 6px;
+}
+
+.formula-meta {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ══════════════════ NOTA / ADVERTENCIA ══════════════════ */
+.note {
+  font-size: 0.79rem;
+  color: var(--muted);
+  padding: 9px 13px;
+  background: rgba(255,255,255,0.018);
+  border-radius: 6px;
+  border-left: 2px solid var(--border2);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.note b       { color: var(--text); font-weight: 500; }
+.note em      { color: var(--cyan); font-style: normal; }
+.note .warn   { color: var(--amber); font-weight: 500; }
+
+/* ══════════════════ FOOTER ══════════════════ */
+footer {
+  max-width: 840px;
+  margin: 26px auto 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* ══════════════════ RESPONSIVE ══════════════════ */
+@media (max-width: 520px) {
+  .slider-label { width: 105px; font-size: 0.74rem; }
+  .metric-val   { font-size: 1.05rem; }
+  .mode-btn     { padding: 4px 8px; font-size: 0.72rem; }
+  .panel-body   { padding: 14px 14px; }
+}

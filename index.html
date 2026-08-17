@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutherford → RBS · Teoría Cuántica Temprana</title>
+  <meta name="description" content="Simulación interactiva de la dispersión de Rutherford y Rutherford Backscattering Spectrometry (RBS). Evaluación 2 — Módulo 2.">
+
+  <!-- Tipografía académica -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS de la app -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- MathJax: renderiza fórmulas LaTeX en el navegador -->
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+
+<body>
+
+<!-- ══════════════════ ENCABEZADO ══════════════════ -->
+<header>
+  <div class="tag">Evaluación 2 · Módulo 2 · Teoría Cuántica Temprana</div>
+  <h1>Del experimento de Rutherford a la espectroscopía RBS</h1>
+  <p>Cada valor en pantalla se calcula en vivo con la fórmula física real.
+     Las simplificaciones están declaradas explícitamente.</p>
+</header>
+
+<main>
+
+  <!-- ══════════════════ PANEL A — DISPERSIÓN ══════════════════ -->
+  <section class="panel" id="panel-a">
+    <div class="panel-header">
+      <span class="badge">A</span>
+      <h2>Dispersión de Rutherford</h2>
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="btnRuth" onclick="panelA.setMode('rutherford')">Rutherford</button>
+        <button class="mode-btn"        id="btnThom" onclick="panelA.setMode('thomson')">Thomson</button>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <p class="note" id="descA">
+        <b>Rutherford (1909-1911):</b> partículas alfa (He²⁺, Z₁=2) se dirigen contra una lámina de oro
+        (Z₂=79). Las trayectorias son <b>hipérbolas reales</b>, calculadas integrando la ecuación de
+        movimiento en el potencial de Coulomb (RK4). Los parámetros de impacto son valores físicos fijos
+        en fm; al variar la energía, a₀ cambia y la deflexión también — el efecto es visible en tiempo real.
+      </p>
+
+      <canvas id="canvasA" width="800" height="330"></canvas>
+
+      <div class="controls">
+        <div class="slider-row">
+          <span class="slider-label">Energía $E_0$</span>
+          <input type="range" id="sliderE" min="4" max="10" step="0.1" value="7.0">
+          <span class="slider-val" id="valE">7.0 MeV</span>
+        </div>
+      </div>
+
+      <!-- Fórmula Rutherford (visible en modo Rutherford) -->
+      <div class="formula-box" id="formulaA">
+        <div class="flabel">Parámetro de impacto — dispersión de Rutherford (física real)</div>
+        $$b(\theta) = \frac{Z_1 Z_2 e^2}{4\pi\varepsilon_0 \cdot 2E}\,\cot\!\left(\frac{\theta}{2}\right)$$
+        <div class="formula-meta">
+          $Z_1=2$, $\;Z_2=79$ $\;\mid\;$
+          $a_0 = \dfrac{Z_1 Z_2 e^2}{4\pi\varepsilon_0\cdot 2E} = $
+          <b id="val-a0" style="color:var(--cyan)">16.2</b> fm
+          $\;\mid\;$ trayectoria interna: $\theta = $
+          <b id="val-theta-a" style="color:var(--amber)">143°</b>
+        </div>
+      </div>
+
+      <!-- Fórmula Thomson (visible en modo Thomson) -->
+      <div class="formula-box" id="formulaThom" style="display:none">
+        <div class="flabel">Deflexión Thomson — potencial de esfera uniforme (física real)</div>
+        $$\theta_\text{Thomson}(b)=\frac{Z_1 Z_2 e^2}{4\pi\varepsilon_0\cdot E}
+          \frac{b\,\sqrt{R^2-b^2}}{R^3},\quad b\le R$$
+        <div class="formula-meta">
+          $R_\text{Au}\approx 1.45\,\text{Å}$ $\;\mid\;$
+          deflexión máxima $= a_0/R = $
+          <b id="val-thom-max" style="color:var(--cyan)">0.007</b>°
+          → invisible a escala atómica.
+        </div>
+      </div>
+
+      <div class="note" id="noteA">
+        <span class="warn">⚠ Simplificación declarada:</span> la velocidad de la animación no representa
+        tiempo real (el choque ocurre en femtosegundos). Sin embargo, los puntos de la trayectoria están
+        separados en <em>pasos de tiempo iguales</em> — por lo que el punto visual sí se ralentiza cerca
+        del núcleo, lo cual es físicamente correcto: la partícula pierde velocidad al subir el potencial de Coulomb.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PANEL B — FACTOR K ══════════════════ -->
+  <section class="panel" id="panel-b">
+    <div class="panel-header">
+      <span class="badge">B</span>
+      <h2>Factor cinemático $K$ — principio de RBS</h2>
+    </div>
+    <div class="panel-body">
+
+      <p class="note">
+        <b>¿Cómo identifica RBS un elemento?</b> En una colisión elástica entre el proyectil alfa
+        ($M_1=4$ u) y un átomo del material ($M_2$ desconocida), la fracción de energía conservada —el
+        factor $K$— depende únicamente de $M_2$ y del ángulo del detector. Midiendo $E_1 = K\cdot E_0$
+        se despeja $M_2$ y se identifica el elemento. El tamaño del átomo en la animación escala como
+        $M_2^{1/3}$ (proporcional al radio).
+      </p>
+
+      <canvas id="canvasB" width="800" height="210"></canvas>
+
+      <div class="controls">
+        <div class="slider-row">
+          <span class="slider-label">Masa blanco $M_2$</span>
+          <input type="range" id="sliderM2" min="4" max="200" step="0.5" value="197" list="m2marks">
+          <span class="slider-val" id="valM2">197 u</span>
+        </div>
+        <datalist id="m2marks">
+          <option value="12"></option><option value="28"></option>
+          <option value="56"></option><option value="108"></option><option value="197"></option>
+        </datalist>
+        <div class="el-marks">
+          <span>C (12)</span><span>Si (28)</span><span>Fe (56)</span>
+          <span>Ag (108)</span><span>Au (197)</span>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="flabel">Factor cinemático — colisión elástica (física real)</div>
+        $$K(M_2,\theta)=\left(\frac{\sqrt{M_2^2-M_1^2\sin^2\!\theta}+M_1\cos\theta}{M_1+M_2}\right)^{\!2}$$
+        <div class="formula-meta">
+          $\theta=170°$ (posición fija del detector) $\;\mid\;$ $E_0=2\,\text{MeV}$ $\;\mid\;$ $M_1=4\,\text{u}$
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-label">Factor K</div>
+          <div class="metric-val"><span id="val-K">0.9230</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Energía salida E₁</div>
+          <div class="metric-val"><span id="val-E1">1.846</span><span class="metric-unit">MeV</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Elemento más cercano</div>
+          <div class="metric-val" id="val-el" style="color:var(--green)">Au</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Recule del blanco</div>
+          <div class="metric-val"><span id="val-recoil">0.040</span><span class="metric-unit">v₀</span></div>
+        </div>
+      </div>
+
+      <div class="note">
+        <b>Analogía (billar):</b> una bola de billar choca con una de bowling y rebota casi a la misma
+        velocidad ($K\approx1$, Au pesado). Con masas iguales, el proyectil entrega casi toda la energía
+        ($K$ mínimo). La velocidad de salida delata la masa del blanco.<br>
+        <span class="warn">⚠ Simplificación declarada:</span> la velocidad de la animación de salida es
+        proporcional a $\sqrt{K}$. El choque real ocurre en femtosegundos; lo que varía físicamente
+        es la energía de salida, no la duración del evento.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PANEL C — ESPECTRO ══════════════════ -->
+  <section class="panel" id="panel-c">
+    <div class="panel-header">
+      <span class="badge">C</span>
+      <h2>Espectro RBS resultante</h2>
+    </div>
+    <div class="panel-body">
+
+      <p class="note">
+        <b>¿Qué muestra el espectro?</b> Cada pico corresponde a un elemento en el material. La
+        <b>posición</b> en energía se calcula con la fórmula de $K$ del Panel B. La <b>altura</b> es
+        proporcional a $Z_2^2$ (sección eficaz diferencial de Rutherford) para igual concentración
+        superficial — física real, no ilustrativa. El marcador azul se sincroniza con el slider de $M_2$.
+      </p>
+
+      <canvas id="canvasC" width="800" height="280"></canvas>
+
+      <div class="formula-box">
+        <div class="flabel">Sección eficaz diferencial — altura real de los picos (física real)</div>
+        $$\frac{d\sigma}{d\Omega}=\left(\frac{Z_1 Z_2 e^2}{4E_0}\right)^{\!2}
+          \frac{1}{\sin^4\!\!\left(\dfrac{\theta}{2}\right)}\;\propto\;Z_2^2$$
+        <div class="formula-meta">
+          $\theta$ y $E_0$ son constantes en RBS, así que la sección eficaz relativa
+          reduce a $Z_2^2$. Pico más alto = mayor número atómico, <em>no</em> mayor cantidad.
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="warn">⚠ Simplificación declarada:</span> este espectro muestra solo choques en la
+        superficie. En RBS real, los átomos en profundidad producen picos desplazados a menor energía
+        (<em>stopping power</em>). La altura de los picos asume igual concentración superficial ($N_i$
+        igual para todos los elementos).
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Evaluación 2 · Módulo 2 · Diplomado en Física Moderna</p>
+  <p>Fórmulas: Chu, Mayer &amp; Nicolet (1978); Feldman &amp; Mayer (1986)
+     · $ke^2=1.44\,\text{MeV·fm}$ · integración RK4 en tiempo real</p>
+</footer>
+
+<!-- ══════ JavaScript — carga modular ══════ -->
+<script src="js/constants.js"></script>
+<script src="js/physics.js"></script>
+<script src="js/panelA.js"></script>
+<script src="js/panelB.js"></script>
+<script src="js/panelC.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
