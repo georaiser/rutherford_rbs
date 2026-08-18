@@ -108,7 +108,11 @@
         <span class="warn">⚠ Simplificación declarada:</span> la velocidad de la animación no es tiempo
         real (los choques ocurren en femtosegundos). Sin embargo, cada punto de la trayectoria está
         separado por pasos de tiempo iguales, por lo que el punto visual sí se ralentiza cerca del
-        núcleo — la partícula pierde velocidad al subir el potencial de Coulomb: comportamiento correcto.
+        núcleo — la partícula pierde velocidad al subir el potencial de Coulomb: comportamiento correcto.<br><br>
+        <b>De aquí en adelante:</b> el mismo haz de partículas alfa que Rutherford usó para
+        descubrir el núcleo es hoy la base de una técnica analítica de precisión llamada RBS.
+        El <b>Panel B</b> muestra la física de cada colisión individual; el <b>Panel C</b>, el espectro
+        que resulta de millones de ellas; el <b>Panel D</b>, cómo se ve todo junto en una muestra real.
       </div>
     </div>
   </section>
@@ -206,13 +210,18 @@
         Con millones de colisiones, el detector registra una distribución de energías: el espectro.
         Cada elemento del material produce un pico bien definido. Dos propiedades independientes
         determinan ese pico:<br>
-        · <b>Posición</b> → energía $E_1 = K(M_2)\cdot E_0$. Depende de $M_2$ a través del factor $K$
+        · <b>Posición</b> → energía $E_1 = K(M_2)\cdot E_0$. Depende de $M_2$ vía el factor $K$
         del Panel B. Cambiar la concentración <em>no</em> mueve el pico — solo la altura cambia.<br>
-        · <b>Altura</b> → número de cuentas $\propto Z_2^2 \cdot N_i$: la sección eficaz diferencial
-        de Rutherford (proporcional a $Z_2^2$) multiplicada por la concentración superficial $N_i$.<br>
-        Ajusta los sliders de $N_i$ para ver cómo la altura cambia sin mover la posición.
-        Haz hover sobre un pico para ver K, E₁ y Z₂² exactos. Click para resaltarlo.
-        El marcador azul se sincroniza con el slider de $M_2$ del Panel B.
+        · <b>Altura</b> → $\propto Z_2^2 \cdot N_i$: sección eficaz de Rutherford × concentración.<br><br>
+        <b>¿Qué muestra representa este panel?</b>
+        Este panel es un <em>laboratorio configurable</em>: los sliders te permiten componer
+        cualquier mezcla hipotética de cinco elementos (C, Si, Fe, Ag, Au) y ver el espectro
+        resultante. No corresponde a ninguna muestra real específica — es una herramienta para
+        entender la física. El <b>Panel D</b> muestra el caso concreto y realista:
+        una oblea de Si con una película fina de Au y traza de C superficial,
+        con el espectro construyéndose evento por evento.<br><br>
+        Ajusta los sliders de $N_i$, haz hover sobre los picos para ver K, E₁ y Z₂² exactos,
+        y haz click para resaltar. El marcador azul se sincroniza con el slider de $M_2$ del Panel B.
       </p>
 
       <canvas id="canvasC" width="800" height="280"></canvas>
@@ -269,16 +278,18 @@
         — colisión elástica entre un proyectil y un núcleo — permite analizar chips de computadora,
         catalizadores industriales y pinturas de obras de arte, <em>capa por capa</em>, sin destruir
         la muestra.<br><br>
-        <b>¿Cómo funciona RBS? — 4 pasos:</b><br>
-        <b>1.</b> Un haz de partículas α (He²⁺) con energía $E_0$ entra al material.<br>
-        <b>2.</b> Cada partícula choca elásticamente con un núcleo. Por conservación de energía y
-        momento, retiene la fracción $K(M_2,\theta)$ de su energía: $E_1 = K \cdot E_0$.<br>
-        <b>3.</b> El detector (fijo a 170°) mide $E_1$. Como $K$ depende solo de la relación de masas,
-        se despeja $M_2$ y se identifica el elemento — sin ver el átomo directamente.<br>
-        <b>4.</b> Con millones de colisiones se acumula el espectro. La <b>posición</b> del pico
-        identifica el elemento; la <b>altura</b> mide la cantidad ($\propto Z_2^2 \cdot N_i$).<br><br>
+        <b>Síntesis de los paneles anteriores:</b>
+        el Panel A mostró que el núcleo existe y es denso; el Panel B explicó cómo una sola
+        colisión elástica identifica un elemento mediante $E_1 = K(M_2)\cdot E_0$;
+        el Panel C mostró el espectro resultante de muchas colisiones en una muestra hipotética.<br>
+        Aquí ves todo eso junto en un caso concreto y realista: una oblea de <b>Si</b> (substrato)
+        con una película fina de <b>Au</b> depositada encima y trazas de <b>C</b> en la superficie —
+        el ejemplo clásico de RBS en semiconductores.
+        La animación izquierda muestra las colisiones individuales; el espectro derecho se
+        acumula con cada detección, reproduciendo cómo funciona un equipo real.<br><br>
         <b>Cómo interactuar:</b> haz click en una capa de la muestra para resaltarla y ver su pico.
-        Pasa el cursor sobre un pico del espectro para ver $K$, $E_1$ y $Z_2^2$ exactos.
+        Cambia $E_0$ para ver que los picos se desplazan pero $K$ permanece constante.
+        Pasa el cursor sobre un pico para ver $K$, $E_1$ y $Z_2^2$ exactos.
       </p>
 
       <!-- Vista lado a lado: muestra | espectro -->
@@ -335,7 +346,12 @@
         (1) modelo de superficie — en RBS real los átomos en profundidad producen picos desplazados
         a menor energía (<em>stopping power</em>), lo que permite medir el espesor de cada capa.
         (2) la probabilidad de impacto es $\propto Z_2^2 \cdot N_i$; Au acumula cuentas mucho
-        más rápido que C por su mayor sección eficaz diferencial.
+        más rápido que C por su mayor sección eficaz diferencial.<br><br>
+        <b>Cierre del hilo:</b> el núcleo que Rutherford descubrió en 1909 obligó a Bohr a
+        cuantizar el momento angular del electrón ($L=n\hbar$) para que el átomo no colapsara —
+        ese fue el primer paso de la mecánica cuántica. Ese mismo núcleo es hoy el «blanco»
+        que da a cada elemento su firma única en el espectro RBS.
+        <em>El experimento que abrió la física cuántica sigue activo en los laboratorios del siglo XXI.</em>
       </div>
     </div>
   </section>
