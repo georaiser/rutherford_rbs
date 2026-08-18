@@ -188,6 +188,16 @@
 
       <canvas id="canvasC" width="800" height="280"></canvas>
 
+      <!-- Sliders de concentración — generados dinámicamente por panelC.js -->
+      <div class="controls" style="margin-top:14px">
+        <p class="note" style="margin-bottom:10px; border-left-color:var(--cyan)">
+          <b>Concentración superficial $N_i$:</b> ajusta la cantidad de cada elemento en la muestra.
+          La altura del pico cambia con $A_i \propto Z_2^2 \cdot N_i$ — física real completa.
+          Pasa el cursor sobre un pico para ver sus valores exactos. Haz click para resaltarlo.
+        </p>
+        <div id="concSliders"></div>
+      </div>
+
       <div class="formula-box">
         <div class="flabel">Sección eficaz diferencial — altura real de los picos (física real)</div>
         $$\frac{d\sigma}{d\Omega}=\left(\frac{Z_1 Z_2 e^2}{4E_0}\right)^{\!2}
