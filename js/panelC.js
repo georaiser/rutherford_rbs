@@ -135,9 +135,7 @@ const panelC = (() => {
       ctx.fillText(p.E1.toFixed(3) + ' MeV', xp, yp - 24);
 
       ctx.fillStyle = 'rgba(160,180,200,0.45)';
-      ctx.fillText('Z2^2=' + p.xs, xp, PAD.T + PH + 18);
       ctx.fillStyle = p.Ni < 0.05 ? 'rgba(230,100,100,0.75)' : 'rgba(160,180,200,0.45)';
-      ctx.fillText('N=' + Math.round(p.Ni * 100) + '%', xp, PAD.T + PH + 30);
     }
     ctx.textAlign = 'left';
 

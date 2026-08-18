@@ -48,10 +48,13 @@
     <div class="panel-body">
 
       <p class="note" id="descA">
-        <b>Rutherford (1909-1911):</b> partículas alfa (He²⁺, Z₁=2) se dirigen contra una lámina de oro
-        (Z₂=79). Las trayectorias son <b>hipérbolas reales</b>, calculadas integrando la ecuación de
-        movimiento en el potencial de Coulomb (RK4). Los parámetros de impacto son valores físicos fijos
-        en fm; al variar la energía, a₀ cambia y la deflexión también — el efecto es visible en tiempo real.
+        <b>Experimento de Geiger-Marsden (1909), dirigido por Rutherford:</b> un haz de partículas alfa
+        ($Z_1=2$, $M_1=4$ u) bombardea una lámina delgada de oro ($Z_2=79$). Cada trayectoria es una
+        <b>hipérbola real</b>, calculada integrando la ecuación de movimiento en el potencial de Coulomb
+        repulsivo (integración numérica RK4). El resultado histórico: la mayoría de las partículas pasan
+        sin desviarse (parámetro de impacto $b$ grande), pero una fracción pequeña con $b$ muy pequeño
+        rebota en ángulos grandes — lo que solo se explica con un <b>núcleo diminuto y denso</b>.
+        Al mover el slider de energía, el parámetro $a_0 = Z_1Z_2e^2/2E$ cambia y con él la deflexión.
       </p>
 
       <canvas id="canvasA" width="800" height="330"></canvas>
@@ -91,10 +94,14 @@
       </div>
 
       <div class="note" id="noteA">
-        <span class="warn">⚠ Simplificación declarada:</span> la velocidad de la animación no representa
-        tiempo real (el choque ocurre en femtosegundos). Sin embargo, los puntos de la trayectoria están
-        separados en <em>pasos de tiempo iguales</em> — por lo que el punto visual sí se ralentiza cerca
-        del núcleo, lo cual es físicamente correcto: la partícula pierde velocidad al subir el potencial de Coulomb.
+        <b>Conexión con la teoría cuántica:</b> el núcleo que descubrió Rutherford generó un problema
+        nuevo e insoluble para la física clásica — un electrón en órbita debe irradiar energía
+        continuamente y colapsar en ~10⁻¹¹ s. Bohr lo resolvió en 1913 postulando la cuantización del
+        momento angular ($L = n\hbar$). Sin el núcleo de Rutherford no hay problema que resolver;
+        sin ese problema no existe la mecánica cuántica temprana.<br>
+        <span class="warn">⚠ Simplificación declarada:</span> la velocidad de animación no es tiempo
+        real. Los pasos de tiempo son iguales, por lo que el punto sí se ralentiza al acercarse al
+        núcleo — comportamiento físicamente correcto (la partícula sube el potencial de Coulomb).
       </div>
     </div>
   </section>
@@ -108,11 +115,15 @@
     <div class="panel-body">
 
       <p class="note">
-        <b>¿Cómo identifica RBS un elemento?</b> En una colisión elástica entre el proyectil alfa
-        ($M_1=4$ u) y un átomo del material ($M_2$ desconocida), la fracción de energía conservada —el
-        factor $K$— depende únicamente de $M_2$ y del ángulo del detector. Midiendo $E_1 = K\cdot E_0$
-        se despeja $M_2$ y se identifica el elemento. El tamaño del átomo en la animación escala como
-        $M_2^{1/3}$ (proporcional al radio).
+        <b>Principio de RBS:</b> en una colisión elástica (se conservan energía y momento lineal), la
+        fracción de energía que retiene el proyectil alfa ($M_1=4$ u) al chocar contra un átomo del
+        material ($M_2$ desconocida) depende solo de la relación de masas y del ángulo de detección.
+        A ese factor se le llama $K$. En un equipo real de RBS el detector está fijo a 170° — ángulo
+        que maximiza la diferencia de $K$ entre elementos distintos, facilitando su separación en el
+        espectro. Midiendo $E_1 = K \cdot E_0$ se despeja $M_2$ y se identifica el elemento.
+        <br><b>Analogía:</b> una bola de billar golpea otra bola. Si el blanco es muy pesado (Au), rebota
+        rápido ($K \approx 0.92$). Si el blanco es liviano (C), casi se detiene ($K \approx 0.25$).
+        La energía de rebote «delata» la masa del blanco — sin necesidad de ver el choque.
       </p>
 
       <canvas id="canvasB" width="800" height="210"></canvas>
@@ -161,12 +172,15 @@
       </div>
 
       <div class="note">
-        <b>Analogía (billar):</b> una bola de billar choca con una de bowling y rebota casi a la misma
-        velocidad ($K\approx1$, Au pesado). Con masas iguales, el proyectil entrega casi toda la energía
-        ($K$ mínimo). La velocidad de salida delata la masa del blanco.<br>
-        <span class="warn">⚠ Simplificación declarada:</span> la velocidad de la animación de salida es
-        proporcional a $\sqrt{K}$. El choque real ocurre en femtosegundos; lo que varía físicamente
-        es la energía de salida, no la duración del evento.
+        <b>Lo que mide el detector — y lo que no:</b> un detector RBS real registra solo la
+        energía de la partícula que llega. No «ve» el instante del choque ni la trayectoria intermedia.
+        La fórmula de $K$ es exactamente eso: una relación entre el estado <em>antes</em> del choque
+        ($E_0$) y el estado <em>después</em> ($E_1$), sin necesidad de conocer los detalles del contacto.
+        La app funciona igual — lo que es real son los dos estados; la animación del trayecto de salida
+        es una visualización pedagógica.<br>
+        <span class="warn">⚠ Simplificación declarada:</span> la velocidad de la animación de salida
+        es proporcional a $\sqrt{K}$ (metáfora visual de la energía conservada). El choque real ocurre
+        en femtosegundos; lo que varía físicamente es $E_1$, no la duración del evento.
       </div>
     </div>
   </section>
@@ -180,10 +194,16 @@
     <div class="panel-body">
 
       <p class="note">
-        <b>¿Qué muestra el espectro?</b> Cada pico corresponde a un elemento en el material. La
-        <b>posición</b> en energía se calcula con la fórmula de $K$ del Panel B. La <b>altura</b> es
-        proporcional a $Z_2^2$ (sección eficaz diferencial de Rutherford) para igual concentración
-        superficial — física real, no ilustrativa. El marcador azul se sincroniza con el slider de $M_2$.
+        <b>¿Qué muestra el espectro?</b> Cuando millones de partículas alfa bombardean un material,
+        cada elemento produce un pico en la energía $E_1 = K(M_2)\cdot E_0$ que le corresponde.
+        Dos propiedades físicas determinan el espectro:<br>
+        · <b>Posición del pico</b> → depende de $M_2$ a través del factor $K$ (calculado en tiempo
+        real con la misma fórmula del Panel B).<br>
+        · <b>Altura del pico</b> → proporcional a $Z_2^2 \cdot N_i$: la sección eficaz de Rutherford
+        ($\propto Z_2^2$) multiplicada por la concentración superficial $N_i$ del elemento.
+        Ajusta los sliders para ver cómo la altura cambia con la concentración manteniendo la posición fija.
+        Pasa el cursor sobre un pico para ver sus valores exactos. El marcador azul se sincroniza con el
+        slider de $M_2$ del Panel B.
       </p>
 
       <canvas id="canvasC" width="800" height="280"></canvas>
@@ -203,16 +223,23 @@
         $$\frac{d\sigma}{d\Omega}=\left(\frac{Z_1 Z_2 e^2}{4E_0}\right)^{\!2}
           \frac{1}{\sin^4\!\!\left(\dfrac{\theta}{2}\right)}\;\propto\;Z_2^2$$
         <div class="formula-meta">
-          $\theta$ y $E_0$ son constantes en RBS, así que la sección eficaz relativa
-          reduce a $Z_2^2$. Pico más alto = mayor número atómico, <em>no</em> mayor cantidad.
+          Con $\theta = 170°$ y $E_0 = 2$ MeV fijos, la sección eficaz relativa entre elementos
+          reduce a $Z_2^2$. Ejemplo verificado: Au ($Z_2=79$) tiene un pico
+          $(79/6)^2 = 173{\times}$ más alto que C ($Z_2=6$) a igual concentración.
+          Un pico alto puede significar $Z_2$ grande <em>o</em> $N_i$ grande — el espectro por sí solo
+          no los distingue sin información adicional.
         </div>
       </div>
 
       <div class="note">
-        <span class="warn">⚠ Simplificación declarada:</span> este espectro muestra solo choques en la
-        superficie. En RBS real, los átomos en profundidad producen picos desplazados a menor energía
-        (<em>stopping power</em>). La altura de los picos asume igual concentración superficial ($N_i$
-        igual para todos los elementos).
+        <b>Aplicaciones actuales de RBS:</b> caracterización de capas delgadas en semiconductores
+        (verificar espesor y composición sin destruir la muestra), análisis de pigmentos en obras de
+        arte, y perfiles de dopaje en materiales avanzados. La técnica es no destructiva porque la
+        partícula alfa no daña la estructura del material a estas energías.<br>
+        <span class="warn">⚠ Simplificación declarada:</span> este espectro modela solo choques
+        en la superficie. En un equipo real, los átomos en profundidad producen picos desplazados a
+        menor energía por la pérdida de energía al atravesar el material (<em>stopping power</em> —
+        efecto que permite determinar el espesor de cada capa).
       </div>
     </div>
   </section>
