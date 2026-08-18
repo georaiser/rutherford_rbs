@@ -1,5 +1,5 @@
-/**
- * panelA.js - Panel A: Dispersion de Rutherford
+﻿/**
+ * panel-a.js — Panel A: Dispersion de Rutherford
  *
  * Trayectorias hiperbolicas calculadas con integracion RK4 en tiempo real.
  * Modo Rutherford: modelo planetario (1911). Modo Thomson: esfera difusa (1904).

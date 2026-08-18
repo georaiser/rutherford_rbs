@@ -1,5 +1,5 @@
-/**
- * main.js — Punto de entrada e inicialización de la app
+﻿/**
+ * app.js — Punto de entrada e inicialización de la app
  *
  * Inicializa los tres paneles y lanza el loop principal de animación.
  * El loop único de requestAnimationFrame maneja Paneles A y B.

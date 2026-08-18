@@ -1,5 +1,5 @@
 ﻿/**
- * panelD.js — Panel D: RBS en acción (versión interactiva)
+ * panel-d.js — Panel D: RBS en acción (versión interactiva)
  *
  * Interactividad:
  *   1. Slider E₀ (energía del haz 1–3 MeV): picos se desplazan, K permanece fijo

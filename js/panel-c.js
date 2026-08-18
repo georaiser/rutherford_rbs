@@ -1,5 +1,5 @@
 ﻿/**
- * panelC.js — Panel C: Espectro RBS (interactivo)
+ * panel-c.js — Panel C: Espectro RBS (interactivo)
  *
  * Interactividad implementada:
  *   1. Sliders de concentracion N_i por elemento — altura = Z2^2 * N_i (fisica real)

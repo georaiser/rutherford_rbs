@@ -1,5 +1,5 @@
-/**
- * panelB.js — Panel B: Factor cinemático K y animación de colisión RBS
+﻿/**
+ * panel-b.js — Panel B: Factor cinemático K y animación de colisión RBS
  *
  * La fórmula K(M₂,θ) se evalúa en vivo con cada movimiento del slider.
  * La animación muestra el ciclo: entrada → colisión → salida a 170°.
