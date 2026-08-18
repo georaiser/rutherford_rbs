@@ -17,8 +17,7 @@
 - Ensayar las acciones de la app por separado antes de grabar.
 - Los traspasos son frases fijas — no improvisar.
 - Los valores numéricos son exactos, verificados con Python 3.13.
-- **Estudiante 3** tiene la carga más densa: Paneles C, D y E condensados + cierre.
-  Practicar ese bloque hasta dominar el tiempo.
+- **Estudiante 3** tiene la carga más densa: Paneles C, D y E + cierre. Practicar ese bloque hasta dominar el tiempo.
 
 ---
 
@@ -29,7 +28,7 @@
 | 0:00–0:20 | Cámara al estudiante. App en espera. | "¿Cómo sabemos de qué está hecho un material sin abrirlo? A principios del siglo XX, Rutherford se hizo una pregunta parecida sobre el átomo. El resultado fue, según sus propias palabras, tan increíble como si hubieras disparado una bala naval contra un pañuelo de papel y hubiera rebotado hacia ti." |
 | 0:20–0:50 | **Panel A → modo Thomson.** Señalar la esfera naranja. Trayectorias casi rectas. | "En 1904 existía el modelo de Thomson: carga positiva distribuida en todo el volumen del átomo. Si ese modelo fuera correcto, las partículas alfa pasarían casi sin desviarse — la deflexión máxima calculada es de seis milésimas de grado. Líneas rectas a esta escala." |
 | 0:50–1:05 | **Clic en toggle → modo Rutherford.** Trayectorias curvas. Inset del modelo atómico. | "Pero Geiger y Marsden observaron rebotes a más de 90 grados. Eso solo ocurre si toda la carga positiva está concentrada en un núcleo pequeño y denso. Ese núcleo obliga a Bohr a cuantizar el átomo dos años después — es el origen de la mecánica cuántica temprana." |
-| 1:05–1:35 | **Mover slider de energía de 4 a 10 MeV.** La barra de escala y ángulos cambian en tiempo real. | "Cada trayectoria es una hipérbola real — la ecuación de movimiento en el potencial de Coulomb, integrada numéricamente. A 7 Megaelectronvoltios, la partícula más cercana al núcleo de oro pasa a solo 16 femtómetros — cien mil veces más pequeño que el átomo. Al subir la energía, las trayectorias penetran más cerca del núcleo." |
+| 1:05–1:35 | **Mover slider de energía de 4 a 10 MeV.** Barra de escala y ángulos cambian en tiempo real. | "Cada trayectoria es una hipérbola real — la ecuación de movimiento en el potencial de Coulomb, integrada numéricamente. A 7 Megaelectronvoltios, la partícula más cercana al núcleo de oro pasa a solo 16 femtómetros — cien mil veces más pequeño que el átomo. Al subir la energía, las trayectorias penetran más cerca del núcleo." |
 | 1:35–1:40 | Cámara al estudiante. | "Ese mismo núcleo que Rutherford descubrió es la base de la técnica que mi compañero presenta ahora." |
 
 > **Traspaso a Estudiante 2** (frase fija):
@@ -57,8 +56,8 @@
 |:---:|:---|:---|
 | 3:20–3:45 | **Panel C.** Espectro completo. Mover marcador de C a Au. | "Cuando el equipo RBS analiza un material, cada pico del espectro resume miles de choques contra el mismo elemento. La posición identifica el elemento con la fórmula de K. La altura mide la cantidad — proporcional al cuadrado del número atómico. A igual concentración, el pico del oro es 173 veces más alto que el del carbono: 79 al cuadrado sobre 6 al cuadrado." |
 | 3:45–4:05 | **Panel D.** Simulación C/Au/Si corriendo. Subir corriente de 20 a 60 nA. | "Aquí todo junto en una muestra concreta: silicio como substrato, película de oro encima, trazas de carbono en la superficie. El espectro se acumula con cada detección. El slider de corriente controla cuántas partículas impactan por segundo — igual que en un equipo real. Esta técnica analiza chips, catalizadores y obras de arte sin destruir la muestra." |
-| 4:05–4:35 | **Panel E.** Mostrar la curva de Bragg con protones a 150 MeV. Mover slider de 100 a 200 MeV. Luego toggle a iones C¹². | "La misma interacción de Coulomb que dispersa partículas en RBS también frena los proyectiles dentro del tejido. Esta es la curva de Bragg: un haz de protones deposita muy poca dosis en la entrada y casi toda su energía en el pico — exactamente donde está el tumor. Comparen con los fotones en azul punteado: los rayos X depositan la dosis máxima en la entrada y decaen sin control. Al cambiar la energía del haz, el pico se mueve — eso permite apuntar al tumor. Los iones de carbono producen un pico aún más estrecho e intenso." |
-| 4:35–5:00 | Cámara al estudiante. | "El núcleo que Rutherford descubrió en 1911 creó la crisis que Bohr resolvió cuantizando el átomo. Ese mismo núcleo es el blanco que hoy analiza materiales capa a capa en RBS, y el que permite tratar tumores con precisión milimétrica en hadronterapia. Y en 1912, Georg de Hevesy, trabajando en el laboratorio de Rutherford, inventó el principio del radiotrazador al no poder separar isótopos — ese 'fracaso' dio origen a todos los estudios PET y SPECT del mundo. Todo parte del mismo experimento." |
+| 4:05–4:35 | **Panel E.** Curva de Bragg con protones a 150 MeV. Mover slider de 100 a 200 MeV. Toggle a iones C¹². | "La misma interacción de Coulomb que dispersa partículas en RBS también frena los proyectiles dentro del tejido. Esta es la curva de Bragg: un haz de protones deposita casi toda su energía en el pico — exactamente donde está el tumor. Comparen con los fotones en azul punteado: los rayos X depositan la dosis máxima en la entrada, sin control. Al cambiar la energía, el pico se mueve. Los iones de carbono producen un pico aún más estrecho e intenso." |
+| 4:35–5:00 | Cámara al estudiante. | "El núcleo que Rutherford descubrió en 1911 creó la crisis que Bohr resolvió cuantizando el átomo — y lo paradójico es que la partícula alfa que usó para descubrirlo solo puede salir del núcleo por efecto túnel cuántico: el experimento que hizo necesaria la cuántica, ya la necesitaba para funcionar. Ese mismo núcleo es hoy el blanco que analiza materiales en RBS y que permite tratar tumores en hadronterapia. La app incluye además una línea de tiempo completa — de Planck a Bethe — disponible al final para quien quiera explorar el hilo cuántico completo." |
 
 ---
 
@@ -74,6 +73,7 @@ Frases fijas al final de cada bloque. **Ensayarlas como frases cerradas** — no
 4. **Panel C:** marcador azul sincronizado con M₂
 5. **Panel D:** subir corriente de 20 a 60 nA → espectro se acumula más rápido
 6. **Panel E:** slider de energía de 100 a 200 MeV → pico se mueve → toggle a C¹²
+7. **Sección ∞** (no se usa en el video — solo para preguntas del docente): timeline interactivo de Planck → Bohr → QM → Gamow → Dirac → Bethe
 
 ### Control de tiempo
 
@@ -85,9 +85,8 @@ Frases fijas al final de cada bloque. **Ensayarlas como frases cerradas** — no
 | Total | 4:45 – 5:00 | — |
 
 **Estudiante 3 — si el tiempo se extiende**, recortar en este orden:
-1. Reducir el bloque Panel D (3:45–4:05) a 10 s — solo mostrar la simulación corriendo
-2. Comprimir las aplicaciones de RBS (segunda mitad de 3:45–4:05)
-3. NO recortar Panel E ni el cierre — son el diferenciador del trabajo
+1. Reducir Panel D a 10 s — solo mostrar la simulación corriendo
+2. NO recortar Panel E ni el cierre — son el diferenciador del trabajo
 
 ### Valores numéricos verificados
 
@@ -104,20 +103,17 @@ Frases fijas al final de cada bloque. **Ensayarlas como frases cerradas** — no
 | a₀(Au, 7 MeV) | 16.25 fm |
 | θ_max Thomson (Au, 7 MeV) | 6.4 × 10⁻³ ° |
 | Corriente default Panel D | 20 nA → Δt = 460 ms entre partículas |
-| Factor Bethe-Bloch correccion | 0.56 (shell + densidad, declarado) |
 | Pico Bragg protones 150 MeV | ~15 cm en tejido (agua) |
-| Pico Bragg protones 70 MeV | ~4 cm en tejido (agua) |
-| Pico Bragg protones 230 MeV | ~33 cm en tejido (agua) |
-| z² protones vs. C¹²⁶⁺ | 1 vs. 36 (pico 36× más intenso) |
+| Pico Bragg protones 70 MeV | ~4 cm |
+| Pico Bragg protones 230 MeV | ~33 cm |
+| z² protones vs. C¹²⁶⁺ | 1 vs. 36 |
+| Factor corrección Bethe-Bloch | 0.56 (declarado como simplificación) |
 
-### Relación entre las tres técnicas (para referencia del equipo)
-
-| Técnica | Usa de Coulomb | Mide/controla |
-|---|---|---|
-| RBS | Dispersión elástica α-núcleo | Energía de retroceso → identifica elementos |
-| Hadronterapia | Frenado del proyectil (Bethe-Bloch) | Profundidad del pico → dosis en tumor |
-| PET/SPECT | Radiación de núcleos inestables | Distribución del radiotrazador → imagen funcional |
+### Sección ∞ — hilo cuántico (no se graba, sirve para Q&A)
+La app incluye al final una línea de tiempo visual de Planck (1900) a Bethe (1930):
+Planck → Einstein → **Rutherford** → crisis → Bohr → de Broglie → Heisenberg/Schrödinger → Gamow → Dirac → Bethe.
+El punto clave para el docente: la partícula alfa requiere efecto túnel (Gamow 1928) para escapar del núcleo — la cuántica ya estaba implícita en el experimento que la hizo necesaria.
 
 ---
 
-*Guion actualizado 18-ago-2026. Versión final: 5 paneles (A–E). Panel E incluye hadronterapia (Bragg curve, Bethe-Bloch) y conexión con diagnóstico nuclear. Verificado con Python 3.13 + mamba. Referencias: Chu, Mayer & Nicolet (1978); Bethe (1930); PDG (2022); Wilson (1946).*
+*Guion actualizado 18-ago-2026. Versión final: 5 paneles (A–E) + sección ∞. Referencias: Chu, Mayer & Nicolet (1978); Bethe (1930); PDG (2022); Wilson (1946).*
