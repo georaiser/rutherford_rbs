@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -47,7 +47,8 @@
     </div>
     <div class="panel-body">
 
-      <p class="note" id="descA">
+      <!-- Descripción modo Rutherford -->
+      <p class="note" id="descA-ruth">
         <b>Geiger-Marsden (1909), dirigido por Rutherford:</b> partículas alfa ($Z_1=2$, $M_1=4$ u)
         bombardean una lámina delgada de oro ($Z_2=79$). El resultado sorprendió a todos:
         la <b>mayoría pasan casi sin desviarse</b> (parámetro de impacto $b$ grande, lejos del centro),
@@ -56,10 +57,36 @@
         sino concentrada en un <b>núcleo diminuto y denso</b>. Cada trayectoria aquí es una
         <b>hipérbola real</b>, calculada integrando la ecuación de movimiento en el potencial de Coulomb
         (integración numérica RK4).<br>
+        <b>Rutherford (1909–1911) — modelo planetario:</b> la lámina de oro contiene núcleos
+        pequeños y densos (carga positiva concentrada). Las partículas alfa son deflectadas por
+        la repulsión de Coulomb entre cargas positivas. <b>Los electrones no participan en la
+        dispersión</b> — son ~7&thinsp;000× más livianos que las partículas alfa y prácticamente
+        no los afectan. Al aumentar la energía, $a_0$ decrece y las deflexiones disminuyen —
+        visible en tiempo real.<br>
+        <b>¿Qué es $a_0$?</b> Es el <em>parámetro de Rutherford</em>: la distancia mínima de acercamiento
+        en un choque frontal directo ($b=0$), donde toda la energía cinética se convierte en energía
+        potencial de Coulomb. Funciona como la unidad natural de longitud del problema:
+        partículas con $b \gg a_0$ pasan casi sin desviarse; con $b \sim a_0$ se desvían ~90°;
+        con $b \ll a_0$ rebotan casi 180°. La barra de escala en el canvas muestra $5a_0$ en femtómetros
+        (1 fm = 10⁻¹⁵ m) — cambia con la energía porque $a_0 = Z_1Z_2ke^2/2E$.<br>
         Usa el <b>toggle</b> para comparar: en el modelo de Thomson la deflexión máxima es de milésimas
         de grado — invisible. En Rutherford, con el mismo haz, algunas partículas rebotan a 170°.
-        Mueve el slider para ver cómo al aumentar la energía ($a_0 = Z_1Z_2e^2/2E$ disminuye)
-        las trayectorias se aproximan más al núcleo antes de deflectarse.
+        Mueve el slider para ver cómo al aumentar la energía $a_0$ disminuye y las
+        trayectorias penetran más cerca del núcleo antes de deflectarse.
+      </p>
+
+      <!-- Descripción modo Thomson -->
+      <p class="note" id="descA-thom" style="display:none">
+        <b>Modelo de Thomson ("pudín de pasas", 1904):</b> carga positiva distribuida uniformemente
+        en todo el volumen atómico (esfera naranja, radio ≈ 1.45 Å para Au). Los electrones (azul)
+        y la carga positiva (rojo) están embebidos en la esfera — como pasas en un pudín.<br>
+        La deflexión máxima calculada con el potencial de esfera uniforme es &lt; 0.01°:
+        <b>las trayectorias son literalmente líneas rectas a esta escala</b>.
+        Este resultado fue incompatible con los ángulos grandes observados por Geiger-Marsden.<br>
+        <b>¿Por qué falla este modelo?</b> La carga positiva difusa genera un campo eléctrico
+        muy débil en cada punto — ninguna partícula alfa experimenta una fuerza suficientemente grande
+        para rebotar. Para producir deflexiones de 90° o más, Rutherford demostró que la carga positiva
+        debe estar concentrada en un núcleo de radio ~10⁻¹⁵ m, unas 10 000 veces más pequeño que el átomo.
       </p>
 
       <canvas id="canvasA" width="800" height="330"></canvas>
@@ -78,10 +105,18 @@
         $$b(\theta) = \frac{Z_1 Z_2 e^2}{4\pi\varepsilon_0 \cdot 2E}\,\cot\!\left(\frac{\theta}{2}\right)$$
         <div class="formula-meta">
           $Z_1=2$, $\;Z_2=79$ $\;\mid\;$
-          $a_0 = \dfrac{Z_1 Z_2 e^2}{4\pi\varepsilon_0\cdot 2E} = $
+          $a_0 = \dfrac{Z_1 Z_2 ke^2}{2E} = $
           <b id="val-a0" style="color:var(--cyan)">16.2</b> fm
-          $\;\mid\;$ trayectoria interna: $\theta = $
-          <b id="val-theta-a" style="color:var(--amber)">143°</b>
+          $\;\mid\;$ $\theta$ trayectoria interna ($b=5$ fm) $= $
+          <b id="val-theta-a" style="color:var(--amber)">143°</b><br>
+          <span style="opacity:0.65;font-size:0.92em">
+            $a_0$ = distancia mínima de acercamiento en choque frontal ($b=0$).
+            Para Au a 7 MeV: $a_0 \approx 16$ fm $\ll$ radio atómico (145&thinsp;000 fm).
+            La barra de escala en el canvas muestra $5a_0$ — el factor 5 es práctico:
+            $1a_0 \approx 10$ px (ilegible); $5a_0 \approx 52$ px (visible).
+            Las deflexiones más grandes ocurren para $b &lt; 2a_0$; a $b \sim 5a_0$ la deflexión
+            ya es pequeña (&lt;20°), lo que da contexto visual a la región de interés.
+          </span>
         </div>
       </div>
 
@@ -98,7 +133,8 @@
         </div>
       </div>
 
-      <div class="note" id="noteA">
+      <!-- Nota modo Rutherford -->
+      <div class="note" id="noteA-ruth">
         <b>¿Por qué este experimento importa para la física moderna?</b>
         El núcleo descubierto aquí creó dos problemas insolubles para la física clásica:<br>
         <b>1. Estabilidad:</b> un electrón en órbita circular irradia energía electromagnética
@@ -119,6 +155,21 @@
         descubrir el núcleo es hoy la base de una técnica analítica de precisión llamada RBS.
         El <b>Panel B</b> muestra la física de cada colisión individual; el <b>Panel C</b>, el espectro
         que resulta de millones de ellas; el <b>Panel D</b>, cómo se ve todo junto en una muestra real.
+      </div>
+
+      <!-- Nota modo Thomson -->
+      <div class="note" id="noteA-thom" style="display:none">
+        <b>Por qué el modelo de Thomson falla cuantitativamente:</b>
+        en una esfera de carga positiva uniforme, el campo eléctrico que experimenta una partícula alfa
+        en tránsito es proporcional a su distancia al centro — débil y siempre transverso al movimiento.
+        La deflexión máxima se puede calcular exactamente con el teorema del impulso:<br>
+        $\theta_\text{máx} \approx a_0/R_\text{átomo} \approx 16\,\text{fm} / 145\,000\,\text{fm} \approx 6 \times 10^{-3\circ}$<br>
+        Este ángulo es absolutamente invisible — equivale a apuntar un rifle y que la bala se desvíe
+        el diámetro de un cabello a un kilómetro de distancia.<br>
+        Geiger y Marsden observaron rebotes a más de 90°, lo que es imposible con el modelo de Thomson.<br>
+        <span class="warn">⚠ Simplificación declarada:</span> la deflexión sub-píxel mostrada
+        es físicamente correcta (la fórmula del potencial de esfera uniforme está implementada).
+        El núcleo amarillo visible no está a escala — a escala real sería literalmente invisible.
       </div>
     </div>
   </section>
