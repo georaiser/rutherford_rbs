@@ -1,4 +1,4 @@
-﻿/**
+/**
  * panel-d.js — Panel D: RBS en acción (versión interactiva)
  *
  * Interactividad:
@@ -32,11 +32,15 @@ const panelD = (() => {
   const WP = cvP.width;   // 520
   const HP = cvP.height;  // 300
 
-  // ─── Capas de la muestra (fijas para este panel de síntesis) ───
+  // ─── Capas de la muestra ───
+  // C, Ag, Au, Fe, Si ordenados superficie → substrato.
+  // Fe y Ag comienzan en conc=0 (sin efecto hasta que el usuario los active).
   const LAYERS = [
-    { sym:'C',  Z2:6,  M2:12,  color:'#94a3b8', label:'C — contaminación superficial', yFrac:0.08, hFrac:0.15 },
-    { sym:'Au', Z2:79, M2:197, color:'#f59e0b', label:'Au — película fina',             yFrac:0.23, hFrac:0.27 },
-    { sym:'Si', Z2:14, M2:28,  color:'#60a5fa', label:'Si — substrato',                 yFrac:0.50, hFrac:0.43 },
+    { sym:'C',  Z2:6,  M2:12,  color:'#94a3b8', label:'C  — superficie',       yFrac:0.06, hFrac:0.10 },
+    { sym:'Ag', Z2:47, M2:108, color:'#c084fc', label:'Ag — capa opcional',     yFrac:0.16, hFrac:0.14 },
+    { sym:'Au', Z2:79, M2:197, color:'#f59e0b', label:'Au — película fina',     yFrac:0.30, hFrac:0.18 },
+    { sym:'Fe', Z2:26, M2:56,  color:'#fb923c', label:'Fe — capa opcional',     yFrac:0.48, hFrac:0.14 },
+    { sym:'Si', Z2:14, M2:28,  color:'#60a5fa', label:'Si — substrato',         yFrac:0.62, hFrac:0.30 },
   ];
 
   // Posiciones absolutas en canvas
@@ -44,7 +48,7 @@ const panelD = (() => {
     l.y  = l.yFrac  * HS;
     l.h  = l.hFrac  * HS;
     l.cy = l.y + l.h / 2;
-    l.K  = Physics.calcK(l.M2, PHYS.THETA_DET); // K es constante (solo depende de masas y θ)
+    l.K  = Physics.calcK(l.M2, PHYS.THETA_DET);
   });
 
   // ─── Estado mutable ───
@@ -53,8 +57,8 @@ const panelD = (() => {
   let selectedLyr = null;  // capa seleccionada con click
   let hoveredSpec = null;  // pico bajo el cursor en el espectro
 
-  // Concentraciones relativas (0–1) por capa
-  const conc = { C: 0.30, Au: 1.0, Si: 1.0 };
+  // Concentraciones relativas (0–1). Ag y Fe comienzan en 0 (capas opcionales).
+  const conc = { C: 0.30, Ag: 0.0, Au: 1.0, Fe: 0.0, Si: 1.0 };
 
   // Calcular E₁ usando E0_D actual
   function getE1(layer) {
@@ -94,9 +98,11 @@ const panelD = (() => {
 
   // ─── Partículas ───
   const particles = [];
-  let lastTs      = null;
-  let spawnTimer  = 0;
-  const SPAWN_MS  = 460;
+  let lastTs     = null;
+  let spawnTimer = 0;
+  // Corriente del haz: 9200 / I_nA => a 20 nA = 460 ms (default), a 100 nA = 92 ms
+  let I_nA    = 20;
+  let spawnMs = 9200 / I_nA;   // ms entre spawns — controlado por slider
   const DUR_APP   = 820;
   const DUR_FLASH = 180;
 
@@ -468,7 +474,7 @@ const panelD = (() => {
     if (!isPaused) {
       spawnTimer += dt;
       const active = particles.filter(p => p.phase !== 'done').length;
-      if (spawnTimer >= SPAWN_MS && active < 5) { spawnParticle(); spawnTimer = 0; }
+      if (spawnTimer >= spawnMs && active < 5) { spawnParticle(); spawnTimer = 0; }
       for (const p of particles) { if (p.phase !== 'done') updateParticle(p, dt); }
       while (particles.length > 16) particles.shift();
     }
@@ -500,6 +506,13 @@ const panelD = (() => {
 
   function init() { buildControls(); }
 
-  return { init, tick, reset, setE0, togglePause };
+  function setCurrent(nA) {
+    I_nA    = parseFloat(nA);
+    spawnMs = 9200 / I_nA;
+    const lbl = document.getElementById('valI_nA');
+    if (lbl) lbl.textContent = I_nA.toFixed(0) + ' nA';
+  }
+
+  return { init, tick, reset, setE0, setCurrent, togglePause };
 
 })();

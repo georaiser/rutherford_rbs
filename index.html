@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -325,12 +325,21 @@
                  oninput="panelD.setE0(this.value)">
           <span class="slider-val" id="valE0D">2.0 MeV</span>
         </div>
+        <div class="slider-row">
+          <span class="slider-label">Corriente del haz $I$</span>
+          <input type="range" id="sliderI_nA" min="5" max="100" step="5" value="20"
+                 oninput="panelD.setCurrent(this.value)">
+          <span class="slider-val" id="valI_nA">20 nA</span>
+        </div>
         <p class="note" style="margin:10px 0 8px;border-left-color:var(--cyan)">
           <b>Composición $N_i$:</b> la <b>posición</b> del pico no cambia al variar $N_i$
           (depende de $M_2$, no de la cantidad). La <b>altura</b> sí cambia
           ($\propto Z_2^2\cdot N_i$). Al cambiar $E_0$, todos los picos se desplazan
           proporcionalmente — $K$ es constante porque depende solo de las masas.
-          El espectro se reinicia al cambiar $E_0$.
+          El espectro se reinicia al cambiar $E_0$.<br>
+          <b>Corriente $I$:</b> en RBS real determina cuántas partículas α por segundo
+          impactan la muestra. A mayor corriente, el espectro se acumula más rápido.
+          Rango típico: 10–100 nA. Aquí controla la tasa de spawn: $\Delta t = 9200/I$ ms.
         </p>
         <div id="panelD-sliders"></div>
       </div>
