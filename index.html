@@ -378,14 +378,105 @@
       </div>
 
     </div>
+    </section>
+
+  <!-- ══════════════ PANEL E — HADRONTERAPIA ══════════════ -->
+  <section class="panel" id="panel-e">
+    <div class="panel-header">
+      <span class="badge">E</span>
+      <h2>Hadronterapia — Curva de Bragg</h2>
+      <div class="mode-toggle">
+        <button class="mode-btn active bragg-btn" id="braggBtn_proton"
+                onclick="panelE.setParticle('proton')">Protones</button>
+        <button class="mode-btn bragg-btn" id="braggBtn_carbon"
+                onclick="panelE.setParticle('carbon')">Iones C¹²</button>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <p class="note">
+        <b>El mismo principio, otra aplicación.</b>
+        Rutherford descubrió en 1919 que bombardeando nitrógeno con partículas alfa se emiten
+        protones — fue la primera reacción nuclear artificial, y descubrió el protón.
+        Hoy ese mismo protón, acelerado a 70–230 MeV, se usa para tratar tumores con
+        precisión milimétrica. La razón es la <b>curva de Bragg</b>: una partícula cargada
+        deposita casi toda su energía en un pico estrecho justo antes de detenerse —
+        localizable en la profundidad del tumor.<br>
+        Compara con los fotones (curva azul punteada): los rayos X depositan la mayor dosis
+        en la entrada y decaen exponencialmente — no hay forma de concentrarlos en el tumor
+        sin irradiar el tejido sano anterior. Los protones sí lo permiten.
+        Los iones de carbono (C¹²⁶⁺) tienen un pico aún más estrecho y mayor efecto biológico.<br>
+        <b>Usa el slider</b> para mover el pico de Bragg a distintas profundidades
+        (controla la energía del haz). Alterna entre protones e iones de carbono.
+      </p>
+
+      <canvas id="canvasE" width="800" height="320"></canvas>
+
+      <div class="controls">
+        <div class="slider-row">
+          <span class="slider-label">Energía del haz $E_0$</span>
+          <input type="range" id="sliderE_bragg" min="70" max="230" step="5" value="150"
+                 oninput="panelE.setEnergy(this.value)">
+          <span class="slider-val" id="valE_bragg">150 MeV</span>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-label">Profundidad del pico</div>
+          <div class="metric-val"><span id="val-bragg-peak">—</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Partícula</div>
+          <div class="metric-val" id="val-bragg-par" style="font-size:0.9rem;color:var(--amber)">Protones p⁺</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Carga $z$ → sección eficaz</div>
+          <div class="metric-val" id="val-bragg-z" style="font-size:0.82rem">z=1  z²=1</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="flabel">Poder de frenado — Bethe-Bloch relativista</div>
+        $$-\frac{dE}{\rho\,dx}=\frac{K z^2 Z}{A\beta^2}
+          \left[\frac{1}{2}\ln\frac{2m_ec^2\beta^2\gamma^2 W_\text{max}}{I^2}-\beta^2\right]$$
+        <div class="formula-meta">
+          $K=0.307\,\text{MeV·cm}^2/\text{mol}$ · $I_\text{tejido}=79.7\,\text{eV}$ ·
+          $Z/A_\text{agua}=0.5551\,\text{mol/g}$ · $\rho=1\,\text{g/cm}^3$<br>
+          Para iones C¹²⁶⁺: $z=6$ → potencia $z^2=36$ · campo Coulomb 36× más intenso
+          → pico más estrecho y mayor deposición de energía por unidad de longitud (LET alto).
+        </div>
+      </div>
+
+      <div class="note">
+        <b>Conexión con el hilo del módulo:</b>
+        el potencial de Coulomb que deflecta las partículas alfa en el Panel A es el mismo que
+        frena los protones en el tejido en el Panel E — $F = Z_1 Z_2 ke^2/r^2$ actúa en ambos casos.
+        En RBS (Paneles B–D) medimos la energía que pierde el proyectil al colisionar con un
+        núcleo; en hadronterapia <em>controlamos</em> cuánta energía deposita el proyectil en
+        cada capa de tejido antes de detenerse. Misma física, diferente propósito.<br>
+        <b>Diagnóstico nuclear (PET/SPECT):</b> también nace de Rutherford —
+        Georg de Hevesy, en el laboratorio de Rutherford en Manchester (1912),
+        inventó el principio del radiotrazador al no poder separar isótopos de plomo.
+        Ese "fracaso" dio origen a todos los estudios PET y SPECT del mundo (Nobel 1943).<br>
+        <span class="warn">⚠ Simplificaciones:</span>
+        (1) factor de corrección 0.56 para correcciones de capa y densidad no implementadas
+        (Bethe-Bloch simple sobreestima ~1.8× respecto a NIST PSTAR);
+        (2) tejido blando homogéneo — sin heterogeneidades (hueso, pulmón);
+        (3) sin fragmentación nuclear (relevante para C¹²⁶⁺ a profundidad: crea partículas
+        secundarias más allá del pico).
+      </div>
+
+    </div>
   </section>
 
 </main>
 
 <footer>
   <p>Evaluación 2 · Módulo 2 · Diplomado en Física Moderna</p>
-  <p>Fórmulas: Chu, Mayer &amp; Nicolet (1978); Feldman &amp; Mayer (1986)
-     · $ke^2=1.44\,\text{MeV·fm}$ · integración RK4 en tiempo real</p>
+  <p>Fórmulas: Chu, Mayer &amp; Nicolet (1978); Feldman &amp; Mayer (1986);
+     Bethe (1930); PDG (2022)
+     · $ke^2=1.44\,\text{MeV·fm}$ · integración RK4 y Bethe-Bloch en tiempo real</p>
 </footer>
 
 <!-- JavaScript modular -->
@@ -395,6 +486,7 @@
 <script src="js/panel-b.js"></script>
 <script src="js/panel-c.js"></script>
 <script src="js/panel-d.js"></script>
+<script src="js/panel-e.js"></script>
 <script src="js/app.js"></script>
 
 </body>

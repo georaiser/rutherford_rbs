@@ -2,8 +2,8 @@
  * app.js — Punto de entrada e inicialización de la app
  *
  * Inicializa los tres paneles y lanza el loop principal de animación.
- * El loop único de requestAnimationFrame maneja Paneles A y B.
- * El Panel C es estático y se redibuja solo cuando cambia M₂.
+ * El loop único de requestAnimationFrame maneja Paneles A, B y D.
+ * Paneles C y E son estáticos: se redibujan solo ante eventos.
  *
  * Depende de: constants.js, physics.js, panelA.js, panelB.js, panelC.js
  */
@@ -16,6 +16,7 @@
   panelB.init();
   panelC.init();
   panelD.init();
+  panelE.init();
 
   // Sincronizar el marcador de Panel C con el slider de M₂
   // (panelB.init() ya registra el slider, aquí añadimos la sincronización con C)
