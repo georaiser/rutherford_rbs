@@ -244,6 +244,59 @@
     </div>
   </section>
 
+
+  <!-- ══════════════════ PANEL D — RBS EN ACCIÓN ══════════════════ -->
+  <section class="panel" id="panel-d">
+    <div class="panel-header">
+      <span class="badge">D</span>
+      <h2>RBS en acción — síntesis</h2>
+    </div>
+    <div class="panel-body">
+
+      <p class="note">
+        <b>El gancho:</b> Rutherford disparó partículas alfa para descubrir el núcleo atómico en 1909.
+        Hoy usamos exactamente el mismo principio — no para descubrir el átomo, sino para analizar
+        chips de computadora, catalizadores o pinturas de obras de arte, <em>capa por capa</em>,
+        sin destruir la muestra.<br>
+        La muestra típica de RBS es una oblea de silicio con una película fina de oro depositada encima.
+        Las partículas que chocan con Au rebotan con <b>más energía</b> ($K=0.9226$, núcleo pesado);
+        las que chocan con Si rebotan con <b>menos energía</b> ($K=0.5649$, núcleo más liviano).
+        El detector no ve los átomos — solo mide la energía de llegada. El espectro se construye
+        acumulando miles de eventos: <b>cada pico es la firma de un elemento</b>.
+      </p>
+
+      <!-- Vista lado a lado: muestra | espectro -->
+      <div class="rbs-view">
+        <div class="rbs-col">
+          <div class="canvas-label">Interacción α con la muestra — Au sobre Si</div>
+          <canvas id="canvasDsamp" width="520" height="300"></canvas>
+        </div>
+        <div class="rbs-col">
+          <div class="canvas-label">Espectro acumulado — los picos revelan la composición</div>
+          <canvas id="canvasDspec" width="520" height="300"></canvas>
+        </div>
+      </div>
+
+      <div style="text-align:center">
+        <button class="btn-reset" onclick="panelD.reset()">↺ Reiniciar espectro</button>
+      </div>
+
+      <div class="note" style="margin-top:14px">
+        <b>Lo que muestra este panel en conjunto:</b>
+        (1) la partícula alfa que choca con Au sale con E₁ = 1.845 MeV — aparece como pico amarillo
+        en el espectro; (2) la que choca con Si sale con E₁ = 1.130 MeV — pico azul;
+        (3) la traza de C superficial produce un pico pequeño a E₁ = 0.505 MeV.
+        La <b>posición</b> del pico identifica el elemento; la <b>altura</b> mide la cantidad
+        (proporcional a $Z_2^2$: Au produce picos 173× más altos que C a igual concentración).<br>
+        <span class="warn">⚠ Simplificación declarada:</span> la muestra es puramente superficial.
+        En RBS real, los átomos en profundidad producen picos desplazados a menor energía
+        (<em>stopping power</em>), lo que permite medir el espesor de las capas.
+        La probabilidad de disparo contra cada capa es $\propto Z_2^2$ (sección eficaz de Rutherford),
+        no uniforme — por eso Au acumula cuentas mucho más rápido que C.
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -258,6 +311,7 @@
 <script src="js/panelA.js"></script>
 <script src="js/panelB.js"></script>
 <script src="js/panelC.js"></script>
+<script src="js/panelD.js"></script>
 <script src="js/main.js"></script>
 
 </body>

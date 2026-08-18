@@ -15,6 +15,7 @@
   panelA.init();
   panelB.init();
   panelC.init();
+  panelD.init();
 
   // Sincronizar el marcador de Panel C con el slider de M₂
   // (panelB.init() ya registra el slider, aquí añadimos la sincronización con C)
@@ -29,6 +30,7 @@
   function loop(timestamp) {
     panelA.tick();
     panelB.draw(timestamp);
+    panelD.tick(timestamp);
     requestAnimationFrame(loop);
   }
 
