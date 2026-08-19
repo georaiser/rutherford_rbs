@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -81,7 +81,24 @@
           <input type="range" id="sliderE" min="4" max="10" step="0.1" value="7.0">
           <span class="slider-val" id="valE">7.0 MeV</span>
         </div>
+        <!-- Slider Z₂ — solo Rutherford -->
+        <div class="slider-row" id="rowZ2">
+          <span class="slider-label">Elemento blanco $Z_2$</span>
+          <input type="range" id="sliderZ2" min="10" max="92" step="1" value="79">
+          <span class="slider-val" id="valZ2">Z = 79</span>
+          <span class="slider-val" id="val-Z2-label" style="color:var(--amber);margin-left:6px">Au  (Z=79)</span>
+        </div>
+        <!-- Trazas + Pausa — solo Rutherford -->
+        <div class="slider-row" id="rowCtrlA" style="gap:16px;align-items:center">
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--muted);cursor:pointer">
+            <input type="checkbox" id="checkTracesA" style="accent-color:var(--cyan)">
+            Trazas acumuladas
+          </label>
+          <button id="btnPauseA" class="mode-btn" style="padding:3px 12px;font-size:0.8rem">⏸ Pausa</button>
+          <button id="btnStepA"  class="mode-btn" style="padding:3px 12px;font-size:0.8rem">⏭ Paso</button>
+        </div>
       </div>
+
 
       <!-- Fórmula Rutherford -->
       <div class="formula-box" id="formulaA">

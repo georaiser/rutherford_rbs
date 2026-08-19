@@ -1,0 +1,13 @@
+a modo de studio (academic, riguroso, simple y claro de entender), generar un archivo md con toda informacion y analisis fisico, matematico y de formulas de cada panel y en general del proyecto (en español). buscar informacion en los links abajo y en otras fuentes fidedignas.
+esto tambien servira para actualizar y mejorar textos en app html y guion de presentacion.
+
+https://www.eag.com/app-note/rutherford-backscattering-spectrometry-rbs-tutorial/
+https://www.cmam.uam.es/facilities/iba-techniques/rbs/
+https://www.ansto.gov.au/rutherford-backscattering
+https://covalent.com/techniques/chemical-analysis/rutherford-backscattering-spectrometry-rbs/
+https://www.hzdr.de/db/Cms?pOid=68137&pNid=1172&pLang=en
+https://www.cmam.uam.es/es/instalaciones/tecnica-iba/rbs-es/
+https://www.tandfonline.com/doi/full/10.1080/03036758.2021.1962368
+https://espanol.libretexts.org/Bookshelves/Quimica/Qu%C3%ADmica_Anal%C3%ADtica/M%C3%A9todos_F%C3%ADsicos_en_Qu%C3%ADmica_y_Nano_Ciencia_(Barron)/01%3A_An%C3%A1lisis_Elemental/1.15%3A_Retrodispersi%C3%B3n_de_Rutherford_de_pel%C3%ADculas_delgadas
+https://revistas.uni.edu.pe/index.php/tecnia/article/view/53/43
+https://dayinlab.com/2017/10/29/un-evento-tipo-rutherford-luchando-contra-la-estadistica/

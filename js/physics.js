@@ -16,8 +16,8 @@ const Physics = (() => {
   //    Es la distancia de máximo acercamiento para colisión frontal (b=0).
   //    Fuente: Rutherford (1911); Chu et al. (1978) ec. 2.1
   // ─────────────────────────────────────────────────────────────────────────
-  function calcA0(E_MeV) {
-    return PHYS.Z1 * PHYS.Z2_AU * PHYS.KE2 / (2 * E_MeV); // fm
+  function calcA0(E_MeV, Z2 = PHYS.Z2_AU) {
+    return PHYS.Z1 * Z2 * PHYS.KE2 / (2 * E_MeV); // fm
   }
 
   // ─────────────────────────────────────────────────────────────────────────
