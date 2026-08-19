@@ -14,6 +14,7 @@
 8. Glosario de términos
 9. Referencias
 10. Física avanzada — Fondo teórico complementario
+    (10.6 Extensiones cuánticas de las técnicas IBA)
 
 ---
 
@@ -341,6 +342,7 @@ Paul Dirac unió la mecánica cuántica con la relatividad especial, prediciendo
 ---
 
 ### 10. Física avanzada — Fondo teórico complementario
+    (10.6 Extensiones cuánticas de las técnicas IBA)
 
 #### 10.1 Barrera de Coulomb
 Los núcleos reales tienen radio $R_\text{núcleo} \approx r_0 A^{1/3}$ ($r_0 = 1.25\,\text{fm}$). Para dispersión puramente electromagnética se requiere $a_0 > R_1 + R_2$. La energía máxima permitida es la **barrera de Coulomb**:
@@ -370,6 +372,59 @@ Esta coincidencia exacta es exclusiva del potencial $1/r$ y justifica que el an�
 La detección es un proceso de Poisson. Incertidumbre relativa por canal:
 $$\frac{\sigma_N}{N} = \frac{1}{\sqrt{N}}$$
 A baja corriente ($5\,\text{nA}$): espectro con fluctuaciones visibles. A alta corriente ($100\,\text{nA}$): estadística converge. El Panel D ilustra esta evolución en tiempo real.
+
+
+#### 10.6 ¿Dónde entra la mecánica cuántica en las técnicas relacionadas a RBS?
+
+El RBS clásico es mecánicamente clásico (ver §0.5). Pero las técnicas complementarias de la familia IBA sí requieren mecánica cuántica de forma esencial. Hay tres fenómenos cuánticos centrales:
+
+---
+
+**A. Efecto túnel — la conexión más directa con este proyecto**
+
+La barrera de Coulomb que en el Panel A *repele* una partícula alfa hacia afuera es **la misma barrera** que en el decaimiento radiactivo la partícula alfa debe *atravesar desde adentro* para escapar del núcleo. Clásicamente esto es imposible: la partícula no tiene energía suficiente para subir la barrera. Pero cuánticamente, la función de onda $\Psi$ penetra la barrera con una amplitud no nula — el **efecto túnel de Gamow (1928)**:
+
+$$T \approx e^{-2G}, \quad G = \int_{r_1}^{r_2} \sqrt{\frac{2m}{\hbar^2}\left[V(r)-E\right]}\,dr$$
+
+donde $V(r) = kZ_1Z_2e^2/r$ es exactamente el potencial coulombiano del Panel A. En palabras simples:
+
+> *Las partículas alfa que usa el experimento de Rutherford llegaron hasta ahí gracias al efecto túnel cuántico — escaparon del núcleo del Radio atravesando la barrera de Coulomb por la que la simulación las muestra rebotando.*
+
+La técnica **NRA** (*Nuclear Reaction Analysis*) aprovecha esto: a energías específicas, el proyectil también puede penetrar el núcleo blanco por túnel y desencadenar una reacción nuclear. Esto permite detectar elementos ligeros ($^{12}$C, $^{16}$O, $^{14}$N) con resolución de profundidad de $\sim$2 nm — imposible con RBS clásica.
+
+---
+
+**B. Resonancias cuánticas — estados del núcleo compuesto (NRA/RNRA)**
+
+Cuando la energía del proyectil coincide exactamente con un estado cuántico (nivel de energía) del núcleo compuesto formado durante la colisión, la sección eficaz sube órdenes de magnitud. Este fenómeno se describe con la fórmula de **Breit-Wigner**:
+
+$$\sigma(E) = \sigma_0 \frac{(\Gamma/2)^2}{(E-E_r)^2 + (\Gamma/2)^2}$$
+
+donde $E_r$ es la energía de la resonancia y $\Gamma$ su anchura. Es el análogo nuclear de las líneas espectrales de Bohr: los niveles $E_r$ son estados cuánticos discretos del núcleo, no energías continuas. **Sin mecánica cuántica no existen estas resonancias**.
+
+---
+
+**C. Transiciones electrónicas cuánticas — PIXE**
+
+La técnica **PIXE** (*Particle-Induced X-ray Emission*) detecta los rayos X característicos emitidos cuando el haz de iones expulsa un electrón de una capa interna del átomo blanco y otro electrón cae a ocupar el hueco. La energía del fotón emitido es:
+
+$$E_{K\alpha} = E_{K} - E_{L} \quad \text{(transición L} \to \text{K)}$$
+
+Estas energías son fijas y únicas para cada elemento (huella digital cuántica del átomo), determinadas por la estructura de capas cuánticas. Las **reglas de selección** ($\Delta l = \pm 1$, $\Delta j = 0, \pm 1$) son puramente cuánticas. Sin la cuantización de Bohr y su extensión a la estructura electrónica, PIXE no funcionaría.
+
+---
+
+**Resumen visual: clásico vs. cuántico en IBA**
+
+| Técnica | ¿Usa QM? | Fenómeno cuántico | Para qué sirve |
+|---|:---:|---|---|
+| **RBS** | No (clásica exacta) | — (coincidencia Gordon) | Masas y concentraciones |
+| **ERDA** | No | — | Hidrógeno y elementos ligeros |
+| **NRA / RNRA** | **Sí** | Efecto túnel + resonancias Breit-Wigner | Perfiles de $^{16}$O, $^{12}$C con nm de resolución |
+| **PIXE** | **Sí** | Transiciones electrónicas cuánticas | Elementos con masas similares ($Z$ cercano) |
+| **Channeling** | Parcial | Potencial de steering (límite cuántico a baja E) | Daño por implantación, dopantes |
+
+**Conclusión:** RBS es el punto de partida clásico. Las técnicas que extienden su alcance hacia elementos ligeros, resolución isotópica o mayor sensibilidad requieren mecánica cuántica. El proyecto cubre el caso clásico exacto; el ecosistema completo de IBA es un ejemplo de cómo la física cuántica amplía —sin reemplazar— las capacidades de la física clásica.
 
 ---
 
