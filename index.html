@@ -282,9 +282,9 @@
       <p class="note">
         <b>Identidad + cantidad en una sola gráfica.</b><br>
         Con millones de colisiones, el detector acumula una distribución de energías: el espectro.
-        Cada elemento produce un pico definido por dos propiedades independientes:<br>
+        Cada elemento produce un peak definido por dos propiedades independientes:<br>
         · <b>Posición</b> → $E_1 = K(M_2)\cdot E_0$. Solo depende de $M_2$ (Panel B).
-          Cambiar la concentración <em>no</em> mueve el pico.<br>
+          Cambiar la concentración <em>no</em> mueve el peak.<br>
         · <b>Altura</b> → $\propto Z_2^2\cdot N_i$: sección eficaz de Rutherford × concentración.<br><br>
         <b>Este panel es un laboratorio configurable</b> — no representa una muestra real.
         Los sliders permiten componer cualquier mezcla hipotética de cinco elementos (C, Si, Fe, Ag, Au)
@@ -297,14 +297,14 @@
       <div class="controls" style="margin-top:14px">
         <p class="note" style="margin-bottom:10px; border-left-color:var(--cyan)">
           <b>Concentración superficial $N_i$:</b> ajusta la cantidad de cada elemento.
-          La altura cambia con $A_i\propto Z_2^2\cdot N_i$. Pasa el cursor sobre un pico para
+          La altura cambia con $A_i\propto Z_2^2\cdot N_i$. Pasa el cursor sobre un peak para
           ver K, E₁ y Z₂² exactos. Haz clic para resaltarlo.
         </p>
         <div id="concSliders"></div>
       </div>
 
       <div class="formula-box">
-        <div class="flabel">Sección eficaz diferencial de Rutherford — altura de los picos</div>
+        <div class="flabel">Sección eficaz diferencial de Rutherford — altura de los peaks</div>
         $$\frac{d\sigma}{d\Omega}=\left(\frac{Z_1 Z_2\,ke^2}{4E_0}\right)^{\!2}
           \frac{1}{\sin^4\!\!\left(\dfrac{\theta}{2}\right)}\;\propto\;Z_2^2$$
         <div class="formula-meta">
@@ -314,11 +314,11 @@
       </div>
 
       <div class="note">
-        <b>Limitación fundamental:</b> un pico alto puede deberse a $Z_2$ grande
+        <b>Limitación fundamental:</b> un peak alto puede deberse a $Z_2$ grande
         <em>o</em> a $N_i$ grande — el espectro por sí solo no los distingue.
         En la práctica se usan muestras de referencia o se combina RBS con otras técnicas.<br>
         <span class="warn">⚠ Simplificación:</span> se muestra solo la capa superficial.
-        En RBS real, los átomos en profundidad producen picos desplazados a menor energía
+        En RBS real, los átomos en profundidad producen peaks desplazados a menor energía
         (<em>stopping power</em>), lo que permite medir el espesor de cada capa.
         La forma gaussiana refleja la resolución del detector ($\sigma\approx15{-}30$ keV FWHM).
       </div>
@@ -347,9 +347,9 @@
         en semiconductores.<br>
         La animación izquierda muestra las colisiones individuales; el espectro derecho se acumula
         con cada detección, como en un equipo real.<br><br>
-        <b>Interacción:</b> haz clic en una capa para resaltarla y ver su pico.
-        Cambia $E_0$ para ver que los picos se desplazan pero $K$ permanece constante.
-        Pasa el cursor sobre un pico para ver $K$, $E_1$ y $Z_2^2$ exactos.
+        <b>Interacción:</b> haz clic en una capa para resaltarla y ver su peak.
+        Cambia $E_0$ para ver que los peaks se desplazan pero $K$ permanece constante.
+        Pasa el cursor sobre un peak para ver $K$, $E_1$ y $Z_2^2$ exactos.
       </p>
 
       <div class="rbs-view">
@@ -358,7 +358,7 @@
           <canvas id="canvasDsamp" width="520" height="300"></canvas>
         </div>
         <div class="rbs-col">
-          <div class="canvas-label">Espectro acumulado — pasar cursor sobre picos para ver detalles</div>
+          <div class="canvas-label">Espectro acumulado — pasar cursor sobre peaks para ver detalles</div>
           <canvas id="canvasDspec" width="520" height="300"></canvas>
         </div>
       </div>
@@ -377,14 +377,14 @@
           <span class="slider-val" id="valI_nA">20 nA</span>
         </div>
         <p class="note" style="margin:10px 0 8px;border-left-color:var(--cyan)">
-          <b>Composición $N_i$:</b> la <b>posición</b> del pico no cambia al variar $N_i$
+          <b>Composición $N_i$:</b> la <b>posición</b> del peak no cambia al variar $N_i$
           (depende de $M_2$, no de la cantidad). La <b>altura</b> sí cambia
-          ($\propto Z_2^2\cdot N_i$). Al cambiar $E_0$, todos los picos se desplazan
+          ($\propto Z_2^2\cdot N_i$). Al cambiar $E_0$, todos los peaks se desplazan
           proporcionalmente — $K$ es constante porque depende solo de las masas.
           El espectro se reinicia al cambiar $E_0$.<br>
           <b>Corriente $I$:</b> en RBS real determina cuántas partículas α por segundo
           impactan la muestra. A mayor corriente, el espectro se acumula más rápido.
-          Rango típico: 10–100 nA. Aquí controla la tasa de spawn: $\Delta t = 9200/I$ ms.
+          Rango típeak: 10–100 nA. Aquí controla la tasa de spawn: $\Delta t = 9200/I$ ms.
         </p>
         <div id="panelD-sliders"></div>
       </div>
@@ -395,7 +395,7 @@
       </div>
 
       <div class="formula-box" style="margin-top:16px">
-        <div class="flabel">Posición del pico vs. altura del pico</div>
+        <div class="flabel">Posición del peak vs. altura del peak</div>
         $$\underbrace{E_1 = K(M_2,\,\theta)\cdot E_0}_{\text{posición — identifica el elemento}}
           \qquad
           \underbrace{A_i \;\propto\; Z_2^2\cdot N_i}_{\text{altura — mide la cantidad}}$$
@@ -410,7 +410,7 @@
         semiconductores; medir perfiles de dopaje; autenticar pigmentos en obras de arte.
         En todos los casos la energía de rebote revela la masa del núcleo encontrado.<br>
         <span class="warn">⚠ Simplificaciones:</span>
-        (1) modelo de superficie — en RBS real los átomos en profundidad producen picos
+        (1) modelo de superficie — en RBS real los átomos en profundidad producen peaks
         desplazados a menor energía (<em>stopping power</em>), lo que permite medir el espesor
         de cada capa.
         (2) la probabilidad de impacto es $\propto Z_2^2\cdot N_i$; Au acumula cuentas mucho
@@ -445,12 +445,12 @@
         protones — fue la primera reacción nuclear artificial, y descubrió el protón.
         Hoy ese mismo protón, acelerado a 70–230 MeV, se usa para tratar tumores con
         precisión milimétrica. La razón es la <b>curva de Bragg</b>: una partícula cargada
-        deposita casi toda su energía en un pico estrecho justo antes de detenerse —
+        deposita casi toda su energía en un peak estrecho justo antes de detenerse —
         localizable en la profundidad del tumor.<br>
         Compara con los fotones (curva azul punteada): los rayos X depositan la mayor dosis
         en la entrada y decaen exponencialmente — no hay forma de concentrarlos en el tumor
         sin irradiar el tejido sano anterior. Los protones sí lo permiten.
-        Los iones de carbono (C¹²⁶⁺) tienen un pico aún más estrecho y mayor efecto biológico.<br>
+        Los iones de carbono (C¹²⁶⁺) tienen un peak aún más estrecho y mayor efecto biológico.<br>
         <b>Usa el slider</b> para mover el pico de Bragg a distintas profundidades
         (controla la energía del haz). Alterna entre protones e iones de carbono.
       </p>
@@ -468,7 +468,7 @@
 
       <div class="metrics">
         <div class="metric-card">
-          <div class="metric-label">Profundidad del pico</div>
+          <div class="metric-label">Profundidad del peak</div>
           <div class="metric-val"><span id="val-bragg-peak">—</span></div>
         </div>
         <div class="metric-card">
@@ -489,7 +489,7 @@
           $K=0.307\,\text{MeV·cm}^2/\text{mol}$ · $I_\text{tejido}=79.7\,\text{eV}$ ·
           $Z/A_\text{agua}=0.5551\,\text{mol/g}$ · $\rho=1\,\text{g/cm}^3$<br>
           Para iones C¹²⁶⁺: $z=6$ → potencia $z^2=36$ · campo Coulomb 36× más intenso
-          → pico más estrecho y mayor deposición de energía por unidad de longitud (LET alto).
+          → peak más estrecho y mayor deposición de energía por unidad de longitud (LET alto).
         </div>
       </div>
 
@@ -509,7 +509,7 @@
         (Bethe-Bloch simple sobreestima ~1.8× respecto a NIST PSTAR);
         (2) tejido blando homogéneo — sin heterogeneidades (hueso, pulmón);
         (3) sin fragmentación nuclear (relevante para C¹²⁶⁺ a profundidad: crea partículas
-        secundarias más allá del pico).
+        secundarias más allá del peak).
       </div>
 
     </div>
