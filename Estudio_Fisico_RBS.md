@@ -1,8 +1,9 @@
-﻿# Estudio Físico — Experimento de Rutherford, RBS y Hadronterapia
+# Estudio Físico — Experimento de Rutherford, RBS y Hadronterapia
 ## Proyecto: Evaluación 2, Módulo 2 — Diplomado de Física Moderna
 
 ### Índice
 0. Contexto histórico y motivación
+0.5. Rutherford y la mecánica cuántica: el puente necesario
 1. Panel A — Dispersión de Rutherford
 2. Panel B — Factor cinemático K
 3. Panel C — Espectro RBS
@@ -12,6 +13,7 @@
 7. Tabla maestra de fórmulas verificadas
 8. Glosario de términos
 9. Referencias
+10. Física avanzada — Fondo teórico complementario
 
 ---
 
@@ -21,13 +23,92 @@ El desarrollo de la física moderna a principios del siglo XX estuvo marcado por
 
 ---
 
+### 0.5 Rutherford y la mecánica cuántica: el puente necesario
+
+Este proyecto forma parte del módulo de *Teoría Cuántica Temprana*. Sin embargo, el experimento de Rutherford —tomado en sus propios términos— es **física clásica pura**. Entender esta tensión es fundamental para comprender el rol histórico y conceptual del experimento.
+
+#### 0.5.1 Rutherford no usa mecánica cuántica: lo que hace el experimento
+
+El experimento de Geiger-Marsden (1909–1911) y su interpretación por Rutherford (1911) se resuelven completamente con dos ingredientes clásicos:
+
+1. **Fuerza de Coulomb:** $F = kZ_1Z_2e^2/r^2$ — mecánica newtoniana pura.
+2. **Conservación de energía y momento lineal** — leyes clásicas del siglo XVII–XVIII.
+
+No aparece ningún $\hbar$, ninguna función de onda $\Psi$, ningún postulado de cuantización. La trayectoria hiperbólica, el parámetro $a_0$, la fórmula $\theta(b)$ y la sección eficaz diferencial son todos resultados de la mecánica de Newton aplicada a un potencial $1/r$. En ese sentido, **Rutherford es el último gran triunfo de la física clásica aplicada a escala nuclear**, no el primero de la física cuántica.
+
+#### 0.5.2 La crisis que Rutherford crea: el átomo que colapsa
+
+Al descubrir el núcleo, Rutherford resuelve un problema (por qué las partículas rebotan) pero crea uno más grave: si la carga positiva está concentrada en un núcleo central, el electrón debe orbitar alrededor de él. Pero según las ecuaciones de Maxwell, **toda carga eléctrica acelerada irradia energía electromagnética**. Un electrón en órbita circular está continuamente acelerado (aceleración centrípeta), por lo tanto:
+
+$$P_\text{radiada} = \frac{e^2 a^2}{6\pi\varepsilon_0 c^3} \neq 0$$
+
+El tiempo estimado de colapso espiral del electrón hacia el núcleo es $\tau \sim 10^{-11}\,\text{s}$. En $\sim 10$ picosegundos, **la materia no debería existir** según la física clásica post-Rutherford.
+
+Este es el problema que la mecánica cuántica nace para resolver. Sin el núcleo de Rutherford, no hay crisis. Sin la crisis, no hay urgencia para inventar la cuantización.
+
+#### 0.5.3 Por qué Rutherford está en el módulo de mecánica cuántica temprana
+
+Rutherford cumple un **rol narrativo e histórico preciso** en la historia de la física cuántica, que se puede trazar como una cadena lógica causal:
+
+```
+Modelo de Thomson (1904)
+    → carga difusa → campo débil → θ_max ≈ 0.006° (clásico)
+        ↓
+Experimento de Geiger-Marsden (1909-1911)
+    → retrodispersión a 150° → imposible con Thomson
+        ↓
+Núcleo de Rutherford (1911)
+    → campo coulombiano concentrado → θ grande (¡clásico!)
+        ↓
+CRISIS: Maxwell predice colapso en 10⁻¹¹ s
+        ↓
+Postulados de Bohr (1913): L = nℏ  ← PRIMER ACTO CUÁNTICO
+    → órbitas estacionarias → espectros atómicos explicados
+        ↓
+De Broglie (1924) → Heisenberg / Schrödinger (1925-26)
+    → mecánica cuántica completa
+```
+
+**Rutherford es la premisa que hace necesaria la mecánica cuántica, no un ejemplo de ella.** Su experimento está en este módulo porque sin él, Bohr no tiene problema que resolver.
+
+#### 0.5.4 La coincidencia de Gordon: el puente matemático
+
+En 1928, Walter Gordon resolvió formalmente la ecuación de Schrödinger para el potencial coulombiano $V(r) = kZ_1Z_2e^2/r$ y obtuvo un resultado sorprendente: la sección eficaz diferencial cuántica exacta es **idéntica** a la fórmula clásica de Rutherford:
+
+$$\left(\frac{d\sigma}{d\Omega}\right)_\text{cuántica} = \left(\frac{d\sigma}{d\Omega}\right)_\text{clásica} = \left(\frac{Z_1 Z_2 ke^2}{4E_0}\right)^2 \frac{1}{\sin^4(\theta/2)}$$
+
+Esta coincidencia **no es accidental**: es una propiedad matemática exclusiva del potencial $1/r$ (potencial coulombiano). Para cualquier otro potencial —como el de la fuerza nuclear fuerte— la mecánica cuántica y la clásica darían resultados distintos. El corolario práctico es poderoso:
+
+> *La técnica RBS, desarrollada en pleno siglo XX en un mundo donde la mecánica cuántica ya era conocida, puede calcularse y verificarse correctamente usando solo mecánica clásica. El resultado es cuánticamente exacto.*
+
+Esto hace de Rutherford un caso pedagógico excepcional: ilustra que la validez de un modelo no depende de su época, sino de su régimen de aplicabilidad.
+
+#### 0.5.5 Síntesis: tres roles de Rutherford en este proyecto
+
+| Rol | Descripción | Marco físico |
+|---|---|---|
+| **Histórico** | Descubre el núcleo atómico; crea la crisis que origina la QM | Clásico |
+| **Técnico (RBS)** | Base de la técnica analítica más precisa de películas delgadas | Clásico (con exactitud cuántica por §10.2) |
+| **Conceptual** | Puente entre la física newtoniana y la mecánica cuántica temprana | Clásico → Cuántico |
+
+El experimento de Rutherford es, en palabras del físico Freeman Dyson, *"el último gran experimento clásico y el primero en revelar que el mundo necesita una física nueva"*.
+
+---
+
 ### 1. Panel A — Dispersión de Rutherford
 
 #### 1.1 El experimento de Geiger-Marsden (1909-1911)
 El experimento original consistió en dirigir un haz colimado de partículas alfa ($Z_1=2$, núcleos de helio emitidos por decaimiento radiactivo) hacia una finísima lámina de oro ($Z_2=79$). Se esperaba que las partículas atravesaran la lámina con desviaciones minúsculas. Sin embargo, una pequeña pero significativa fracción rebotaba en ángulos mayores a 90°, un resultado que Rutherford comparó con disparar un proyectil naval contra un pañuelo de papel y que este rebotara.
 
 #### 1.2 Modelo de Thomson vs. modelo nuclear
-El modelo de J.J. Thomson o "budín de pasas" postulaba una esfera de carga positiva continua en la que los electrones estaban incrustados. Debido a la baja densidad de carga, el campo eléctrico máximo en el interior del átomo era débil. La predicción clásica para este modelo resulta en un ángulo máximo de deflexión extremadamente pequeño. En nuestra simulación, este valor límite está fijado y verificado en $\theta_{\text{max Thomson}} = 6.4 \times 10^{-3 \circ}$.
+El modelo de J.J. Thomson (1904) postulaba una esfera de carga positiva $+Z_2 e$ distribuida homogéneamente en el volumen atómico ($R \approx 1.45\,\text{Å} = 145{,}000\,\text{fm}$). Por la Ley de Gauss, el campo eléctrico interior crece linealmente:
+$$\vec{E}(r) = \frac{k Z_2 e}{R^3}\,\vec{r} \quad (r < R)$$
+Una partícula alfa con parámetro de impacto $b$ siente fuerza transversal $F_\perp = kZ_1Z_2e^2 b/R^3$ durante $\Delta t = 2\sqrt{R^2-b^2}/v_0$. El impulso resulta en:
+$$\theta(b) = \frac{k Z_1 Z_2 e^2}{E_0 R^3}\,b\sqrt{R^2-b^2}$$
+cuyo máximo en $b = R/\sqrt{2}$ vale:
+$$\theta_{\text{max,Thomson}} = \frac{a_0}{R} = \frac{16.25\,\text{fm}}{145{,}000\,\text{fm}} \approx 0.0064°$$
+**Thomson no puede producir rebotes hacia atrás.** Solo un núcleo puntual explica los ángulos de hasta 150° de Geiger-Marsden.
+
 Por contraste, el modelo nuclear de Rutherford concentra toda la carga positiva y casi toda la masa en un núcleo central de dimensiones del orden de los femtómetros ($1 \text{ fm} = 10^{-15} \text{ m}$). Esto genera un campo eléctrico intenso capaz de retrodispersar proyectiles de varios MeV.
 
 #### 1.3 Fuerza de Coulomb y trayectoria hiperbólica
@@ -63,33 +144,38 @@ Cuando se activa el "toggle" del modelo de Thomson en el panel, el simulador cam
 En la simulación del Panel A, la variable de entrada del usuario es el número atómico $Z_2$. La interacción dominante es puramente electromagnética; la fuerza nuclear fuerte actúa a rangos tan cortos ($\approx 1\text{-}2 \text{ fm}$) que no es relevante mientras el proyectil no venza la barrera de Coulomb. Por ello, los neutrones $N$ del blanco no juegan ningún papel en la trayectoria hiperbólica; solo aportan inercia al retroceso (Panel B).
 
 #### 1.9 Simplificaciones declaradas
-- **Física clásica:** Se ignora la mecánica cuántica (la sección eficaz clásica y cuántica para un potencial de Coulomb coinciden accidentalmente, teorema de Rutherford).
-- **Masa infinita:** En el panel A, se asume que el núcleo blanco es infinitamente masivo y permanece estacionario (sin retroceso). El retroceso se aborda en el Panel B.
-- **Apantallamiento electrónico ignorado:** No se considera la reducción del campo eléctrico causada por la nube de electrones a grandes distancias.
+- **Física clásica:** La sección eficaz clásica y cuántica para el potencial de Coulomb coinciden exactamente (Gordon, 1928) — ver §10.2.
+- **Masa infinita:** El núcleo blanco se asume estacionario. El retroceso se trata en el Panel B.
+- **Apantallamiento ignorado:** La corrección de Andersen/L'Ecuyer es $<2\%$ a $E_0=2\,\text{MeV}$ sobre Au — despreciable pedagógicamente.
+- **Sin barrera de Coulomb:** A $E_0 = 2\,\text{MeV}$, la barrera es $E_C \approx 20\,\text{MeV}$ para Au; la colisión es 100% electromagnética. Ver §10.1.
 
 ---
 
 ### 2. Panel B — Factor cinemático K
 
 #### 2.1 Colisión elástica: conservación de $E$ y $p$
-En un experimento de RBS, el núcleo blanco experimenta un retroceso macroscópeak. Para modelarlo, tratamos el evento como una colisión elástica clásica en dos dimensiones. Se aplican los principios de conservación de la energía cinética y del momento lineal (cantidad de movimiento).
+En un experimento de RBS, el núcleo blanco experimenta un retroceso macroscópico. Para modelarlo, tratamos el evento como una colisión elástica clásica en dos dimensiones. Se aplican los principios de conservación de la energía cinética y del momento lineal (cantidad de movimiento).
 
 #### 2.2 Fórmula de $K(M_2, \theta)$
 El factor cinemático $K$ es la fracción de la energía inicial $E_0$ que retiene el proyectil ($E_1$) tras rebotar en un ángulo $\theta$ contra un blanco de masa $M_2$. Despejando las ecuaciones de conservación, obtenemos:
 $$ K = \frac{E_1}{E_0} = \left[ \frac{\sqrt{M_2^2 - M_1^2 \sin^2\theta} + M_1 \cos\theta}{M_1 + M_2} \right]^2 $$
 Esta ecuación es la piedra angular del análisis RBS, pues demuestra que la energía detectada $E_1$ es una firma única de la masa $M_2$ del átomo blanco.
 
-#### 2.3 Límites físicos: $M_2 \gg M_1$ y $M_2 = M_1$
-- **Si $M_2 \gg M_1$**: El núcleo blanco es tan masivo que apenas retrocede. $K \approx 1$.
-- **Si $M_2 = M_1$**: La fórmula se reduce a $K = \cos^2\theta$ para $\theta \le 90^\circ$. A $180^\circ$ (colisión frontal), $K=0$; el proyectil transfiere toda su energía al blanco.
+#### 2.3 Límites físicos
+- **$M_2 \gg M_1$:** Apenas hay retroceso; $K \to 1$. Ejemplo: Au, $K=0.9226$.
+- **$M_2 = M_1$:** $K = \cos^2\theta$. En choque frontal ($180°$): $K=0$, toda la energía se transfiere.
+- **$M_2 < M_1$ (límite cinemático):** El término $M_2^2 - M_1^2\sin^2\theta < 0$ para $\theta > \arcsin(M_2/M_1)$. Una alfa no puede rebotar hacia atrás contra un núcleo más ligero (e.g., H con $M_2=1\,\text{u}$). RBS no detecta Hidrógeno directamente; se requiere **ERDA** (*Elastic Recoil Detection Analysis*, ver §10.3).
 
-#### 2.4 Valores verificados
+#### 2.4 ¿Por qué $\theta = 170°$?
+A $180°$ la sensibilidad de masa $dK/dM_2$ es máxima pero bloquearía el haz. La **geometría IBM a $170°$** conserva $\sim 99.8\%$ de la resolución teórica y es el estándar internacional (CMAM-UAM, EAG).
+
+#### 2.5 Valores verificados
 En el contexto del proyecto, considerando $M_1=4\text{ u}$ (alfa), un ángulo de retrodispersión de $\theta = 170^\circ$, y las masas del carbono ($12\text{ u}$) y el oro ($197\text{ u}$):
 - Para el Carbono: $K(C, 170^\circ) = 0.2525$
 - Para el Oro: $K(Au, 170^\circ) = 0.9226$
 Esto significa que una partícula alfa retrodispersada por oro conserva el 92.2% de su energía, mientras que una rebotada por carbono retiene apenas el 25.2%.
 
-#### 2.5 Simplificaciones declaradas
+#### 2.6 Simplificaciones declaradas
 - **Ausencia de efectos relativistas:** A las energías estándar del RBS ($2 \text{ MeV}$), las correcciones relativistas para partículas alfa son de un orden de magnitud muy por debajo de la resolución experimental.
 - **Energía de enlace atómico:** Se considera la colisión entre núcleos libres, despreciando la energía de enlace molecular o de la red cristalina (del orden de los eV frente a los MeV del proyectil).
 
@@ -143,8 +229,15 @@ Para que el proceso sea realista, la probabilidad de que una partícula simulada
 $$ P(\text{capa } i) = \frac{Z_{2,i}^2}{\sum Z_{2,j}^2} $$
 Por consiguiente, el algoritmo estocástico selecciona la interacción con el Oro con mucha más frecuencia que con el Oxígeno, haciendo crecer su peak gaussiano más rápidamente ante los ojos del usuario.
 
-#### 4.4 Energía dispersada y pérdida de energía en profundidad
-Aunque es una simulación visual, introduce el concepto avanzado del RBS: un proyectil que interacciona más profundo en la lámina perderá energía adicional tanto en su trayecto de entrada como en el de salida debido a interacciones inelásticas con los electrones (poder de frenado). En las técnicas modernas, esta pérdida de energía continua $\Delta E$ permite determinar el grosor de las películas delgadas.
+#### 4.4 Pérdida de energía en profundidad: el Factor de Parada $[S]$
+Un proyectil que interacciona a profundidad $x$ pierde energía en tres etapas:
+1. **Entrada:** llega con energía reducida $E(x) = E_0 - x(dE/dx)_{\text{in}}$
+2. **Colisión elástica:** rebota con $E' = K \cdot E(x)$
+3. **Salida:** emerge con $E_1(x) = E' - \frac{x}{\cos\theta}(dE/dx)_{\text{out}}$
+
+La diferencia de energía respecto a un choque en superficie es lineal en $x$:
+$$\Delta E = [S] \cdot x, \quad [S] = \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} + \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
+El Factor de Parada $[S]$ (en eV/Å) convierte el desplazamiento espectral en espesor de película. Una capa de Au de 50 nm produce un peak con ancho $\Delta E = [S] \cdot 50\,\text{nm}$ medible en el detector. Esta relación es la base del análisis de profundidad no destructivo del RBS.
 
 #### 4.5 Aplicaciones reales del RBS
 Como se evidencia en la acumulación de datos en este panel, el RBS se ha convertido en una técnica invaluable en la industria de los semiconductores y nanomateriales. Permite realizar perfiles de profundidad sin destruir la muestra (no-destructivo), identificar contaminantes metálicos, analizar la estequiometría de películas delgadas (como óxidos en puertas de transistores), y estudiar la difusión térmica entre multicapas.
@@ -193,12 +286,22 @@ Los iones de carbono presentan: (i) frenado $Z_1^2 = 36\times$ mayor al inicio, 
 Debido a la naturaleza estadística de las colisiones independientes con los electrones, no todas las partículas iniciales idénticas se detienen exactamente en la misma profundidad. Esta variación estocástica produce un ensanchamiento gaussiano del peak ideal de Bragg conocido como *straggling* o dispersión de rango.
 
 #### 5.6 Fotones (rayos X 6 MV): comparación
-Se incluyen perfiles típeaks de rayos X de 6 MV. Interaccionan mediante el efecto fotoeléctrico, dispersión Compton y producción de pares, y están gobernados por la ley de atenuación exponencial $I(x) = I_0 e^{-\mu x}$, lo que subraya la superioridad conformacional de los hadrones.
+Los rayos X de 6 MV interactúan mediante efecto fotoeléctrico, dispersión Compton y producción de pares, siguiendo $I(x) = I_0 e^{-\mu x}$: el máximo de dosis aparece en los primeros $\sim 1.5\,\text{cm}$, dañando tejido sano antes y después del tumor. El contraste con el peak de Bragg es la motivación clínica central de la hadronterapia.
+
+#### 5.6b SOBP: peak de Bragg extendido para uso clínico
+Un peak de Bragg monoenergético tiene un ancho de solo $\sim 2$–5 mm, insuficiente para tumores reales de 2–5 cm. En la clínica se superponen múltiples peaks a distintas profundidades ponderados en intensidad, generando una meseta de dosis uniforme: el **SOBP** (*Spread-Out Bragg Peak*). La modulación de energía se logra con ruedas de rango giratorias o variando la energía del acelerador en tiempo real.
 
 #### 5.7 Conexión con RBS: mismo $a_0$, distinta escala
-La física del frenado electrónico (Bethe-Bloch) que define la hadronterapia es exactamente la misma física que frena a los iones alfa cuando entran y salen de la muestra en un experimento de RBS. Mientras que en RBS usamos el modelo de retroceso de Coulomb para obtener información a nivel de superficie (~nanómetros/micrómetros), en hadronterapia usamos el modelo de Bethe-Bloch integral para administrar energía a nivel macroscópeak (~centímetros).
+La física del frenado electrónico (Bethe-Bloch) que define la hadronterapia es exactamente la misma física que frena a los iones alfa cuando entran y salen de la muestra en un experimento de RBS. Mientras que en RBS usamos el modelo de retroceso de Coulomb para obtener información a nivel de superficie (~nanómetros/micrómetros), en hadronterapia usamos el modelo de Bethe-Bloch integral para administrar energía a nivel macroscópico (~centímetros).
 
-#### 5.8 Simplificaciones declaradas
+#### 5.8 Hilo conductor: Rutherford → de Hevesy → PET/SPECT
+El experimento de Rutherford fue catalizador directo de la medicina nuclear diagnóstica. **Georg de Hevesy** (1912), postdoc en el laboratorio de Rutherford en Manchester, intentó separar Radio-D (isótopo de Pb) del plomo ordinario. Al comprobar que era químicamente imposible, formuló el **principio de los radiotrazadores**: los isótopos son bioquímicamente indistinguibles (Premio Nobel de Química, 1943).
+
+Dos tecnologías actuales emergen de este principio:
+- **PET** (*Positron Emission Tomography*): La ecuación de Dirac (1928) predijo el positrón. Radiofarmacos como $^{18}$F-FDG emiten $\beta^+$ que se aniquilan con electrones del tejido produciendo dos fotones gamma colineales de 511 keV, detectados por coincidencia para mapear el metabolismo tumoral.
+- **SPECT**: Emplea núcleos metaestables ($^{99m}$Tc, $t_{1/2} = 6$ h) que emiten un fotón gamma puro de 140.5 keV, ideal para imagen de perfusión cardíaca y ósea.
+
+#### 5.9 Simplificaciones declaradas
 - **CSDA (Continuous Slowing Down Approximation):** Se asume que el proyectil pierde energía continuamente, enmascarando las fluctuaciones de transferencia de energía evento-a-evento para el trazado de la curva teórica central.
 - **Tejido homogéneo:** Se asume que el cuerpo del paciente es equivalente al agua líquida pura ($I = 79.7 \text{ eV}$) para los cálculos termodinámicos, omitiendo densidades óseas locales o huecos de aire.
 
@@ -216,10 +319,12 @@ Max Planck resolvió la catástrofe ultravioleta del cuerpo negro introduciendo 
 Einstein amplió la idea de Planck y teorizó que la propia luz no es solo una onda, sino que está compuesta de corpúsculos de energía (fotones), explicando por qué la energía de los electrones extraídos depende de la frecuencia de la luz y no de su intensidad.
 
 #### 6.4 Rutherford (1911): el núcleo
-Como se trata en el Panel A, Rutherford probó que el átomo es en su mayor parte espacio vacío con un núcleo denso y puntual. Curiosamente, él utilizó leyes de Newton puramente clásicas para demostrarlo, derivando su sección eficaz sin tener que recurrir a la nueva física cuántica.
+Rutherford probó que el átomo es en su mayor parte espacio vacío con un núcleo denso y puntual, usando exclusivamente mecánica clásica (Newton + Coulomb), sin recurrir a ningún principio cuántico. Como se desarrolla en §0.5, el experimento en sí no es cuántico — pero la existencia del núcleo crea la crisis que obliga a Bohr a cuantizar las órbitas atómicas en 1913.
 
-#### 6.5 Bohr (1913): órbitas cuantizadas
-El modelo planetario de Rutherford presentaba un problema: según Maxwell, un electrón girando debería radiar energía y colapsar en espiral hacia el núcleo. Bohr solucionó esto postulando, a partir de Planck, que el momento angular estaba cuantizado ($L = n\hbar$), imponiendo órbitas estacionarias.
+#### 6.5 Bohr (1913): órbitas cuantizadas — el primer acto cuántico
+El modelo nuclear de Rutherford generó una crisis inmediata: según Maxwell, un electrón en órbita emite radiación continuamente y colapsa en $\tau \sim 10^{-11}\,\text{s}$ (ver §0.5.2). Bohr resolvió esto con un postulado cuántico explícito — el primero en la historia aplicado a un átomo:
+$$L = n\hbar, \quad n = 1, 2, 3, \ldots$$
+Este postulado no se puede derivar de la física clásica; es una ruptura deliberada con ella. Impone órbitas estacionarias que no irradian, explica los espectros de líneas del hidrógeno y establece el programa de la física cuántica temprana.
 
 #### 6.6 De Broglie (1924): dualidad onda-partícula
 En una propuesta simétrica, Louis de Broglie sugirió que si la luz podía actuar como partícula, la materia (los electrones) podía actuar como onda, con una longitud $\lambda = h / p$.
@@ -232,6 +337,39 @@ George Gamow resolvió el enigma del decaimiento alfa. Aplicando la ecuación de
 
 #### 6.9 Dirac (1928) y Bethe (1930): electrodinámica y frenado
 Paul Dirac unió la mecánica cuántica con la relatividad especial, prediciendo la antimateria. Posteriormente, Hans Bethe aplicó las herramientas de la electrodinámica cuántica al problema del frenado de partículas cargadas en la materia, derivando la rigurosa ecuación de Bethe-Bloch moderna discutida en el Panel E.
+
+---
+
+### 10. Física avanzada — Fondo teórico complementario
+
+#### 10.1 Barrera de Coulomb
+Los núcleos reales tienen radio $R_\text{núcleo} \approx r_0 A^{1/3}$ ($r_0 = 1.25\,\text{fm}$). Para dispersión puramente electromagnética se requiere $a_0 > R_1 + R_2$. La energía máxima permitida es la **barrera de Coulomb**:
+$$E_C = \frac{Z_1 Z_2 k e^2}{R_1 + R_2}$$
+Para $\alpha$ sobre C: $E_C \approx 4.5\,\text{MeV}$; sobre Au: $E_C \approx 20\,\text{MeV}$. A $E_0 = 2.0\,\text{MeV}$, todas las colisiones con $Z \ge 6$ son 100% coulombianas.
+
+#### 10.2 La coincidencia cuántica de Gordon (1928)
+Walter Gordon resolvió la ecuación de Schrödinger para $V(r) = kZ_1Z_2e^2/r$ y obtuvo:
+$$\left(\frac{d\sigma}{d\Omega}\right)_\text{cuántica} = \left(\frac{Z_1Z_2ke^2}{4E}\right)^2\frac{1}{\sin^4(\theta/2)} = \left(\frac{d\sigma}{d\Omega}\right)_\text{Rutherford clásica}$$
+Esta coincidencia exacta es exclusiva del potencial $1/r$ y justifica que el análisis RBS sea riguroso usando física puramente clásica.
+
+#### 10.3 Familia de técnicas IBA
+
+| Técnica | Proyectil | Qué detecta | Ventaja |
+|---|---|---|---|
+| **RBS** | $^4$He (2 MeV) | Iones $\alpha$ retrodispersados | Cuantificación absoluta sin patrones |
+| **ERDA** | $^{35}$Cl o $^4$He rasante | Núcleos expulsados hacia adelante | Detecta H y elementos con $M < M_\text{proyectil}$ |
+| **PIXE** | Protones (2–3 MeV) | Rayos X característicos | Separa elementos de masa similar |
+| **NRA** | Deuterones | Productos de reacciones resonantes | Sensibilidad isotópica selectiva |
+
+#### 10.4 Instrumentación: Tandem y detectores PIPS
+**Acelerador Tandem:** Iones $\text{He}^-$ acelerados a $+V_\text{term}$, convertidos en $\text{He}^{2+}$ por celda *stripper*, repelidos a tierra. Energía: $E_0 = (1+q)V_\text{term}$, estabilidad $\pm 0.05\%$.
+
+**Detectores PIPS:** Cada partícula crea pares e-h ($w = 3.62\,\text{eV}$/par). Para $E_1 = 1.845\,\text{MeV}$ (Au): $N \approx 509{,}668$ electrones. Un preamplificador sensible a carga genera un pulso proporcional a $E_1$, clasificado por ADC en el histograma.
+
+#### 10.5 Estadística de Poisson en la acumulación espectral
+La detección es un proceso de Poisson. Incertidumbre relativa por canal:
+$$\frac{\sigma_N}{N} = \frac{1}{\sqrt{N}}$$
+A baja corriente ($5\,\text{nA}$): espectro con fluctuaciones visibles. A alta corriente ($100\,\text{nA}$): estadística converge. El Panel D ilustra esta evolución en tiempo real.
 
 ---
 
@@ -280,3 +418,8 @@ Paul Dirac unió la mecánica cuántica con la relatividad especial, prediciendo
 7. Chu, W. K., Mayer, J. W., & Nicolet, M. A. (1978). *Backscattering Spectrometry*. Academic Press.
 8. Goldstein, H., Poole, C. P., & Safko, J. L. (2001). *Classical Mechanics* (3rd ed.). Addison-Wesley.
 9. Krane, K. S. (2012). *Modern Physics* (3rd ed.). John Wiley & Sons.
+10. Feldman, L. C., & Mayer, J. W. (1986). *Fundamentals of Surface and Thin Film Analysis*. North-Holland.
+11. Gordon, W. (1928). Über den Stoß zweier Punktladungen nach der Wellenmechanik. *Z. Physik*, 48(3), 180–191.
+12. Mott, N. F. (1930). The Scattering of Fast Electrons by Atomic Nuclei. *Proc. Roy. Soc. A*, 126, 259–267.
+13. Wilson, R. R. (1946). Radiological Use of Fast Protons. *Radiology*, 47(5), 487–491.
+14. ICRU Report 37 (1984). *Stopping Powers for Electrons and Positrons*. ICRU, Bethesda.
