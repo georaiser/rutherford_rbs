@@ -1,4 +1,4 @@
-﻿/**
+/**
  * panel-a.js -- Panel A: Dispersion de Rutherford
  *
  * Trayectorias hiperbolicas calculadas con integracion RK4 en tiempo real.
@@ -333,8 +333,8 @@ const panelA = (() => {
     document.getElementById('noteA-thom').style.display = isR ? 'none' : '';
     const rowZ    = document.getElementById('rowZ2');
     const rowCtrl = document.getElementById('rowCtrlA');
-    if (rowZ)    rowZ.style.display    = isR ? '' : 'none';
-    if (rowCtrl) rowCtrl.style.display = isR ? '' : 'none';
+    if (rowZ)    rowZ.style.display    = '';          // visible en ambos modos
+    if (rowCtrl) rowCtrl.style.display = isR ? '' : 'none'; // solo Rutherford
     recompute(); clearTraceCanvas();
     if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
   }
