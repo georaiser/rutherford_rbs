@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -41,16 +41,22 @@
         <button class="mode-btn active" id="btnRuth" onclick="panelA.setMode('rutherford')">Rutherford</button>
         <button class="mode-btn"        id="btnThom" onclick="panelA.setMode('thomson')">Thomson</button>
       </div>
+      <p style="font-size:0.72rem;color:var(--muted);margin:2px 0 0 4px;font-style:italic">
+        ⓘ Ambos modelos son <b>física clásica</b> — la diferencia es cómo distribuyen la carga positiva, no si usan mecánica cuántica.
+      </p>
     </div>
     <div class="panel-body">
 
       <!-- Descripción modo Rutherford -->
       <p class="note" id="descA-ruth">
-        <b>Experimento de Geiger-Marsden (1909):</b> partículas alfa ($Z_1=2$, $M_1=4$ u)
+        <b>Experimento de Geiger-Marsden (1909–1911):</b> partículas alfa ($Z_1=2$, $M_1=4$ u)
         bombardean una lámina delgada de oro ($Z_2=79$). La mayoría pasan sin desviarse
         (parámetro de impacto $b$ grande), pero <b>unas pocas rebotan en ángulos grandes</b>,
         incluso hacia atrás. Ese resultado es imposible si la carga positiva está dispersa en
-        todo el átomo — solo ocurre si está concentrada en un <b>núcleo diminuto y denso</b>.<br>
+        todo el átomo — solo ocurre si está concentrada en un <b>núcleo diminuto y denso</b>.
+        El recuadro inferior izquierdo muestra el montaje real: fuente de <b>Radio</b> (Ra) como fuente de alfas,
+        <b>colimador</b> para dirigir el haz, lámina de <b>oro</b> (Au) como blanco, y pantalla de
+        <b>sulfuro de zinc</b> (ZnS) que centellea con cada partícula detectada.<br>
         Cada trayectoria es una <b>hipérbola real</b>, calculada con la ecuación de movimiento
         en el potencial de Coulomb (integración RK4). Los electrones <em>no participan</em>
         — son ~7&thinsp;000× más livianos que las partículas alfa.<br>
@@ -58,13 +64,15 @@
         $a_0 = Z_1 Z_2 ke^2/2E$ es la distancia mínima de acercamiento en un choque frontal
         ($b=0$, toda la energía cinética → potencial de Coulomb). Para Au a 7 MeV: $a_0\approx16$ fm.
         Al aumentar la energía, $a_0$ disminuye y las trayectorias penetran más cerca del núcleo.
+        <b>Criterio clave:</b> si $b &lt; 2a_0$, el rebote supera 45°; la mayoría de partículas tienen $b \gg a_0$ —
+        por eso la lámina es casi transparente y solo una de cada 10⁴ rebota.
         Usa el <b>toggle</b> para comparar con el modelo de Thomson.
       </p>
 
       <!-- Descripción modo Thomson -->
       <p class="note" id="descA-thom" style="display:none">
         <b>Modelo de Thomson (1904 — "pudín de pasas"):</b> la carga positiva está distribuida
-        uniformemente en todo el volumen atómico (radio ≈ 1.45 Å). Los electrones están embebidos
+        uniformemente en todo el volumen atómico (radio atómico ≈ 1.45 Å, valor típico aproximado). Los electrones están embebidos
         dentro, como pasas en un pudín.<br>
         La deflexión máxima calculada con el potencial de esfera uniforme es
         $\theta_\text{máx} \approx a_0/R \approx 16\,\text{fm}/145\,000\,\text{fm} \approx 0.006°$:
@@ -118,7 +126,7 @@
         <div class="flabel">Deflexión Thomson — esfera de carga uniforme</div>
         $$\theta_\text{Thomson}(b)=\frac{Z_1 Z_2\,ke^2}{E}\,\frac{b\,\sqrt{R^2-b^2}}{R^3},\quad b\le R$$
         <div class="formula-meta">
-          $R_\text{Au}\approx1.45\,\text{Å}$ $\;\mid\;$
+          $R_\text{átomo}\approx1.45\,\text{Å}$ (aprox.) $\;\mid\;$
           deflexión máxima $\approx$
           <b id="val-thom-max" style="color:var(--cyan)">0.007</b> × 10⁻³ °
           → sub-píxel a esta escala.
@@ -151,21 +159,10 @@
         (iii) emite o absorbe un fotón $\Delta E=h\nu$ al saltar entre órbitas.<br>
         <em>Sin el núcleo de Rutherford no existen estos problemas; sin estos problemas no existe
         la mecánica cuántica temprana.</em><br>
-        <span class="warn">⚠ Simplificación:</span> la animación no es tiempo real
-        (los choques ocurren en femtosegundos). Los pasos de tiempo son iguales —
-        el punto sí se ralentiza cerca del núcleo (la partícula pierde velocidad subiendo
-        el potencial de Coulomb), comportamiento físicamente correcto.<br><br>
-        El núcleo descubierto aquí creó dos problemas que la física clásica no podía resolver:<br>
-        <b>1. Estabilidad:</b> un electrón en órbita circular irradia energía y debería colapsar sobre
-        el núcleo en ~10⁻¹¹ s — pero los átomos son estables.<br>
-        <b>2. Espectros discretos:</b> el hidrógeno emite solo ciertas longitudes de onda (líneas de
-        Balmer, Lyman, Paschen) — la física clásica no podía predecirlas.<br>
-        Bohr resolvió ambos en 1913 con tres postulados:
-        (i) el electrón solo ocupa órbitas donde $L=n\hbar$;
-        (ii) en esas órbitas no irradia;
-        (iii) emite o absorbe un fotón $\Delta E=h\nu$ al saltar entre órbitas.<br>
-        <em>Sin el núcleo de Rutherford no existen estos problemas; sin estos problemas no existe
-        la mecánica cuántica temprana.</em><br>
+        <b>Nota sobre la física:</b> aunque el experimento es 100% clásico, Walter Gordon demostró en 1928
+        que la mecánica cuántica produce <em>exactamente</em> la misma sección eficaz de dispersión que
+        la fórmula clásica de Rutherford — propiedad exclusiva del potencial $1/r$ de Coulomb.
+        RBS es por tanto cuánticamente exacto sin necesitar mecánica cuántica para calcularse.<br>
         <span class="warn">⚠ Simplificación:</span> la animación no es tiempo real
         (los choques ocurren en femtosegundos). Los pasos de tiempo son iguales —
         el punto sí se ralentiza cerca del núcleo (la partícula pierde velocidad subiendo
@@ -206,11 +203,17 @@
         antes ($E_0$) y después ($E_1$) del choque:
         $$E_1 = K(M_2,\,\theta)\cdot E_0$$
         $K$ depende <em>solo</em> de las masas y el ángulo — no de la energía ni de la estructura
-        del material. Con el detector fijo a $\theta=170°$ (ángulo que maximiza la separación entre
-        elementos), medir $E_1$ es suficiente para identificar $M_2$.<br>
-        <b>Analogía:</b> si golpeas una bola pesada (Au), tu bola rebota conservando casi toda la
+        del material. Con el detector fijo a $\theta=170°$ (a 180° la sensibilidad de masa es máxima
+        pero bloquearía el haz de entrada; a 170° se conserva el 99.8% de esa resolución sin obstruir nada),
+        medir $E_1$ es suficiente para identificar $M_2$.<br>
+        <b>Analogía del billar:</b> si golpeas una bola pesada (Au), tu bola rebota conservando casi toda la
         energía ($K=0.9226$). Si golpeas una liviana (C), casi se detiene ($K=0.2525$).
-        La energía de rebote revela la masa del blanco. Mueve el slider para verlo.
+        La energía de rebote revela la masa del blanco. Mueve el slider para verlo.<br>
+        <b>Límite cinemático:</b> si $M_2 &lt; M_1 = 4\,\text{u}$ (más ligero que la alfa), la fórmula no
+        tiene solución real — el proyectil no puede rebotar hacia atrás. Por eso <b>RBS no detecta
+        hidrógeno</b> ($M_2=1\,\text{u}$) ni deuterio directamente. Para esos elementos se usa
+        <b>ERDA</b> (<em>Elastic Recoil Detection Analysis</em>), donde se detecta el núcleo blanco
+        expulsado hacia adelante en lugar del proyectil rebotado.
       </p>
 
       <canvas id="canvasB" width="800" height="210"></canvas>
@@ -263,6 +266,11 @@
         de la partícula que llega. No registra la trayectoria ni el instante del choque.
         Toda la información — masa $M_2$, elemento, concentración — se infiere únicamente de
         comparar $E_0$ (conocida, fijada por el acelerador) con $E_1$ (medida por el detector).<br>
+        <b>Recule del blanco:</b> la energía que la alfa no conserva ($1-K$) es transferida al núcleo
+        blanco como energía cinética de recule. La velocidad de recule en colisión frontal es:
+        $$v_\text{rec}/v_0 = \frac{2M_1}{M_1+M_2}$$
+        Para Au: $v_\text{rec} = 0.04\,v_0$ (apenas se mueve — blanco muy pesado).
+        Para C: $v_\text{rec} = 0.57\,v_0$ (recibe un empujón significativo).<br>
         <span class="warn">⚠ Simplificación:</span> la velocidad de salida en la animación es
         $\propto\sqrt{K}$ (metáfora visual de energía). El tamaño del átomo escala como $M_2^{1/3}$
         (proporcional al radio nuclear). El choque real ocurre en femtosegundos.
@@ -317,6 +325,9 @@
         <b>Limitación fundamental:</b> un peak alto puede deberse a $Z_2$ grande
         <em>o</em> a $N_i$ grande — el espectro por sí solo no los distingue.
         En la práctica se usan muestras de referencia o se combina RBS con otras técnicas.<br>
+        <b>Ventaja clave del RBS:</b> la sección eficaz de Rutherford es <em>calculable desde primeros principios</em>
+        — no requiere muestras de calibración para cada elemento (<em>cuantificación absoluta</em>
+        o <em>standardless</em>). Es la única técnica analítica de superficies con esta propiedad.<br>
         <span class="warn">⚠ Simplificación:</span> se muestra solo la capa superficial.
         En RBS real, los átomos en profundidad producen peaks desplazados a menor energía
         (<em>stopping power</em>), lo que permite medir el espesor de cada capa.
@@ -384,7 +395,7 @@
           El espectro se reinicia al cambiar $E_0$.<br>
           <b>Corriente $I$:</b> en RBS real determina cuántas partículas α por segundo
           impactan la muestra. A mayor corriente, el espectro se acumula más rápido.
-          Rango típeak: 10–100 nA. Aquí controla la tasa de spawn: $\Delta t = 9200/I$ ms.
+          Rango típico: 10–100 nA. Aquí controla la tasa de spawn: $\Delta t = 9200/I$ ms.
         </p>
         <div id="panelD-sliders"></div>
       </div>
@@ -452,7 +463,13 @@
         sin irradiar el tejido sano anterior. Los protones sí lo permiten.
         Los iones de carbono (C¹²⁶⁺) tienen un peak aún más estrecho y mayor efecto biológico.<br>
         <b>Usa el slider</b> para mover el pico de Bragg a distintas profundidades
-        (controla la energía del haz). Alterna entre protones e iones de carbono.
+        (controla la energía del haz). Alterna entre protones e iones de carbono.<br>
+        <b>SOBP</b> (<em>Spread-Out Bragg Peak</em>): un peak monoenergético tiene solo 2–5 mm de
+        ancho — insuficiente para tumores reales de 2–5 cm. En clínica se superponen múltiples peaks
+        a distintas energías, creando una meseta de dosis uniforme sobre todo el volumen tumoral.<br>
+        <b>Eficacia biológica relativa (RBE):</b> protones tienen RBE $\approx 1.1$ (similar a rayos X);
+        iones C¹² tienen RBE $\approx 2{-}3$ — producen roturas dobles del ADN tumoral no reparables,
+        útiles en tumores radiorresistentes como cordomas y sarcomas.
       </p>
 
       <canvas id="canvasE" width="800" height="320"></canvas>

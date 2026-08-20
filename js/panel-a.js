@@ -42,7 +42,10 @@ const panelA = (() => {
     return KNOWN_EL[Z] ? (KNOWN_EL[Z] + '  (Z=' + Z + ')') : ('Z = ' + Z);
   }
 
-  const B_PHYS_FM = [5, 12, 26, 55, 95, 155];
+  // Parámetros de impacto como múltiplos de a₀: garantiza rango angular relevante
+  // para cualquier Z₂ y E. Calculados en recompute() a partir de a₀ actual.
+  const B_A0_MULT = [0.30, 0.72, 1.60, 3.38, 5.86, 9.55]; // b / a₀
+  let   B_PHYS_FM = [5, 12, 26, 55, 95, 155];              // actualizado en recompute()
   const B_COLORS  = ['#ef4444','#f97316','#facc15','#4ade80','#38bdf8','#a78bfa'];
 
   const NUC_X   = W * 0.44;
@@ -58,14 +61,17 @@ const panelA = (() => {
   let imgLoaded = false;
   let thomsonParts = [];
 
-  function genThomsonParts() {
+  function genThomsonParts(z2) {
     thomsonParts = [];
-    const N_ELECTRONS = 52, N_PROTONS = 22;
-    for (let i = 0; i < N_ELECTRONS + N_PROTONS; i++) {
-      let x, y, maxR = i < N_ELECTRONS ? 0.94 : 0.88;
+    // Escalar con Z2 para coherencia visual: mostrar hasta 40 electrones y Z2 protones
+    // (cap para no saturar la visualización con elementos pesados)
+    const nP = Math.min(z2, 36);   // protones mostrados (representativo)
+    const nE = Math.min(z2, 48);   // electrones mostrados
+    for (let i = 0; i < nE + nP; i++) {
+      let x, y, maxR = i < nE ? 0.94 : 0.88;
       do { x = (Math.random() - 0.5) * 2; y = (Math.random() - 0.5) * 2; }
       while (x * x + y * y > maxR * maxR);
-      thomsonParts.push({ x, y, type: i < N_ELECTRONS ? 'e' : 'p' });
+      thomsonParts.push({ x, y, type: i < nE ? 'e' : 'p' });
     }
   }
 
@@ -93,6 +99,7 @@ const panelA = (() => {
 
   function recompute() {
     const a0     = Physics.calcA0(E_mev, Z2);
+    B_PHYS_FM    = B_A0_MULT.map(m => parseFloat((m * a0).toFixed(1)));
     const R_norm = PHYS.R_AU_FM / a0;
     const isR    = mode === 'rutherford';
     trajs  = B_PHYS_FM.map(b_fm => Physics.integrateTraj(b_fm / a0, isR, R_norm, R_START));
@@ -218,7 +225,7 @@ const panelA = (() => {
     ctx.beginPath(); ctx.moveTo(sx+sc5, sy-4); ctx.lineTo(sx+sc5, sy+4); ctx.stroke();
     ctx.font = '10px JetBrains Mono, monospace'; ctx.fillStyle = 'rgba(255,255,255,0.45)';
     ctx.textAlign = 'center';
-    ctx.fillText('5a\u2080 = ' + (5 * a0).toFixed(0) + ' fm   (b < 2a\u2080 \u2192 \u03b8 > 45\u00b0)', sx + sc5 / 2, sy - 6);
+    ctx.fillText('5a\u2080 = ' + (5 * a0).toFixed(0) + ' fm  |  b < 2a\u2080 \u21d2 \u03b8 > 45\u00b0  |  b \u226b a\u2080: sin desvio', sx + sc5 / 2, sy - 6);
     ctx.textAlign = 'left';
 
     let ly = 14;
@@ -226,7 +233,8 @@ const panelA = (() => {
     for (let i = 0; i < B_PHYS_FM.length; i++) {
       ctx.fillStyle = B_COLORS[i]; ctx.fillRect(W - 160, ly, 10, 10);
       ctx.fillStyle = 'rgba(255,255,255,0.5)';
-      ctx.fillText('b=' + B_PHYS_FM[i] + ' fm  \u03b8=' + trajs[i].thetaDeg.toFixed(0) + '\u00b0', W - 146, ly + 9);
+      const bRatio = (B_PHYS_FM[i] / Physics.calcA0(E_mev, Z2)).toFixed(2);
+      ctx.fillText('b=' + B_PHYS_FM[i] + ' fm (' + bRatio + 'a\u2080)  \u03b8=' + trajs[i].thetaDeg.toFixed(0) + '\u00b0', W - 186, ly + 9);
       ly += 15;
     }
 
@@ -332,7 +340,7 @@ const panelA = (() => {
   }
 
   function setEnergy(E)    { E_mev = E; recompute(); clearTraceCanvas(); }
-  function setZ2(z)        { Z2 = Math.max(1, Math.min(92, Math.round(z))); recompute(); clearTraceCanvas(); }
+  function setZ2(z)        { Z2 = Math.max(1, Math.min(92, Math.round(z))); genThomsonParts(Z2); recompute(); clearTraceCanvas(); }
   function toggleTraces(c) { showTraces = !!c; if (!showTraces) clearTraceCanvas(); }
 
   function togglePause() {
@@ -347,7 +355,7 @@ const panelA = (() => {
   }
 
   function init() {
-    genThomsonParts();
+    genThomsonParts(Z2);
     atomImg = new Image();
     atomImg.onload  = () => { imgLoaded = true; };
     atomImg.onerror = () => { imgLoaded = false; };

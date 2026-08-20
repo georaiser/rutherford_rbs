@@ -101,6 +101,15 @@ El experimento de Rutherford es, en palabras del físico Freeman Dyson, *"el úl
 #### 1.1 El experimento de Geiger-Marsden (1909-1911)
 El experimento original consistió en dirigir un haz colimado de partículas alfa ($Z_1=2$, núcleos de helio emitidos por decaimiento radiactivo) hacia una finísima lámina de oro ($Z_2=79$). Se esperaba que las partículas atravesaran la lámina con desviaciones minúsculas. Sin embargo, una pequeña pero significativa fracción rebotaba en ángulos mayores a 90°, un resultado que Rutherford comparó con disparar un proyectil naval contra un pañuelo de papel y que este rebotara.
 
+#### 1.1b Montaje experimental de Geiger-Marsden
+El experimento usó cuatro componentes clave:
+1. **Fuente de Radio (Ra):** emisor natural de partículas alfa por decaimiento radiactivo. Las alfas emergen con energía típica de 5–8 MeV.
+2. **Colimador:** ranura estrecha que selecciona solo las alfas que viajan en línea recta — define el "haz" experimental.
+3. **Lámina de oro (Au):** espesor $\sim 0.4\,\mu\text{m}$ ($\sim 2000$ átomos de grosor). Lo suficientemente delgada para que la mayoría de partículas pasen con una sola dispersión (*single scattering*).
+4. **Pantalla de sulfuro de zinc (ZnS):** cada partícula alfa que la golpea produce un destello de luz visible. Geiger y Marsden los contaban en la oscuridad con un microscopio de ocular.
+
+El resultado cuantitativo clave: **1 de cada $10^4$ partículas** rebotaba a más de 90°. Imposible con la carga difusa de Thomson. Solo explicable con un núcleo puntual.
+
 #### 1.2 Modelo de Thomson vs. modelo nuclear
 El modelo de J.J. Thomson (1904) postulaba una esfera de carga positiva $+Z_2 e$ distribuida homogéneamente en el volumen atómico ($R \approx 1.45\,\text{Å} = 145{,}000\,\text{fm}$). Por la Ley de Gauss, el campo eléctrico interior crece linealmente:
 $$\vec{E}(r) = \frac{k Z_2 e}{R^3}\,\vec{r} \quad (r < R)$$
@@ -129,6 +138,8 @@ El ángulo de deflexión $\theta$ depende del parámetro de impacto $b$, la dist
 $$ b = a_0 \cot\left(\frac{\theta}{2}\right) \implies \theta = 2 \arctan\left(\frac{a_0}{b}\right) $$
 A menor parámetro de impacto, mayor es la repulsión experimentada y, por tanto, mayor el ángulo de dispersión.
 
+**Criterio práctico:** si $b < 2a_0$ entonces $\theta > 45°$. La gran mayoría de partículas del haz tienen $b \gg a_0$, lo que explica por qué la lámina es casi transparente: solo $\sim 1/10^4$ alfas tiene puntería suficientemente centrada para rebotar notoriamente.
+
 #### 1.6 Integración RK4 de las ecuaciones de movimiento
 En coordenadas cartesianas reducidas (normalizadas por $a_0$), las ecuaciones de movimiento en el campo de Coulomb son:
 $$\ddot{x} = \frac{x}{(x^2+y^2)^{3/2}}, \quad \ddot{y} = \frac{y}{(x^2+y^2)^{3/2}}$$
@@ -137,6 +148,11 @@ Para el modelo de Thomson (esfera uniforme, $r < R_\text{átomo}$), la fuerza ca
 El motor físico implementa el método de **Runge-Kutta de cuarto orden (RK4)** para integrar estas ecuaciones en cada paso de tiempo $dt$:
 $$\mathbf{y}_{n+1} = \mathbf{y}_n + \frac{dt}{6}(k_1 + 2k_2 + 2k_3 + k_4)$$
 con $k_i$ evaluados en los subestados intermedios estándar del RK4. El error local es $O(dt^5)$, suficiente para conservar la energía con paso $dt = 0.05\,a_0/v_0$. La trayectoria se calcula una sola vez al cambiar parámetros y luego se recorre en la animación.
+
+#### 1.6b Parámetros de impacto en la simulación
+La simulación elige los parámetros de impacto como múltiplos de $a_0$:
+$$b_i = \{0.30,\; 0.72,\; 1.60,\; 3.38,\; 5.86,\; 9.55\} \times a_0$$
+Esto garantiza que la distribución de trayectorias sea visualmente informativa para cualquier combinación de $Z_2$ y $E_0$: siempre cubre desde dispersión casi frontal ($b < a_0$, ángulos grandes) hasta dispersión lejana ($b \gg a_0$, ángulos pequeños).
 
 #### 1.7 Modelo de Thomson: esfera de carga uniforme
 Cuando se activa el "toggle" del modelo de Thomson en el panel, el simulador cambia la ley de fuerza. Para $r < R_{\text{átomo}}$, la fuerza deja de ser inversamente proporcional a $r^2$ y se vuelve directamente proporcional a $r$ (comportamiento de oscilador armónico espacial), resultando en las trayectorias casi rectas que se observan en la app.
