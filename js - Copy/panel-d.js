@@ -36,32 +36,19 @@ const panelD = (() => {
   // C, Ag, Au, Fe, Si ordenados superficie → substrato.
   // Fe y Ag comienzan en conc=0 (sin efecto hasta que el usuario los active).
   const LAYERS = [
-    { sym:'C',  Z2:6,  M2:12,  color:'#94a3b8', label:'C  — superficie',   thickness:0.10 },
-    { sym:'Ag', Z2:47, M2:108, color:'#c084fc', label:'Ag — capa opcional', thickness:0.14 },
-    { sym:'Au', Z2:79, M2:197, color:'#f59e0b', label:'Au — película fina', thickness:0.18 },
-    { sym:'Fe', Z2:26, M2:56,  color:'#fb923c', label:'Fe — capa opcional', thickness:0.14 },
-    { sym:'Si', Z2:14, M2:28,  color:'#60a5fa', label:'Si — sustrato',       thickness:0.44 },
+    { sym:'C',  Z2:6,  M2:12,  color:'#94a3b8', label:'C  — superficie',       yFrac:0.06, hFrac:0.10 },
+    { sym:'Ag', Z2:47, M2:108, color:'#c084fc', label:'Ag — capa opcional',     yFrac:0.16, hFrac:0.14 },
+    { sym:'Au', Z2:79, M2:197, color:'#f59e0b', label:'Au — película fina',     yFrac:0.30, hFrac:0.18 },
+    { sym:'Fe', Z2:26, M2:56,  color:'#fb923c', label:'Fe — capa opcional',     yFrac:0.48, hFrac:0.14 },
+    { sym:'Si', Z2:14, M2:28,  color:'#60a5fa', label:'Si — substrato',         yFrac:0.62, hFrac:0.30 },
   ];
 
-  // ─── Layout físico: sección transversal de una muestra estratificada ───
-  // Por economía de espacio, la profundidad se representa de izquierda a derecha:
-  // el haz lateral entra por C y atraviesa las capas hasta el sustrato de Si.
-  const SAMP_X = 128;
-  const SAMP_Y = 58;
-  const SAMP_W = 296;
-  const SAMP_H = 190;
-  const BEAM_X = 54;
-  const BEAM_Y = SAMP_Y + SAMP_H * 0.53;
-  const DET_X  = 23;
-  const DET_Y  = BEAM_Y - 22;
-
-  let layerX = SAMP_X;
+  // Posiciones absolutas en canvas
   LAYERS.forEach(l => {
-    l.x  = layerX;
-    l.w  = l.thickness * SAMP_W;
-    l.cx = l.x + l.w / 2;
+    l.y  = l.yFrac  * HS;
+    l.h  = l.hFrac  * HS;
+    l.cy = l.y + l.h / 2;
     l.K  = Physics.calcK(l.M2, PHYS.THETA_DET);
-    layerX += l.w;
   });
 
   // ─── Estado mutable ───
@@ -77,6 +64,12 @@ const panelD = (() => {
   function getE1(layer) {
     return layer.K !== null ? layer.K * E0_D : null;
   }
+
+  // ─── Layout de la muestra ───
+  const SURF_X = 198;
+  const SAMP_W = 118;
+  const DET_X  = 28;
+  const DET_Y  = 15;
 
   // ─── Espectro acumulado ───
   const NUM_BINS  = 120;
@@ -125,8 +118,7 @@ const panelD = (() => {
   function spawnParticle() {
     const layer = pickLayer();
     if (!layer || getE1(layer) === null) return;
-    const hitY = BEAM_Y + (Math.random() - 0.5) * 12;
-    particles.push({ layer, phase:'approach', t:0, x:BEAM_X, y:BEAM_Y, hitX:layer.cx, hitY });
+    particles.push({ layer, phase:'approach', t:0, x:82, y:layer.cy, hitX:SURF_X, hitY:layer.cy });
   }
 
   function updateParticle(p, dt) {
@@ -135,9 +127,7 @@ const panelD = (() => {
     const DUR_RB = DUR_APP * 0.65 / Math.sqrt(p.layer.K);
 
     if (p.phase === 'approach') {
-      const f = Math.min(p.t / DUR_APP, 1);
-      p.x = BEAM_X + f * (p.hitX - BEAM_X);
-      p.y = BEAM_Y + f * (p.hitY - BEAM_Y);
+      p.x = 82 + Math.min(p.t / DUR_APP, 1) * (p.hitX - 82);
       if (p.t >= DUR_APP) { p.phase = 'flash'; p.t = 0; }
 
     } else if (p.phase === 'flash') {
@@ -155,21 +145,21 @@ const panelD = (() => {
   function drawSample() {
     cxS.clearRect(0, 0, WS, HS);
 
-    // Eje del haz: la profundidad se recorre de izquierda a derecha.
-    cxS.setLineDash([4, 7]); cxS.strokeStyle = 'rgba(100,160,255,0.18)'; cxS.lineWidth = 1;
-    cxS.beginPath(); cxS.moveTo(BEAM_X + 8, BEAM_Y); cxS.lineTo(SAMP_X + SAMP_W + 2, BEAM_Y); cxS.stroke();
-    cxS.setLineDash([]);
+    // Guías de haz (punteadas)
+    LAYERS.forEach(l => {
+      if (conc[l.sym] < 0.05) return;
+      cxS.setLineDash([4, 8]); cxS.strokeStyle = 'rgba(100,160,255,0.07)'; cxS.lineWidth = 1;
+      cxS.beginPath(); cxS.moveTo(82, l.cy); cxS.lineTo(SURF_X - 2, l.cy); cxS.stroke();
+      cxS.setLineDash([]);
+    });
 
     // Fuente del haz
     cxS.textAlign = 'center';
-    cxS.font = 'bold 10px Inter, sans-serif'; cxS.fillStyle = 'rgba(100,160,255,0.82)';
-    cxS.fillText('Haz α  He²⁺', BEAM_X, BEAM_Y - 17);
-    cxS.font = '9px JetBrains Mono, monospace'; cxS.fillStyle = 'rgba(100,160,255,0.65)';
-    cxS.fillText(E0_D.toFixed(1) + ' MeV', BEAM_X, BEAM_Y - 5);
-    cxS.beginPath(); cxS.moveTo(BEAM_X + 13, BEAM_Y); cxS.lineTo(SAMP_X - 10, BEAM_Y);
-    cxS.strokeStyle = 'rgba(100,160,255,0.78)'; cxS.lineWidth = 1.4; cxS.stroke();
-    cxS.beginPath(); cxS.moveTo(SAMP_X - 10, BEAM_Y); cxS.lineTo(SAMP_X - 16, BEAM_Y - 4); cxS.lineTo(SAMP_X - 16, BEAM_Y + 4); cxS.closePath();
-    cxS.fillStyle = 'rgba(100,160,255,0.78)'; cxS.fill();
+    cxS.font = 'bold 10px Inter, sans-serif'; cxS.fillStyle = 'rgba(100,160,255,0.75)';
+    cxS.fillText('α  He²⁺', 40, HS / 2 - 9);
+    cxS.font = '9px JetBrains Mono, monospace'; cxS.fillStyle = 'rgba(100,160,255,0.6)';
+    cxS.fillText(E0_D.toFixed(1) + ' MeV', 40, HS / 2 + 5);
+    cxS.fillText('→', 68, HS / 2 - 1);
     cxS.textAlign = 'left';
 
     // Detector
@@ -177,15 +167,15 @@ const panelD = (() => {
     cxS.fillStyle = 'rgba(100,200,255,0.25)'; cxS.fill();
     cxS.strokeStyle = 'rgba(100,200,255,0.65)'; cxS.lineWidth = 1.2; cxS.stroke();
     cxS.font = '9px Inter, sans-serif'; cxS.fillStyle = 'rgba(100,200,255,0.7)';
-    cxS.textAlign = 'center'; cxS.fillText('Detector', DET_X, DET_Y - 5);
-    cxS.font = '8px JetBrains Mono, monospace'; cxS.fillText('θ = 170°', DET_X, DET_Y + 31); cxS.textAlign = 'left';
+    cxS.textAlign = 'center'; cxS.fillText('Detector  170°', DET_X, DET_Y - 5); cxS.textAlign = 'left';
 
-    // Superficie y dirección de profundidad
+    // Línea de superficie
+    const yTop = LAYERS[0].y - 4;
+    const yBot = LAYERS[LAYERS.length - 1].y + LAYERS[LAYERS.length - 1].h + 4;
     cxS.strokeStyle = 'rgba(255,255,255,0.28)'; cxS.lineWidth = 1.8;
-    cxS.beginPath(); cxS.moveTo(SAMP_X, SAMP_Y); cxS.lineTo(SAMP_X, SAMP_Y + SAMP_H); cxS.stroke();
+    cxS.beginPath(); cxS.moveTo(SURF_X, yTop); cxS.lineTo(SURF_X, yBot); cxS.stroke();
     cxS.fillStyle = 'rgba(200,220,240,0.5)'; cxS.font = '10px Inter, sans-serif';
-    cxS.textAlign = 'left'; cxS.fillText('Superficie', SAMP_X + 4, SAMP_Y - 9);
-    cxS.textAlign = 'right'; cxS.fillText('Profundidad →', SAMP_X + SAMP_W, SAMP_Y - 9); cxS.textAlign = 'left';
+    cxS.textAlign = 'center'; cxS.fillText('Muestra', SURF_X + SAMP_W / 2, LAYERS[0].y - 10); cxS.textAlign = 'left';
 
     // Capas
     LAYERS.forEach(l => {
@@ -198,26 +188,26 @@ const panelD = (() => {
       if (isSel) {
         cxS.shadowColor = l.color; cxS.shadowBlur = 14;
         cxS.fillStyle = l.color + '18';
-        cxS.fillRect(l.x - 2, SAMP_Y - 4, l.w + 4, SAMP_H + 8);
+        cxS.fillRect(SURF_X - 4, l.y - 2, SAMP_W + 8, l.h + 4);
         cxS.shadowBlur = 0;
       }
 
       // Relleno de la capa
       cxS.fillStyle = l.color + Math.round(alpha * 255).toString(16).padStart(2,'0').slice(0,2);
-      cxS.fillRect(l.x, SAMP_Y, l.w, SAMP_H);
+      cxS.fillRect(SURF_X, l.y, SAMP_W, l.h);
       cxS.strokeStyle = isSel ? l.color + 'aa' : l.color + '40';
       cxS.lineWidth = isSel ? 1.5 : 1;
-      cxS.strokeRect(l.x, SAMP_Y, l.w, SAMP_H);
+      cxS.strokeRect(SURF_X, l.y, SAMP_W, l.h);
 
       if (visible) {
         // Átomos (radio ∝ M₂^(1/3))
         const atomR = Math.cbrt(l.M2 / 12) * 4.0;
-        const cols  = Math.max(1, Math.round(l.w / (atomR * 3.2)));
-        const rows  = 4;
+        const cols  = 4;
+        const rows  = Math.max(2, Math.round(l.h / (atomR * 3.2)));
         for (let r = 0; r < rows; r++) {
           for (let c = 0; c < cols; c++) {
-            const ax = l.x + l.w * (c + 0.5) / cols;
-            const ay = SAMP_Y + atomR + (r + 0.5) * (SAMP_H - 2 * atomR) / rows;
+            const ax = SURF_X + 14 + c * (SAMP_W - 22) / (cols - 1);
+            const ay = l.y + atomR + (r + 0.5) * (l.h - 2 * atomR) / rows;
             cxS.beginPath(); cxS.arc(ax, ay, atomR, 0, Math.PI * 2);
             cxS.fillStyle = l.color + Math.round(Ni * 180 + 40).toString(16).padStart(2,'0');
             cxS.fill();
@@ -225,12 +215,16 @@ const panelD = (() => {
         }
       }
 
-      // Etiqueta bajo cada estrato: evita texto ilegible en capas angostas.
+      // Etiquetas a la derecha
+      const lx = SURF_X + SAMP_W + 10;
+      const E1 = getE1(l);
       cxS.font = 'bold 10px Inter, sans-serif';
       cxS.fillStyle = visible ? l.color : l.color + '44';
-      cxS.textAlign = 'center';
-      cxS.fillText(l.sym, l.cx, SAMP_Y + SAMP_H + 15);
-      cxS.textAlign = 'left';
+      cxS.fillText(l.label, lx, l.cy - 6);
+      if (E1 !== null && visible) {
+        cxS.font = '9px JetBrains Mono, monospace'; cxS.fillStyle = l.color + 'aa';
+        cxS.fillText('K=' + l.K.toFixed(4) + '   E₁=' + E1.toFixed(3) + ' MeV', lx, l.cy + 8);
+      }
     });
 
     // Partículas
@@ -250,7 +244,7 @@ const panelD = (() => {
     const E1  = getE1(p.layer);
 
     if (p.phase === 'approach') {
-      cxS.beginPath(); cxS.moveTo(BEAM_X, BEAM_Y); cxS.lineTo(p.x, p.y - 4);
+      cxS.beginPath(); cxS.moveTo(82, p.y); cxS.lineTo(p.x - 4, p.y);
       cxS.strokeStyle = 'rgba(100,160,255,0.35)'; cxS.lineWidth = 1.5; cxS.stroke();
       const g = cxS.createRadialGradient(p.x,p.y,0,p.x,p.y,9);
       g.addColorStop(0,'rgba(100,160,255,0.9)'); g.addColorStop(1,'transparent');
@@ -425,7 +419,7 @@ const panelD = (() => {
     const my = (e.clientY - rect.top)  * (HS / rect.height);
     let found = null;
     for (const l of LAYERS) {
-      if (mx >= SAMP_X && mx <= SAMP_X + SAMP_W && my >= l.y && my <= l.y + l.h) { found = l.sym; break; }
+      if (mx >= SURF_X && mx <= SURF_X + SAMP_W && my >= l.y && my <= l.y + l.h) { found = l.sym; break; }
     }
     selectedLyr = (found === selectedLyr) ? null : found;
     hoveredSpec = selectedLyr;
