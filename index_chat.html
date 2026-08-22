@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rutherford → RBS · Teoría Cuántica Temprana</title>
-  <meta name="description"
-    content="Simulación interactiva: dispersión de Rutherford y espectroscopía RBS. Evaluación 2, Módulo 2, Diplomado en Física Moderna.">
+  <meta name="description" content="Simulación interactiva: dispersión de Rutherford y espectroscopía RBS. Evaluación 2, Módulo 2, Diplomado en Física Moderna.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS modular -->
   <link rel="stylesheet" href="css/main.css">
   <!-- MathJax -->
   <script>
     MathJax = {
-      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea'] }
+      tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea'] }
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
@@ -27,757 +23,1342 @@
 
 <body>
 
-  <header>
-    <div class="tag">Evaluación 2 · Módulo 2 · Teoría Cuántica Temprana</div>
-    <h1>Del experimento de Rutherford a la espectroscopía RBS</h1>
-    <p>Cada valor en pantalla se calcula con la fórmula física real.
-      Las simplificaciones están declaradas explícitamente con ⚠.</p>
-  </header>
+<header>
+  <div class="tag">Evaluación 2 · Módulo 2 · Teoría Cuántica Temprana</div>
+  <h1>Del experimento de Rutherford a la espectroscopía RBS</h1>
+  <p>Cada valor en pantalla se calcula con la fórmula física real.
+     Las simplificaciones están declaradas explícitamente con ⚠.</p>
+</header>
 
-  <main>
+<main>
 
-    <!-- ══════════════ PANEL A — DISPERSIÓN ══════════════ -->
-    <section class="panel" id="panel-a">
-      <div class="panel-header">
-        <span class="badge">A</span>
-        <h2>Dispersión de Rutherford</h2>
-        <div class="mode-toggle">
-          <button class="mode-btn active" id="btnRuth" onclick="panelA.setMode('rutherford')">Rutherford</button>
-          <button class="mode-btn" id="btnThom" onclick="panelA.setMode('thomson')">Thomson</button>
-        </div>
-        <p style="font-size:0.72rem;color:var(--muted);margin:2px 0 0 4px;font-style:italic">
-          ⓘ Ambos modelos son <b>clásicos</b>; la diferencia está en cómo distribuyen la carga positiva.
-        </p>
+<!-- ══════════════ PANEL A — DISPERSIÓN ══════════════ -->
+<section class="panel" id="panel-a">
+  <div class="panel-header">
+    <span class="badge">A</span>
+    <h2>Dispersión de Rutherford</h2>
+
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btnRuth"
+              onclick="panelA.setMode('rutherford')">Rutherford</button>
+      <button class="mode-btn" id="btnThom"
+              onclick="panelA.setMode('thomson')">Thomson</button>
+    </div>
+
+    <p style="font-size:0.72rem;color:var(--muted);margin:2px 0 0 4px;font-style:italic">
+      ⓘ Ambos modelos son <b>clásicos</b>: la diferencia está en cómo se distribuye
+      la carga positiva.
+    </p>
+  </div>
+
+  <div class="panel-body">
+
+    <!-- Descripción modo Rutherford -->
+    <p class="note" id="descA-ruth">
+      <b>Experimento de Geiger-Marsden (1909–1911):</b>
+      partículas alfa ($Z_1=2$, $M_1\approx4\,\mathrm{u}$) bombardean una lámina delgada
+      de oro ($Z_2=79$). La mayoría atraviesa la lámina con desviaciones pequeñas,
+      pero una fracción muy pequeña presenta desviaciones grandes, incluso hacia atrás.
+      <br><br>
+
+      Este resultado es incompatible con una distribución difusa de la carga positiva.
+      Rutherford lo explicó suponiendo que la carga positiva y prácticamente toda la masa
+      del átomo están concentradas en un <b>núcleo muy pequeño y denso</b>.
+      <br><br>
+
+      El montaje experimental utilizaba una fuente de <b>radio</b> (Ra), un
+      <b>colimador</b>, una lámina de <b>oro</b> (Au) y una pantalla de
+      <b>sulfuro de zinc</b> (ZnS), que permitía detectar las partículas mediante
+      pequeños destellos.
+      <br><br>
+
+      En esta simulación, las trayectorias se calculan numéricamente a partir de la
+      ecuación de movimiento en el potencial de Coulomb mediante integración RK4.
+      Los electrones no se incluyen en este modelo: a las distancias relevantes para
+      la dispersión nuclear, su efecto sobre la trayectoria es pequeño frente a la
+      interacción con el núcleo.
+      <br><br>
+
+      <b>Escala:</b> la barra representa $5a_0$, donde
+
+      $$a_0=\frac{Z_1Z_2ke^2}{2E}$$
+
+      es la distancia mínima de acercamiento en una colisión frontal ($b=0$).
+      Para Au y $E=7\,\mathrm{MeV}$:
+
+      $$a_0\approx16\,\mathrm{fm}.$$
+
+      Al aumentar la energía, $a_0$ disminuye y la partícula puede acercarse más
+      al núcleo antes de desviarse.
+      <br><br>
+
+      <b>Dispersión y parámetro de impacto:</b>
+      para la interacción Coulombiana,
+
+      $$b=a_0\cot\left(\frac{\theta}{2}\right).$$
+
+      Por ejemplo, $b=2a_0$ corresponde a $\theta\approx53^\circ$.
+      Por tanto, los grandes ángulos de dispersión requieren parámetros de impacto
+      pequeños, mientras que para $b\gg a_0$ la desviación es pequeña.
+      <br><br>
+
+      Usa el <b>toggle</b> para comparar este resultado con el modelo de Thomson.
+    </p>
+
+    <!-- Descripción modo Thomson -->
+    <p class="note" id="descA-thom" style="display:none">
+      <b>Modelo de Thomson (1904 — "pudín de pasas"):</b>
+      la carga positiva se supone distribuida uniformemente en el volumen del átomo,
+      mientras los electrones están embebidos en ella.
+      Para esta comparación se utiliza un radio atómico aproximado de
+      $R\approx1.45\,\text{\AA}$.
+      <br><br>
+
+      En una esfera de carga uniforme, la deflexión máxima calculada para una partícula
+      alfa es aproximadamente
+
+      $$\theta_{\max}\approx\frac{a_0}{R}
+      \approx\frac{16\,\mathrm{fm}}{145\,000\,\mathrm{fm}}
+      \approx0.006^\circ.$$
+
+      Por tanto, las trayectorias aparecen prácticamente rectas a la escala de esta
+      simulación.
+      <br><br>
+
+      Geiger y Marsden observaron partículas desviadas a ángulos muy grandes,
+      incluso mayores que $90^\circ$. Este resultado no podía explicarse mediante
+      el modelo de Thomson y condujo a Rutherford a proponer en 1911 un modelo
+      atómico con un núcleo central muy pequeño.
+    </p>
+
+    <canvas id="canvasA" width="800" height="330"></canvas>
+
+    <div class="controls">
+
+      <div class="slider-row">
+        <span class="slider-label">Energía $E_0$</span>
+        <input type="range" id="sliderE" min="4" max="10" step="0.1" value="7.0">
+        <span class="slider-val" id="valE">7.0 MeV</span>
       </div>
 
-      <div class="panel-body">
-        <!-- Introducción histórica -->
-        <p class="note" id="introA">
-          El desarrollo de la Física Moderna a comienzos del siglo XX estuvo marcado por la necesidad
-          de comprender la estructura de la materia. Entre los experimentos decisivos se encuentra el
-          realizado por Hans Geiger y Ernest Marsden entre 1909 y 1911, bajo la dirección de Ernest
-          Rutherford. Al bombardear una delgada lámina de oro con partículas alfa, observaron que la
-          mayoría atravesaba la lámina con pequeñas desviaciones, mientras que una pequeña fracción se
-          dispersaba a grandes ángulos, incluso hacia atrás. Estas observaciones no podían explicarse
-          mediante el modelo de Thomson y llevaron a Rutherford a proponer, en 1911, un átomo con un
-          <b>núcleo muy pequeño, denso y cargado positivamente</b>.
-        </p>
-        <!-- Descripción modo Rutherford -->
-        <p class="note" id="descA-ruth">
-          <b>Experimento de Geiger-Marsden (1909–1911):</b>
-          partículas alfa ($Z_1=2$, $M_1\approx4$ u) bombardearon una lámina delgada de oro
-          ($Z_2=79$). La mayoría atravesó la lámina con pequeñas desviaciones, pero una pequeña
-          fracción se dispersó a grandes ángulos, incluso hacia atrás. Estas observaciones no
-          eran compatibles con una carga positiva distribuida uniformemente en el átomo y
-          llevaron a Rutherford a proponer en 1911 un <b>núcleo pequeño, denso y cargado
-            positivamente</b>.<br>
-
-          El montaje utilizaba una fuente de <b>radio</b> (Ra), un <b>colimador</b>, una lámina
-          de <b>oro</b> (Au) y una pantalla de <b>sulfuro de zinc</b> (ZnS) para detectar las
-          partículas dispersadas mediante centelleos.<br>
-
-          En el modelo nuclear, la trayectoria de una partícula alfa está determinada por la
-          <b>interacción Coulombiana</b> con el núcleo. El parámetro de impacto $b$ determina
-          qué tan cerca pasa la partícula del núcleo: cuanto menor es $b$, mayor es el ángulo
-          de dispersión.<br>
-
-          <b>Escala:</b> la simulación utiliza
-          $$
-          a_0=\frac{Z_1Z_2ke^2}{2E},
-          $$
-          donde $a_0$ es la distancia mínima de acercamiento para un choque frontal ($b=0$).
-          Para Au y $E=7$ MeV, $a_0\approx16$ fm. Al aumentar la energía, $a_0$ disminuye y
-          la partícula puede aproximarse más al núcleo.<br>
-
-          <b>Relación fundamental:</b>
-          $$
-          b(\theta)=a_0\cot\left(\frac{\theta}{2}\right).
-          $$
-          Por tanto, las partículas con $b\gg a_0$ presentan pequeñas desviaciones, mientras que
-          las que se aproximan al núcleo pueden sufrir grandes ángulos de dispersión.
-        </p>
-
-        <!-- Descripción modo Thomson -->
-        <p class="note" id="descA-thom" style="display:none">
-          <b>Modelo de Thomson (1904):</b>
-          la carga positiva está distribuida uniformemente en el volumen del átomo y los
-          electrones están embebidos en ella. En este modelo no existe un núcleo concentrado.<br>
-
-          Para una esfera de carga uniforme, el campo eléctrico dentro de la esfera es proporcional
-          a la distancia al centro. La deflexión producida por la interacción es, por tanto,
-          extremadamente pequeña para partículas alfa de varios MeV.<br>
-
-          Para los parámetros utilizados en esta simulación,
-          $\theta_\text{máx}\sim a_0/R\approx6\times10^{-3}\!^\circ$,
-          donde $R\approx1.45$ Å es el radio atómico adoptado para el oro.
-          Las trayectorias son prácticamente rectas a la escala mostrada.<br>
-
-          Esta predicción es incompatible con la observación de partículas alfa dispersadas a
-          grandes ángulos, incluso hacia atrás, lo que condujo al modelo nuclear de Rutherford.
-        </p>
-
-        <canvas id="canvasA" width="800" height="330"></canvas>
-
-        <div class="controls">
-
-          <div class="slider-row">
-            <span class="slider-label">Energía $E_0$</span>
-            <input type="range" id="sliderE" min="4" max="10" step="0.1" value="7.0">
-            <span class="slider-val" id="valE">7.0 MeV</span>
-          </div>
-
-          <!-- Slider Z₂ — Rutherford y Thomson -->
-          <div class="slider-row" id="rowZ2">
-            <span class="slider-label">Elemento blanco $Z_2$</span>
-            <input type="range" id="sliderZ2" min="10" max="92" step="1" value="79">
-            <span class="slider-val" id="valZ2">Z = 79</span>
-            <span class="slider-val" id="val-Z2-label" style="color:var(--amber);margin-left:6px">Au (Z=79)</span>
-          </div>
-
-          <!-- Trazas + Pausa — solo Rutherford -->
-          <div class="slider-row" id="rowCtrlA" style="gap:16px;align-items:center">
-            <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--muted);cursor:pointer">
-              <input type="checkbox" id="checkTracesA" style="accent-color:var(--cyan)">
-              Trazas acumuladas
-            </label>
-            <button id="btnPauseA" class="mode-btn" style="padding:3px 12px;font-size:0.8rem">⏸ Pausa</button>
-            <button id="btnStepA" class="mode-btn" style="padding:3px 12px;font-size:0.8rem">⏭ Paso</button>
-          </div>
-
-        </div>
-
-        <!-- Fórmula Rutherford -->
-        <div class="formula-box" id="formulaA">
-          <div class="flabel">Parámetro de impacto — dispersión de Rutherford</div>
-
-          $$
-          b(\theta)=
-          \frac{Z_1Z_2ke^2}{2E}
-          \cot\left(\frac{\theta}{2}\right)
-          =
-          a_0\cot\left(\frac{\theta}{2}\right)
-          $$
-
-          <div class="formula-meta">
-            $Z_1=2$, $Z_2=79$ $\;\mid\;$
-            $a_0=\dfrac{Z_1Z_2ke^2}{2E}=$
-            <b id="val-a0" style="color:var(--cyan)">16.2</b> fm
-            $\;\mid\;$
-            $\theta$ (trayectoria $b=5$ fm) $=$
-            <b id="val-theta-a" style="color:var(--amber)">143°</b>
-          </div>
-        </div>
-
-        <!-- Fórmula Thomson -->
-        <div class="formula-box" id="formulaThom" style="display:none">
-          <div class="flabel">Deflexión Thomson — esfera de carga uniforme</div>
-
-          $$
-          \theta_\text{Thomson}(b)=
-          \frac{Z_1Z_2ke^2}{E}
-          \frac{b\sqrt{R^2-b^2}}{R^3},
-          \qquad b\leq R
-          $$
-
-          <div class="formula-meta">
-            $R_\text{átomo}\approx1.45\,\text{Å}$
-            $\;\mid\;$
-            deflexión máxima $\approx$
-            <b id="val-thom-max" style="color:var(--cyan)">0.006</b>°
-            → sub-píxel a esta escala.
-          </div>
-        </div>
-
-        <!-- Nota modo Rutherford -->
-        <div class="note" id="noteA-ruth">
-
-          <b>Interacción Coulombiana</b><br>
-
-          La dispersión de Rutherford se explica mediante la repulsión eléctrica entre la
-          partícula alfa y el núcleo:
-          $$
-          F=\frac{Z_1Z_2ke^2}{r^2}.
-          $$
-
-          Aquí $Z_1=2$ corresponde a la carga de la partícula alfa
-          ($^4_2\text{He}^{2+}$), mientras que $Z_2$ es el número atómico del núcleo blanco.
-          Los neutrones no contribuyen directamente a la interacción Coulombiana porque
-          tienen carga eléctrica nula.<br>
-
-          La masa del núcleo $M_2$ no aparece en esta expresión de la fuerza, pero sí será
-          relevante cuando consideremos el <b>retroceso del núcleo</b> y la energía de la
-          partícula después de la colisión (Panel B).<br><br>
-
-          <b>Del núcleo a la Física Moderna</b><br>
-
-          El modelo nuclear permitió explicar los resultados de dispersión, pero planteó nuevos
-          problemas para la física clásica, entre ellos la estabilidad del átomo y los espectros
-          atómicos discretos. Estos problemas formaron parte de una crisis más amplia de la física
-          clásica, iniciada antes con Planck y Einstein.<br>
-
-          En 1913, Bohr introdujo un modelo semiclásico en el que ciertas órbitas electrónicas
-          estaban cuantizadas:
-          $$
-          L=n\hbar.
-          $$
-          En esas órbitas el electrón no irradiaría energía y la emisión o absorción de radiación
-          ocurriría mediante transiciones entre estados:
-          $$
-          \Delta E=h\nu.
-          $$
-          El modelo explicó el espectro del hidrógeno, pero no constituía todavía una teoría
-          cuántica completa. La mecánica cuántica se desarrollaría posteriormente con los trabajos
-          de de Broglie, Heisenberg, Schrödinger y otros.<br><br>
-
-          <span class="warn">⚠ Simplificación:</span>
-          la animación no representa el tiempo físico real de la interacción. La escala temporal
-          está adaptada para visualizar la trayectoria, mientras que la dinámica se calcula a partir
-          de la interacción Coulombiana.<br><br>
-
-          <b>→ Panel B:</b> la misma física de las colisiones Coulombianas permite hoy analizar
-          la composición de materiales mediante <b>RBS</b>. En el Panel B se incorpora el
-          movimiento del núcleo y se determina la energía de la partícula después de la colisión.
-        </div>
-
-        <!-- Nota modo Thomson -->
-        <div class="note" id="noteA-thom" style="display:none">
-
-          <b>¿Por qué falla el modelo de Thomson?</b><br>
-
-          En una esfera de carga uniforme, el campo eléctrico interno aumenta linealmente con
-          la distancia al centro. La componente transversal de este campo produce una deflexión,
-          pero su magnitud es muy pequeña para una partícula alfa de varios MeV.<br>
-
-          Para los parámetros utilizados aquí,
-          $$
-          \theta_\text{máx}\approx6\times10^{-3}\!^\circ.
-          $$
-          Por tanto, las partículas seguirían trayectorias prácticamente rectas.<br>
-
-          Geiger y Marsden observaron, en cambio, una pequeña fracción de partículas alfa
-          dispersadas a grandes ángulos, incluso hacia atrás. Esta observación no podía explicarse
-          mediante una distribución uniforme de carga positiva y proporcionó la evidencia
-          experimental para el modelo nuclear de Rutherford.<br>
-
-          <span class="warn">⚠ Simplificación:</span>
-          la deflexión calculada es sub-píxel en la visualización. El núcleo mostrado en la
-          simulación tampoco está representado a escala real: su tamaño es muchísimo menor que
-          el radio atómico.
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════ PANEL B — FACTOR K ══════════════ -->
-    <section class="panel" id="panel-b">
-      <div class="panel-header">
-        <span class="badge">B</span>
-        <h2>Factor cinemático $K$ — principio de RBS</h2>
-      </div>
-      <div class="panel-body">
-
-        <p class="note">
-          <b>¿Cómo identifica RBS un elemento sin verlo?</b><br>
-          En una colisión elástica entre el proyectil α ($M_1=4$ u) y un núcleo del material ($M_2$),
-          la conservación de energía y momento lineal fija una relación exacta entre la energía
-          antes ($E_0$) y después ($E_1$) del choque:
-          $$E_1 = K(M_2,\,\theta)\cdot E_0$$
-          $K$ depende <em>solo</em> de las masas y el ángulo — no de la energía ni de la estructura
-          del material. Con el detector fijo a $\theta=170°$ (a 180° la sensibilidad de masa es máxima
-          pero bloquearía el haz de entrada; a 170° se conserva el 99.8% de esa resolución sin obstruir nada),
-          medir $E_1$ es suficiente para identificar $M_2$.<br>
-          <b>Analogía del billar:</b> si golpeas una bola pesada (Au), tu bola rebota conservando casi toda la
-          energía ($K=0.9226$). Si golpeas una liviana (C), casi se detiene ($K=0.2525$).
-          La energía de rebote revela la masa del blanco. Mueve el slider para verlo.<br>
-          <b>Límite cinemático:</b> si $M_2 &lt; M_1 = 4\,\text{u}$ (más ligero que la alfa), la fórmula no
-          tiene solución real — el proyectil no puede rebotar hacia atrás. Por eso <b>RBS no detecta
-            hidrógeno</b> ($M_2=1\,\text{u}$) ni deuterio directamente. Para esos elementos se usa
-          <b>ERDA</b> (<em>Elastic Recoil Detection Analysis</em>), donde se detecta el núcleo blanco
-          expulsado hacia adelante en lugar del proyectil rebotado.
-        </p>
-
-        <canvas id="canvasB" width="800" height="210"></canvas>
-
-        <div class="controls">
-          <div class="slider-row">
-            <span class="slider-label">Masa blanco $M_2$</span>
-            <input type="range" id="sliderM2" min="4" max="200" step="0.5" value="197" list="m2marks">
-            <span class="slider-val" id="valM2">197 u</span>
-          </div>
-          <datalist id="m2marks">
-            <option value="12"></option>
-            <option value="28"></option>
-            <option value="56"></option>
-            <option value="108"></option>
-            <option value="197"></option>
-          </datalist>
-          <div class="el-marks">
-            <span>C (12)</span><span>Si (28)</span><span>Fe (56)</span>
-            <span>Ag (108)</span><span>Au (197)</span>
-          </div>
-        </div>
-
-        <div class="formula-box">
-          <div class="flabel">Factor cinemático — colisión elástica</div>
-          $$K(M_2,\theta)=\left(\frac{\sqrt{M_2^2-M_1^2\sin^2\!\theta}+M_1\cos\theta}{M_1+M_2}\right)^{\!2}$$
-          <div class="formula-meta">
-            $\theta=170°$ · $E_0=2\,\text{MeV}$ · $M_1=4\,\text{u}$
-          </div>
-        </div>
-
-        <div class="metrics">
-          <div class="metric-card">
-            <div class="metric-label">Factor K</div>
-            <div class="metric-val"><span id="val-K">0.9230</span></div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Energía de salida E₁</div>
-            <div class="metric-val"><span id="val-E1">1.846</span><span class="metric-unit">MeV</span></div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Elemento más cercano</div>
-            <div class="metric-val" id="val-el" style="color:var(--green)">Au</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Recule del blanco</div>
-            <div class="metric-val"><span id="val-recoil">0.040</span><span class="metric-unit">v₀</span></div>
-          </div>
-        </div>
-
-        <div class="note">
-          <b>Lo que el detector mide — y lo que no:</b> un detector RBS registra solo la energía
-          de la partícula que llega. No registra la trayectoria ni el instante del choque.
-          Toda la información — masa $M_2$, elemento, concentración — se infiere únicamente de
-          comparar $E_0$ (conocida, fijada por el acelerador) con $E_1$ (medida por el detector).<br>
-          <b>Recule del blanco:</b> la energía que la alfa no conserva ($1-K$) es transferida al núcleo
-          blanco como energía cinética de recule. La velocidad de recule en colisión frontal es:
-          $$v_\text{rec}/v_0 = \frac{2M_1}{M_1+M_2}$$
-          Para Au: $v_\text{rec} = 0.04\,v_0$ (apenas se mueve — blanco muy pesado).
-          Para C: $v_\text{rec} = 0.57\,v_0$ (recibe un empujón significativo).<br>
-          <span class="warn">⚠ Simplificación:</span> la velocidad de salida en la animación es
-          $\propto\sqrt{K}$ (metáfora visual de energía). El tamaño del átomo escala como $M_2^{1/3}$
-          (proporcional al radio nuclear). El choque real ocurre en femtosegundos.
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════ PANEL C — ESPECTRO ══════════════ -->
-    <section class="panel" id="panel-c">
-      <div class="panel-header">
-        <span class="badge">C</span>
-        <h2>Espectro RBS resultante</h2>
-      </div>
-      <div class="panel-body">
-
-        <p class="note">
-          <b>Identidad + cantidad en una sola gráfica.</b><br>
-          Con millones de colisiones, el detector acumula una distribución de energías: el espectro.
-          Cada elemento produce un peak definido por dos propiedades independientes:<br>
-          · <b>Posición</b> → $E_1 = K(M_2)\cdot E_0$. Solo depende de $M_2$ (Panel B).
-          Cambiar la concentración <em>no</em> mueve el peak.<br>
-          · <b>Altura</b> → $\propto Z_2^2\cdot N_i$: sección eficaz de Rutherford × concentración.<br><br>
-          <b>Este panel es un laboratorio configurable</b> — no representa una muestra real.
-          Los sliders permiten componer cualquier mezcla hipotética de cinco elementos (C, Si, Fe, Ag, Au)
-          para entender la física. El Panel D muestra el caso concreto: oblea de Si con película de Au
-          y traza de C superficial, con el espectro construyéndose evento por evento.
-        </p>
-
-        <canvas id="canvasC" width="800" height="280"></canvas>
-
-        <div class="controls" style="margin-top:14px">
-          <p class="note" style="margin-bottom:10px; border-left-color:var(--cyan)">
-            <b>Concentración superficial $N_i$:</b> ajusta la cantidad de cada elemento.
-            La altura cambia con $A_i\propto Z_2^2\cdot N_i$. Pasa el cursor sobre un peak para
-            ver K, E₁ y Z₂² exactos. Haz clic para resaltarlo.
-          </p>
-          <div id="concSliders"></div>
-        </div>
-
-        <div class="formula-box">
-          <div class="flabel">Sección eficaz diferencial de Rutherford — altura de los peaks</div>
-          $$\frac{d\sigma}{d\Omega}=\left(\frac{Z_1 Z_2\,ke^2}{4E_0}\right)^{\!2}
-          \frac{1}{\sin^4\!\!\left(\dfrac{\theta}{2}\right)}\;\propto\;Z_2^2$$
-          <div class="formula-meta">
-            Con $\theta=170°$ y $E_0=2$ MeV fijos, la altura relativa entre elementos reduce a $Z_2^2$.
-            Verificado: Au/C $= (79/6)^2 = 173\times$ a igual concentración.
-          </div>
-        </div>
-
-        <div class="note">
-          <b>Limitación fundamental:</b> un peak alto puede deberse a $Z_2$ grande
-          <em>o</em> a $N_i$ grande — el espectro por sí solo no los distingue.
-          En la práctica se usan muestras de referencia o se combina RBS con otras técnicas.<br>
-          <b>Ventaja clave del RBS:</b> la sección eficaz de Rutherford es <em>calculable desde primeros principios</em>
-          — no requiere muestras de calibración para cada elemento (<em>cuantificación absoluta</em>
-          o <em>standardless</em>). Es la única técnica analítica de superficies con esta propiedad.<br>
-          <span class="warn">⚠ Simplificación:</span> se muestra solo la capa superficial.
-          En RBS real, los átomos en profundidad producen peaks desplazados a menor energía
-          (<em>stopping power</em>), lo que permite medir el espesor de cada capa.
-          La forma gaussiana refleja la resolución del detector ($\sigma\approx15{-}30$ keV FWHM).
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════ PANEL D — RBS EN ACCIÓN ══════════════ -->
-    <section class="panel" id="panel-d">
-      <div class="panel-header">
-        <span class="badge">D</span>
-        <h2>RBS en acción — síntesis interactiva</h2>
-      </div>
-      <div class="panel-body">
-
-        <p class="note">
-          <b>El mismo principio, 115 años después.</b>
-          Rutherford disparó partículas alfa para descubrir el núcleo (1909). Hoy esa misma física
-          — colisión elástica, repulsión de Coulomb — permite analizar chips, catalizadores y obras
-          de arte <em>capa por capa</em>, sin destruir la muestra.<br><br>
-          <b>Síntesis de los paneles anteriores:</b>
-          el Panel A mostró que el núcleo existe y es denso; el B explicó cómo una colisión elástica
-          identifica un elemento mediante $E_1=K(M_2)\cdot E_0$; el C mostró el espectro de una mezcla
-          hipotética. Aquí ves todo junto en un caso concreto: oblea de <b>Si</b> (substrato) con
-          película fina de <b>Au</b> encima y trazas de <b>C</b> en la superficie — ejemplo clásico
-          en semiconductores.<br>
-          La animación izquierda muestra las colisiones individuales; el espectro derecho se acumula
-          con cada detección, como en un equipo real.<br><br>
-          <b>Interacción:</b> haz clic en una capa para resaltarla y ver su peak.
-          Cambia $E_0$ para ver que los peaks se desplazan pero $K$ permanece constante.
-          Pasa el cursor sobre un peak para ver $K$, $E_1$ y $Z_2^2$ exactos.
-        </p>
-
-        <div class="rbs-view">
-          <div class="rbs-col">
-            <div class="canvas-label">Interacción α con la muestra — clic en una capa para resaltarla</div>
-            <canvas id="canvasDsamp" width="520" height="300"></canvas>
-          </div>
-          <div class="rbs-col">
-            <div class="canvas-label">Espectro acumulado — pasar cursor sobre peaks para ver detalles</div>
-            <canvas id="canvasDspec" width="520" height="300"></canvas>
-          </div>
-        </div>
-
-        <div class="controls" style="margin-top:14px">
-          <div class="slider-row">
-            <span class="slider-label">Energía del haz $E_0$</span>
-            <input type="range" id="sliderE0D" min="1.0" max="3.0" step="0.1" value="2.0"
-              oninput="panelD.setE0(this.value)">
-            <span class="slider-val" id="valE0D">2.0 MeV</span>
-          </div>
-          <div class="slider-row">
-            <span class="slider-label">Corriente del haz $I$</span>
-            <input type="range" id="sliderI_nA" min="5" max="100" step="5" value="20"
-              oninput="panelD.setCurrent(this.value)">
-            <span class="slider-val" id="valI_nA">20 nA</span>
-          </div>
-          <p class="note" style="margin:10px 0 8px;border-left-color:var(--cyan)">
-            <b>Composición $N_i$:</b> la <b>posición</b> del peak no cambia al variar $N_i$
-            (depende de $M_2$, no de la cantidad). La <b>altura</b> sí cambia
-            ($\propto Z_2^2\cdot N_i$). Al cambiar $E_0$, todos los peaks se desplazan
-            proporcionalmente — $K$ es constante porque depende solo de las masas.
-            El espectro se reinicia al cambiar $E_0$.<br>
-            <b>Corriente $I$:</b> en RBS real determina cuántas partículas α por segundo
-            impactan la muestra. A mayor corriente, el espectro se acumula más rápido.
-            Rango típico: 10–100 nA. Aquí controla la tasa de spawn: $\Delta t = 9200/I$ ms.
-          </p>
-          <div id="panelD-sliders"></div>
-        </div>
-
-        <div style="display:flex;gap:10px;justify-content:center;margin-top:12px">
-          <button class="btn-reset" id="btnDPause" onclick="panelD.togglePause()">⏸ Pausar</button>
-          <button class="btn-reset" onclick="panelD.reset()">↺ Reiniciar espectro</button>
-        </div>
-
-        <div class="formula-box" style="margin-top:16px">
-          <div class="flabel">Posición del peak vs. altura del peak</div>
-          $$\underbrace{E_1 = K(M_2,\,\theta)\cdot E_0}_{\text{posición — identifica el elemento}}
-          \qquad
-          \underbrace{A_i \;\propto\; Z_2^2\cdot N_i}_{\text{altura — mide la cantidad}}$$
-          <div class="formula-meta">
-            $K$ depende solo de $M_2$ y $\theta$.
-            Verificado: Au/C $=(79/6)^2=173\times$ a igual concentración.
-          </div>
-        </div>
-
-        <div class="note" style="margin-top:12px">
-          <b>Aplicaciones actuales:</b> verificar espesor y composición de capas delgadas en
-          semiconductores; medir perfiles de dopaje; autenticar pigmentos en obras de arte.
-          En todos los casos la energía de rebote revela la masa del núcleo encontrado.<br>
-          <span class="warn">⚠ Simplificaciones:</span>
-          (1) modelo de superficie — en RBS real los átomos en profundidad producen peaks
-          desplazados a menor energía (<em>stopping power</em>), lo que permite medir el espesor
-          de cada capa.
-          (2) la probabilidad de impacto es $\propto Z_2^2\cdot N_i$; Au acumula cuentas mucho
-          más rápido que C por su mayor sección eficaz.<br><br>
-          <b>Cierre del hilo cuántico:</b> el núcleo que Rutherford descubrió obligó a Bohr a
-          cuantizar el momento angular ($L=n\hbar$) para que el átomo no colapsara — primer paso
-          de la mecánica cuántica. Ese mismo núcleo es hoy el «blanco» que da a cada elemento
-          su firma única en el espectro RBS.
-          <em>El experimento que abrió la física cuántica sigue activo en los laboratorios del siglo XXI.</em>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════ PANEL E — HADRONTERAPIA ══════════════ -->
-    <section class="panel" id="panel-e">
-      <div class="panel-header">
-        <span class="badge">E</span>
-        <h2>Hadronterapia — Curva de Bragg</h2>
-        <div class="mode-toggle">
-          <button class="mode-btn active bragg-btn" id="braggBtn_proton"
-            onclick="panelE.setParticle('proton')">Protones</button>
-          <button class="mode-btn bragg-btn" id="braggBtn_carbon" onclick="panelE.setParticle('carbon')">Iones
-            C¹²</button>
-        </div>
-      </div>
-      <div class="panel-body">
-
-        <p class="note">
-          <b>El mismo principio, otra aplicación.</b>
-          Rutherford descubrió en 1919 que bombardeando nitrógeno con partículas alfa se emiten
-          protones — fue la primera reacción nuclear artificial, y descubrió el protón.
-          Hoy ese mismo protón, acelerado a 70–230 MeV, se usa para tratar tumores con
-          precisión milimétrica. La razón es la <b>curva de Bragg</b>: una partícula cargada
-          deposita casi toda su energía en un peak estrecho justo antes de detenerse —
-          localizable en la profundidad del tumor.<br>
-          Compara con los fotones (curva azul punteada): los rayos X depositan la mayor dosis
-          en la entrada y decaen exponencialmente — no hay forma de concentrarlos en el tumor
-          sin irradiar el tejido sano anterior. Los protones sí lo permiten.
-          Los iones de carbono (C¹²⁶⁺) tienen un peak aún más estrecho y mayor efecto biológico.<br>
-          <b>Usa el slider</b> para mover el pico de Bragg a distintas profundidades
-          (controla la energía del haz). Alterna entre protones e iones de carbono.<br>
-          <b>SOBP</b> (<em>Spread-Out Bragg Peak</em>): un peak monoenergético tiene solo 2–5 mm de
-          ancho — insuficiente para tumores reales de 2–5 cm. En clínica se superponen múltiples peaks
-          a distintas energías, creando una meseta de dosis uniforme sobre todo el volumen tumoral.<br>
-          <b>Eficacia biológica relativa (RBE):</b> protones tienen RBE $\approx 1.1$ (similar a rayos X);
-          iones C¹² tienen RBE $\approx 2{-}3$ — producen roturas dobles del ADN tumoral no reparables,
-          útiles en tumores radiorresistentes como cordomas y sarcomas.
-        </p>
-
-        <canvas id="canvasE" width="800" height="320"></canvas>
-
-        <div class="controls">
-          <div class="slider-row">
-            <span class="slider-label">Energía del haz $E_0$</span>
-            <input type="range" id="sliderE_bragg" min="70" max="230" step="5" value="150"
-              oninput="panelE.setEnergy(this.value)">
-            <span class="slider-val" id="valE_bragg">150 MeV</span>
-          </div>
-        </div>
-
-        <div class="metrics">
-          <div class="metric-card">
-            <div class="metric-label">Profundidad del peak</div>
-            <div class="metric-val"><span id="val-bragg-peak">—</span></div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Partícula</div>
-            <div class="metric-val" id="val-bragg-par" style="font-size:0.9rem;color:var(--amber)">Protones p⁺</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-label">Carga $z$ → sección eficaz</div>
-            <div class="metric-val" id="val-bragg-z" style="font-size:0.82rem">z=1 z²=1</div>
-          </div>
-        </div>
-
-        <div class="formula-box">
-          <div class="flabel">Poder de frenado — Bethe-Bloch relativista</div>
-          $$-\frac{dE}{\rho\,dx}=\frac{K z^2 Z}{A\beta^2}
-          \left[\frac{1}{2}\ln\frac{2m_ec^2\beta^2\gamma^2 W_\text{max}}{I^2}-\beta^2\right]$$
-          <div class="formula-meta">
-            $K=0.307\,\text{MeV·cm}^2/\text{mol}$ · $I_\text{tejido}=79.7\,\text{eV}$ ·
-            $Z/A_\text{agua}=0.5551\,\text{mol/g}$ · $\rho=1\,\text{g/cm}^3$<br>
-            Para iones C¹²⁶⁺: $z=6$ → potencia $z^2=36$ · campo Coulomb 36× más intenso
-            → peak más estrecho y mayor deposición de energía por unidad de longitud (LET alto).
-          </div>
-        </div>
-
-        <div class="note">
-          <b>Conexión con el hilo del módulo:</b>
-          el potencial de Coulomb que deflecta las partículas alfa en el Panel A es el mismo que
-          frena los protones en el tejido en el Panel E — $F = Z_1 Z_2 ke^2/r^2$ actúa en ambos casos.
-          En RBS (Paneles B–D) medimos la energía que pierde el proyectil al colisionar con un
-          núcleo; en hadronterapia <em>controlamos</em> cuánta energía deposita el proyectil en
-          cada capa de tejido antes de detenerse. Misma física, diferente propósito.<br>
-          <b>Diagnóstico nuclear (PET/SPECT):</b> también nace de Rutherford —
-          Georg de Hevesy, en el laboratorio de Rutherford en Manchester (1912),
-          inventó el principio del radiotrazador al no poder separar isótopos de plomo.
-          Ese "fracaso" dio origen a todos los estudios PET y SPECT del mundo (Nobel 1943).<br>
-          <span class="warn">⚠ Simplificaciones:</span>
-          (1) factor de corrección 0.56 para correcciones de capa y densidad no implementadas
-          (Bethe-Bloch simple sobreestima ~1.8× respecto a NIST PSTAR);
-          (2) tejido blando homogéneo — sin heterogeneidades (hueso, pulmón);
-          (3) sin fragmentación nuclear (relevante para C¹²⁶⁺ a profundidad: crea partículas
-          secundarias más allá del peak).
-        </div>
-
+      <!-- Slider Z₂ — Rutherford y Thomson -->
+      <div class="slider-row" id="rowZ2">
+        <span class="slider-label">Elemento blanco $Z_2$</span>
+        <input type="range" id="sliderZ2" min="10" max="92" step="1" value="79">
+        <span class="slider-val" id="valZ2">Z = 79</span>
+        <span class="slider-val" id="val-Z2-label"
+              style="color:var(--amber);margin-left:6px">Au (Z=79)</span>
       </div>
 
-    </section>
+      <!-- Trazas + Pausa — solo Rutherford -->
+      <div class="slider-row" id="rowCtrlA"
+           style="gap:16px;align-items:center">
 
+        <label style="display:flex;align-items:center;gap:6px;
+                      font-size:0.82rem;color:var(--muted);cursor:pointer">
+          <input type="checkbox" id="checkTracesA"
+                 style="accent-color:var(--cyan)">
+          Trazas acumuladas
+        </label>
 
-    <!-- ══════════════ HILO CUÁNTICO — LÍNEA DE TIEMPO ══════════════ -->
-    <section class="panel" id="panel-timeline">
-      <div class="panel-header">
-        <span class="badge" style="background:linear-gradient(135deg,var(--cyan),#a78bfa)">∞</span>
-        <h2>El hilo cuántico — de Planck a la mecánica cuántica</h2>
+        <button id="btnPauseA" class="mode-btn"
+                style="padding:3px 12px;font-size:0.8rem">
+          ⏸ Pausa
+        </button>
+
+        <button id="btnStepA" class="mode-btn"
+                style="padding:3px 12px;font-size:0.8rem">
+          ⏭ Paso
+        </button>
+
       </div>
-      <div class="panel-body">
-        <div class="formula-box">
-          <div class="flabel">Planck (1900) → Rutherford (1911) → Bohr (1913) → mecánica cuántica (1925)</div>
-          <div class="quantum-timeline">
+    </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot"></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year">1900</div>
-                <div class="tl-title">Planck — = hf$</div>
-                <p class="tl-desc">La energía se emite en paquetes discretos (cuantos). Explica la radiación del cuerpo
-                  negro. Primer quiebre con la física clásica.</p>
-              </div>
+    <!-- Fórmula Rutherford -->
+    <div class="formula-box" id="formulaA">
+      <div class="flabel">Parámetro de impacto — dispersión de Rutherford</div>
+
+      $$b(\theta)=
+      \frac{Z_1Z_2ke^2}{2E}
+      \cot\left(\frac{\theta}{2}\right)
+      =a_0\cot\left(\frac{\theta}{2}\right)$$
+
+      <div class="formula-meta">
+        $Z_1=2$, $Z_2=79$ $\;\mid\;$
+        $a_0=\dfrac{Z_1Z_2ke^2}{2E}=$
+        <b id="val-a0" style="color:var(--cyan)">16.2</b> fm
+        $\;\mid\;$
+        $\theta$ (trayectoria $b=5$ fm) $=$
+        <b id="val-theta-a" style="color:var(--amber)">148°</b>
+      </div>
+    </div>
+
+    <!-- Fórmula Thomson -->
+    <div class="formula-box" id="formulaThom" style="display:none">
+      <div class="flabel">Deflexión Thomson — esfera de carga uniforme</div>
+
+      $$\theta_{\mathrm{Thomson}}(b)=
+      \frac{Z_1Z_2ke^2}{E}
+      \frac{b\sqrt{R^2-b^2}}{R^3},
+      \qquad b\le R$$
+
+      <div class="formula-meta">
+        $R_{\mathrm{átomo}}\approx1.45\,\text{\AA}$ $\;\mid\;$
+        deflexión máxima $\approx$
+        <b id="val-thom-max" style="color:var(--cyan)">0.006</b>°
+        → sub-píxel a esta escala.
+      </div>
+    </div>
+
+    <!-- Nota modo Rutherford -->
+    <div class="note" id="noteA-ruth">
+
+      <b>¿Qué representan $Z_1$ y $Z_2$?</b><br>
+
+      La interacción entre la partícula alfa y el núcleo es Coulombiana:
+
+      $$F=\frac{Z_1Z_2ke^2}{r^2}.$$
+
+      <b>$Z_1=2$</b> corresponde a la carga de la partícula alfa
+      (${}^4_2\mathrm{He}^{2+}$), que contiene dos protones.
+
+      <br>
+
+      <b>$Z_2$</b> es el número atómico del blanco y determina la carga nuclear
+      $+Z_2e$.
+
+      <br>
+
+      Los <b>neutrones</b> no tienen carga eléctrica, por lo que no contribuyen
+      directamente a la interacción de Coulomb. Su masa sí es relevante para la
+      cinemática del retroceso nuclear, que se estudia en el <b>Panel B</b>.
+
+      <br><br>
+
+      <b>¿Por qué fue importante el experimento?</b><br>
+
+      La dispersión a grandes ángulos mostró que el átomo posee un núcleo muy pequeño,
+      cargado positivamente y con gran concentración de masa. El modelo nuclear de
+      Rutherford resolvió el problema de la distribución de carga, pero dejó abiertas
+      otras dificultades de la física atómica, como la estabilidad del átomo y el
+      origen de los espectros discretos.
+
+      <br><br>
+
+      En 1913, <b>Bohr</b> incorporó la cuantización al modelo nuclear de Rutherford.
+      Entre sus postulados se encuentra
+
+      $$L=n\hbar,$$
+
+      y la emisión o absorción de radiación asociada a una diferencia de energía:
+
+      $$\Delta E=h\nu.$$
+
+      El modelo de Bohr fue un paso importante hacia la mecánica cuántica,
+      pero no constituye todavía una teoría cuántica completa.
+
+      <br><br>
+
+      <span class="warn">⚠ Simplificación:</span>
+      la animación no representa el tiempo real de la colisión.
+      Los pasos de integración son iguales, mientras que la velocidad de la partícula
+      cambia de acuerdo con su energía cinética en el potencial de Coulomb.
+
+      <br><br>
+
+      <b>→ Panel B:</b> el mismo principio de colisión con núcleos permite desarrollar
+      una aplicación moderna: la <b>espectroscopía de retrodispersión de Rutherford (RBS)</b>.
+      En RBS, la energía de las partículas retrodispersadas proporciona información
+      sobre la masa de los núcleos presentes en el material.
+    </div>
+
+    <!-- Nota modo Thomson -->
+    <div class="note" id="noteA-thom" style="display:none">
+
+      <b>¿Por qué Thomson falla cuantitativamente?</b><br>
+
+      En una esfera de carga positiva uniforme, el campo eléctrico es mucho menor que
+      el producido por una carga concentrada en un núcleo. La deflexión máxima calculada
+      es del orden de
+
+      $$\theta_{\max}\approx6\times10^{-3}\,^\circ.$$
+
+      Por tanto, las trayectorias presentan desviaciones extremadamente pequeñas.
+
+      <br><br>
+
+      Las partículas observadas por Geiger y Marsden a grandes ángulos,
+      incluso por encima de $90^\circ$, no pueden explicarse con este modelo.
+
+      <br><br>
+
+      <span class="warn">⚠ Simplificación:</span>
+      la deflexión mostrada es físicamente pequeña, pero el núcleo dibujado
+      <b>no está a escala</b>. Su tamaño real es diminuto comparado con el radio atómico.
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ PANEL B — FACTOR K ══════════════ -->
+<section class="panel" id="panel-b">
+  <div class="panel-header">
+    <span class="badge">B</span>
+    <h2>Factor cinemático $K$ — principio de RBS</h2>
+  </div>
+
+  <div class="panel-body">
+
+    <p class="note">
+
+      <b>¿Qué ocurre con la energía de la partícula después de la colisión?</b><br>
+
+      En una colisión elástica entre una partícula alfa
+      ($M_1\approx4\,\mathrm{u}$) y un núcleo del material ($M_2$),
+      se conservan la energía y el momento lineal.
+
+      Para una geometría de detección dada, estas leyes determinan la relación
+
+      $$E_1=K(M_2,\theta)\,E_0,$$
+
+      donde $E_0$ es la energía inicial de la partícula alfa,
+      $E_1$ su energía después de la colisión y $K$ es el
+      <b>factor cinemático</b>.
+
+      <br><br>
+
+      El factor $K$ depende de las masas $M_1$, $M_2$ y del ángulo de detección
+      $\theta$, pero <b>no depende de $E_0$</b>.
+      Por eso, si cambiamos la energía inicial, $K$ permanece constante
+      mientras la energía medida $E_1$ cambia proporcionalmente.
+
+      <br><br>
+
+      En esta simulación se fija el detector en $\theta=170^\circ$,
+      un ángulo cercano a la retrodispersión. Esta geometría permite detectar
+      las partículas que regresan sin situar el detector exactamente sobre
+      la dirección del haz incidente.
+
+      <br><br>
+
+      <b>Analogía del billar:</b>
+      una partícula ligera que colisiona con un núcleo pesado conserva gran parte
+      de su energía. Si el núcleo es más ligero, la transferencia de energía
+      puede ser mayor.
+
+      Por ejemplo, para $\theta=170^\circ$ y $M_1=4\,\mathrm{u}$:
+
+      $$K_{\mathrm{Au}}\approx0.923,$$
+      $$K_{\mathrm{C}}\approx0.253.$$
+
+      Así, con $E_0=2\,\mathrm{MeV}$:
+
+      $$E_{1,\mathrm{Au}}\approx1.85\,\mathrm{MeV},$$
+      $$E_{1,\mathrm{C}}\approx0.51\,\mathrm{MeV}.$$
+
+      La energía de la partícula retrodispersada contiene, por tanto,
+      información sobre la masa del núcleo con el que colisionó.
+
+      <br><br>
+
+      <b>Límite cinemático:</b>
+      para una partícula alfa, un blanco con $M_2<M_1$ no puede producir
+      retrodispersión del proyectil hacia el hemisferio posterior.
+      Por eso la detección convencional de hidrógeno mediante RBS con partículas
+      alfa está limitada por la cinemática.
+
+      Para medir hidrógeno y otros elementos muy ligeros pueden utilizarse
+      técnicas complementarias, como <b>ERDA</b>
+      (<em>Elastic Recoil Detection Analysis</em>), que detecta el núcleo de retroceso.
+    </p>
+
+    <canvas id="canvasB" width="800" height="210"></canvas>
+
+    <div class="controls">
+
+      <div class="slider-row">
+        <span class="slider-label">Masa blanco $M_2$</span>
+        <input type="range"
+               id="sliderM2"
+               min="4"
+               max="200"
+               step="0.5"
+               value="197"
+               list="m2marks">
+        <span class="slider-val" id="valM2">197 u</span>
+      </div>
+
+      <datalist id="m2marks">
+        <option value="12"></option>
+        <option value="28"></option>
+        <option value="56"></option>
+        <option value="108"></option>
+        <option value="197"></option>
+      </datalist>
+
+      <div class="el-marks">
+        <span>C (12)</span>
+        <span>Si (28)</span>
+        <span>Fe (56)</span>
+        <span>Ag (108)</span>
+        <span>Au (197)</span>
+      </div>
+
+    </div>
+
+    <div class="formula-box">
+
+      <div class="flabel">Factor cinemático — colisión elástica</div>
+
+      $$K(M_2,\theta)=
+      \left(
+      \frac{
+      \sqrt{M_2^2-M_1^2\sin^2\theta}
+      +M_1\cos\theta
+      }{
+      M_1+M_2
+      }
+      \right)^2$$
+
+      <div class="formula-meta">
+        $\theta=170^\circ$ · $E_0=2\,\mathrm{MeV}$ · $M_1=4\,\mathrm{u}$
+      </div>
+
+    </div>
+
+    <div class="metrics">
+
+      <div class="metric-card">
+        <div class="metric-label">Factor $K$</div>
+        <div class="metric-val">
+          <span id="val-K">0.9230</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Energía de salida $E_1$</div>
+        <div class="metric-val">
+          <span id="val-E1">1.846</span>
+          <span class="metric-unit">MeV</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Elemento más cercano</div>
+        <div class="metric-val"
+             id="val-el"
+             style="color:var(--green)">Au</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Velocidad de retroceso</div>
+        <div class="metric-val">
+          <span id="val-recoil">0.040</span>
+          <span class="metric-unit">$v_0$</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note">
+
+      <b>¿Qué mide el detector?</b><br>
+
+      El detector registra la <b>energía $E_1$</b> de la partícula alfa
+      que llega después de la colisión. No necesita observar directamente
+      el núcleo ni medir su movimiento.
+
+      Si conocemos $E_0$, $M_1$ y $\theta$, la energía medida $E_1$ permite
+      obtener información sobre $M_2$ mediante
+
+      $$E_1=K(M_2,\theta)E_0.$$
+
+      En otras palabras, la energía de la partícula retrodispersada
+      funciona como una <b>firma cinemática de la masa del núcleo</b>.
+
+      <br><br>
+
+      <b>¿Qué ocurre con la energía que pierde la partícula alfa?</b><br>
+
+      En una colisión elástica ideal, la energía transferida al núcleo es
+
+      $$E_{\mathrm{recoil}}=E_0-E_1=(1-K)E_0.$$
+
+      Para un núcleo pesado como Au, $K$ es cercano a 1:
+      la partícula alfa conserva la mayor parte de su energía y el núcleo
+      recibe una fracción pequeña.
+
+      Para un núcleo más ligero, la transferencia de energía es mayor.
+
+      <br><br>
+
+      Para una colisión frontal, la velocidad del núcleo de retroceso es
+
+      $$\frac{v_{\mathrm{rec}}}{v_0}
+      =\frac{2M_1}{M_1+M_2}.$$
+
+      Para Au:
+
+      $$\frac{v_{\mathrm{rec}}}{v_0}
+      \approx0.040.$$
+
+      Para C:
+
+      $$\frac{v_{\mathrm{rec}}}{v_0}
+      =0.50.$$
+
+      <br><br>
+
+      <span class="warn">⚠ Simplificaciones:</span>
+      la velocidad de salida en la animación se representa como
+      $\propto\sqrt{K}$ para visualizar la relación entre velocidad y energía
+      cinética. El tamaño dibujado del núcleo no está a escala y la colisión
+      real ocurre en escalas temporales extremadamente pequeñas.
+
+      <br><br>
+
+      <b>→ Panel C:</b>
+      al repetir la colisión muchas veces, las energías $E_1$ detectadas
+      forman un <b>espectro RBS</b>. La posición de los peaks permite relacionar
+      las señales observadas con los distintos elementos presentes en la muestra.
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ PANEL C — ESPECTRO RBS ══════════════ -->
+<section class="panel" id="panel-c">
+  <div class="panel-header">
+    <span class="badge">C</span>
+    <h2>Espectro RBS — identidad y cantidad</h2>
+  </div>
+
+  <div class="panel-body">
+
+    <p class="note">
+      <b>De una colisión a un espectro.</b><br>
+
+      Una sola colisión produce una partícula con una energía $E_1$ determinada
+      por la masa del núcleo y por la geometría de detección. En un experimento real
+      se registran millones de colisiones.
+
+      <br><br>
+
+      Al representar el número de partículas detectadas frente a su energía,
+      obtenemos un <b>espectro RBS</b>. Cada elemento presente en la muestra
+      puede producir una señal en una región característica de energía.
+
+      <br><br>
+
+      <b>Posición del peak:</b>
+
+      $$E_1=K(M_2,\theta)\,E_0.$$
+
+      Para $E_0$, $\theta$ y $M_1$ fijos, la posición de la señal depende de
+      $M_2$. Por ello, la energía de las partículas retrodispersadas proporciona
+      información sobre la identidad del núcleo.
+
+      <br><br>
+
+      <b>Intensidad del peak:</b>
+      el número de partículas detectadas depende de la sección eficaz de dispersión
+      y de la cantidad de átomos presentes. Para dispersión de Rutherford,
+
+      $$\frac{d\sigma}{d\Omega}
+      =
+      \left(
+      \frac{Z_1Z_2ke^2}{4E_0}
+      \right)^2
+      \frac{1}{\sin^4(\theta/2)}
+      \propto Z_2^2.$$
+
+      A igualdad de las demás condiciones experimentales, un elemento con mayor
+      $Z_2$ presenta una mayor probabilidad de dispersión.
+
+      <br><br>
+
+      En una muestra de concentración superficial $N_i$, el número de cuentas
+      asociado a un elemento depende, entre otros factores, de
+
+      $$N_i\,\frac{d\sigma}{d\Omega}.$$
+
+      Por tanto, <b>la posición proporciona información sobre la identidad</b>,
+      mientras que el <b>número de cuentas o el área del peak</b> proporciona
+      información sobre la cantidad.
+
+      <br><br>
+
+      <b>Este panel es un laboratorio configurable:</b>
+      los sliders permiten construir mezclas hipotéticas de C, Si, Fe, Ag y Au.
+      La simulación está diseñada para visualizar la relación entre masa,
+      energía y número de cuentas; no representa una muestra experimental completa.
+    </p>
+
+    <canvas id="canvasC" width="800" height="280"></canvas>
+
+    <div class="controls" style="margin-top:14px">
+
+      <p class="note"
+         style="margin-bottom:10px;border-left-color:var(--cyan)">
+        <b>Concentración superficial $N_i$:</b>
+        modifica la cantidad relativa de cada elemento.
+        La posición del peak permanece determinada por la cinemática,
+        mientras que el número de cuentas cambia con la cantidad de átomos
+        y la sección eficaz.
+        Pasa el cursor sobre un peak para consultar $K$, $E_1$ y $Z_2$.
+        Haz clic para resaltarlo.
+      </p>
+
+      <div id="concSliders"></div>
+
+    </div>
+
+    <div class="formula-box">
+
+      <div class="flabel">
+        Sección eficaz diferencial de Rutherford
+      </div>
+
+      $$\frac{d\sigma}{d\Omega}
+      =
+      \left(
+      \frac{Z_1Z_2ke^2}{4E_0}
+      \right)^2
+      \frac{1}{\sin^4\left(\dfrac{\theta}{2}\right)}
+      \propto Z_2^2$$
+
+      <div class="formula-meta">
+        Con $\theta=170^\circ$ y $E_0=2\,\mathrm{MeV}$ fijos,
+        la sección eficaz relativa entre elementos escala como $Z_2^2$.
+        Por ejemplo, para igual concentración:
+        $$\frac{\sigma_{\mathrm{Au}}}{\sigma_{\mathrm{C}}}
+        \approx
+        \left(\frac{79}{6}\right)^2
+        \approx173.$$
+      </div>
+
+    </div>
+
+    <div class="note">
+
+      <b>¿Por qué un peak puede ser más intenso?</b><br>
+
+      Una señal intensa puede deberse a una mayor concentración del elemento,
+      a un número atómico mayor o a ambos. Por eso la intensidad del peak,
+      por sí sola, no permite separar completamente estos efectos.
+
+      <br><br>
+
+      En condiciones experimentales conocidas, la sección eficaz calculable
+      de Rutherford permite relacionar las cuentas detectadas con la cantidad
+      de material presente. Para obtener resultados cuantitativos se deben
+      considerar además la geometría experimental, la eficiencia del detector,
+      el espesor y la pérdida de energía en la muestra.
+
+      <br><br>
+
+      <span class="warn">⚠ Simplificación:</span>
+      esta simulación muestra principalmente la contribución superficial.
+      En una muestra real, una partícula que se dispersa a cierta profundidad
+      pierde energía al entrar y al salir del material. Por ello, los átomos
+      situados a mayor profundidad aparecen a energías menores.
+
+      Este efecto, asociado al <em>stopping power</em>, permite obtener
+      información sobre la distribución en profundidad.
+
+      <br><br>
+
+      La forma y el ancho de un peak real también dependen de la resolución
+      energética del detector y de otros efectos experimentales.
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ PANEL D — RBS EN ACCIÓN ══════════════ -->
+<section class="panel" id="panel-d">
+
+  <div class="panel-header">
+    <span class="badge">D</span>
+    <h2>RBS en acción — síntesis interactiva</h2>
+  </div>
+
+  <div class="panel-body">
+
+    <p class="note">
+
+      <b>De Rutherford a una técnica de análisis de materiales.</b><br>
+
+      El experimento de Rutherford mostró que los átomos contienen un núcleo
+      pequeño y cargado positivamente. RBS utiliza las colisiones entre partículas
+      cargadas y esos núcleos para obtener información sobre la composición de
+      un material.
+
+      <br><br>
+
+      <b>Síntesis de los paneles anteriores:</b>
+
+      el Panel A mostró la dispersión Coulombiana y la existencia del núcleo.
+      El Panel B mostró que, en una colisión elástica, la energía de la partícula
+      retrodispersada depende de la masa del núcleo:
+
+      $$E_1=K(M_2,\theta)\,E_0.$$
+
+      El Panel C mostró cómo muchas colisiones forman un espectro.
+
+      <br><br>
+
+      Aquí se combinan los tres elementos en una muestra hipotética:
+      una oblea de <b>Si</b>, una película superficial de <b>Au</b>
+      y una pequeña concentración de <b>C</b>.
+
+      La animación izquierda representa las colisiones individuales.
+      El gráfico derecho acumula las energías detectadas y construye
+      progresivamente el espectro RBS.
+
+      <br><br>
+
+      <b>Interacción:</b>
+      haz clic en una capa para resaltarla y localizar su señal en el espectro.
+      Cambia $E_0$ para observar cómo se desplazan las señales.
+      El factor cinemático $K$ permanece constante si las masas y el ángulo
+      de detección no cambian.
+    </p>
+
+    <div class="rbs-view">
+
+      <div class="rbs-col">
+        <div class="canvas-label">
+          Interacción α con la muestra — clic en una capa para resaltarla
+        </div>
+        <canvas id="canvasDsamp" width="520" height="300"></canvas>
+      </div>
+
+      <div class="rbs-col">
+        <div class="canvas-label">
+          Espectro acumulado — pasar cursor sobre los peaks para ver detalles
+        </div>
+        <canvas id="canvasDspec" width="520" height="300"></canvas>
+      </div>
+
+    </div>
+
+    <div class="controls" style="margin-top:14px">
+
+      <div class="slider-row">
+        <span class="slider-label">Energía del haz $E_0$</span>
+        <input type="range"
+               id="sliderE0D"
+               min="1.0"
+               max="3.0"
+               step="0.1"
+               value="2.0"
+               oninput="panelD.setE0(this.value)">
+        <span class="slider-val" id="valE0D">2.0 MeV</span>
+      </div>
+
+      <div class="slider-row">
+        <span class="slider-label">Corriente del haz $I$</span>
+        <input type="range"
+               id="sliderI_nA"
+               min="5"
+               max="100"
+               step="5"
+               value="20"
+               oninput="panelD.setCurrent(this.value)">
+        <span class="slider-val" id="valI_nA">20 nA</span>
+      </div>
+
+      <p class="note"
+         style="margin:10px 0 8px;border-left-color:var(--cyan)">
+
+        <b>Composición $N_i$:</b>
+        modificar la cantidad de un elemento cambia la intensidad de su señal,
+        pero no su posición cinemática.
+
+        <br>
+
+        <b>Energía $E_0$:</b>
+        al cambiar la energía inicial, las posiciones de los peaks cambian porque
+
+        $$E_1=K\,E_0.$$
+
+        Si la masa y el ángulo permanecen constantes, $K$ no cambia.
+
+        <br>
+
+        <b>Corriente $I$:</b>
+        en un experimento real, una corriente mayor significa más partículas
+        incidentes por unidad de tiempo y, por tanto, una acumulación más rápida
+        de eventos.
+
+        <br>
+
+        En esta simulación, la corriente controla únicamente la velocidad
+        con que se generan eventos.
+
+      </p>
+
+      <div id="panelD-sliders"></div>
+
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:12px">
+      <button class="btn-reset" id="btnDPause"
+              onclick="panelD.togglePause()">⏸ Pausar</button>
+      <button class="btn-reset"
+              onclick="panelD.reset()">↺ Reiniciar espectro</button>
+    </div>
+
+    <div class="formula-box" style="margin-top:16px">
+
+      <div class="flabel">
+        Posición e intensidad del peak
+      </div>
+
+      $$\underbrace{
+      E_1=K(M_2,\theta)\,E_0
+      }_{\text{posición — información sobre la masa}}
+      \qquad
+      \underbrace{
+      N_{\mathrm{cuentas}}\propto
+      N_i\,\frac{d\sigma}{d\Omega}
+      }_{\text{intensidad — información sobre la cantidad}}$$
+
+      <div class="formula-meta">
+        Para dispersión de Rutherford,
+        $\dfrac{d\sigma}{d\Omega}\propto Z_2^2$
+        si $E_0$ y $\theta$ permanecen fijos.
+      </div>
+
+    </div>
+
+    <div class="note" style="margin-top:12px">
+
+      <b>Aplicaciones:</b>
+      RBS puede utilizarse para determinar composición y espesor de películas
+      delgadas, estudiar perfiles de composición y analizar materiales como
+      semiconductores, catalizadores y muestras arqueológicas.
+
+      <br><br>
+
+      En una muestra real, los átomos situados a distintas profundidades
+      producen señales a diferentes energías debido a la pérdida de energía
+      de la partícula durante su recorrido por el material.
+
+      <br><br>
+
+      <span class="warn">⚠ Simplificaciones:</span>
+
+      la simulación representa una muestra idealizada y no incluye todos los
+      efectos instrumentales y físicos de un experimento real, como resolución
+      energética, pérdidas de energía detalladas, dispersión múltiple y
+      efectos de superficie.
+
+      <br><br>
+
+      <b>Cierre:</b>
+      una propiedad que Rutherford utilizó para revelar la existencia del núcleo
+      —la dispersión de partículas cargadas— se convierte aquí en una herramienta
+      para obtener información sobre la composición de materiales.
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ PANEL E — HADRONTERAPIA ══════════════ -->
+<section class="panel" id="panel-e">
+
+  <div class="panel-header">
+    <span class="badge">E</span>
+    <h2>Hadronterapia — curva de Bragg</h2>
+
+    <div class="mode-toggle">
+      <button class="mode-btn active bragg-btn"
+              id="braggBtn_proton"
+              onclick="panelE.setParticle('proton')">
+        Protones
+      </button>
+
+      <button class="mode-btn bragg-btn"
+              id="braggBtn_carbon"
+              onclick="panelE.setParticle('carbon')">
+        Iones ${}^{12}\mathrm{C}^{6+}$
+      </button>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <p class="note">
+
+      <b>Una aplicación de partículas cargadas en medicina.</b><br>
+
+      Los protones pueden acelerarse hasta energías del orden de
+      $70$–$230\,\mathrm{MeV}$ para tratamientos de tumores profundos.
+      Al atravesar el tejido, pierden energía principalmente mediante
+      interacciones electromagnéticas con los electrones del medio.
+
+      <br><br>
+
+      La pérdida de energía por unidad de longitud aumenta al disminuir
+      la velocidad de la partícula. Como consecuencia, un haz de protones
+      deposita una fracción importante de su energía cerca del final de
+      su trayectoria, produciendo el <b>pico de Bragg</b>.
+
+      <br><br>
+
+      La profundidad del pico depende de la energía inicial del haz:
+      al aumentar $E_0$, los protones penetran más profundamente antes
+      de detenerse.
+
+      <br><br>
+
+      Los fotones utilizados en radioterapia convencional presentan una
+      distribución de dosis diferente y no poseen un rango finito definido
+      por un pico de Bragg. La ventaja dosimétrica de los protones es que
+      permiten concentrar una mayor proporción de la dosis alrededor de
+      una profundidad seleccionada, reduciendo la dosis de salida.
+
+      <br><br>
+
+      <b>Iones de carbono:</b>
+      los iones ${}^{12}\mathrm{C}^{6+}$ también presentan un máximo de
+      deposición cerca del final de su recorrido y, además, tienen una
+      transferencia de energía lineal (LET) mayor que los protones.
+      Esto puede producir una mayor eficacia biológica relativa.
+
+      <br><br>
+
+      <b>SOBP</b> (<em>Spread-Out Bragg Peak</em>):
+      un haz monoenergético produce un pico localizado. Para cubrir un tumor
+      con un espesor finito se combinan haces de distintas energías, formando
+      una región de dosis extendida.
+
+      <br><br>
+
+      <b>RBE:</b>
+      la eficacia biológica relativa no es una constante universal.
+      Para protones suele utilizarse un valor clínico cercano a $1.1$,
+      mientras que para iones de carbono depende de la profundidad,
+      el tejido y las condiciones radiobiológicas.
+    </p>
+
+    <canvas id="canvasE" width="800" height="320"></canvas>
+
+    <div class="controls">
+
+      <div class="slider-row">
+        <span class="slider-label">Energía del haz $E_0$</span>
+        <input type="range"
+               id="sliderE_bragg"
+               min="70"
+               max="230"
+               step="5"
+               value="150"
+               oninput="panelE.setEnergy(this.value)">
+        <span class="slider-val" id="valE_bragg">150 MeV</span>
+      </div>
+
+    </div>
+
+    <div class="metrics">
+
+      <div class="metric-card">
+        <div class="metric-label">Profundidad del peak</div>
+        <div class="metric-val">
+          <span id="val-bragg-peak">—</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Partícula</div>
+        <div class="metric-val"
+             id="val-bragg-par"
+             style="font-size:0.9rem;color:var(--amber)">
+          Protones p⁺
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">Carga $z$</div>
+        <div class="metric-val"
+             id="val-bragg-z"
+             style="font-size:0.82rem">
+          $z=1$
+        </div>
+      </div>
+
+    </div>
+
+    <div class="formula-box">
+
+      <div class="flabel">
+        Poder de frenado — Bethe-Bloch
+      </div>
+
+      $$-\frac{dE}{\rho\,dx}
+      =
+      \frac{Kz^2Z}{A\beta^2}
+      \left[
+      \frac{1}{2}
+      \ln\left(
+      \frac{2m_ec^2\beta^2\gamma^2W_{\max}}{I^2}
+      \right)
+      -\beta^2
+      \right]$$
+
+      <div class="formula-meta">
+
+        El factor $z^2$ muestra que la carga del proyectil influye
+        fuertemente en la pérdida de energía.
+
+        Para protones: $z=1$.
+
+        Para ${}^{12}\mathrm{C}^{6+}$: $z=6$.
+
+        Por tanto, el término $z^2$ es $36$ veces mayor para el ion de carbono,
+        aunque la pérdida de energía completa no se obtiene simplemente
+        multiplicando por 36, porque también cambian $\beta$, $\gamma$
+        y otros términos de la expresión.
+
+      </div>
+
+    </div>
+
+    <div class="note">
+
+      <b>Conexión con el hilo del módulo:</b><br>
+
+      RBS y hadronterapia utilizan partículas cargadas y sus interacciones
+      electromagnéticas con la materia, pero estudian fenómenos diferentes.
+
+      En RBS, una colisión elástica con un núcleo modifica la energía y dirección
+      de la partícula y utilizamos esa información para caracterizar el material.
+
+      En hadronterapia, interesa principalmente la <b>pérdida de energía del proyectil
+      a medida que atraviesa el tejido</b> y dónde se deposita esa energía.
+
+      <br><br>
+
+      <span class="warn">⚠ Simplificaciones:</span>
+
+      la simulación utiliza un modelo simplificado del poder de frenado y considera
+      un medio homogéneo. Un tejido real presenta variaciones de densidad y composición,
+      y los haces de iones pesados pueden producir fragmentación nuclear y partículas
+      secundarias.
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════ PANEL F — HILO CUÁNTICO ══════════════ -->
+<section class="panel" id="panel-timeline">
+
+  <div class="panel-header">
+    <span class="badge"
+          style="background:linear-gradient(135deg,var(--cyan),#a78bfa)">
+      ∞
+    </span>
+    <h2>Física Moderna — del cuanto a la mecánica cuántica</h2>
+  </div>
+
+  <div class="panel-body">
+
+    <div class="formula-box">
+
+      <div class="flabel">
+        Principales etapas: 1900 → 1926
+      </div>
+
+      <div class="quantum-timeline">
+
+        <div class="tl-row">
+          <div class="tl-dot-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+            <div class="tl-year">1900</div>
+            <div class="tl-title">
+              Planck — cuantización de la energía
             </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot"></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year">1905</div>
-                <div class="tl-title">Einstein — efecto fotoeléctrico</div>
-                <p class="tl-desc">Confirma que la luz son fotones con =hf$. Nobel 1921. La cuantización de Planck es
-                  real, no un truco matemático.</p>
-              </div>
+            <p class="tl-desc">
+              Para explicar la radiación del cuerpo negro, Planck introduce
+              la idea de que los intercambios de energía ocurren en cantidades
+              discretas:
+
+              $$E=nh\nu.$$
+
+              Este resultado constituye uno de los primeros pasos hacia la
+              física cuántica.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="tl-row">
+          <div class="tl-dot-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+
+            <div class="tl-year">1905</div>
+
+            <div class="tl-title">
+              Einstein — efecto fotoeléctrico
             </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot amber"></div>
-                <div class="tl-line red"></div>
-              </div>
-              <div class="tl-content red-border">
-                <div class="tl-year amber">1911</div>
-                <div class="tl-title">Rutherford — descubre el núcleo ← <em>Panel A de esta app</em></div>
-                <p class="tl-desc">El experimento de Geiger-Marsden prueba que la carga positiva está concentrada en un
-                  núcleo puntual y denso. Abre una crisis irresoluble con la física clásica.</p>
-              </div>
+            <p class="tl-desc">
+              Einstein propone que la radiación electromagnética intercambia
+              energía en cuantos:
+
+              $$E=h\nu.$$
+
+              El efecto fotoeléctrico proporciona evidencia experimental
+              de la cuantización de la radiación.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div class="tl-row">
+
+          <div class="tl-dot-col">
+            <div class="tl-dot amber"></div>
+            <div class="tl-line red"></div>
+          </div>
+
+          <div class="tl-content red-border">
+
+            <div class="tl-year amber">1911</div>
+
+            <div class="tl-title">
+              Rutherford — modelo nuclear
+              ← <em>Panel A de esta aplicación</em>
             </div>
 
-            <div class="tl-crisis-box">
-              ⚡ <b>Crisis:</b> un electrón en órbita circular <em>acelera</em> → emite radiación (Maxwell)
-              → pierde energía → debería colapsar sobre el núcleo en ~10⁻¹¹ s.
-              Pero los átomos son estables. La física clásica no puede explicarlo.
+            <p class="tl-desc">
+              Los experimentos de Geiger y Marsden muestran que una pequeña
+              fracción de las partículas alfa puede sufrir grandes desviaciones.
+              Rutherford interpreta el resultado mediante un núcleo pequeño,
+              masivo y cargado positivamente.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div class="tl-crisis-box">
+
+          ⚡ <b>Problema del modelo nuclear clásico:</b>
+
+          si los electrones se encuentran ligados al núcleo mediante
+          fuerzas electromagnéticas, la física clásica no proporciona una
+          explicación satisfactoria para la estabilidad del átomo ni para
+          sus espectros discretos.
+
+        </div>
+
+
+        <div class="tl-row" style="margin-top:6px">
+
+          <div class="tl-dot-col">
+            <div class="tl-dot amber"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+
+            <div class="tl-year amber">1913</div>
+
+            <div class="tl-title">
+              Bohr — modelo cuántico del átomo
             </div>
 
-            <div class="tl-row" style="margin-top:6px">
-              <div class="tl-dot-col">
-                <div class="tl-dot amber"></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year amber">1913</div>
-                <div class="tl-title">Bohr — cuantización del átomo</div>
-                <p class="tl-desc">Usa el núcleo de Rutherford + =hf$ de Planck. Postula =n\hbar$ → órbitas estables →
-                  =-13.6/n^2$ eV. Explica exactamente el espectro del hidrógeno. Primer modelo cuántico del átomo.</p>
-              </div>
+            <p class="tl-desc">
+              Bohr combina el modelo nuclear de Rutherford con condiciones
+              de cuantización. Para el átomo de hidrógeno obtiene niveles
+              de energía discretos:
+
+              $$E_n=-\frac{13.6}{n^2}\,\mathrm{eV}.$$
+
+              Las transiciones entre niveles cumplen
+
+              $$\Delta E=h\nu.$$
+
+              El modelo explica correctamente el espectro del hidrógeno,
+              aunque todavía no constituye una mecánica cuántica completa.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div class="tl-row">
+
+          <div class="tl-dot-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+
+            <div class="tl-year">1924</div>
+
+            <div class="tl-title">
+              de Broglie — dualidad onda-partícula
             </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot"></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year">1924</div>
-                <div class="tl-title">de Broglie — $\lambda = h/p$</div>
-                <p class="tl-desc">Los electrones tienen longitud de onda. La dualidad onda-partícula es universal.
-                  Nobel 1929.</p>
-              </div>
+            <p class="tl-desc">
+              De Broglie propone asociar una longitud de onda a las partículas:
+
+              $$\lambda=\frac{h}{p}.$$
+
+              La idea extiende la dualidad onda-partícula a la materia.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div class="tl-row">
+
+          <div class="tl-dot-col">
+            <div class="tl-dot violet"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+
+            <div class="tl-year violet">1925–26</div>
+
+            <div class="tl-title">
+              Heisenberg y Schrödinger — mecánica cuántica
             </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot violet"></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year violet">1925–26</div>
-                <div class="tl-title">Heisenberg · Schrödinger — mecánica cuántica completa</div>
-                <p class="tl-desc">Matrices y ecuación de onda. La función de onda $\psi$ describe completamente el
-                  estado del sistema. Principio de incertidumbre: $\Delta x \cdot \Delta p \ge \hbar/2$.</p>
-              </div>
+            <p class="tl-desc">
+              Se desarrollan formulaciones matemáticas completas de la
+              mecánica cuántica. Schrödinger introduce la ecuación de onda,
+              mientras Heisenberg desarrolla la mecánica matricial.
+
+              <br>
+
+              El principio de incertidumbre establece:
+
+              $$\Delta x\,\Delta p\geq\frac{\hbar}{2}.$$
+            </p>
+
+          </div>
+        </div>
+
+
+        <div class="tl-row">
+
+          <div class="tl-dot-col">
+            <div class="tl-dot violet"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+
+            <div class="tl-year violet">1928</div>
+
+            <div class="tl-title">
+              Gamow — efecto túnel y desintegración alfa
             </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot violet"></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year violet">1928 · Gamow</div>
-                <div class="tl-title">Efecto túnel cuántico — explica la desintegración α</div>
-                <p class="tl-desc">La partícula alfa que Rutherford usó para descubrir el núcleo <em>solo puede escapar
-                    de él por efecto túnel</em>. Sin mecánica cuántica no hay fuente de α; sin fuente de α no hay
-                  experimento de Rutherford. El experimento que hizo necesaria la cuántica, ya la necesitaba para
-                  funcionar.</p>
-              </div>
+            <p class="tl-desc">
+              La mecánica cuántica permite explicar la emisión alfa mediante
+              el efecto túnel a través de la barrera de potencial nuclear.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div class="tl-row">
+
+          <div class="tl-dot-col">
+            <div class="tl-dot violet"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+
+            <div class="tl-year violet">1928</div>
+
+            <div class="tl-title">
+              Dirac — mecánica cuántica relativista
             </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot violet"></div>
-                <div class="tl-line"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year violet">1928 · Dirac</div>
-                <div class="tl-title">QM relativista — predice la antimateria (positrón)</div>
-                <p class="tl-desc">El positrón (^+$) es predicho teóricamente y descubierto en 1932 (Anderson). Hoy es
-                  la base del PET — medicina nuclear diagnóstica. La cuántica hace posible el diagnóstico por imagen.
-                </p>
-              </div>
+            <p class="tl-desc">
+              La ecuación de Dirac combina mecánica cuántica y relatividad
+              especial y conduce a la predicción de la antimateria.
+              El positrón fue descubierto experimentalmente en 1932.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div class="tl-row">
+
+          <div class="tl-dot-col">
+            <div class="tl-dot amber"></div>
+            <div class="tl-line"></div>
+          </div>
+
+          <div class="tl-content">
+
+            <div class="tl-year amber">1930</div>
+
+            <div class="tl-title">
+              Bethe — pérdida de energía de partículas cargadas
             </div>
 
-            <div class="tl-row">
-              <div class="tl-dot-col">
-                <div class="tl-dot amber"></div>
-              </div>
-              <div class="tl-content">
-                <div class="tl-year amber">1930 · Bethe</div>
-                <div class="tl-title">Fórmula de Bethe-Bloch — pérdida de energía de partículas cargadas</div>
-                <p class="tl-desc">Derivada de mecánica cuántica: la ionización del tejido = transiciones electrónicas
-                  cuánticas. Gobierna la profundidad de capas en RBS (Paneles B–D) y el pico de Bragg en hadronterapia
-                  (<b>Panel E</b>).</p>
-              </div>
-            </div>
+            <p class="tl-desc">
+              La teoría de Bethe-Bloch describe la pérdida de energía de
+              partículas cargadas al atravesar la materia. El concepto de
+              <em>stopping power</em> es fundamental para interpretar la
+              pérdida de energía en RBS y para comprender la deposición de
+              energía en hadronterapia.
+            </p>
 
-          </div><!-- fin quantum-timeline -->
-        </div><!-- fin formula-box -->
+          </div>
+        </div>
+
       </div>
-    </section>
+    </div>
 
-  </main>
+  </div>
+</section>
 
-  <footer>
-    <p>Evaluación 2 · Módulo 2 · Diplomado en Física Moderna</p>
-    <p>Fórmulas: Chu, Mayer &amp; Nicolet (1978); Feldman &amp; Mayer (1986);
-      Bethe (1930); PDG (2022)
-      · $ke^2=1.44\,\text{MeV·fm}$ · integración RK4 y Bethe-Bloch en tiempo real</p>
-  </footer>
+</main>
 
-  <!-- JavaScript modular -->
-  <script src="js/constants.js"></script>
-  <script src="js/physics.js"></script>
-  <script src="js/panel-a.js"></script>
-  <script src="js/panel-b.js"></script>
-  <script src="js/panel-c.js"></script>
-  <script src="js/panel-d.js"></script>
-  <script src="js/panel-e.js"></script>
-  <script src="js/app.js"></script>
+<footer>
+  <p>Evaluación 2 · Módulo 2 · Diplomado en Física Moderna</p>
+  <p>Fórmulas: Chu, Mayer &amp; Nicolet (1978); Feldman &amp; Mayer (1986);
+     Bethe (1930); PDG (2022)
+     · $ke^2=1.44\,\text{MeV·fm}$ · integración RK4 y Bethe-Bloch en tiempo real</p>
+</footer>
+
+<!-- JavaScript modular -->
+<script src="js/constants.js"></script>
+<script src="js/physics.js"></script>
+<script src="js/panel-a.js"></script>
+<script src="js/panel-b.js"></script>
+<script src="js/panel-c.js"></script>
+<script src="js/panel-d.js"></script>
+<script src="js/panel-e.js"></script>
+<script src="js/app.js"></script>
 
 </body>
-
 </html>
