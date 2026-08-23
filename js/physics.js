@@ -140,9 +140,9 @@ const Physics = (() => {
    * @returns {{ pts: Array<[number,number]>, thetaDeg: number }}
    */
   function integrateTraj(b_norm, isRutherford, R_norm, R_start = 32) {
-    const dt   = isRutherford ? 0.07 : 0.4;
-    const max  = isRutherford ? 2800 : 1500;
-    const lim  = R_start + 6;
+    const dt   = isRutherford ? (b_norm < 1.0 ? 0.05 : 0.08) : 0.4;
+    const max  = isRutherford ? Math.min(25000, Math.ceil((R_start * 3.0) / dt) + 600) : 1500;
+    const lim  = R_start + 8;
 
     let state = [-R_start, b_norm, 1.0, 0.0];
     const pts = [[state[0], state[1]]];
@@ -150,19 +150,24 @@ const Physics = (() => {
     for (let i = 0; i < max; i++) {
       state = _rk4Step(state, dt, isRutherford, R_norm);
       pts.push([state[0], state[1]]);
-      if (state[0] > lim || state[0] < -(lim + 4)) break;
-      if (Math.hypot(state[0], state[1]) < 0.03)    break; // singularidad
+      if (state[0] > lim || state[0] < -(lim + 6) || Math.abs(state[1]) > lim) break;
+      if (Math.hypot(state[0], state[1]) < 0.02) break; // singularidad
     }
 
-    // Ángulo de dispersión real (de los últimos puntos)
-    const n    = pts.length;
-    const tail = Math.max(0, n - 14);
-    const dx   = pts[n-1][0] - pts[tail][0];
-    const dy   = pts[n-1][1] - pts[tail][1];
-    const sp   = Math.hypot(dx, dy);
-    const thetaDeg = sp > 1e-9
-      ? Math.acos(Math.max(-1, Math.min(1, dx / sp))) * 180 / Math.PI
-      : 0;
+    // Ángulo de dispersión analítico exacto de Rutherford
+    let thetaDeg;
+    if (isRutherford) {
+      thetaDeg = 2 * Math.atan(1 / b_norm) * (180 / Math.PI);
+    } else {
+      const n    = pts.length;
+      const tail = Math.max(0, n - 14);
+      const dx   = pts[n-1][0] - pts[tail][0];
+      const dy   = pts[n-1][1] - pts[tail][1];
+      const sp   = Math.hypot(dx, dy);
+      thetaDeg = sp > 1e-9
+        ? Math.acos(Math.max(-1, Math.min(1, dx / sp))) * 180 / Math.PI
+        : 0;
+    }
 
     return { pts, thetaDeg };
   }

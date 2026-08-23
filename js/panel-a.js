@@ -42,16 +42,15 @@ const panelA = (() => {
     return KNOWN_EL[Z] ? (KNOWN_EL[Z] + '  (Z=' + Z + ')') : ('Z = ' + Z);
   }
 
-  // Parámetros de impacto como múltiplos de a₀: garantiza rango angular relevante
-  // para cualquier Z₂ y E. Calculados en recompute() a partir de a₀ actual.
-  const B_A0_MULT = [0.30, 0.72, 1.60, 3.38, 5.86, 9.55]; // b / a₀
-  let   B_PHYS_FM = [5, 12, 26, 55, 95, 155];              // actualizado en recompute()
-  const B_COLORS  = ['#ef4444','#f97316','#facc15','#4ade80','#38bdf8','#a78bfa'];
+  // Parámetros de impacto físicos fijos (en fm) para representar el haz incidente:
+  const B_PHYS_FM  = [4.9, 11.7, 26.0, 55.0, 95.2, 155.2];
+  const B_COLORS   = ['#ef4444','#f97316','#facc15','#4ade80','#38bdf8','#a78bfa'];
 
-  const NUC_X   = W * 0.44;
-  const NUC_Y   = H * 0.50;
-  const R_START = 32;
-  const SCALE   = NUC_X / (R_START + 2);
+  const NUC_X      = W * 0.44;
+  const NUC_Y      = H * 0.50;
+  const A0_REF     = 16.25; // fm (escala de referencia física: Au a 7.0 MeV)
+  const R_START_FM = 32 * A0_REF; // ~520 fm
+  const SCALE_FM   = NUC_X / (R_START_FM + 2 * A0_REF); // px / fm
 
   let trajs  = [];
   let phases = [];
@@ -75,7 +74,7 @@ const panelA = (() => {
     }
   }
 
-  function toCan(x, y) { return [NUC_X + x * SCALE, NUC_Y - y * SCALE]; }
+  function toCan(x_fm, y_fm) { return [NUC_X + x_fm * SCALE_FM, NUC_Y - y_fm * SCALE_FM]; }
 
   function drawPath(pts, color, alpha) {
     if (pts.length < 2) return;
@@ -99,17 +98,32 @@ const panelA = (() => {
 
   function recompute() {
     const a0     = Physics.calcA0(E_mev, Z2);
-    B_PHYS_FM    = B_A0_MULT.map(m => parseFloat((m * a0).toFixed(1)));
     const R_norm = PHYS.R_AU_FM / a0;
     const isR    = mode === 'rutherford';
-    trajs  = B_PHYS_FM.map(b_fm => Physics.integrateTraj(b_fm / a0, isR, R_norm, R_START));
+    
+    // Integración física de cada haz en función de su parámetro físico real dividido por el a0 dinámico:
+    trajs = B_PHYS_FM.map(b_fm => {
+      const b_norm       = b_fm / a0;
+      const R_start_norm = R_START_FM / a0;
+      const res          = Physics.integrateTraj(b_norm, isR, R_norm, R_start_norm);
+      // Mapear puntos a coordenadas físicas en femtómetros:
+      const pts_fm = res.pts.map(([xn, yn]) => [xn * a0, yn * a0]);
+      return { pts: pts_fm, thetaDeg: res.thetaDeg };
+    });
+
     phases = B_PHYS_FM.map((_, i) => -i * 0.14);
-    document.getElementById('val-a0').textContent      = a0.toFixed(1);
-    document.getElementById('val-theta-a').textContent = trajs[0].thetaDeg.toFixed(0) + '\u00b0';
+    const elA0 = document.getElementById('val-a0');
+    if (elA0) elA0.textContent = a0.toFixed(1);
+    const elThA = document.getElementById('val-theta-a');
+    if (elThA) {
+      const thetaDeg = 2 * Math.atan(a0 / 5.0) * (180 / Math.PI);
+      elThA.textContent = thetaDeg.toFixed(0) + '\u00b0';
+    }
     const thMax = Physics.thetaThomsonMax_deg(a0);
-    document.getElementById('val-thom-max').textContent = (thMax * 1000).toFixed(2) + ' \u00d7 10\u207b\u00b3';
-    const lbl = document.getElementById('val-Z2-label');
-    if (lbl) lbl.textContent = elemLabel(Z2);
+    const elThMax = document.getElementById('val-thom-max');
+    if (elThMax) elThMax.textContent = (thMax * 1000).toFixed(2) + ' \u00d7 10\u207b\u00b3';
+    const valZ = document.getElementById('valZ2');
+    if (valZ) valZ.textContent = elemLabel(Z2);
   }
 
   function drawExperimentInset() {
@@ -218,23 +232,36 @@ const panelA = (() => {
     ctx.fillText('\u2192 haz de part\u00edculas \u03b1', 10, H / 2 - 60);
 
     const a0  = Physics.calcA0(E_mev, Z2);
-    const sc5 = SCALE * 5, sx = 195, sy = H - 14;
+    const sc5 = Math.min(220, (5 * a0) * SCALE_FM), sx = 195, sy = H - 14;
     ctx.strokeStyle = 'rgba(255,255,255,0.30)'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx + sc5, sy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx, sy-4); ctx.lineTo(sx, sy+4); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(sx+sc5, sy-4); ctx.lineTo(sx+sc5, sy+4); ctx.stroke();
     ctx.font = '10px JetBrains Mono, monospace'; ctx.fillStyle = 'rgba(255,255,255,0.45)';
     ctx.textAlign = 'center';
-    ctx.fillText('5a\u2080 = ' + (5 * a0).toFixed(0) + ' fm  |  b < 2a\u2080 \u21d2 \u03b8 > 45\u00b0  |  b \u226b a\u2080: sin desvio', sx + sc5 / 2, sy - 6);
+    ctx.fillText('5a\u2080 = ' + (5 * a0).toFixed(0) + ' fm  |  b < 2a\u2080 \u21d2 \u03b8 > 45\u00b0  |  b \u226b a\u2080: sin desv\u00edo', sx + sc5 / 2, sy - 6);
     ctx.textAlign = 'left';
 
-    let ly = 14;
-    ctx.font = '10px JetBrains Mono, monospace';
+    // Monitor / Leyenda de haces (arriba a la derecha, ampliado y estilizado)
+    const BW = 210, BH = 126;
+    const BX = W - BW - 10, BY = 10;
+    ctx.fillStyle = 'rgba(6, 12, 26, 0.85)';
+    ctx.beginPath(); ctx.roundRect(BX, BY, BW, BH, 6); ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)'; ctx.lineWidth = 1; ctx.stroke();
+
+    ctx.font = 'bold 9.5px Inter, sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.textAlign = 'left';
+    ctx.fillText('Haces \u03b1 (b real vs \u03b8 calculado)', BX + 12, BY + 15);
+
+    let ly = BY + 30;
+    ctx.font = '10.5px JetBrains Mono, monospace';
     for (let i = 0; i < B_PHYS_FM.length; i++) {
-      ctx.fillStyle = B_COLORS[i]; ctx.fillRect(W - 160, ly, 10, 10);
-      ctx.fillStyle = 'rgba(255,255,255,0.5)';
-      const bRatio = (B_PHYS_FM[i] / Physics.calcA0(E_mev, Z2)).toFixed(2);
-      ctx.fillText('b=' + B_PHYS_FM[i] + ' fm (' + bRatio + 'a\u2080)  \u03b8=' + trajs[i].thetaDeg.toFixed(0) + '\u00b0', W - 186, ly + 9);
+      ctx.fillStyle = B_COLORS[i]; ctx.fillRect(BX + 12, ly - 8, 8, 8);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.72)';
+      const bStr = ('b = ' + B_PHYS_FM[i].toFixed(1) + ' fm').padEnd(13, ' ');
+      const thetaStr = trajs[i] ? trajs[i].thetaDeg.toFixed(0) + '\u00b0' : '--';
+      ctx.fillText(bStr + ' \u2192 \u03b8 = ' + thetaStr, BX + 26, ly);
       ly += 15;
     }
 
@@ -370,7 +397,6 @@ const panelA = (() => {
     const sliderZ = document.getElementById('sliderZ2');
     if (sliderZ) sliderZ.addEventListener('input', function () {
       setZ2(parseInt(this.value));
-      document.getElementById('valZ2').textContent = 'Z = ' + this.value;
     });
 
     const checkTr = document.getElementById('checkTracesA');

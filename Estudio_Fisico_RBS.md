@@ -1,16 +1,16 @@
 # Estudio Físico — Experimento de Rutherford, RBS y Hadronterapia
-## Proyecto: Evaluación 2, Módulo 2 — Diplomado de Física Moderna
+## Proyecto: Evaluación 2, Módulo 2: Teoría Cuántica Temprana — Diplomado de Física Moderna
 
 ### Índice
-0. Contexto histórico y motivación
+0. Contexto histórico y motivación epistemológica (Panel 0)
 0.5. Rutherford y la mecánica cuántica: el puente necesario
-1. Panel A — Dispersión de Rutherford
-2. Panel B — Factor cinemático K
-3. Panel C — Espectro RBS
-4. Panel D — RBS en acción (simulación dinámica)
-5. Panel E — Hadronterapia y Curva de Bragg
-6. Hilo cuántico — Sección ∞
-7. Tabla maestra de fórmulas verificadas
+1. Panel A — Dispersión de Rutherford y Modelo Clásico
+2. Panel B — Factor Cinemático $K$ y Choque Elástico
+3. Panel C — Espectro RBS y Cuantificación de Superficie
+4. Panel D — RBS en acción (adquisición estocástica y perfilado $[S]$)
+5. Panel E — Hadronterapia, Curva de Bragg y Medicina Nuclear
+6. Hilo cuántico — De Planck a la Mecánica Cuántica (Sección ∞)
+7. Tabla maestra de fórmulas y valores verificados
 8. Glosario de términos
 9. Referencias
 10. Física avanzada — Fondo teórico complementario
@@ -18,9 +18,15 @@
 
 ---
 
-### 0. Contexto histórico y motivación
+### 0. Contexto histórico y motivación epistemológica (Panel 0)
 
-El desarrollo de la física moderna a principios del siglo XX estuvo marcado por la necesidad de comprender la estructura íntima de la materia. El experimento de la lámina de oro, concebido por Ernest Rutherford y ejecutado por Hans Geiger y Ernest Marsden (1909-1911), supuso un punto de inflexión. Al bombardear átomos de oro con partículas alfa, observaron retrodispersiones (backscattering) que contradecían las predicciones de la época. Este proyecto interactivo no solo simula dicho hito histórico, sino que lo conecta con dos aplicaciones modernas de gran relevancia: la Espectrometría de Retrodispersión de Rutherford (RBS), técnica fundamental en el análisis de materiales y películas delgadas, y la hadronterapia, que aprovecha los principios de interacción radiación-materia (Curva de Bragg) para el tratamiento oncológico avanzado. El presente documento académico detalla la base física, matemática y algorítmica de cada uno de los paneles del proyecto.
+A inicios del siglo XX, la física clásica se enfrentaba a dos revoluciones paralelas e íntimamente conectadas:
+1. **La cuantización de la radiación (1900–1905):** Max Planck postuló los cuantos discretos de energía ($E = nh\nu$) para resolver la **catástrofe ultravioleta** de la radiación de cuerpo negro (donde la física clásica de Rayleigh-Jeans predecía energía infinita a altas frecuencias), extendida por Albert Einstein al efecto fotoeléctrico (1905).
+2. **La estructura íntima de la materia (1909–1911):** El modelo atómico de Thomson (1904, "pudín de pasas") concebía la carga positiva repartida de forma continua en una esfera atómica de radio $R \approx 1.45\,\text{Å}$.
+
+Entre 1909 y 1911, **Hans Geiger y Ernest Marsden** (bajo la dirección de **Ernest Rutherford**) en la Universidad de Manchester bombardearon láminas delgadas de oro con partículas alfa procedentes de una fuente radiactiva de $^{226}\text{Ra}$. Al descubrir que $\sim 1/10^4$ partículas rebotaban a ángulos $\theta > 90^\circ$, Rutherford demostró en 1911 que toda la masa y la carga positiva están concentradas en un **núcleo central denso y diminuto** ($\sim 10^{-14}\,\text{m}$).
+
+Este proyecto interactivo no solo simula dicho hito histórico fundacional, sino que lo conecta directamente con sus aplicaciones de frontera: la **Espectrometría de Retrodispersión de Rutherford (RBS)** para metrología nanometrológica de materiales y la **Hadronterapia oncológica** (Curva de Bragg y medicina nuclear diagnóstica PET/SPECT).
 
 ---
 
@@ -206,23 +212,29 @@ El espectro es un histograma de frecuencias: en el eje X se representa la energ�
 #### 3.2 Posición de los peaks: energía $E_1 = K\cdot E_0$
 Cada elemento químico presente en la muestra superficial genera una señal (peak) a una energía específica, determinada unívocamente por su factor cinemático $K$. Elementos pesados (Au) aparecen a la derecha del espectro (alta energía), y los ligeros (C, O) a la izquierda (baja energía).
 
-#### 3.3 Altura de los peaks: sección eficaz diferencial $\sigma$
-La altura o área bajo el peak indica la cantidad de ese elemento. La probabilidad espacial de que ocurra la retrodispersión se define como la sección eficaz diferencial, la cual, según la ley de Rutherford, es proporcional al cuadrado del número atómico del blanco ($Z_2$):
+#### 3.3 Altura y rendimiento de los peaks: sección eficaz diferencial $\sigma$
+La altura o área integrada bajo el peak cuantifica la abundancia atómica de ese elemento. La probabilidad de retrodispersión por unidad de ángulo sólido viene dada por la sección eficaz diferencial de Rutherford, que escala con $Z_2^2$:
 $$ \frac{d\sigma}{d\Omega} = \left( \frac{Z_1 Z_2 e^2}{16 \pi \epsilon_0 E_0} \right)^2 \frac{1}{\sin^4(\theta/2)} \propto Z_2^2 $$
+
+**Fórmula canónica de rendimiento (Chu, Mayer & Nicolet, 1978):**
+El área integrada $A_i$ (número total de cuentas) del peak correspondiente al elemento $i$ en una película delgada se expresa analíticamente como:
+$$A_i = Q \cdot N_i \cdot \left(\frac{d\sigma}{d\Omega}\right)_i \cdot \Delta\Omega$$
+donde $Q$ es la carga total integrada del haz incidente, $N_i$ es la densidad atómica superficial ($\text{átomos/cm}^2$), $(d\sigma/d\Omega)_i$ es la sección eficaz diferencial y $\Delta\Omega$ es el ángulo sólido subtendido por el detector. Dado que la sección eficaz se deriva exactamente de la electrostática pura, el RBS permite una **cuantificación elemental absoluta sin necesidad de patrones previos de calibración (*standardless*)**.
+
 **Valor verificado:** La relación de intensidades entre el oro y el carbono a igual concentración estequiométrica es:
 $$ \frac{(d\sigma/d\Omega)_{\text{Au}}}{(d\sigma/d\Omega)_{\text{C}}} = \left(\frac{79}{6}\right)^2 = \frac{6241}{36} = 173.36 \approx 173.4 $$
 Esta tremenda diferencia en la sección eficaz hace que el RBS sea extremadamente sensible a trazas de elementos pesados sobre sustratos ligeros, pero poco sensible a elementos ligeros sobre sustratos pesados.
 
 #### 3.4 Anchura de los peaks: resolución energética del detector
-Los peaks simulados no son líneas de Dirac infinitamente estrechas. Se ensanchan según una distribución Gaussiana impulsada por la resolución instrumental intrínseca del detector de barrera de superficie de silicio (normalmente unos $15\text{-}20\text{ keV}$).
+Los peaks simulados no son líneas de Dirac infinitamente estrechas. Se ensanchan según una distribución Gaussiana impulsada por la resolución instrumental intrínseca del detector de barrera de superficie de silicio (PIPS, con energía media de creación de pares $w = 3.62\,\text{eV}/\text{par}$ y resolución típica $\text{FWHM} \approx 15\text{-}20\text{ keV}$).
 
 #### 3.5 El espectro completo: suma de gaussianas
 Matemáticamente, el perfil transversal en el Panel C se modela como una superposición de funciones Gaussianas:
 $$ Y(E) = \sum_{i} A_i \exp\left( - \frac{(E - K_i E_0)^2}{2\sigma_{\text{det}}^2} \right) $$
-Donde la amplitud $A_i$ está escalada con $Z_i^2$ de cada elemento de la muestra.
+Donde la amplitud $A_i$ está escalada con $N_i Z_i^2$ de cada elemento de la muestra.
 
 #### 3.6 Simplificaciones declaradas
-- **Solo dispersión en superficie:** El panel C es estático y no muestra las colas de dispersión producidas por la pérdida de energía en profundidad.
+- **Solo dispersión en superficie:** El panel C es estático y no muestra las colas de dispersión producidas por la pérdida de energía en profundidad (tratadas en el Panel D).
 - **Rutherford ideal:** Se ignoran posibles resonancias nucleares no-Rutherford que suelen ocurrir en elementos ligeros a ciertas energías específicas.
 
 ---
@@ -444,23 +456,28 @@ Estas energías son fijas y únicas para cada elemento (huella digital cuántica
 
 ---
 
-### 7. Tabla maestra de fórmulas verificadas
+### 7. Tabla maestra de fórmulas y valores verificados
 
-| Panel | Concepto físico | Fórmula | Valor verificado en el proyecto |
+| Panel | Concepto físico | Fórmula matemática | Valor verificado en el proyecto |
 | :---: | :--- | :--- | :--- |
-| A | Constante $ke^2$ | $ke^2 = e^2/4\pi\epsilon_0$ | $1.44\text{ MeV}\cdot\text{fm}$ (NIST CODATA) |
-| A | Parámetro de Rutherford | $a_0 = Z_1 Z_2 ke^2 / 2E_0$ | $a_0(\text{Au},7\text{ MeV}) = 16.25\text{ fm}$ |
-| A | Ángulo de dispersión | $\theta = 2\arctan(a_0/b)$ | $b=5\text{ fm} \Rightarrow \theta=143°$ (Au, 7 MeV) |
-| A | Deflexión max. Thomson | $\theta_\text{Th,max} \approx a_0 / R_\text{átomo}$ | $6.4\times10^{-3°}$ (sub-píxel) |
-| B | Factor cinemático | $K=\!\left[\frac{\sqrt{M_2^2-M_1^2\sin^2\theta}+M_1\cos\theta}{M_1+M_2}\right]^2$ | $K(\text{C},170°)=0.2525$; $K(\text{Au},170°)=0.9226$ |
-| B | Energía retrodispersada | $E_1 = K\cdot E_0$ | $E_1(\text{C})=0.505\text{ MeV}$; $E_1(\text{Au})=1.845\text{ MeV}$ |
-| C | Sección eficaz Rutherford | $d\sigma/d\Omega = (Z_1Z_2ke^2/4E_0)^2\sin^{-4}(\theta/2)$ | $\sigma(\text{Au})/\sigma(\text{C})=(79/6)^2=173.4$ |
-| C | Espectro (gaussianas) | $Y(E)=\sum_i A_i\exp[-(E-K_iE_0)^2/2\sigma_\det^2]$ | $\sigma_\det=0.028\text{ MeV}$ |
-| D | Probabilidad de capa | $P_i = Z_{2,i}^2 / \sum_j Z_{2,j}^2$ | Au domina: $\sim79\%$ vs C: $\sim0.5\%$ |
+| A | Constante de Coulomb atómica | $ke^2 = e^2/4\pi\varepsilon_0$ | $1.439965 \approx 1.44\text{ MeV}\cdot\text{fm}$ (CODATA) |
+| A | Parámetro característico | $a_0 = Z_1 Z_2 ke^2 / 2E_0$ | $a_0(\text{Au},7\text{ MeV}) = 16.25\text{ fm}$ ($d_{\min} = 32.5\text{ fm}$) |
+| A | Parámetro de impacto | $b(\theta) = a_0 \cot(\theta/2)$ | $b(143^\circ) \approx 5.0\text{ fm}$ (Au, $7\text{ MeV}$) |
+| A | Deflexión máx. Thomson | $\theta_\text{Th,max} \approx a_0 / R_\text{átomo}$ | $6.4\times10^{-3}{^\circ}$ (sub-píxel a escala atómica) |
+| B | Factor cinemático | $K=\!\left[\frac{\sqrt{M_2^2-M_1^2\sin^2\theta}+M_1\cos\theta}{M_1+M_2}\right]^2$ | $K(\text{C},170^\circ)=0.2525$; $K(\text{Au},170^\circ)=0.9226$ |
+| B | Energía retrodispersada | $E_1 = K\cdot E_0$ | $E_1(\text{C})=0.505\text{ MeV}$; $E_1(\text{Au})=1.845\text{ MeV}$ ($E_0=2\text{ MeV}$) |
+| B | Velocidad de recule frontal | $v_{\text{rec}}/v_0 = 2M_1/(M_1+M_2)$ | $0.50\,v_0$ ($^{12}\text{C}$); $0.040\,v_0$ ($^{197}\text{Au}$) |
+| C | Sección eficaz diferencial | $d\sigma/d\Omega = (Z_1Z_2ke^2/4E_0)^2\sin^{-4}(\theta/2)$ | $\sigma(\text{Au})/\sigma(\text{C})=(79/6)^2=173.36 \approx 173.4$ |
+| C | Rendimiento canónico (Chu) | $A_i = Q \cdot N_i \cdot (d\sigma/d\Omega)_i \cdot \Delta\Omega$ | Cuantificación absoluta *standardless* |
+| C | Espectro (gaussianas) | $Y(E)=\sum_i A_i\exp[-(E-K_iE_0)^2/2\sigma_\det^2]$ | $\text{FWHM} \approx 66\text{ keV}$ ($\sigma_\det=0.028\text{ MeV}$) |
+| D | Flujo del haz a $20\text{ nA}$ | $\dot{N}_{\text{haz}} = I / (Z_1 e)$ | $6.24 \times 10^{10}\text{ alfas/s}$ |
 | D | Intervalo de spawn | $\Delta t = 9200/I[\text{nA}]$ ms | $20\text{ nA}\Rightarrow 460\text{ ms/partícula}$ |
-| E | Bethe-Bloch (con corrección) | $-dE/dx = 0.56\cdot K_\text{BB}\rho Z_1^2\beta^{-2}[\cdots]$ | $K_\text{BB}=0.307075$; $I_\text{agua}=79.7\text{ eV}$ |
-| E | Rango protón 150 MeV | $R=\int_0^{E_0}(dE/dx)^{-1}dE$ | $\approx15.8\text{ cm}$ en agua (NIST PSTAR) |
-| E | Rango C-12, 290 MeV/u | Ídem, $Z_1=6$, $M=12\text{ u}$ | $\approx14.7\text{ cm}$ (HIMAC / ICRU 73) |
+| D | Incertidumbre de Poisson | $\sigma_N / N = 1/\sqrt{N}$ | Convergencia estadística del histograma |
+| D | Perfilado en profundidad | $\Delta E = [S] \cdot x$ | Relaciona anchura de pico con espesor nanométrico |
+| E | Pérdida de energía Bethe | $-dE/dx \propto z^2/v^2$ | Concentración de dosis en el Pico de Bragg |
+| E | Rango protón 150 MeV | $R=\int_0^{E_0}(dE/dx)^{-1}dE$ | $\approx 15.8\text{ cm}$ en agua (NIST PSTAR) |
+| E | Iones $^{12}\mathrm{C}^{6+}$ | Carga $z=6 \implies z^2 = 36$ | LET alto y $\text{RBE} \approx 2\text{--}3$ para tumores radiorresistentes |
+| ∞ | Colapso clásico de Larmor | $\tau = \frac{m_e^2 c^3 r_0^3}{4 k^2 e^4}$ | $\approx 1.6 \times 10^{-11}\text{ s}$ (resuelto por Bohr $L=n\hbar$) |
 
 ---
 
