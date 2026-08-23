@@ -55,17 +55,17 @@ const panelC = (() => {
   // ── Construccion fisica de los peaks ──────────────────────────────────────
 
   function buildPeaks() {
+    const MAX_REF = PHYS.Z2_AU * PHYS.Z2_AU; // 79² = 6241 (Au a N=100%, referencia nominal de fondo de escala)
     const peaks = ELEMENTS.map(el => {
       const K  = Physics.calcK(el.M2, PHYS.THETA_DET);
       const E1 = K !== null ? K * PHYS.E0_RBS : null;
-      const xs = Physics.relCrossSection(el.Z2); // prop Z2^2
-      const Ni = concentrations[el.sym];
-      const h  = xs * Ni;  // rendimiento no normalizado: A_i prop N_i * Z2^2
-      return { ...el, E1, K, xs, Ni, h };
+      const xs = Physics.relCrossSection(el.Z2); // Z₂²
+      const Ni = concentrations[el.sym] !== undefined ? concentrations[el.sym] : 1.0;
+      const h  = xs * Ni;  // Rendimiento físico: A_i ∝ N_i · Z₂²
+      const hNorm = h / MAX_REF; // Altura normalizada respecto a la referencia de escala
+      return { ...el, E1, K, xs, Ni, h, hNorm };
     }).filter(p => p.E1 !== null);
 
-    const hMax = Math.max(...peaks.map(p => p.h), 1e-9);
-    peaks.forEach(p => { p.hNorm = p.h / hMax; }); // normalizacion al maximo del panel
     return peaks;
   }
 
@@ -241,11 +241,11 @@ const panelC = (() => {
 
     const lines = [
       elName + ' (' + p.sym + ')  \u2014  Z\u2082=' + p.Z2 + ',  M\u2082=' + p.M2 + ' u',
-      'Factor K:          ' + p.K.toFixed(4),
-      'Energ\u00eda  E\u2081:       ' + p.E1.toFixed(4) + ' MeV',
-      'Secc. eficaz:      Z\u2082\u00b2 = ' + p.xs + '  (\u00d7' + ratioC + ' vs C)',
-      'Concentrac. N\u1d62:    ' + Math.round(p.Ni * 100) + ' %',
-      '\u00c1rea rel. A\u1d62:       ' + (p.hNorm * 100).toFixed(1) + ' % del m\u00e1ximo'
+      'Factor cinem\u00e1tico K: ' + p.K.toFixed(4),
+      'Energ\u00eda peak E\u2081:      ' + p.E1.toFixed(4) + ' MeV',
+      'Secci\u00f3n eficaz \u03c3:     Z\u2082\u00b2 = ' + p.xs + '  (\u00d7' + ratioC + ' vs C)',
+      'Concentraci\u00f3n N\u1d62:    ' + Math.round(p.Ni * 100) + ' %',
+      'Rendimiento A\u1d62:        ' + (p.hNorm * 100).toFixed(1) + ' %'
     ];
 
     const pad = 12, lh = 17, tw = 258, th = lines.length * lh + pad * 2 - 2;
