@@ -61,23 +61,35 @@ El modelo de Thomson es físicamente incapaz de producir rebotes a $>90^\circ$.
 
 ---
 
-## 2. Panel B — Factor Cinemático $K$ y Choque Elástico
+## 2. Panel B — Factor Cinemático $K$, Balance de Energía y Retroceso
 
 ### Principio de conservación en 2D
-En una colisión elástica bidimensional entre la partícula alfa ($M_1=4\,\text{u}$) y un núcleo blanco estacionario ($M_2$), la conservación simultánea de momento lineal ($\vec{p}$) y energía cinética ($E$) determina la energía de rebote $E_1$:
-$$E_1 = K(M_2, \theta) \cdot E_0$$
+En una colisión elástica bidimensional entre la partícula alfa ($M_1=4\,\text{u}$) y un núcleo blanco estacionario ($M_2$), la conservación simultánea de momento lineal ($\vec{p}$) y energía cinética ($E$) determina tanto la energía de rebote $E_1$ como la energía absorbida por el núcleo $E_{\text{rec}}$:
+$$E_1 = K(M_2, \theta) \cdot E_0, \qquad E_{\text{rec}} = E_0 - E_1 = (1 - K) \cdot E_0$$
 
 ### Fórmula canónica del Factor $K$
 $$K(M_2, \theta) = \left[\frac{\sqrt{M_2^2 - M_1^2 \sin^2\theta} + M_1 \cos\theta}{M_1 + M_2}\right]^2$$
 
-### Valores estándar en geometría IBM ($\theta = 170^\circ$, $E_0 = 2.0\,\text{MeV}$)
-| Blanco | Masa $M_2$ | Factor $K$ | Energía residual $E_1$ | Recule $v_{\text{rec}}/v_0$ | Interpretación |
-|---|:---:|:---:|:---:|:---:|---|
-| **Carbono ($^{12}\text{C}$)** | $12\,\text{u}$ | $0.2525$ | $0.505\,\text{MeV}$ | $0.500\,v_0$ | Blanco ligero: absorbe el 74.7% de la energía. |
-| **Silicio ($^{28}\text{Si}$)** | $28\,\text{u}$ | $0.5649$ | $1.130\,\text{MeV}$ | $0.250\,v_0$ | Pérdida moderada de energía. |
-| **Hierro ($^{56}\text{Fe}$)** | $56\,\text{u}$ | $0.7527$ | $1.505\,\text{MeV}$ | $0.133\,v_0$ | Blanco metálico medio. |
-| **Plata ($^{108}\text{Ag}$)** | $108\,\text{u}$ | $0.8632$ | $1.726\,\text{MeV}$ | $0.071\,v_0$ | Retiene el 86.3% de la energía. |
-| **Oro ($^{197}\text{Au}$)** | $197\,\text{u}$ | $0.9226$ | $1.845\,\text{MeV}$ | $0.040\,v_0$ | Blanco muy pesado: la alfa rebota conservando casi toda su energía. |
+### Distinción fundamental de velocidades tras el choque
+- **Partícula alfa que rebota hacia el detector ($v_1$):** $v_1 = \sqrt{K} \cdot v_0$ ($0.502\,v_0$ en Carbono vs. $0.960\,v_0$ en Oro).
+- **Núcleo blanco empujado hacia adelante ($v_{\text{rec}}$):** $v_{\text{rec}} = \frac{2M_1}{M_1+M_2} \cdot v_0$ ($0.500\,v_0$ en Carbono vs. $0.040\,v_0$ en Oro).
+*(donde $v_0 = \sqrt{2E_0/m_\alpha} \approx 9\,820\,\text{km/s}$ a $E_0 = 2.0\,\text{MeV}$)*.
+
+### Protocolo de medición física y deducción analítica (Las 5 Tarjetas)
+El detector semiconductor a $\theta = 170^\circ$ **mide físicamente una sola magnitud: la energía dispersada $E_1$**. A partir de esa única lectura:
+1. $K = E_1 / E_0$ (Razón cinemática / huella de masa).
+2. $M_2$ y Elemento: se despeja $M_2$ en la fórmula de $K$ ($\implies$ diagnóstico del material).
+3. $E_{\text{rec}} = (1-K)E_0$ (energía absorbida por el blanco).
+4. $v_{\text{rec}} = \frac{2M_1}{M_1+M_2}v_0$ (cinemática de retroceso).
+
+### Valores verificados ($\theta = 170^\circ$, $E_0 = 2.0\,\text{MeV}$)
+| Blanco | Masa $M_2$ | Factor $K$ | Energía rebote $E_1$ | Energía absorbida $E_{\text{rec}}$ | Retroceso $v_{\text{rec}}$ | Diagnóstico |
+|---|:---:|:---:|:---:|:---:|:---:|---|
+| **Carbono ($^{12}\text{C}$)** | $12\,\text{u}$ | $0.2525$ | $0.505\,\text{MeV}$ ($25.3\%$) | **$1.495\,\text{MeV}$ ($74.7\%$)** | $0.500\,v_0$ | Blanco ligero: absorbe gran parte del impacto. |
+| **Silicio ($^{28}\text{Si}$)** | $28\,\text{u}$ | $0.5649$ | $1.130\,\text{MeV}$ ($56.5\%$) | **$0.870\,\text{MeV}$ ($43.5\%$)** | $0.250\,v_0$ | Pérdida moderada de energía. |
+| **Hierro ($^{56}\text{Fe}$)** | $56\,\text{u}$ | $0.7527$ | $1.505\,\text{MeV}$ ($75.3\%$) | **$0.495\,\text{MeV}$ ($24.7\%$)** | $0.133\,v_0$ | Blanco metálico medio. |
+| **Plata ($^{108}\text{Ag}$)** | $108\,\text{u}$ | $0.8632$ | $1.726\,\text{MeV}$ ($86.3\%$) | **$0.274\,\text{MeV}$ ($13.7\%$)** | $0.071\,v_0$ | Retiene la mayor parte de la energía. |
+| **Oro ($^{197}\text{Au}$)** | $197\,\text{u}$ | $0.9226$ | $1.845\,\text{MeV}$ ($92.3\%$) | **$0.155\,\text{MeV}$ ($7.7\%$)** | $0.040\,v_0$ | Blanco muy pesado: la alfa rebota casi intacta. |
 
 ### Límite cinemático y técnica ERDA
 Para blancos más ligeros que el proyectil ($M_2 < M_1 = 4\,\text{u}$, como $^1\text{H}$ o $^2\text{H}$), la raíz $\sqrt{M_2^2 - M_1^2 \sin^2\theta}$ no tiene solución real para ángulos hacia atrás ($\theta > 90^\circ$). RBS convencional no detecta hidrógeno; para ello se emplea **ERDA** (*Elastic Recoil Detection Analysis*), detectando los núcleos de retroceso proyectados hacia adelante ($\theta < 90^\circ$).

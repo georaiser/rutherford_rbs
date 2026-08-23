@@ -79,7 +79,8 @@
         <p class="note" id="descA-ruth">
           <b>Simulación interactiva del experimento de Geiger-Marsden:</b><br>
           Esta simulación calcula las trayectorias hiperbólicas de partículas alfa
-          ($^4_2\text{He}^{2+}$, carga $Z_1=2$, masa $M_1=4\,\text{u}$, donde $\text{u}$ es la <b>unidad de masa atómica</b>: 2 protones + 2 neutrones) que se desvían por el potencial electrostático de
+          ($^4_2\text{He}^{2+}$, carga $Z_1=2$, masa $M_1=4\,\text{u}$, donde $\text{u}$ es la <b>unidad de masa
+            atómica</b>: 2 protones + 2 neutrones) que se desvían por el potencial electrostático de
           Coulomb ($V(r)=\frac{Z_1 Z_2 ke^2}{r}$) de un núcleo del blanco ($Z_2$).<br><br>
 
           · <b>Montaje experimental de Geiger-Marsden (1909–1911):</b> una fuente radiactiva de radio
@@ -229,51 +230,65 @@
         <h2>Factor cinemático $K$ — principio de RBS</h2>
       </div>
       <div class="panel-body">
-
         <p class="note">
-          <b>Identificación elemental por colisión elástica:</b><br>
-          En un choque elástico bidimensional entre la partícula alfa proyectil ($M_1=4\,\text{u}$, donde $\text{u}$ es la unidad de masa atómica: $1\,\text{u} \approx 1.66 \times 10^{-27}\,\text{kg}$) y un núcleo blanco
-          ($M_2$), la conservación simultánea de momento lineal y energía cinética determina la energía residual tras el
-          rebote:
-          $$E_1 = K(M_2,\,\theta)\cdot E_0$$
-          El <b>factor cinemático $K$</b> depende únicamente de las masas participantes y del ángulo de dispersión
-          $\theta$, siendo independiente de la energía incidente $E_0$.<br><br>
-          · <b>Geometría estándar IBM ($\theta=170^\circ$):</b> adoptada internacionalmente (CMAM-UAM, EAG), retiene el
-          $99.8\%$ de la resolución de masa máxima ($\theta=180^\circ$) sin obstruir el haz entrante.<br>
-          · <b>Firma por masa:</b> un blanco pesado como el oro ($M_2=197\,\text{u}$) apenas retrocede y retiene el
-          $92.3\%$ de la energía ($K=0.9226$); un blanco ligero como el carbono ($M_2=12\,\text{u}$) absorbe el $74.7\%$
-          ($K=0.2525$). Medir $E_1$ identifica unívocamente a $M_2$.<br>
-          · <b>Límite cinemático ($M_2 < M_1$):</b> para $M_2 < 4\,\text{u}$ no existe solución física a $\theta>
-                90^\circ$. El RBS convencional no detecta hidrógeno ni deuterio; para ellos se emplea <b>ERDA</b>
-                (<em>Elastic Recoil Detection Analysis</em>), detectando los núcleos expulsados hacia adelante.
+          <b>Determinación composicional por colisión elástica (Fundamento teórico y experimental):</b><br>
+          En la técnica RBS, la identidad química se determina analizando el choque elástico entre la
+          partícula alfa proyectil ($M_1=4\,\text{u}$) y los núcleos atómicos del blanco ($M_2$). Resolviendo analíticamente las ecuaciones de conservación del momento lineal ($\vec{p}$) y de la energía cinética ($E$), la energía residual del proyectil ($E_1$) y la <b>energía que absorbió el núcleo blanco ($E_{\text{rec}} = E_0 - E_1 = (1 - K)E_0$)</b> son funciones matemáticas exactas de la masa $M_2$:
+          $$E_1 = K(M_2,\,\theta)\cdot E_0, \qquad E_{\text{rec}} = E_0 - E_1 = (1 - K)\cdot E_0$$
+          El <b>factor cinemático $K$</b> ($E_1/E_0$) representa la fracción de energía que conserva el proyectil. Como $K(M_2)$ es una función estrictamente monótona creciente, <b>cada elemento químico posee una firma energética $E_1$ única e inconfundible</b>, verificada experimentalmente en aceleradores de iones con una concordancia superior al $99.9\%$.<br><br>
+
+          · <b>Ángulo de detección hacia atrás ($\theta = 170^\circ$):</b> al ubicar el detector casi en retrodispersión
+          total ($170^\circ$), se maximiza la resolución de masa ($dK/dM_2$) permitiendo distinguir elementos de masas
+          cercanas sin obstruir el paso del haz incidente.<br>
+
+          · <b>Firma elemental y balance energético:</b> medir $E_1$ revela de inmediato la masa $M_2$ del átomo impactado:<br>
+          &nbsp;&nbsp;— <em>Blanco pesado (Oro, $^{197}\text{Au}$):</em> su enorme inercia apenas retrocede $\implies$ la alfa retiene el <b>$92.3\%$</b> ($K=0.9226 \implies E_1 = 1.845\,\text{MeV}$) y el núcleo solo absorbe $E_{\text{rec}} = 0.155\,\text{MeV}$ ($7.7\%$).<br>
+          &nbsp;&nbsp;— <em>Blanco ligero (Carbono, $^{12}\text{C}$):</em> absorbe gran parte del impacto con <b>$E_{\text{rec}} = 1.495\,\text{MeV}$ (absorbe el $74.7\%$)</b> $\implies$ la alfa solo retiene el <b>$25.3\%$</b> ($K=0.2525 \implies E_1 = 0.505\,\text{MeV}$).<br>
+
+          · <b>Límite cinemático ($M_2 < M_1$):</b> por leyes de conservación, una partícula alfa ($4\,\text{u}$) no
+              puede rebotar hacia atrás ($\theta > 90^\circ$) contra núcleos más livianos que ella (como el Hidrógeno,
+              $1\,\text{u}$). Para caracterizar estos elementos ligeros se emplea la técnica complementaria <b>ERDA</b>
+              (<em>Elastic Recoil Detection Analysis</em>), midiendo los núcleos blanco expulsados hacia adelante.
         </p>
 
         <canvas id="canvasB" width="800" height="210"></canvas>
 
         <div class="controls">
-          <div class="slider-row">
-            <span class="slider-label">Masa blanco $M_2$</span>
-            <input type="range" id="sliderM2" min="4" max="200" step="0.5" value="197" list="m2marks">
-            <span class="slider-val" id="valM2">197.0 u</span>
-          </div>
-          <datalist id="m2marks">
-            <option value="12"></option>
-            <option value="28"></option>
-            <option value="56"></option>
-            <option value="108"></option>
-            <option value="197"></option>
-          </datalist>
-          <div class="el-marks">
-            <span>C (12)</span><span>Si (28)</span><span>Fe (56)</span>
-            <span>Ag (108)</span><span>Au (197)</span>
+          <div class="slider-row" style="align-items:flex-start;">
+            <span class="slider-label" style="margin-top:2px;">Masa blanco $M_2$</span>
+            <div style="flex:1; display:flex; flex-direction:column;">
+              <input type="range" id="sliderM2" min="4" max="200" step="0.5" value="197" list="m2marks"
+                style="width:100%;">
+              <datalist id="m2marks">
+                <option value="12"></option>
+                <option value="28"></option>
+                <option value="56"></option>
+                <option value="108"></option>
+                <option value="197"></option>
+              </datalist>
+              <!-- Marcas escalonadas en 2 niveles para evitar cualquier solapamiento -->
+              <div class="el-marks" style="position:relative; width:100%; height:26px; margin-top:4px; font-size:0.70rem; white-space:nowrap;">
+                <span style="position:absolute; left:4.1%; top:0; transform:translateX(-10%); cursor:pointer; color:var(--cyan); white-space:nowrap;"
+                  onclick="panelB.setM2(12);" title="Seleccionar Carbono (12 u)">C (12)</span>
+                <span style="position:absolute; left:12.2%; top:12px; transform:translateX(-30%); cursor:pointer; color:var(--green); white-space:nowrap;"
+                  onclick="panelB.setM2(28);" title="Seleccionar Silicio (28 u)">Si (28)</span>
+                <span style="position:absolute; left:26.5%; top:0; transform:translateX(-50%); cursor:pointer; color:var(--amber); white-space:nowrap;"
+                  onclick="panelB.setM2(56);" title="Seleccionar Hierro (56 u)">Fe (56)</span>
+                <span style="position:absolute; left:53.1%; top:12px; transform:translateX(-50%); cursor:pointer; color:#fb923c; white-space:nowrap;"
+                  onclick="panelB.setM2(108);" title="Seleccionar Plata (108 u)">Ag (108)</span>
+                <span style="position:absolute; left:98.5%; top:0; transform:translateX(-95%); cursor:pointer; color:#f59e0b; white-space:nowrap;"
+                  onclick="panelB.setM2(197);" title="Seleccionar Oro (197 u)">Au (197)</span>
+              </div>
+            </div>
+            <span class="slider-val" id="valM2" style="margin-top:2px;">197.0 u</span>
           </div>
         </div>
 
         <div class="formula-box">
-          <div class="flabel">Factor cinemático — colisión elástica bidimensional</div>
-          $$K(M_2,\theta)=\left(\frac{\sqrt{M_2^2-M_1^2\sin^2\!\theta}+M_1\cos\theta}{M_1+M_2}\right)^{\!2}$$
+          <div class="flabel">Factor cinemático y balance de energía — colisión elástica bidimensional</div>
+          $$K(M_2,\theta)=\left(\frac{\sqrt{M_2^2-M_1^2\sin^2\!\theta}+M_1\cos\theta}{M_1+M_2}\right)^{\!2}, \qquad E_1 = K\,E_0, \qquad E_{\text{rec}} = (1 - K)\,E_0$$
           <div class="formula-meta">
-            $\theta=170°$ · $E_0=2\,\text{MeV}$ · $M_1=4\,\text{u}$
+            $\theta=170°$ · $E_0=2.0\,\text{MeV}$ · $M_1=4\,\text{u}$ · $E_0 = E_1 + E_{\text{rec}}$ (conservación de energía)
           </div>
         </div>
 
@@ -283,29 +298,112 @@
             <div class="metric-val"><span id="val-K">0.9226</span></div>
           </div>
           <div class="metric-card">
-            <div class="metric-label">Energía de salida E₁</div>
+            <div class="metric-label">Energía dispersada E₁</div>
             <div class="metric-val"><span id="val-E1">1.8451</span><span class="metric-unit">MeV</span></div>
           </div>
           <div class="metric-card">
-            <div class="metric-label">Elemento más cercano</div>
-            <div class="metric-val" id="val-el" style="color:var(--green)">Au</div>
+            <div class="metric-label">Energía retroceso E<sub>rec</sub></div>
+            <div class="metric-val"><span id="val-Erec">0.1549</span><span class="metric-unit">MeV</span></div>
           </div>
           <div class="metric-card">
-            <div class="metric-label">Recule del blanco</div>
+            <div class="metric-label">Velocidad retroceso v<sub>rec</sub></div>
             <div class="metric-val"><span id="val-recoil">0.040</span><span class="metric-unit">v₀</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Elemento identificado</div>
+            <div class="metric-val" id="val-el" style="color:var(--green)">Au</div>
           </div>
         </div>
 
         <div class="note">
-          · <b>Firma espectral:</b> conociendo $E_0$ y $\theta=170^\circ$, la energía detectada $E_1$ revela
-          directamente la masa nuclear $M_2$.<br>
-          · <b>Velocidad y energía de recule:</b> la energía cedida al blanco es $E_{\text{rec}} = (1-K)E_0$. En
-          colisión frontal, la velocidad de retroceso es $v_{\text{rec}}/v_0 = \frac{2M_1}{M_1+M_2}$ ($0.50\,v_0$ para
-          $^{12}\mathrm{C}$ y $0.040\,v_0$ para $\mathrm{Au}$).<br>
-          · <span class="warn">⚠ Simplificación:</span> la velocidad en la animación es proporcional a $\sqrt{K}$; el
-          radio nuclear ilustrativo escala con $M_2^{1/3}$.<br>
-          <b>→ Conexión con Panel C:</b> al incidir sobre una mezcla de elementos, cada masa $M_2$ genera un pico
-          separado en el espectro energético.
+          · <b>Medición física vs deducción analítica:</b> el detector semiconductor ubicado a $170^\circ$ mide únicamente la <b>energía dispersada $E_1$</b> (Tarjeta 2). A partir de esa única lectura experimental, las leyes de conservación calculan el <b>factor cinemático $K = E_1/E_0$</b>, la <b>energía absorbida $E_{\text{rec}} = (1-K)E_0$</b> y la <b>velocidad de retroceso $v_{\text{rec}}$</b>, diagnosticando unívocamente el <b>elemento químico</b> de la muestra.<br>
+
+          <!-- Diagrama vectorial SVG del flujo de análisis RBS -->
+          <div style="margin: 14px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #030712;">
+            <div style="padding: 8px 14px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber);">
+                Esquema de Flujo: Medición Experimental vs Deducción Analítica
+              </span>
+              <span style="font-size: 0.68rem; color: var(--muted); font-family: 'JetBrains Mono', monospace;">
+                Geometría RBS 170° · E₀ = 2.0 MeV
+              </span>
+            </div>
+            <svg viewBox="0 0 800 242" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gradDet" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0c2340" />
+                  <stop offset="100%" stop-color="#061224" />
+                </linearGradient>
+                <linearGradient id="gradBox" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0a1226" />
+                  <stop offset="100%" stop-color="#040814" />
+                </linearGradient>
+                <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+                </marker>
+                <marker id="arrAmber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#fbbf24" />
+                </marker>
+                <marker id="arrGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4ade80" />
+                </marker>
+                <marker id="arrViolet" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#a78bfa" />
+                </marker>
+              </defs>
+
+              <!-- ── TARJETA SUPERIOR (Detector Físico) ── -->
+              <rect x="235" y="12" width="330" height="56" rx="8" fill="url(#gradDet)" stroke="#38bdf8" stroke-width="1.4" />
+              <text x="400" y="28" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#38bdf8" text-anchor="middle" letter-spacing="0.06em">📡 MEDIDOR FÍSICO EXPERIMENTAL</text>
+              <text x="400" y="46" font-family="'JetBrains Mono', monospace" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">Energía dispersada E₁ = 0.5051 MeV</text>
+              <text x="400" y="60" font-family="Inter, sans-serif" font-size="8.8" fill="rgba(255,255,255,0.65)" text-anchor="middle">(Tarjeta 2: única señal física leída por el detector semiconductor)</text>
+
+              <!-- ── LÍNEAS DE FLUJO CONECTORAS ── -->
+              <path d="M 400 68 L 400 88" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" />
+              <circle cx="400" cy="88" r="3" fill="#38bdf8" />
+              <path d="M 400 88 L 135 88 L 135 106" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrCyan)" />
+              <path d="M 400 88 L 400 106" fill="none" stroke="#fbbf24" stroke-width="1.8" marker-end="url(#arrAmber)" />
+              <path d="M 400 88 L 665 88 L 665 106" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrGreen)" />
+
+              <!-- ── TARJETA IZQUIERDA (Factor K) ── -->
+              <rect x="20" y="112" width="230" height="116" rx="8" fill="url(#gradBox)" stroke="rgba(56,189,248,0.35)" stroke-width="1.2" />
+              <rect x="30" y="121" width="92" height="17" rx="4" fill="rgba(56,189,248,0.15)" />
+              <text x="76" y="133" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#38bdf8" text-anchor="middle">1. FACTOR K</text>
+              <text x="32" y="156" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#ffffff">K = E₁ / E₀</text>
+              <text x="32" y="174" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8">0.5051 / 2.0 = 0.2525</text>
+              <text x="32" y="195" font-family="Inter, sans-serif" font-size="8.8" fill="rgba(255,255,255,0.6)">• Razón cinemática pura</text>
+              <text x="32" y="210" font-family="Inter, sans-serif" font-size="8.8" fill="rgba(255,255,255,0.6)">• Huella digital de la masa M₂</text>
+
+              <!-- ── TARJETA CENTRO (Energía de Retroceso E_rec) ── -->
+              <rect x="275" y="112" width="250" height="116" rx="8" fill="url(#gradBox)" stroke="rgba(251,191,36,0.4)" stroke-width="1.2" />
+              <rect x="285" y="121" width="132" height="17" rx="4" fill="rgba(251,191,36,0.15)" />
+              <text x="351" y="133" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#fbbf24" text-anchor="middle">3. ENERGÍA RETROCESO</text>
+              <text x="287" y="156" font-family="'JetBrains Mono', monospace" font-size="11.5" font-weight="600" fill="#ffffff">E_rec = E₀ - E₁ = (1-K)E₀</text>
+              <text x="287" y="174" font-family="'JetBrains Mono', monospace" font-size="11" fill="#fbbf24">2.0 - 0.5051 = 1.4949 MeV</text>
+              <text x="287" y="195" font-family="Inter, sans-serif" font-size="8.8" fill="rgba(255,255,255,0.6)">• Absorbe el 74.7% del impacto</text>
+              <text x="287" y="210" font-family="Inter, sans-serif" font-size="8.8" fill="rgba(255,255,255,0.6)">• Balance: E₀ = E₁ + E_rec</text>
+
+              <!-- ── TARJETAS DERECHA (Elemento y Velocidad de Retroceso) ── -->
+              <!-- 5. Elemento identificado -->
+              <rect x="550" y="112" width="230" height="53" rx="8" fill="url(#gradBox)" stroke="rgba(74,222,128,0.4)" stroke-width="1.2" />
+              <rect x="560" y="119" width="140" height="16" rx="4" fill="rgba(74,222,128,0.15)" />
+              <text x="630" y="131" font-family="Inter, sans-serif" font-size="8.8" font-weight="700" fill="#4ade80" text-anchor="middle">5. ELEMENTO IDENTIFICADO</text>
+              <text x="562" y="152" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#ffffff">M₂ = 12 u ➔ <tspan fill="#4ade80">¡CARBONO (C)!</tspan></text>
+
+              <!-- Flecha conector entre 5 y 4 -->
+              <path d="M 665 165 L 665 174" fill="none" stroke="#a78bfa" stroke-width="1.4" marker-end="url(#arrViolet)" />
+
+              <!-- 4. Velocidad de retroceso -->
+              <rect x="550" y="175" width="230" height="53" rx="8" fill="url(#gradBox)" stroke="rgba(167,139,250,0.35)" stroke-width="1.2" />
+              <text x="560" y="190" font-family="Inter, sans-serif" font-size="8.8" font-weight="600" fill="#a78bfa">4. VELOCIDAD DE RETROCESO v_rec</text>
+              <text x="560" y="211" font-family="'JetBrains Mono', monospace" font-size="10.8" fill="#ffffff">2M₁/(M₁+M₂) = <tspan fill="#a78bfa" font-weight="700">0.500 v₀</tspan></text>
+            </svg>
+          </div>
+
+          · <b>Distinción de velocidades tras el choque:</b><br>
+          &nbsp;&nbsp;— <em>Partícula alfa que rebota hacia el detector ($v_1$):</em> viaja a $v_1 = \sqrt{K}\cdot v_0$ ($0.502\,v_0$ en Carbono vs. $0.960\,v_0$ en Oro).<br>
+          &nbsp;&nbsp;— <em>Núcleo blanco empujado hacia adelante ($v_{\text{rec}}$):</em> sale despedido a $v_{\text{rec}} = \frac{2M_1}{M_1+M_2}v_0$ ($0.500\,v_0$ en Carbono vs. $0.040\,v_0$ en Oro).<br><br>
+          <b>→ Conexión con Panel C:</b> al analizar una muestra con múltiples elementos, cada masa $M_2$ produce un pico independiente en el espectro energético RBS según su respectiva energía $E_1$.
         </div>
 
       </div>

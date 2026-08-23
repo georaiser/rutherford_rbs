@@ -184,19 +184,40 @@ El factor cinemático $K$ es la fracción de la energía inicial $E_0$ que retie
 $$ K = \frac{E_1}{E_0} = \left[ \frac{\sqrt{M_2^2 - M_1^2 \sin^2\theta} + M_1 \cos\theta}{M_1 + M_2} \right]^2 $$
 Esta ecuación es la piedra angular del análisis RBS, pues demuestra que la energía detectada $E_1$ es una firma única de la masa $M_2$ del átomo blanco.
 
+#### 2.2b Balance de Energía, Energía Absorbida y Retroceso ($E_{\text{rec}}$)
+Por la primera ley de la termodinámica y conservación de la energía mecánica en choques elásticos:
+$$E_0 = E_1 + E_{\text{rec}} \implies E_{\text{rec}} = E_0 - E_1 = (1 - K) \cdot E_0$$
+Donde **$E_{\text{rec}}$ es la energía cinética absorbida por el núcleo blanco** al recibir el impacto.
+
+#### 2.2c Distinción fundamental de velocidades tras el choque
+Tras la colisión se originan dos movimientos divergentes con velocidades bien diferenciadas:
+1. **Velocidad de rebote de la partícula alfa hacia el detector ($v_1$):**
+   $$v_1 = \sqrt{K} \cdot v_0 \quad (0.502\,v_0 \text{ en Carbono vs. } 0.960\,v_0 \text{ en Oro})$$
+2. **Velocidad de retroceso del átomo blanco empujado hacia adelante ($v_{\text{rec}}$):**
+   $$v_{\text{rec}} = \frac{2M_1}{M_1 + M_2} \cdot v_0 \quad (0.500\,v_0 \text{ en Carbono vs. } 0.040\,v_0 \text{ en Oro})$$
+donde $v_0 = \sqrt{2E_0/m_\alpha} \approx 9\,820\,\text{km/s}$ a $E_0 = 2.0\,\text{MeV}$.
+
+#### 2.2d Protocolo de deducción analítica (Las 5 Tarjetas Métricas)
+En el laboratorio real, el detector semiconductor a $170^\circ$ **mide físicamente una sola magnitud: $E_1$**. A partir de esa única señal eléctrica:
+1. **Factor $K$:** se calcula como $K = E_1 / E_0$.
+2. **Identificación de masa $M_2$:** la computadora despeja la masa $M_2$ en la fórmula de $K$ y consulta la tabla periódica ($\implies$ ¡identifica el elemento!).
+3. **Energía de retroceso:** $E_{\text{rec}} = (1 - K)E_0$ (energía transferida a la red cristalina).
+4. **Velocidad de retroceso:** $v_{\text{rec}} = \frac{2M_1}{M_1+M_2}v_0$.
+
 #### 2.3 Límites físicos
-- **$M_2 \gg M_1$:** Apenas hay retroceso; $K \to 1$. Ejemplo: Au, $K=0.9226$.
-- **$M_2 = M_1$:** $K = \cos^2\theta$. En choque frontal ($180°$): $K=0$, toda la energía se transfiere.
+- **$M_2 \gg M_1$:** Apenas hay retroceso; $K \to 1$. Ejemplo: Au ($197\,\text{u}$), $K=0.9226$, $E_{\text{rec}} = 0.155\,\text{MeV}$ ($7.7\%$), $v_{\text{rec}} = 0.040\,v_0$.
+- **$M_2 = M_1$:** $K = \cos^2\theta$. En choque frontal ($180°$): $K=0$, transferencia del 100% de la energía.
 - **$M_2 < M_1$ (límite cinemático):** El término $M_2^2 - M_1^2\sin^2\theta < 0$ para $\theta > \arcsin(M_2/M_1)$. Una alfa no puede rebotar hacia atrás contra un núcleo más ligero (e.g., H con $M_2=1\,\text{u}$). RBS no detecta Hidrógeno directamente; se requiere **ERDA** (*Elastic Recoil Detection Analysis*, ver §10.3).
 
 #### 2.4 ¿Por qué $\theta = 170°$?
-A $180°$ la sensibilidad de masa $dK/dM_2$ es máxima pero bloquearía el haz. La **geometría IBM a $170°$** conserva $\sim 99.8\%$ de la resolución teórica y es el estándar internacional (CMAM-UAM, EAG).
+A $180°$ la sensibilidad de masa $dK/dM_2$ es máxima pero bloquearía el haz incidente. La **geometría a $170°$** conserva $\sim 99.8\%$ de la resolución teórica y es el estándar internacional en laboratorios de iones (CMAM-UAM, EAG).
 
-#### 2.5 Valores verificados
-En el contexto del proyecto, considerando $M_1=4\text{ u}$ (alfa), un ángulo de retrodispersión de $\theta = 170^\circ$, y las masas del carbono ($12\text{ u}$) y el oro ($197\text{ u}$):
-- Para el Carbono: $K(C, 170^\circ) = 0.2525$
-- Para el Oro: $K(Au, 170^\circ) = 0.9226$
-Esto significa que una partícula alfa retrodispersada por oro conserva el 92.2% de su energía, mientras que una rebotada por carbono retiene apenas el 25.2%.
+#### 2.5 Valores verificados ($E_0 = 2.0\,\text{MeV}$, $\theta = 170^\circ$)
+- **Carbono ($^{12}\text{C}$):** $K = 0.2525 \implies E_1 = 0.5051\,\text{MeV}$, $E_{\text{rec}} = 1.4949\,\text{MeV}$ (absorbe el $74.7\%$), $v_{\text{rec}} = 0.500\,v_0$.
+- **Silicio ($^{28}\text{Si}$):** $K = 0.5649 \implies E_1 = 1.1298\,\text{MeV}$, $E_{\text{rec}} = 0.8702\,\text{MeV}$ (absorbe el $43.5\%$), $v_{\text{rec}} = 0.250\,v_0$.
+- **Hierro ($^{56}\text{Fe}$):** $K = 0.7527 \implies E_1 = 1.5054\,\text{MeV}$, $E_{\text{rec}} = 0.4946\,\text{MeV}$ (absorbe el $24.7\%$), $v_{\text{rec}} = 0.133\,v_0$.
+- **Plata ($^{108}\text{Ag}$):** $K = 0.8632 \implies E_1 = 1.7264\,\text{MeV}$, $E_{\text{rec}} = 0.2736\,\text{MeV}$ (absorbe el $13.7\%$), $v_{\text{rec}} = 0.071\,v_0$.
+- **Oro ($^{197}\text{Au}$):** $K = 0.9226 \implies E_1 = 1.8451\,\text{MeV}$, $E_{\text{rec}} = 0.1549\,\text{MeV}$ (absorbe el $7.7\%$), $v_{\text{rec}} = 0.040\,v_0$.
 
 #### 2.6 Simplificaciones declaradas
 - **Ausencia de efectos relativistas:** A las energías estándar del RBS ($2 \text{ MeV}$), las correcciones relativistas para partículas alfa son de un orden de magnitud muy por debajo de la resolución experimental.
