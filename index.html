@@ -400,7 +400,7 @@
           · <b>Distinción de velocidades tras el choque:</b><br>
           &nbsp;&nbsp;— <em>Partícula alfa que rebota hacia el detector ($v_1$):</em> viaja a $v_1 = \sqrt{K}\cdot v_0$ ($0.502\,v_0$ en Carbono vs. $0.960\,v_0$ en Oro).<br>
           &nbsp;&nbsp;— <em>Núcleo blanco empujado hacia adelante ($v_{\text{rec}}$):</em> sale despedido a $v_{\text{rec}} = \frac{2M_1}{M_1+M_2}v_0$ ($0.500\,v_0$ en Carbono vs. $0.040\,v_0$ en Oro).<br><br>
-          <b>→ Conexión con Panel C:</b> al analizar una muestra con múltiples elementos, cada masa $M_2$ produce un pico independiente en el espectro energético RBS según su respectiva energía $E_1$.
+          <b>→ Conexión con Panel C:</b> al analizar una muestra con múltiples elementos, cada masa $M_2$ produce un peak independiente en el espectro energético RBS según su respectiva energía $E_1$.
         </div>
 
       </div>
@@ -418,9 +418,9 @@
           <b>Lectura dual del espectro RBS:</b><br>
           Al acumular las colisiones detectadas, se obtiene un histograma $Y(E_1)$ que desacopla identidad y
           cantidad:<br>
-          1. <b>Posición del pico ($E_1 = K(M_2)\cdot E_0$):</b> depende únicamente de la masa nuclear $M_2$. Invariante
+          1. <b>Posición del peak ($E_1 = K(M_2)\cdot E_0$):</b> depende únicamente de la masa nuclear $M_2$. Invariante
           ante cambios de concentración.<br>
-          2. <b>Rendimiento / Área del pico ($Y_i \propto Z_2^2\cdot N_i$):</b> cuantifica la densidad atómica
+          2. <b>Rendimiento / Área del peak ($A_i \propto Z_2^2\cdot N_i$):</b> cuantifica la densidad atómica
           superficial $N_i$ (átomos/$\text{cm}^2$), modulada por la sección eficaz de Rutherford ($\propto
           Z_2^2$).<br><br>
           <b>Laboratorio interactivo:</b> ajusta las concentraciones relativas de C, Si, Fe, Ag y Au para analizar la
@@ -432,36 +432,24 @@
         <div class="controls" style="margin-top:14px">
           <p class="note" style="margin-bottom:10px; border-left-color:var(--cyan)">
             <b>Concentración superficial $N_i$:</b> modula la abundancia atómica de cada elemento. Pasa el cursor sobre
-            un pico para consultar sus valores exactos de $K$, $E_1$ y $Z_2^2$. Haz clic para resaltarlo.
+            un peak para consultar sus valores exactos de $K$, $E_1$ y $Z_2^2$. Haz clic para resaltarlo.
           </p>
           <div id="concSliders"></div>
         </div>
 
         <div class="formula-box">
-          <div class="flabel">Sección eficaz diferencial de Rutherford — rendimiento de los picos</div>
-          $$\frac{d\sigma}{d\Omega}=\left(\frac{Z_1 Z_2\,ke^2}{4E_0}\right)^{\!2}
-          \frac{1}{\sin^4\!\!\left(\dfrac{\theta}{2}\right)}\;\propto\;Z_2^2$$
+          <div class="flabel">Rendimiento de los Peaks (Área y Altura) — ¿De qué depende la señal?</div>
+          $$\text{Rendimiento / Área del Peak } (A_i) \;\propto\; \text{Altura } (H_i) \;\propto\; N_i \cdot Z_2^2$$
           <div class="formula-meta">
-            Con $\theta=170°$ y $E_0=2\,\text{MeV}$ fijos, la sección eficaz relativa escala con $Z_2^2$.
-            Razón de intensidades a igual concentración: $\sigma_\text{Au}/\sigma_\text{C} = (79/6)^2 \approx
-            173.4\times$.
+            · <b>Área vs. Altura:</b> en el análisis físico se integra el <b>Área $A_i$</b> (cuentas totales detectadas); al tener el detector una resolución gaussiana fija ($\sigma$), la <b>Altura</b> es directamente proporcional al área.<br>
+            · <b>$N_i$ (Concentración superficial):</b> a mayor número de átomos en la muestra, mayor es el peak (relación lineal directa).<br>
+            · <b>$Z_2^2$ (Carga nuclear al cuadrado):</b> núcleos con más protones desvían muchas más partículas alfa ($\text{Au}$ produce $173.4\times$ más cuentas que $\text{C}$ a igual abundancia).
           </div>
         </div>
 
         <div class="note">
-          · <b>Fórmula canónica de rendimiento (Chu, Mayer &amp; Nicolet, 1978):</b>
-          $$A_i = Q \cdot N_i \cdot \left(\frac{d\sigma}{d\Omega}\right)_i \cdot \Delta\Omega \;\propto\; N_i \cdot
-          Z_2^2$$
-          donde $Q$ es la carga integrada del haz y $\Delta\Omega$ el ángulo sólido del detector. Al calcularse
-          analíticamente en Coulomb puro, RBS permite una <b>cuantificación absoluta sin patrones de calibración
-            (*standardless*)</b>.<br>
-          · <b>Sensibilidad e instrumentación:</b> la sección eficaz escala como $Z_2^2$
-          ($\sigma_{\text{Au}}/\sigma_{\text{C}} \approx 173.4\times$). Los detectores de silicio (PIPS) convierten cada
-          ion en pares e-h ($w = 3.62\,\text{eV}/\text{par}$) con resolución $\text{FWHM} \approx 66\,\text{keV}$.<br>
-          · <span class="warn">⚠ Simplificación:</span> monocapa ideal en superficie sin colas de dispersión
-          profunda.<br>
-          <b>→ Conexión con Panel D:</b> la combinación de capas estratificadas y adquisición estocástica en tiempo real
-          se analiza en una muestra real.
+          · <b>Cuantificación absoluta directa (*standardless*):</b> como la probabilidad de dispersión ($Z_2^2$) proviene de la ley electrostática de Coulomb pura, el RBS permite determinar la composición química de cualquier material desconocido comparando las áreas de los peaks, sin necesidad de calibrar con muestras patrón previas.<br><br>
+          <b>→ Conexión con Panel D:</b> a continuación se analiza cómo el flujo estocástico del haz y la estratificación multicapa construyen este espectro en tiempo real.
         </div>
 
       </div>
@@ -530,7 +518,7 @@
           \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} +
           \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
           <div class="formula-meta">
-            $[S]$ (en $\text{eV/\AA}$) transforma directamente la anchura en energía $\Delta E$ de un pico en el espesor
+            $[S]$ (en $\text{eV/\AA}$) transforma directamente la anchura en energía $\Delta E$ de un peak en el espesor
             físico $x$ de la película.
           </div>
         </div>
@@ -539,9 +527,7 @@
           · <b>Resolución en profundidad:</b> mientras $K(M_2)$ identifica qué elemento compone cada capa (eje de
           energía), el Factor de Parada $[S]$ determina su espesor físico a partir de la pérdida de energía inelástica
           al entrar y salir de la matriz.<br>
-          · <span class="warn">⚠ Simplificaciones:</span> simulación interfacial en superficie; probabilidad de evento
-          ponderada por $P_i = Z_{2,i}^2 / \sum Z_{2,j}^2$ (Au acumula $\sim 79\%$ de las cuentas vs $\sim 0.5\%$ de C a
-          igual abundancia).<br>
+          · <b>Sensibilidad elemental ponderada ($Z_2^2$):</b> la probabilidad de interacción estocástica escala con la sección eficaz de Rutherford ($\propto Z_2^2$). Por ello, el Oro acumula $\sim 79\%$ de las detecciones frente al $\sim 0.5\%$ del Carbono a igual concentración.<br><br>
           <b>→ Cierre y proyección (Panel E):</b> el mismo fenómeno de frenado electrónico continuo que define $[S]$
           aquí en nanómetros, gobierna la deposición macroscópica de dosis en hadronterapia oncológica.
         </div>
@@ -571,7 +557,7 @@
           circundantes.<br><br>
           · <b>Curva de Bragg vs. Rayos X:</b> los rayos X convencionales ($6\,\text{MV}$, línea azul punteada) decaen
           exponencialmente e irradian tejido sano antes y después del tumor. Las partículas pesadas, en cambio, entregan
-          casi toda su energía en una zona terminal estrecha (**Pico de Bragg**), con dosis nula detrás del tumor.<br>
+          casi toda su energía en una zona terminal estrecha (**Peak de Bragg**), con dosis nula detrás del tumor.<br>
           · <b>Iones $^{12}\mathrm{C}^{6+}$:</b> su carga $z=6$ eleva la ionización ($z^2=36$), provocando daños
           irreparables en el ADN de tumores radiorresistentes.
         </p>
@@ -607,7 +593,7 @@
           $$-\frac{dE}{dx} \;\propto\; \frac{z^2}{v^2}$$
           <div class="formula-meta">
             Al desacelerar en el tejido, la velocidad $v$ disminuye; esto hace que la tasa de frenado $-\frac{dE}{dx}$
-            aumente bruscamente justo antes del reposo, concentrando la dosis en el <b>pico de Bragg</b>.
+            aumente bruscamente justo antes del reposo, concentrando la dosis en el <b>Peak de Bragg</b>.
           </div>
         </div>
 
@@ -616,8 +602,7 @@
           y que sustenta el RBS, gobierna hoy el frenado de iones en terapias oncológicas avanzadas.<br>
           · <b>Medicina Nuclear (PET/SPECT):</b> originada con los radiotrazadores de Georg de Hevesy (1912) en el
           laboratorio de Rutherford, utiliza radiofármacos (como $^{18}\text{F}$ en PET) para diagnóstico molecular.<br>
-          · <span class="warn">⚠ Simplificación:</span> tejido modelado como agua homogénea; la simulación numérica
-          interna utiliza Bethe-Bloch relativista calibrado con datos clínicos NIST PSTAR / ICRU 73.
+          · <b>Rigor de modelado:</b> la simulación numérica implementa el poder de frenado de Bethe-Bloch relativista calibrado con datos del NIST PSTAR y reportes ICRU 73.
         </div>
 
       </div>
@@ -774,7 +759,7 @@
                 <div class="tl-year amber">1930 · Bethe</div>
                 <div class="tl-title">Fórmula de Bethe-Bloch — poder de frenado cuántico</div>
                 <p class="tl-desc">Hans Bethe formula la teoría cuántica de pérdida de energía de iones en la materia
-                  por ionizaciones atómicas. Gobierna el perfil de profundidad en RBS (Paneles B–D) y el pico de Bragg
+                  por ionizaciones atómicas. Gobierna el perfil de profundidad en RBS (Paneles B–D) y el Peak de Bragg
                   en hadronterapia (<b>Panel E</b>).</p>
               </div>
             </div>

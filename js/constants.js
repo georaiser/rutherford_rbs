@@ -41,9 +41,9 @@ const PHYS = Object.freeze({
  * M2: masa atómica en u (determina la posición del pico vía K)
  */
 const ELEMENTS = Object.freeze([
-  { sym: 'C',  Z2:  6, M2:  12,  color: '#38bdf8' },
-  { sym: 'Si', Z2: 14, M2:  28,  color: '#4ade80' },
-  { sym: 'Fe', Z2: 26, M2:  56,  color: '#facc15' },
-  { sym: 'Ag', Z2: 47, M2: 108,  color: '#fb923c' },
-  { sym: 'Au', Z2: 79, M2: 197,  color: '#f59e0b' },
+  { sym: 'C',  name: 'Carbono', Z2:  6, M2:  12,  color: '#38bdf8' },
+  { sym: 'Si', name: 'Silicio', Z2: 14, M2:  28,  color: '#4ade80' },
+  { sym: 'Fe', name: 'Hierro',  Z2: 26, M2:  56,  color: '#facc15' },
+  { sym: 'Ag', name: 'Plata',   Z2: 47, M2: 108,  color: '#fb923c' },
+  { sym: 'Au', name: 'Oro',     Z2: 79, M2: 197,  color: '#f59e0b' },
 ]);

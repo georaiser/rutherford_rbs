@@ -322,6 +322,9 @@ const panelB = (() => {
     if (s && parseFloat(s.value) !== M2) s.value = M2;
     state  = 'incoming'; tState = 0; // reiniciar ciclo
     updateDOM();
+    if (typeof panelC !== 'undefined' && panelC.setM2Marker) {
+      panelC.setM2Marker(M2);
+    }
   }
 
   function init() {
