@@ -232,17 +232,16 @@
       <div class="panel-body">
 
         <p class="note">
-          <b>Determinación elemental por colisión elástica:</b><br>
-          En la técnica RBS, la identidad de los elementos se determina a partir
-          de la energía de una partícula $\alpha$ después de una colisión elástica
-          con un núcleo del blanco ($M_2$). La conservación del momento lineal y
-          de la energía cinética establece:
+          <b>Naturaleza electrostática de la colisión elástica:</b><br>
+          En la técnica RBS, la colisión <b>no es un choque mecánico por contacto físico</b>, sino una <b>interacción
+            electrostática repulsiva sin contacto</b> descrita por la Ley de Coulomb ($F(r) = \frac{k Z_1 Z_2
+          e^2}{r^2}$). Al tratarse de una fuerza central puramente conservativa, la energía mecánica se conserva de
+          forma perfecta:
           $$E_1=K(M_2,\theta)E_0,\qquad
           E_{\text{rec}}=E_0-E_1=(1-K)E_0$$
           <br>
-          · <b>Factor cinemático $K=E_1/E_0$</b> representa la fracción de energía
-          que conserva la partícula $\alpha$ y depende de las masas $M_1$, $M_2$
-          y del ángulo de dispersión $\theta$.<br><br>
+          · <b>Factor cinemático $K=E_1/E_0$:</b> representa la fracción de energía que conserva la partícula $\alpha$ y
+          depende únicamente de las masas $M_1$, $M_2$ y del ángulo de dispersión $\theta$.<br><br>
 
           · <b>Energía de la partícula dispersada $E_1$:</b>
           es la energía cinética que conserva la partícula $\alpha$ después de la
@@ -592,15 +591,17 @@
           <b>espectro RBS</b>. Cada elemento químico presente en la muestra genera un peak individual que desacopla
           analíticamente dos propiedades fundamentales:<br><br>
 
-          1. <b>Posición en energía ($E_1 = K\cdot E_0$):</b> determinada unívocamente por la masa nuclear $M_2$
+          1. <b>Posición en energía ($E_1 = K\cdot E_0$):</b> determinada por la masa nuclear $M_2$
           mediante el factor cinemático $K$. Núcleos más pesados conservan mayor energía cinética ($E_1$ más alto,
           situado más a la derecha). Esta posición es <b>invariante</b> ante variaciones en la concentración del
           elemento.<br><br>
 
           2. <b>Área e intensidad ($A_i \propto N_i \cdot Z_2^2$):</b> cuantifica la abundancia atómica superficial
-          $N_i$ ($\text{átomos/cm}^2$), modulada por la sección eficaz de Coulomb ($\sigma \propto Z_2^2$). Núcleos con
-          mayor número atómico desvían muchas más partículas alfa, generando peaks más intensos a igual
-          concentración.<br><br>
+          $N_i$ ($\text{átomos/cm}^2$), modulada por la <b>sección eficaz de Coulomb</b> ($\sigma \propto Z_2^2$).
+          Esta no representa el radio físico del núcleo, sino el <em>área efectiva</em> del campo electrostático
+          repulsivo: a mayor número de protones ($Z_2$), más intenso es el campo de Coulomb y más partículas $\alpha$
+          son desviadas hacia el detector ($\text{Au}$ genera $173.4\times$ más cuentas que $\text{C}$ a igual
+          concentración).<br><br>
 
           <b>Laboratorio interactivo:</b> ajusta las concentraciones $N_i$ de cada elemento (C, Si, Fe, Ag, Au) para
           comprobar cómo varía la altura del peak sin desplazar su posición en energía.
@@ -619,26 +620,59 @@
 
         <div class="formula-box">
           <div class="flabel">Leyes fundamentales del espectro RBS — Cinemática y Rendimiento</div>
-          $$E_1 = K(M_2,\theta)\cdot E_0, \qquad A_i = H_i\cdot\left(\sigma\sqrt{2\pi}\right) \;\propto\; N_i \cdot
-          Z_2^2$$
+          $$E_1 = K(M_2,\theta)\cdot E_0, \qquad A_i \;\propto\; \underbrace{N_i}_{\text{Cantidad de átomos}} \;\times\;
+          \underbrace{Z_2^2}_{\text{Sección eficaz de Coulomb}}$$
           <div class="formula-meta">
-            · <b>Posición $E_1$ (Eje $X$):</b> firma energética unívoca fijada por la masa $M_2$. Invariante ante
-            cambios de abundancia.<br>
-            · <b>Área $A_i$ y Altura $H_i$ (Eje $Y$):</b> directamente proporcionales debido a la resolución
-            instrumental gaussiana fija del detector ($\sigma \approx 28\,\text{keV}$, $\text{FWHM} \approx
-            66\,\text{keV}$).<br>
-            · <b>Sensibilidad relativa ($Z_2^2$):</b> el oro ($Z_2=79$) genera $173.4\times$ más cuentas que el carbono
-            ($Z_2=6$) a igual concentración ($(79/6)^2 \approx 173.4$).
+            · <b>Posición $E_1$ (Eje $X$):</b> determinada unívocamente por la masa $M_2$ ($E_1 = K \cdot E_0$).
+            Invariante ante cambios de concentración.<br>
+            · <b>Área $A_i$ y Altura $H_i$ (Eje $Y$):</b> directamente proporcionales ($A_i = H_i \cdot
+            \sigma\sqrt{2\pi}$) debido a la resolución gaussiana fija del detector ($\sigma \approx
+            28\,\text{keV}$).<br><br>
+
+            <b>Ejemplo comparativo a igual concentración ($N_i = 100\%$):</b>
+            <div style="overflow-x:auto; margin: 8px 0 6px;">
+              <table
+                style="width:100%; font-size:0.78rem; border-collapse:collapse; text-align:center; background:rgba(0,0,0,0.25); border-radius:4px;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border); color:var(--text);">
+                    <th style="padding:6px 8px; text-align:left;">Elemento</th>
+                    <th style="padding:6px 8px;">Carga nuclear $Z_2$</th>
+                    <th style="padding:6px 8px;">Sección eficaz $\sigma \propto Z_2^2$</th>
+                    <th style="padding:6px 8px;">Altura / Área en el espectro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color:#38bdf8;">
+                    <td style="padding:5px 8px; text-align:left; font-weight:600;">Carbono ($^{12}\text{C}$)</td>
+                    <td style="padding:5px 8px;">$Z_2 = 6$</td>
+                    <td style="padding:5px 8px;">$6^2 = 36$</td>
+                    <td style="padding:5px 8px;"><b>$1\times$</b> (Peak pequeño)</td>
+                  </tr>
+                  <tr style="color:#f59e0b;">
+                    <td style="padding:5px 8px; text-align:left; font-weight:600;">Oro ($^{197}\text{Au}$)</td>
+                    <td style="padding:5px 8px;">$Z_2 = 79$</td>
+                    <td style="padding:5px 8px;">$79^2 = 6241$</td>
+                    <td style="padding:5px 8px;"><b>$173.4\times$</b> (Peak dominante)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            $$\frac{\sigma_{\text{Au}}}{\sigma_{\text{C}}} = \left(\frac{79}{6}\right)^2 = \frac{6241}{36} \approx
+            \mathbf{173.4}$$
+            · <b>Conclusión física visual:</b> a igual abundancia, el Oro genera un peak <b>173.4 veces más alto</b> que
+            el Carbono porque sus 79 protones repelen con un campo electrostático inmensamente mayor, desviando muchas
+            más partículas $\alpha$ hacia el detector.
           </div>
         </div>
 
         <div class="note">
-          · <b>Cuantificación absoluta sin patrones (<i>standardless</i>):</b> al derivarse la sección eficaz
-          directamente de la ley de Coulomb, la estequiometría de una muestra se obtiene calculando la razón de las
-          áreas de los peaks:
+          <b>Importancia en la práctica de laboratorio (RBS):</b><br>
+          · <b>Alta sensibilidad a elementos pesados:</b> RBS puede detectar trazas mínimas (partes por millón, ppm) de
+          impurezas pesadas sobre sustratos livianos (como metales pesados en silicio o carbono).<br>
+          · <b>Cuantificación absoluta sin patrones (<i>standardless</i>):</b> como la sección eficaz de Coulomb
+          ($\sigma \propto Z_2^2$) se calcula analíticamente a partir de la ley de Coulomb pura, <b>no se necesitan
+            patrones de calibración externos</b> para determinar la estequiometría exacta de la muestra:
           $$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
-          Esta propiedad convierte al RBS en una técnica analítica cuantitativa de referencia absoluta, sin necesidad de
-          calibraciones previas.<br><br>
           <b>→ Conexión con Panel D:</b> este modelo describe átomos en superficie. Cuando los iones penetran en el
           material, experimentan frenado inelástico continuo con los electrones, ensanchando los peaks hacia energías
           menores para revelar el perfil de profundidad y espesor nanométrico.
