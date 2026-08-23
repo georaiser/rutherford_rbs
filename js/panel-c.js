@@ -6,13 +6,18 @@
  *   2. Curva envolvente total: suma continua de todas las contribuciones.
  *   3. Linea de referencia cinematica: E0 = 2.0 MeV (frontera del haz).
  *   4. Marcador dinamico M2 sincronizado con Panel B.
- *   5. Tooltip flotante interactivo (Dark Glass) con fijacion por clic.
- *   6. Sliders de concentracion superficial N_i (0-100%).
+ *   5. Presets de muestras reales de laboratorio (Au/Si, Fe+C, Ag/Si, Multicomponente).
+ *   6. Selector de Ganancia Y (x1, x5, x20, Auto-Escala).
+ *   7. Selector de Capas de visualización (Ambas, Solo Total, Deconvolución).
+ *   8. Cuantificación estequiométrica en tiempo real (standardless).
+ *   9. Tooltip flotante interactivo (Dark Glass) con fijacion por clic.
+ *  10. Sliders de concentracion superficial N_i (0-100%).
  *
  * Modelo fisico:
  *   Posicion:  E1 = K(M2, theta) * E0       [factor cinematico, Chu et al. 1978]
  *   Area:      A_i prop H_i prop N_i * Z2^2  [seccion eficaz Coulomb, theta y E0 fijos]
  *   Relacion area-altura: A_i = H_i * sigma * sqrt(2pi)  [detector gaussiano, sigma = 28 keV]
+ *   Estequiometria: N_A / N_B = (A_A / Z_A^2) / (A_B / Z_B^2)  [analisis standardless]
  *
  * Depende de: constants.js (PHYS, ELEMENTS), physics.js (Physics)
  */
@@ -33,6 +38,9 @@ const panelC = (() => {
   let M2_marker    = 197;   // u — posicion del marcador dinamico (sincronizado con Panel B)
   let hoveredPeak  = null;  // simbolo del elemento bajo el cursor
   let selectedPeak = null;  // simbolo del elemento fijado con clic
+
+  let currentGain   = 1;     // 1, 5, 20 o 'auto'
+  let currentPreset = 'all'; // 'all', 'au_si', 'fe_c', 'ag_si'
 
   // Concentraciones relativas N_i: [0, 1] — inicialmente al maximo
   const concentrations = {};
@@ -56,17 +64,119 @@ const panelC = (() => {
 
   function buildPeaks() {
     const MAX_REF = PHYS.Z2_AU * PHYS.Z2_AU; // 79² = 6241 (Au a N=100%, referencia nominal de fondo de escala)
-    const peaks = ELEMENTS.map(el => {
+    
+    // 1. Rendimientos físicos exactos: A_i ∝ N_i · Z₂²
+    const rawPeaks = ELEMENTS.map(el => {
       const K  = Physics.calcK(el.M2, PHYS.THETA_DET);
       const E1 = K !== null ? K * PHYS.E0_RBS : null;
       const xs = Physics.relCrossSection(el.Z2); // Z₂²
       const Ni = concentrations[el.sym] !== undefined ? concentrations[el.sym] : 1.0;
-      const h  = xs * Ni;  // Rendimiento físico: A_i ∝ N_i · Z₂²
-      const hNorm = h / MAX_REF; // Altura normalizada respecto a la referencia de escala
-      return { ...el, E1, K, xs, Ni, h, hNorm };
+      const h  = xs * Ni;
+      return { ...el, E1, K, xs, Ni, h };
     }).filter(p => p.E1 !== null);
 
+    // 2. Determinar escala efectiva según la ganancia activa
+    let scaleRef = MAX_REF;
+    if (currentGain === 'auto') {
+      const maxActive = Math.max(...rawPeaks.map(p => p.h), 1e-9);
+      scaleRef = maxActive;
+    } else {
+      const mult = typeof currentGain === 'number' ? currentGain : 1;
+      scaleRef = MAX_REF / mult;
+    }
+
+    const peaks = rawPeaks.map(p => {
+      const hNorm    = Math.min(p.h / scaleRef, 1.15); // altura normalizada para el canvas
+      const hRawNorm = p.h / MAX_REF;                 // porcentaje respecto al fondo de escala nominal
+      return { ...p, hNorm, hRawNorm };
+    });
+
     return peaks;
+  }
+
+  // ── Cuantificación estequiométrica en tiempo real (Materiales Reales) ─────
+
+  const KNOWN_PHASES = {
+    'Fe3C':   'Cementita (Acero templado)',
+    'Fe2C':   'Carburo de hierro (Hägg)',
+    'FeC':    'Carburo de hierro',
+    'Au2Si':  'Siliciuro de oro (Fase de contacto)',
+    'Au5Si':  'Siliciuro de oro (Eutéctico)',
+    'AuSi':   'Siliciuro de oro',
+    'SiC':    'Carburo de silicio (Semiconductor)',
+    'Ag3Au':  'Electrum (Aleación noble)',
+    'AgAu':   'Aleación Plata-Oro',
+    'FeSi2':  'Siliciuro de hierro (Termoeléctrico)',
+    'FeSi':   'Siliciuro de hierro',
+    'Fe3Si':  'Siliciuro de hierro ferromagnético',
+    'Ag3Si':  'Siliciuro de plata'
+  };
+
+  const SUBSCRIPTS = { '0':'₀', '1':'₁', '2':'₂', '3':'₃', '4':'₄', '5':'₅', '6':'₆', '7':'₇', '8':'₈', '9':'₉', '.':'·' };
+
+  function toSubscript(numStr) {
+    return numStr.split('').map(c => SUBSCRIPTS[c] || c).join('');
+  }
+
+  function updateStoichiometry() {
+    const formulaEl = document.getElementById('stoichFormula');
+    const ratioEl   = document.getElementById('stoichRatio');
+    if (!formulaEl || !ratioEl) return;
+
+    const active = ELEMENTS.filter(el => (concentrations[el.sym] || 0) > 0.001);
+
+    if (active.length === 0) {
+      formulaEl.textContent = 'Muestra vacía (Nᵢ = 0)';
+      ratioEl.textContent   = 'Sin señal detectada';
+      return;
+    }
+
+    if (active.length === 1) {
+      const el = active[0];
+      const pct = Math.round(concentrations[el.sym] * 100);
+      formulaEl.textContent = `${el.sym} elemental (${pct}%)`;
+      ratioEl.textContent   = `Monocapa pura de ${el.name || el.sym}`;
+      return;
+    }
+
+    // Normalizar respecto al elemento de menor abundancia activa
+    const minConc = Math.min(...active.map(el => concentrations[el.sym]));
+    
+    // Generar clave canónica para buscar en la base de datos de fases reales
+    let formulaCleanKey = '';
+    const parts = active.map(el => {
+      const rawRatio = concentrations[el.sym] / minConc;
+      const rounded = Math.round(rawRatio);
+      const isInteger = Math.abs(rawRatio - rounded) < 0.08;
+      
+      let subStr = '';
+      if (isInteger) {
+        formulaCleanKey += el.sym + (rounded > 1 ? rounded : '');
+        subStr = rounded > 1 ? toSubscript(rounded.toString()) : '';
+      } else {
+        const dec = rawRatio.toFixed(2);
+        formulaCleanKey += el.sym + dec;
+        subStr = toSubscript(dec);
+      }
+      return `${el.sym}${subStr}`;
+    });
+
+    const formulaFormatted = parts.join(' ');
+    const knownName = KNOWN_PHASES[formulaCleanKey] || (active.length === 5 ? 'Mezcla Multicomponente' : '');
+
+    formulaEl.innerHTML = formulaFormatted + (knownName ? ` <span style="font-weight:400; color:var(--text); font-size:0.76rem;">— ${knownName}</span>` : '');
+
+    // Razón directa entre los dos elementos principales
+    if (active.length === 2) {
+      const elA = active[0], elB = active[1];
+      const nA = concentrations[elA.sym], nB = concentrations[elB.sym];
+      const pctA = Math.round((nA / (nA + nB)) * 100);
+      const pctB = Math.round((nB / (nA + nB)) * 100);
+      const rAB = (nA / nB).toFixed(2);
+      ratioEl.textContent = `N(${elA.sym})/N(${elB.sym}) = ${rAB} (${pctA}% ${elA.sym}, ${pctB}% ${elB.sym} atómico)`;
+    } else {
+      ratioEl.textContent = `Cálculo N_i ∝ A_i / Z_i² (análisis sin patrones)`;
+    }
   }
 
   // ── Renderizado principal ──────────────────────────────────────────────────
@@ -233,6 +343,7 @@ const panelC = (() => {
     }
 
     drawAxes();
+    updateStoichiometry();
   }
 
   // ── Tooltip interactivo con datos fisicos del peak ─────────────────────────
@@ -249,7 +360,7 @@ const panelC = (() => {
       'Energ\u00eda peak E\u2081:      ' + p.E1.toFixed(4) + ' MeV',
       'Secci\u00f3n eficaz \u03c3:     Z\u2082\u00b2 = ' + p.xs + '  (\u00d7' + ratioC + ' vs C)',
       'Concentraci\u00f3n N\u1d62:    ' + Math.round(p.Ni * 100) + ' %',
-      'Rendimiento A\u1d62:        ' + (p.hNorm * 100).toFixed(1) + ' % del fondo escala'
+      'Rendimiento A\u1d62:        ' + (p.hRawNorm * 100).toFixed(1) + ' % del m\u00e1x. nominal'
     ];
 
     const pad = 12, lh = 17, tw = 268, th = lines.length * lh + pad * 2 + 10;
@@ -314,12 +425,13 @@ const panelC = (() => {
     ctx.fillStyle = 'rgba(200, 220, 240, 0.80)';
     ctx.fillText('Energ\u00eda del proyectil retrodispersado  E\u2081  (MeV)', PAD.L + PW / 2, H - 6);
 
-    // Eje Y: Rendimiento / Cuentas (prop Z2^2 * N_i)
+    // Eje Y: Rendimiento / Cuentas con indicación de ganancia activa
+    const gainStr = currentGain === 'auto' ? 'Auto-Escala' : (currentGain > 1 ? `\u00d7${currentGain}` : '1\u00d7');
     ctx.save();
     ctx.translate(14, PAD.T + PH / 2); ctx.rotate(-Math.PI / 2);
     ctx.textAlign = 'center'; ctx.font = '11px Inter, sans-serif';
     ctx.fillStyle = 'rgba(200, 220, 240, 0.80)';
-    ctx.fillText('Rendimiento (Cuentas)  A\u1d62  \u221d  Z\u2082\u00b2 \u00b7 N\u1d62', 0, 0);
+    ctx.fillText(`Rendimiento A\u1d62  [${gainStr}]  \u221d  Z\u2082\u00b2 \u00b7 N\u1d62`, 0, 0);
     ctx.restore();
 
     // Marcas porcentuales del eje Y
@@ -342,7 +454,6 @@ const panelC = (() => {
     let found  = null;
 
     for (const pp of peakPositions) {
-      // Detección vertical continua desde el ápice del peak hasta la línea base
       if (pp.peak.Ni > 0.001 && Math.abs(mx - pp.xp) < HIT && my >= pp.yp - 28 && my <= PAD.T + PH + 8) {
         found = pp.sym; break;
       }
@@ -384,27 +495,29 @@ const panelC = (() => {
     const container = document.getElementById('concSliders');
     if (!container) return;
     container.innerHTML = '';
+    container.style.cssText = 'display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 16px; margin: 4px 0 2px;';
+
     ELEMENTS.forEach(el => {
       const row = document.createElement('div');
       row.className = 'slider-row';
-      row.style.marginBottom = '4px';
+      row.style.cssText = 'display:flex; align-items:center; gap:8px; margin:0; padding:2px 0;';
 
       const label = document.createElement('span');
       label.className = 'slider-label';
-      label.style.cssText = 'display:flex;align-items:center;gap:6px;width:126px;flex-shrink:0';
+      label.style.cssText = 'display:flex; align-items:center; gap:5px; width:74px; flex-shrink:0;';
       label.innerHTML =
-        '<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' +
-        el.color + ';flex-shrink:0"></span><b style="color:' + el.color + '">' + el.sym +
-        '</b><span style="color:var(--muted);font-size:0.71rem">(Z\u2082=' + el.Z2 + ')</span>';
+        '<span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:' +
+        el.color + ';flex-shrink:0"></span><b style="color:' + el.color + ';font-size:0.82rem;">' + el.sym +
+        '</b><span style="color:var(--muted);font-size:0.68rem;margin-left:auto">(Z\u2082=' + el.Z2 + ')</span>';
 
       const slider = document.createElement('input');
       slider.type  = 'range';
       slider.min   = '0'; slider.max = '100'; slider.step = '1'; slider.value = '100';
-      slider.style.accentColor = el.color;
+      slider.style.cssText = 'flex:1; min-width:60px; height:4px; cursor:pointer;';
 
       const valSpan = document.createElement('span');
       valSpan.className   = 'slider-val';
-      valSpan.style.color = el.color;
+      valSpan.style.cssText = 'width:36px; text-align:right; font-family:"JetBrains Mono",monospace; font-size:0.75rem; color:var(--text);';
       valSpan.textContent = '100%';
 
       slider.addEventListener('input', function () {
@@ -420,6 +533,59 @@ const panelC = (() => {
     });
   }
 
+  // ── Modos: Presets de Muestras y Ganancia Y ─────────────────────────────────
+
+  function setGain(gain) {
+    currentGain = gain;
+    const btnIds = { 1: 'btnGain1', 5: 'btnGain5', 20: 'btnGain20', 'auto': 'btnGainAuto' };
+    Object.keys(btnIds).forEach(k => {
+      const b = document.getElementById(btnIds[k]);
+      if (b) b.classList.toggle('active', (k == gain || (k === 'auto' && gain === 'auto')));
+    });
+    draw();
+  }
+
+  function setPreset(preset) {
+    currentPreset = preset;
+    const presetsMap = {
+      all:    { C: 1.00, Si: 1.00, Fe: 1.00, Ag: 1.00, Au: 1.00 },
+      fe3c:   { C: 0.33, Si: 0.00, Fe: 1.00, Ag: 0.00, Au: 0.00 }, // Fe:C = 3:1 (Cementita)
+      au2si:  { C: 0.00, Si: 0.50, Fe: 0.00, Ag: 0.00, Au: 1.00 }, // Au:Si = 2:1 (Siliciuro de oro)
+      sic:    { C: 1.00, Si: 1.00, Fe: 0.00, Ag: 0.00, Au: 0.00 }, // Si:C = 1:1 (Carburo de silicio)
+      ag3au:  { C: 0.00, Si: 0.00, Fe: 0.00, Ag: 0.90, Au: 0.30 }, // Ag:Au = 3:1 (Electrum)
+      reset:  { C: 1.00, Si: 1.00, Fe: 1.00, Ag: 1.00, Au: 1.00 }
+    };
+    const target = presetsMap[preset] || presetsMap.all;
+    ELEMENTS.forEach(el => {
+      concentrations[el.sym] = target[el.sym] !== undefined ? target[el.sym] : 1.0;
+    });
+
+    // Sincronizar sliders en el DOM
+    const container = document.getElementById('concSliders');
+    if (container) {
+      const rows = container.querySelectorAll('.slider-row');
+      rows.forEach((row, i) => {
+        const el = ELEMENTS[i];
+        if (el) {
+          const slider  = row.querySelector('input[type=range]');
+          const valSpan = row.querySelector('.slider-val');
+          const pct = Math.round(concentrations[el.sym] * 100);
+          if (slider)  slider.value = pct;
+          if (valSpan) valSpan.textContent = pct + '%';
+        }
+      });
+    }
+
+    // Ganancia inteligente para que los peaks ligeros sean inmediatamente visibles
+    if (preset === 'fe3c' || preset === 'sic') {
+      setGain(5);
+    } else if (preset === 'au2si' || preset === 'ag3au' || preset === 'all' || preset === 'reset') {
+      setGain(1);
+    }
+
+    draw();
+  }
+
   // ── API publica ───────────────────────────────────────────────────────────
 
   /** Actualiza el marcador de masa desde Panel B y redibuja. */
@@ -433,6 +599,6 @@ const panelC = (() => {
     draw();
   }
 
-  return { init, draw, setM2Marker };
+  return { init, draw, setM2Marker, setPreset, setGain };
 
 })();

@@ -603,9 +603,39 @@
           son desviadas hacia el detector ($\text{Au}$ genera $173.4\times$ más cuentas que $\text{C}$ a igual
           concentración).<br><br>
 
-          <b>Laboratorio interactivo:</b> ajusta las concentraciones $N_i$ de cada elemento (C, Si, Fe, Ag, Au) para
-          comprobar cómo varía la altura del peak sin desplazar su posición en energía.
+          <b>Laboratorio interactivo:</b> ajusta las concentraciones $N_i$ o selecciona materiales reales para
+          descubrir sus fórmulas estequiométricas exactas mediante un <b>análisis no destructivo</b> (sin alterar,
+          disolver ni dañar la muestra).
         </p>
+
+        <!-- Barra de herramientas: Presets de muestra y Ganancia Y -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+          
+          <!-- Presets de Muestras Reales -->
+          <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+            <span style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Material:</span>
+            <div class="mode-toggle" id="cPresetGroup" style="margin-left:0;">
+              <button class="mode-btn" onclick="panelC.setPreset('all')" id="btnPresetAll">Multicomponente</button>
+              <button class="mode-btn" onclick="panelC.setPreset('fe3c')" id="btnPresetFe3C" title="Cementita: 3 Fe : 1 C (Acero)">Fe₃C (Acero)</button>
+              <button class="mode-btn" onclick="panelC.setPreset('au2si')" id="btnPresetAu2Si" title="Siliciuro de oro: 2 Au : 1 Si (Microelectrónica)">Au₂Si</button>
+              <button class="mode-btn" onclick="panelC.setPreset('sic')" id="btnPresetSiC" title="Carburo de silicio: 1 Si : 1 C (Semiconductor)">SiC</button>
+              <button class="mode-btn" onclick="panelC.setPreset('ag3au')" id="btnPresetAg3Au" title="Electrum: 3 Ag : 1 Au (Aleación noble)">Ag₃Au</button>
+              <button class="mode-btn" onclick="panelC.setPreset('reset')" id="btnPresetReset" title="Restablecer concentraciones al 100%">↺ Restablecer</button>
+            </div>
+          </div>
+
+          <!-- Ganancia Vertical / Escala -->
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Ganancia Y:</span>
+            <div class="mode-toggle" id="cGainGroup" style="margin-left:0;">
+              <button class="mode-btn active" onclick="panelC.setGain(1)" id="btnGain1" title="Escala absoluta nominal">×1</button>
+              <button class="mode-btn" onclick="panelC.setGain(5)" id="btnGain5" title="Aumentar altura ×5 para ver Fe y Si">×5</button>
+              <button class="mode-btn" onclick="panelC.setGain(20)" id="btnGain20" title="Aumentar altura ×20 para ver Carbono">×20</button>
+              <button class="mode-btn" onclick="panelC.setGain('auto')" id="btnGainAuto" title="Ajustar automáticamente al peak más alto activo">Auto</button>
+            </div>
+          </div>
+
+        </div>
 
         <canvas id="canvasC" width="800" height="280"></canvas>
 
@@ -616,6 +646,17 @@
             resaltarlo.
           </p>
           <div id="concSliders"></div>
+
+          <!-- Tarjeta de cuantificación estequiométrica en tiempo real (Opción 4) -->
+          <div id="stoichiometryCard" style="margin-top:10px; padding:9px 13px; background:rgba(4, 8, 20, 0.75); border:1px solid var(--border); border-left:3px solid var(--amber); border-radius:6px; font-size:0.78rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <span style="font-weight:600; color:var(--amber);">Composición estequiométrica deducida (<i>standardless</i>):</span>
+              <span id="stoichFormula" style="font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--cyan); margin-left:6px; font-size:0.88rem;">C₁·₀₀ Si₁·₀₀ Fe₁·₀₀ Ag₁·₀₀ Au₁·₀₀</span>
+            </div>
+            <div id="stoichRatio" style="font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--muted);">
+              Cálculo: N_i ∝ A_i / Z_i²
+            </div>
+          </div>
         </div>
 
         <div class="formula-box">
@@ -667,6 +708,9 @@
 
         <div class="note">
           <b>Importancia en la práctica de laboratorio (RBS):</b><br>
+          · <b>Análisis no destructivo:</b> permite descubrir la estequiometría y fórmula química exacta directamente
+          <i>in situ</i> sin destruir, pulverizar, disolver ni alterar químicamente la muestra (fundamental para obleas
+          de semiconductores, películas delgadas y piezas arqueológicas o de arte).<br>
           · <b>Alta sensibilidad a elementos pesados:</b> RBS puede detectar trazas mínimas (partes por millón, ppm) de
           impurezas pesadas sobre sustratos livianos (como metales pesados en silicio o carbono).<br>
           · <b>Cuantificación absoluta sin patrones (<i>standardless</i>):</b> como la sección eficaz de Coulomb
