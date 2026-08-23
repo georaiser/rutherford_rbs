@@ -297,63 +297,67 @@ En una sola medición no destructiva, RBS desacopla simultáneamente:
 
 ---
 
-### 5. Panel E — Hadronterapia y Curva de Bragg
+### 5. Panel E — Espectrometría PIXE y la Ley de Moseley
 
-#### 5.1 Problema clínico: dosis en profundidad
-La radioterapia convencional con fotones (rayos X) deposita su máxima energía cerca de la superficie de la piel y sigue dañando el tejido sano mientras decae exponencialmente hacia la zona profunda donde se aloja el tumor. La hadronterapia aborda esta limitación clínica aprovechando la física de partículas pesadas cargadas.
+#### 5.1 ¿Qué es la técnica PIXE?
+La **Espectrometría de Emisión de Rayos X Inducida por Partículas** (*Particle-Induced X-Ray Emission*, PIXE) es la técnica analítica complementaria del RBS en los aceleradores de iones modernos (como el acelerador AGLAE del Museo del Louvre en París). Mientras que el RBS identifica núcleos mediante dispersión elástica nuclear y mide espesores en profundidad ($[S]\cdot x$), PIXE excita la nube electrónica atómica para cuantificar elementos traza en concentraciones de partes por millón (PPM) de forma **completamente no destructiva**.
 
-#### 5.2 Fórmula de Bethe-Bloch relativista
-A diferencia de la dispersión nuclear elástica del RBS, el viaje de un protón por el tejido está dominado por millones de interacciones inelásticas con los electrones del medio. La pérdida de energía por unidad de longitud (poder de frenado electrónico) se describe con la ecuación de Bethe-Bloch (PDG 2022):
-$$-\frac{dE}{dx} = K_\text{BB}\,\rho\,\frac{Z_1^2}{\beta^2}\left[\ln\!\left(\frac{2m_e c^2\beta^2\gamma^2}{I}\right) - \beta^2\right]$$
-donde $\beta=v/c$, $\gamma=(1-\beta^2)^{-1/2}$, y para agua (tejido blando):
-- $K_\text{BB} = 0.307075\text{ MeV}\cdot\text{cm}^2/\text{g}$ (constante universal)
-- $Z/A = 0.5551$ (agua), $\rho = 1.0\text{ g/cm}^3$
-- $I_{\text{H}_2\text{O}} = 79.7\text{ eV}$ (ICRU 37)
+#### 5.2 Mecanismo cuántico de emisión
+1. **Ionización por impacto:** Un ión del haz incidente ($\alpha$ de $\sim 2\text{--}3\,\text{MeV}$) colisiona inelásticamente con un electrón de una capa interna fuertemente ligada (capa $K$ con $n=1$ o capa $L$ con $n=2$), expulsándolo fuera del átomo y dejando una vacancia electrónica.
+2. **Desexcitación cuántica:** En un tiempo de $\sim 10^{-16}\,\text{s}$, un electrón de una capa superior cae espontáneamente para llenar la vacancia.
+3. **Emisión del fotón de Rayos X:** La energía liberada en la transición electrónica se emite como un fotón cuántico característico:
+   $$\Delta E = h\nu = \frac{hc}{\lambda} = E_{\text{inicial}} - E_{\text{final}}$$
 
-**Factor de corrección $C_\text{corr} = 0.56$:** La fórmula de Bethe-Bloch simple (sin correcciones de densidad ni de capa) sobreestima el poder de frenado real en $\sim 1.8\times$ respecto a los datos NIST PSTAR. La simulación aplica:
-$$\left(-\frac{dE}{dx}\right)_\text{sim} = 0.56 \times \left(-\frac{dE}{dx}\right)_\text{B-B simple}$$
-Este factor reproduce rangos NIST PSTAR con error $<5\%$ en $70$–$430\text{ MeV}$. Se declara explícitamente como simplificación.
+#### 5.3 La Ley de Moseley (1913) y el Modelo de Bohr
+Trabajando en el laboratorio de Ernest Rutherford en la Universidad de Manchester en 1913, **Henry Moseley** midió sistemáticamente las frecuencias de los rayos X característicos de decenas de elementos. Descubrió la relación lineal fundamental:
+$$\sqrt{\nu} = C \cdot (Z - \sigma)$$
+donde $Z$ es el número atómico y $\sigma$ es la constante de apantallamiento electrónico.
 
-#### 5.3 La Curva de Bragg: física del peak
-La dependencia de $dE/dx \propto 1/v^2$ revela un fenómeno crítico: a medida que el ión penetra, se frena ($v$ disminuye), lo que a su vez *aumenta* drásticamente el frenado. Esto desencadena un depósito masivo de energía justo en los últimos milímetros de la trayectoria, creando el pronunciado **Pico de Bragg**. Al final del rango físico, la dosis cae abruptamente a cero, protegiendo totalmente el tejido sano situado detrás del tumor.
+Conectada con la constante de Rydberg ($R_y = 13.6\,\text{eV}$):
+- **Línea $K_\alpha$ (Transición $L \to K$, $n=2 \to 1$, $\sigma = 1$):**
+  $$E_{K\alpha} = R_y \cdot (Z - 1)^2 \left(\frac{1}{1^2} - \frac{1}{2^2}\right) = \frac{3}{4} R_y \, (Z - 1)^2$$
+- **Línea $K_\beta$ (Transición $M \to K$, $n=3 \to 1$, $\sigma = 1$):**
+  $$E_{K\beta} = R_y \cdot (Z - 1)^2 \left(\frac{1}{1^2} - \frac{1}{3^2}\right) = \frac{8}{9} R_y \, (Z - 1)^2$$
+- **Línea $L_\alpha$ (Transición $M \to L$, $n=3 \to 2$, $\sigma \approx 7.4$):**
+  $$E_{L\alpha} \approx R_y \cdot (Z - 7.4)^2 \left(\frac{1}{2^2} - \frac{1}{3^2}\right) = \frac{5}{36} R_y \, (Z - 7.4)^2$$
 
-#### 5.4 Protones vs. iones carbono-12
-El panel compara dos modalidades clínicas con rangos de energía y profundidad bien definidos:
+#### 5.4 Importancia histórica y física
+El hallazgo de Moseley constituyó la **primera confirmación experimental directa de que el número atómico $Z$ es la carga nuclear real** postulada por Rutherford en 1911. Ordenó definitivamente la Tabla Periódica en función de $Z$ y no del peso atómico (resolviendo anomalías como Cobalto/Níquel y Argón/Potasio).
 
-| Partícula | $Z_1$ | Masa | Energía (slider) | Rango en agua | Uso clínico principal |
-|---|---|---|---|---|---|
-| Protón | 1 | 1 u | 70–230 MeV | ~4–32 cm | Tumores pediátricos, oculares, cabeza/cuello |
-| $^{12}$C$^{6+}$ | 6 | 12 u | 100–430 MeV/u | ~3–26 cm | Tumores radioresistentes, cordomas |
+#### 5.5 Valores experimentales verificados en la simulación
+| Elemento | Carga $Z$ | Línea $K_\alpha$ | Línea $K_\beta$ | Línea $L_\alpha$ | Línea $L_\beta$ | Longitud de onda $\lambda$ | Aplicación en Patrimonio / Louvre |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+| **Titanio ($\text{Ti}$)** | $22$ | $4.51\,\text{keV}$ | $4.93\,\text{keV}$ | — | — | $2.749\,\text{\AA}$ | Blanco de titanio (pigmento moderno) |
+| **Hierro ($\text{Fe}$)** | $26$ | $6.40\,\text{keV}$ | $7.06\,\text{keV}$ | $0.70\,\text{keV}$ | — | $1.937\,\text{\AA}$ | Ocre rojo / meteoritos y aleaciones |
+| **Cobre ($\text{Cu}$)** | $29$ | $8.04\,\text{keV}$ | $8.91\,\text{keV}$ | $0.93\,\text{keV}$ | — | $1.542\,\text{\AA}$ | Azul azurita y verde malaquita |
+| **Plata ($\text{Ag}$)** | $47$ | $22.16\,\text{keV}$ | $24.94\,\text{keV}$ | $2.98\,\text{keV}$ | — | $0.559\,\text{\AA}$ | Orfebrería y monedas históricas |
+| **Oro ($\text{Au}$)** | $79$ | $68.8\,\text{keV}$ | $77.9\,\text{keV}$ | $9.71\,\text{keV}$ | $11.44\,\text{keV}$ | $1.277\,\text{\AA}$ | Joyas reales y pan de oro |
+| **Mercurio ($\text{Hg}$)** | $80$ | $70.8\,\text{keV}$ | $80.2\,\text{keV}$ | $9.99\,\text{keV}$ | $11.82\,\text{keV}$ | $1.241\,\text{\AA}$ | Rojo bermellón histórico (cinabrio) |
+| **Plomo ($\text{Pb}$)** | $82$ | $74.9\,\text{keV}$ | $84.9\,\text{keV}$ | $10.55\,\text{keV}$ | $12.61\,\text{keV}$ | $1.175\,\text{\AA}$ | Blanco de plomo (albayalde en óleos) |
 
-Valores de referencia (NIST PSTAR / ICRU 73):
-- Protón **150 MeV** → rango $\approx 15.8\text{ cm}$ (tumores a profundidad media)
-- Protón **230 MeV** → rango $\approx 32\text{ cm}$ (máximo clínico, tumores abdominales)
-- $^{12}$C **290 MeV/u** (energía típica de HIMAC, Chiba) → rango $\approx 14.7\text{ cm}$
+#### 5.6 El tándem sinérgico: RBS + PIXE
+En un laboratorio de análisis por haces de iones (IBA):
+- **RBS:** Resuelve masas pesadas, perfiles de concentración en profundidad y espesores nanométricos mediante colisión elástica.
+- **PIXE:** Identifica inequívocamente elementos adyacentes de masa similar y detecta impurezas ultra-diluidas (PPM) mediante fotones característicos cuantizados. Ambas técnicas se adquieren simultáneamente con el mismo haz de partículas $\alpha$.
 
-Los iones de carbono presentan: (i) frenado $Z_1^2 = 36\times$ mayor al inicio, (ii) dispersión lateral $\sim 3\times$ menor que protones (trayectorias más rígidas), y (iii) RBE $\approx 2$–$3$ frente a $\approx 1.1$ de los protones. La "cola de fragmentación" más allá del pico de Bragg es una limitación dosimétrica que requiere planificación específica.
+#### 5.7 ¿De qué depende el tipo de salto cuántico ($K_\alpha, K_\beta, L_\alpha, L_\beta$)?
+El tipo de transición radiativa que se observa experimentalmente depende de cuatro factores físicos fundamentales:
 
-#### 5.5 Straggling (dispersión de rango)
-Debido a la naturaleza estadística de las colisiones independientes con los electrones, no todas las partículas iniciales idénticas se detienen exactamente en la misma profundidad. Esta variación estocástica produce un ensanchamiento gaussiano del peak ideal de Bragg conocido como *straggling* o dispersión de rango.
+1. **Ubicación de la vacancia inicial (Sección eficaz de ionización por capa $\sigma_K, \sigma_L$):**
+   Para que ocurra una serie $K$, el proyectil $\alpha$ debe ionizar un electrón de la capa $K$ ($n=1$).
+   - En elementos de $Z$ bajo/medio ($\text{Ti, Fe, Cu}$ con $E_K \sim 4\text{--}9\,\text{keV}$), un haz de $2\text{--}3\,\text{MeV}$ ioniza eficientemente la capa $K$, dominando las transiciones $K_\alpha$ y $K_\beta$.
+   - En elementos pesados ($\text{Au, Hg, Pb}$ con $E_K \sim 70\text{--}88\,\text{keV}$), la probabilidad de ionizar la capa $K$ a $2\,\text{MeV}$ es insignificante; en cambio, ioniza fuertemente la capa $L$ ($E_L \sim 10\text{--}15\,\text{keV}$), dominando las series $L_\alpha$ y $L_\beta$.
 
-#### 5.6 Fotones (rayos X 6 MV): comparación
-Los rayos X de 6 MV interactúan mediante efecto fotoeléctrico, dispersión Compton y producción de pares, siguiendo $I(x) = I_0 e^{-\mu x}$: el máximo de dosis aparece en los primeros $\sim 1.5\,\text{cm}$, dañando tejido sano antes y después del tumor. El contraste con el peak de Bragg es la motivación clínica central de la hadronterapia.
+2. **Probabilidades cuánticas de desexcitación (Coeficientes de Einstein $A_{i\to f}$):**
+   - **Transición $K_\alpha$ ($L \to K$, $\Delta n = 1$):** El electrón de la capa contigua ($L$) tiene máxima superposición espacial con la vacancia en $K$. Ocurre en el **$\sim 80\text{--}85\%$** de los casos (peak principal más intenso).
+   - **Transición $K_\beta$ ($M \to K$, $\Delta n = 2$):** Es menos probable ($\sim 15\text{--}20\%$), pero al caer desde un nivel más externo libera mayor energía ($\Delta E$), situando el peak a la derecha de $K_\alpha$.
+   - De forma análoga, en la capa $L$: $L_\alpha$ ($M \to L$, $\Delta n = 1$) es la más probable y $L_\beta$ ($N \to L$, $\Delta n = 2$) es la más energética.
 
-#### 5.6b SOBP: peak de Bragg extendido para uso clínico
-Un peak de Bragg monoenergético tiene un ancho de solo $\sim 2$–5 mm, insuficiente para tumores reales de 2–5 cm. En la clínica se superponen múltiples peaks a distintas profundidades ponderados en intensidad, generando una meseta de dosis uniforme: el **SOBP** (*Spread-Out Bragg Peak*). La modulación de energía se logra con ruedas de rango giratorias o variando la energía del acelerador en tiempo real.
+3. **Reglas de selección dipolar cuántica ($\Delta \ell = \pm 1$):**
+   La desexcitación radiativa exige un cambio en el momento angular orbital de $\pm 1$. Dado que la capa $K$ ($n=1$) posee orbital $1s$ ($\ell = 0$), el electrón entrante debe provenir necesariamente de subniveles $p$ ($\ell = 1$: $2p$ para $K_\alpha$, $3p$ para $K_\beta$).
 
-#### 5.7 Conexión con RBS: mismo $a_0$, distinta escala
-La física del frenado electrónico (Bethe-Bloch) que define la hadronterapia es exactamente la misma física que frena a los iones alfa cuando entran y salen de la muestra en un experimento de RBS. Mientras que en RBS usamos el modelo de retroceso de Coulomb para obtener información a nivel de superficie (~nanómetros/micrómetros), en hadronterapia usamos el modelo de Bethe-Bloch integral para administrar energía a nivel macroscópico (~centímetros).
-
-#### 5.8 Hilo conductor: Rutherford → de Hevesy → PET/SPECT
-El experimento de Rutherford fue catalizador directo de la medicina nuclear diagnóstica. **Georg de Hevesy** (1912), postdoc en el laboratorio de Rutherford en Manchester, intentó separar Radio-D (isótopo de Pb) del plomo ordinario. Al comprobar que era químicamente imposible, formuló el **principio de los radiotrazadores**: los isótopos son bioquímicamente indistinguibles (Premio Nobel de Química, 1943).
-
-Dos tecnologías actuales emergen de este principio:
-- **PET** (*Positron Emission Tomography*): La ecuación de Dirac (1928) predijo el positrón. Radiofarmacos como $^{18}$F-FDG emiten $\beta^+$ que se aniquilan con electrones del tejido produciendo dos fotones gamma colineales de 511 keV, detectados por coincidencia para mapear el metabolismo tumoral.
-- **SPECT**: Emplea núcleos metaestables ($^{99m}$Tc, $t_{1/2} = 6$ h) que emiten un fotón gamma puro de 140.5 keV, ideal para imagen de perfusión cardíaca y ósea.
-
-#### 5.9 Simplificaciones declaradas
-- **CSDA (Continuous Slowing Down Approximation):** Se asume que el proyectil pierde energía continuamente, enmascarando las fluctuaciones de transferencia de energía evento-a-evento para el trazado de la curva teórica central.
-- **Tejido homogéneo:** Se asume que el cuerpo del paciente es equivalente al agua líquida pura ($I = 79.7 \text{ eV}$) para los cálculos termodinámicos, omitiendo densidades óseas locales o huecos de aire.
+4. **Rendimiento de fluorescencia ($\omega_Z$):**
+   Mide la fracción de vacancias que decaen emitiendo un fotón de Rayos X en lugar de un electrón Auger no radiativo. $\omega_Z$ crece monótonamente con $Z$ ($\omega_K \propto Z^4$), garantizando que para metales y elementos pesados la señal de Rayos X sea óptima.
 
 ---
 

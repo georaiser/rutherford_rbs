@@ -133,23 +133,37 @@ En una sola medición no destructiva, RBS determina simultáneamente:
 
 ---
 
-## 5. Panel E — Hadronterapia, Pico de Bragg y Medicina Nuclear
+## 5. Panel E — Espectrometría PIXE y la Ley de Moseley
 
-### Principio de pérdida de energía (Bethe-Bloch simplificado)
-La tasa de frenado electrónico de un ion pesado en tejido biológico sigue la proporcionalidad fundamental:
-$$-\frac{dE}{dx} \;\propto\; \frac{z^2}{v^2}$$
-Al penetrar en el tejido, la partícula pierde velocidad ($v$ disminuye), lo que provoca que la pérdida de energía $-\frac{dE}{dx}$ aumente bruscamente justo antes de detenerse, formando el **Pico de Bragg**.
+### Fundamento de la técnica PIXE (Louvre / AGLAE)
+Técnica hermana del RBS que opera simultáneamente con el mismo haz de partículas $\alpha$:
+1. **Ionización:** El proyectil $\alpha$ desaloja un electrón de capa interna generando una **vacancia electrónica**.
+2. **Salto cuántico:** Un electrón de una capa superior cae espontáneamente para llenar la vacancia, emitiendo un fotón de Rayos X discreto:
+   $$\Delta E = h\nu = \frac{hc}{\lambda} = E_{\text{inicial}} - E_{\text{final}}$$
+3. **Registro en el detector:** El fotón produce un **peak característico** monoenergético.
 
-### Ventaja clínica frente a los Rayos X
-- **Rayos X convencionales ($6\,\text{MV}$):** Decaimiento exponencial continuo ($I = I_0 e^{-\mu x}$). Depositan la dosis máxima en la piel y tejidos sanos de entrada, y continúan irradiando detrás del tumor.
-- **Hadronterapia (Protones e Iones $^{12}\mathrm{C}^{6+}$):** Dosis baja en la entrada, máxima concentración en el tumor (pico milimétrico) y **dosis cero detrás del tumor**.
-- **Iones de Carbono ($z=6 \implies z^2=36$):** Generan una alta densidad de ionización terminal (LET), provocando roturas dobles irreversibles en el ADN de tumores radiorresistentes.
+### Clasificación de Transiciones Cuánticas
+- **$K_\alpha$ ($L \to K$, $n=2 \to 1$):** Peak principal más intenso en elementos ligeros/medios ($\approx \frac{3}{4} R_y (Z-1)^2$).
+- **$K_\beta$ ($M \to K$, $n=3 \to 1$):** Salto largo a capa $K$, mayor energía liberada ($\approx \frac{8}{9} R_y (Z-1)^2$).
+- **$L_\alpha$ ($M \to L$, $n=3 \to 2$):** Transición dominante en el rango $0\text{--}25\,\text{keV}$ para elementos pesados ($\approx \frac{5}{36} R_y (Z-7.4)^2$).
+- **$L_\beta$ ($N \to L$, $n=4 \to 2$):** Salto largo a capa $L$, peak secundario en metales pesados.
 
-### Spread-Out Bragg Peak (SOBP)
-Un pico monoenergético mide apenas $2\text{--}5\,\text{mm}$. Para cubrir tumores voluminosos, se modula y superpone una familia de haces a diferentes energías, generando una meseta de dosis homogénea conocida como **SOBP**.
+### La Ley de Moseley (1913)
+Descubierta en el laboratorio de Rutherford en Manchester, probó que la carga nuclear $Z$ es el número atómico real:
+$$E_{K\alpha} \approx \frac{3}{4} R_y \, (Z - 1)^2 \qquad [R_y = 13.6\,\text{eV}]$$
 
-### Vínculo histórico con Rutherford
-En 1912, **Georg de Hevesy** concibió el principio de los radiotrazadores en el laboratorio de Rutherford en Manchester. Este concepto sentó las bases de la medicina nuclear diagnóstica moderna: **PET** ($^{18}\text{F}$, fotones de aniquilación de $511\,\text{keV}$) y **SPECT** ($^{99m}\text{Tc}$, rayos $\gamma$ de $140.5\,\text{keV}$).
+### Valores verificados de Rayos X característicos
+- **Titanio ($\text{Ti}$, $Z=22$):** $K_\alpha = 4.51\,\text{keV}$ ($\lambda = 2.749\,\text{\AA}$) $\to$ Blanco de titanio (pigmento moderno)
+- **Hierro ($\text{Fe}$, $Z=26$):** $K_\alpha = 6.40\,\text{keV}$ ($\lambda = 1.937\,\text{\AA}$) $\to$ Ocre rojo / meteoritos
+- **Cobre ($\text{Cu}$, $Z=29$):** $K_\alpha = 8.04\,\text{keV}$ ($\lambda = 1.542\,\text{\AA}$) $\to$ Azul azurita y malaquita
+- **Plata ($\text{Ag}$, $Z=47$):** $K_\alpha = 22.16\,\text{keV}$, $L_\alpha = 2.98\,\text{keV}$ $\to$ Monedas y aleaciones
+- **Oro ($\text{Au}$, $Z=79$):** $L_\alpha = 9.71\,\text{keV}$, $L_\beta = 11.44\,\text{keV}$ $\to$ Orfebrería y pan de oro
+- **Mercurio ($\text{Hg}$, $Z=80$):** $L_\alpha = 9.99\,\text{keV}$, $L_\beta = 11.82\,\text{keV}$ $\to$ Rojo bermellón histórico (cinabrio)
+- **Plomo ($\text{Pb}$, $Z=82$):** $L_\alpha = 10.55\,\text{keV}$, $L_\beta = 12.61\,\text{keV}$ $\to$ Blanco de plomo (albayalde en óleos)
+
+### Sinergia RBS + PIXE en el Análisis por Haces de Iones (IBA)
+- **RBS:** Mide masa nuclear ($M_2$), estequiometría superficial y perfiles de profundidad ($[S]\cdot x$).
+- **PIXE:** Identifica inequívocamente elementos adyacentes y trazas ultra-diluidas ($\text{PPM}$) en obras de arte y patrimonio sin destruirlas.
 
 ---
 
