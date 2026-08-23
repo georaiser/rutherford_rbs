@@ -361,7 +361,7 @@ El tipo de transición radiativa que se observa experimentalmente depende de cua
 
 ---
 
-### 6. Hilo cuántico — Sección ∞
+### 6. Panel F — El Hilo Cuántico (De Planck a la Física Contemporánea)
 
 #### 6.1 Crisis de la física clásica (1900-1911)
 A finales del siglo XIX, las leyes de Newton y el electromagnetismo de Maxwell dominaban la física. No obstante, anomalías térmicas y espectrales comenzaron a agrietar este paradigma monolítico, induciendo el cambio de modelo más profundo de la historia científica.

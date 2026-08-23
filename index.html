@@ -31,7 +31,8 @@
     <div class="tag">Módulo 2 · Teoría Cuántica Temprana · Evaluación 2</div>
     <h1>Del experimento de Rutherford a la espectroscopía RBS</h1>
     <p>Simulación interactiva: desde el descubrimiento del núcleo atómico por Rutherford (1911) hasta los fundamentos de
-      la espectroscopía RBS, su aplicación al análisis de materiales e introducción a la hadronterapia. Las
+      la espectroscopía RBS, su aplicación al análisis de nanomateriales y la espectrometría PIXE en patrimonio
+      cultural. Las
       simplificaciones pedagógicas se indican con ⚠.</p>
   </header>
 
@@ -609,29 +610,42 @@
         </p>
 
         <!-- Barra de herramientas: Presets de muestra y Ganancia Y -->
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
-          
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+
           <!-- Presets de Muestras Reales -->
           <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-            <span style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Material:</span>
+            <span
+              style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Material:</span>
             <div class="mode-toggle" id="cPresetGroup" style="margin-left:0;">
               <button class="mode-btn" onclick="panelC.setPreset('all')" id="btnPresetAll">Multicomponente</button>
-              <button class="mode-btn" onclick="panelC.setPreset('fe3c')" id="btnPresetFe3C" title="Cementita: 3 Fe : 1 C (Acero)">Fe₃C (Acero)</button>
-              <button class="mode-btn" onclick="panelC.setPreset('au2si')" id="btnPresetAu2Si" title="Siliciuro de oro: 2 Au : 1 Si (Microelectrónica)">Au₂Si</button>
-              <button class="mode-btn" onclick="panelC.setPreset('sic')" id="btnPresetSiC" title="Carburo de silicio: 1 Si : 1 C (Semiconductor)">SiC</button>
-              <button class="mode-btn" onclick="panelC.setPreset('ag3au')" id="btnPresetAg3Au" title="Electrum: 3 Ag : 1 Au (Aleación noble)">Ag₃Au</button>
-              <button class="mode-btn" onclick="panelC.setPreset('reset')" id="btnPresetReset" title="Restablecer concentraciones al 100%">↺ Restablecer</button>
+              <button class="mode-btn" onclick="panelC.setPreset('fe3c')" id="btnPresetFe3C"
+                title="Cementita: 3 Fe : 1 C (Acero)">Fe₃C (Acero)</button>
+              <button class="mode-btn" onclick="panelC.setPreset('au2si')" id="btnPresetAu2Si"
+                title="Siliciuro de oro: 2 Au : 1 Si (Microelectrónica)">Au₂Si</button>
+              <button class="mode-btn" onclick="panelC.setPreset('sic')" id="btnPresetSiC"
+                title="Carburo de silicio: 1 Si : 1 C (Semiconductor)">SiC</button>
+              <button class="mode-btn" onclick="panelC.setPreset('ag3au')" id="btnPresetAg3Au"
+                title="Electrum: 3 Ag : 1 Au (Aleación noble)">Ag₃Au</button>
+              <button class="mode-btn" onclick="panelC.setPreset('reset')" id="btnPresetReset"
+                title="Restablecer concentraciones al 100%">↺ Restablecer</button>
             </div>
           </div>
 
           <!-- Ganancia Vertical / Escala -->
           <div style="display:flex; align-items:center; gap:6px;">
-            <span style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Ganancia Y:</span>
+            <span
+              style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Ganancia
+              Y:</span>
             <div class="mode-toggle" id="cGainGroup" style="margin-left:0;">
-              <button class="mode-btn active" onclick="panelC.setGain(1)" id="btnGain1" title="Escala absoluta nominal">×1</button>
-              <button class="mode-btn" onclick="panelC.setGain(5)" id="btnGain5" title="Aumentar altura ×5 para ver Fe y Si">×5</button>
-              <button class="mode-btn" onclick="panelC.setGain(20)" id="btnGain20" title="Aumentar altura ×20 para ver Carbono">×20</button>
-              <button class="mode-btn" onclick="panelC.setGain('auto')" id="btnGainAuto" title="Ajustar automáticamente al peak más alto activo">Auto</button>
+              <button class="mode-btn active" onclick="panelC.setGain(1)" id="btnGain1"
+                title="Escala absoluta nominal">×1</button>
+              <button class="mode-btn" onclick="panelC.setGain(5)" id="btnGain5"
+                title="Aumentar altura ×5 para ver Fe y Si">×5</button>
+              <button class="mode-btn" onclick="panelC.setGain(20)" id="btnGain20"
+                title="Aumentar altura ×20 para ver Carbono">×20</button>
+              <button class="mode-btn" onclick="panelC.setGain('auto')" id="btnGainAuto"
+                title="Ajustar automáticamente al peak más alto activo">Auto</button>
             </div>
           </div>
 
@@ -648,12 +662,17 @@
           <div id="concSliders"></div>
 
           <!-- Tarjeta de cuantificación estequiométrica en tiempo real (Opción 4) -->
-          <div id="stoichiometryCard" style="margin-top:10px; padding:9px 13px; background:rgba(4, 8, 20, 0.75); border:1px solid var(--border); border-left:3px solid var(--amber); border-radius:6px; font-size:0.78rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div id="stoichiometryCard"
+            style="margin-top:10px; padding:9px 13px; background:rgba(4, 8, 20, 0.75); border:1px solid var(--border); border-left:3px solid var(--amber); border-radius:6px; font-size:0.78rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
             <div>
-              <span style="font-weight:600; color:var(--amber);">Composición estequiométrica deducida (<i>standardless</i>):</span>
-              <span id="stoichFormula" style="font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--cyan); margin-left:6px; font-size:0.88rem;">C₁·₀₀ Si₁·₀₀ Fe₁·₀₀ Ag₁·₀₀ Au₁·₀₀</span>
+              <span style="font-weight:600; color:var(--amber);">Composición estequiométrica deducida
+                (<i>standardless</i>):</span>
+              <span id="stoichFormula"
+                style="font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--cyan); margin-left:6px; font-size:0.88rem;">C₁·₀₀
+                Si₁·₀₀ Fe₁·₀₀ Ag₁·₀₀ Au₁·₀₀</span>
             </div>
-            <div id="stoichRatio" style="font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--muted);">
+            <div id="stoichRatio"
+              style="font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--muted);">
               Cálculo: N_i ∝ A_i / Z_i²
             </div>
           </div>
@@ -736,7 +755,8 @@
         <p class="note">
           <b>El mismo principio, 115 años después — Síntesis interactiva:</b><br>
           En 1909–1911, Rutherford disparó partículas $\alpha$ para descubrir el núcleo atómico. Hoy, esa misma física
-          —colisión elástica y repulsión electrostática de Coulomb— permite analizar microchips, catalizadores y películas
+          —colisión elástica y repulsión electrostática de Coulomb— permite analizar microchips, catalizadores y
+          películas
           delgadas capa por capa sin destruir la muestra.<br><br>
 
           <b>Síntesis de los paneles anteriores:</b><br>
@@ -745,11 +765,13 @@
           $K(M_2,\theta)$ y el balance de retroceso ($E_{\text{rec}}$).<br>
           · <b>Panel C:</b> Mostró cómo las colisiones forman el espectro RBS en superficie, desacoplando masa ($E_1$) y
           estequiometría ($A_i \propto N_i Z_2^2$).<br>
-          · <b>Aquí (Panel D):</b> Se integra todo en una <b>heteroestructura real multicapa</b> (sustrato de <b>Si</b> con
+          · <b>Aquí (Panel D):</b> Se integra todo en una <b>heteroestructura real multicapa</b> (sustrato de <b>Si</b>
+          con
           películas de <b>Fe</b>, <b>Au</b>, <b>Ag</b> y superficie de <b>C</b>). Al penetrar, los iones experimentan
           <b>frenado inelástico continuo ($dE/dx$)</b> con los electrones, ensanchando las señales ($\Delta E = [S]\cdot
           x$) para medir el <b>espesor nanométrico</b> de cada estrato.<br><br>
-          · <b>Dinámica estocástica en vivo:</b> la animación izquierda modela los eventos individuales de Monte Carlo; la
+          · <b>Dinámica estocástica en vivo:</b> la animación izquierda modela los eventos individuales de Monte Carlo;
+          la
           gráfica derecha acumula el espectro conforme a la <b>estadística de Poisson</b> ($\sigma_N/N = 1/\sqrt{N}$).
         </p>
 
@@ -780,7 +802,8 @@
           <p class="note" style="margin:10px 0 8px;border-left-color:var(--cyan)">
             <b>Parámetros del haz:</b><br>
             · <b>Energía $E_0$ (Alcance y profundidad):</b> al subir $E_0$, las partículas $\alpha$ tienen mayor energía
-            para vencer el frenado electrónico y penetrar hasta estratos profundos ($R \propto \int \frac{dE}{dE/dx}$, de
+            para vencer el frenado electrónico y penetrar hasta estratos profundos ($R \propto \int \frac{dE}{dE/dx}$,
+            de
             $\sim 1.5\,\mu\text{m}$ a $1\,\text{MeV}$ hasta $>8\,\mu\text{m}$ a $3\,\text{MeV}$). Se mantiene $E_0 \le
             3.0\,\text{MeV}$ para no superar la barrera de Coulomb nuclear y asegurar repulsión $100\%$ pura.<br>
             · <b>Corriente $I$ (Flujo y convergencia de Poisson):</b> rige la tasa de proyectiles
@@ -807,15 +830,21 @@
           </div>
           <div class="formula-meta">
             · <b>Identificación ($M_2$):</b> la energía de borde $E_1$ es la firma cinemática unívoca del núcleo.<br>
-            · <b>Estequiometría ($N_i$):</b> el rendimiento relativo escala con Coulomb ($\sigma \propto Z_2^2$), permitiendo cuantificar sin patrones.<br>
-            · <b>Metrología ($x$):</b> el Factor de Parada $[S]$ ($\text{eV/\AA}$) transforma la pérdida inelástica continua $\Delta E$ en nanómetros de película.
+            · <b>Estequiometría ($N_i$):</b> el rendimiento relativo escala con Coulomb ($\sigma \propto Z_2^2$),
+            permitiendo cuantificar sin patrones.<br>
+            · <b>Metrología ($x$):</b> el Factor de Parada $[S]$ ($\text{eV/\AA}$) transforma la pérdida inelástica
+            continua $\Delta E$ en nanómetros de película.
           </div>
         </div>
 
         <div class="note" style="margin-top:12px">
-          · <b>De la física fundamental a la tecnología:</b> la dispersión elástica de Coulomb que reveló el núcleo atómico en 1911 se convierte aquí en una técnica de metrología no destructiva de precisión nanométrica.<br>
-          · <b>Sensibilidad electrostática ($Z_2^2$):</b> el Oro acumula $173.4\times$ más cuentas que el Carbono a igual concentración debido a la mayor intensidad de su campo de Coulomb.<br><br>
-          <b>→ Conexión con Panel E:</b> el mismo haz de partículas $\alpha$ ioniza las capas atómicas internas en la espectrometría <b>PIXE</b> (Panel E), donde la desexcitación de electrones emite Rayos X característicos según la <b>Ley de Moseley</b>.
+          · <b>De la física fundamental a la tecnología:</b> la dispersión elástica de Coulomb que reveló el núcleo
+          atómico en 1911 se convierte aquí en una técnica de metrología no destructiva de precisión nanométrica.<br>
+          · <b>Sensibilidad electrostática ($Z_2^2$):</b> el Oro acumula $173.4\times$ más cuentas que el Carbono a
+          igual concentración debido a la mayor intensidad de su campo de Coulomb.<br><br>
+          <b>→ Conexión con Panel E:</b> el mismo haz de partículas $\alpha$ ioniza las capas atómicas internas en la
+          espectrometría <b>PIXE</b> (Panel E), donde la desexcitación de electrones emite Rayos X característicos según
+          la <b>Ley de Moseley</b>.
         </div>
 
       </div>
@@ -827,27 +856,38 @@
         <span class="badge">E</span>
         <h2>Evolución tecnológica — Espectrometría PIXE y Ley de Moseley</h2>
         <div class="mode-toggle" id="pixePresetGroup">
-          <button class="mode-btn active" id="btnPixe_louvre" onclick="panelE.setPreset('louvre')" title="Análisis de pigmentos en óleo del Louvre">🖼️ Óleo (Louvre)</button>
-          <button class="mode-btn" id="btnPixe_gold" onclick="panelE.setPreset('gold')" title="Aleación de orfebrería antigua">👑 Joya de Oro</button>
-          <button class="mode-btn" id="btnPixe_meteorite" onclick="panelE.setPreset('meteorite')" title="Matriz de Fe y Ti nativo">☄️ Meteorito</button>
-          <button class="mode-btn" id="btnPixe_all" onclick="panelE.setPreset('all')" title="Visión general de líneas espectrales">🔬 Multielemento</button>
+          <button class="mode-btn active" id="btnPixe_louvre" onclick="panelE.setPreset('louvre')"
+            title="Análisis de pigmentos en óleo del Louvre">🖼️ Óleo (Louvre)</button>
+          <button class="mode-btn" id="btnPixe_gold" onclick="panelE.setPreset('gold')"
+            title="Aleación de orfebrería antigua">👑 Joya de Oro</button>
+          <button class="mode-btn" id="btnPixe_meteorite" onclick="panelE.setPreset('meteorite')"
+            title="Matriz de Fe y Ti nativo">☄️ Meteorito</button>
+          <button class="mode-btn" id="btnPixe_all" onclick="panelE.setPreset('all')"
+            title="Visión general de líneas espectrales">🔬 Multielemento</button>
         </div>
       </div>
       <div class="panel-body">
 
         <div class="note" style="margin-bottom:12px;">
           <b>¿Cómo funciona el Salto Cuántico en PIXE?</b><br>
-          1. <b>Ionización:</b> El haz de partículas $\alpha$ expulsa un electrón interno, generando una <b>vacancia electrónica</b>.<br>
-          2. <b>Salto cuántico:</b> Un electrón de una capa superior cae para ocupar la vacancia y estabilizar el átomo.<br>
-          3. <b>Emisión de Rayos X:</b> La diferencia de energía se libera como un fotón ($\Delta E = h\nu$), produciendo un <b>peak</b> en el espectro.<br>
-          · <b>Ley de Moseley ($E \propto (Z-1)^2$):</b> Cada elemento químico emite a una energía única y predecible según su número atómico $Z$.
+          1. <b>Ionización:</b> El haz de partículas $\alpha$ expulsa un electrón interno, generando una <b>vacancia
+            electrónica</b>.<br>
+          2. <b>Salto cuántico:</b> Un electrón de una capa superior cae para ocupar la vacancia y estabilizar el
+          átomo.<br>
+          3. <b>Emisión de Rayos X:</b> La diferencia de energía se libera como un fotón ($\Delta E = h\nu$),
+          produciendo un <b>peak</b> en el espectro.<br>
+          · <b>Ley de Moseley ($E \propto (Z-1)^2$):</b> Cada elemento químico emite a una energía única y predecible
+          según su número atómico $Z$.
         </div>
 
         <!-- Barras de herramientas: Jerarquía Muestra -> Elemento -> Salto Cuántico -->
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
           <!-- Selector dinámico de elementos presentes en la muestra -->
           <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-            <span style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Elemento en muestra:</span>
+            <span
+              style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Elemento
+              en muestra:</span>
             <div class="mode-toggle" id="pixeElementList" style="margin-left:0;">
               <!-- Se actualiza dinámicamente según la muestra activa -->
               <button class="mode-btn" onclick="panelE.setElement('Pb')"><b>Pb</b> (82)</button>
@@ -859,12 +899,18 @@
 
           <!-- Selector de Transición Cuántica de Bohr -->
           <div style="display:flex; align-items:center; gap:6px;">
-            <span style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Salto Cuántico:</span>
+            <span
+              style="font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;">Salto
+              Cuántico:</span>
             <div class="mode-toggle" id="pixeTransGroup" style="margin-left:0;">
-              <button class="mode-btn" id="btnTrans_Ka" onclick="panelE.setTransition('Ka')" title="Salto L → K (n=2 → 1): transición principal más intensa">Kα (L → K)</button>
-              <button class="mode-btn" id="btnTrans_Kb" onclick="panelE.setTransition('Kb')" title="Salto M → K (n=3 → 1): mayor energía liberada">Kβ (M → K)</button>
-              <button class="mode-btn active" id="btnTrans_La" onclick="panelE.setTransition('La')" title="Salto M → L (n=3 → 2): serie L principal en elementos pesados">Lα (M → L)</button>
-              <button class="mode-btn" id="btnTrans_Lb" onclick="panelE.setTransition('Lb')" title="Salto N → L (n=4 → 2): serie L secundaria">Lβ (N → L)</button>
+              <button class="mode-btn" id="btnTrans_Ka" onclick="panelE.setTransition('Ka')"
+                title="Salto L → K (n=2 → 1): transición principal más intensa">Kα (L → K)</button>
+              <button class="mode-btn" id="btnTrans_Kb" onclick="panelE.setTransition('Kb')"
+                title="Salto M → K (n=3 → 1): mayor energía liberada">Kβ (M → K)</button>
+              <button class="mode-btn active" id="btnTrans_La" onclick="panelE.setTransition('La')"
+                title="Salto M → L (n=3 → 2): serie L principal en elementos pesados">Lα (M → L)</button>
+              <button class="mode-btn" id="btnTrans_Lb" onclick="panelE.setTransition('Lb')"
+                title="Salto N → L (n=4 → 2): serie L secundaria">Lβ (N → L)</button>
             </div>
           </div>
         </div>
@@ -878,36 +924,46 @@
           </div>
           <div class="metric-card">
             <div class="metric-label">Transición cuántica</div>
-            <div class="metric-val" id="val-pixe-trans" style="font-size:0.85rem;color:var(--cyan)">Lα : M → L (n=3 → 2)</div>
+            <div class="metric-val" id="val-pixe-trans" style="font-size:0.85rem;color:var(--cyan)">Lα : M → L (n=3 → 2)
+            </div>
           </div>
           <div class="metric-card">
             <div class="metric-label">Energía del Rayo X (ΔE = hν)</div>
-            <div class="metric-val" id="val-pixe-energy"><span id="val-pixe-energy-num">9.99</span> <span class="metric-unit">keV</span></div>
+            <div class="metric-val" id="val-pixe-energy"><span id="val-pixe-energy-num">9.99</span> <span
+                class="metric-unit">keV</span></div>
           </div>
           <div class="metric-card">
             <div class="metric-label">Longitud de onda (λ)</div>
-            <div class="metric-val" id="val-pixe-lambda"><span id="val-pixe-lambda-num">1.241</span> <span class="metric-unit">Å</span></div>
+            <div class="metric-val" id="val-pixe-lambda"><span id="val-pixe-lambda-num">1.241</span> <span
+                class="metric-unit">Å</span></div>
           </div>
         </div>
 
         <div class="formula-box" style="margin-top:14px;">
           <div class="flabel">Cuantización de Niveles y Ley de Moseley — Bohr &amp; Moseley (1913)</div>
-          $$\Delta E = h\nu = E_i - E_f, \qquad E_{K\alpha} \approx \frac{3}{4} R_y \, (Z - 1)^2 \qquad [R_y = 13.6\,\text{eV}]$$
+          $$\Delta E = h\nu = E_i - E_f, \qquad E_{K\alpha} \approx \frac{3}{4} R_y \, (Z - 1)^2 \qquad [R_y =
+          13.6\,\text{eV}]$$
           <div class="formula-meta">
-            · <b>Universalidad atómica:</b> la estructura de niveles $K, L, M, N$ y las transiciones radiativas aplican a todos los elementos químicos; el número atómico $Z$ modula la escala energética absoluta ($\text{keV}$).<br>
-            · <b>Validación experimental:</b> la ley de Moseley probó que $Z$ es la carga nuclear real descubierta por Rutherford en 1911.
+            · <b>Universalidad atómica:</b> la estructura de niveles $K, L, M, N$ y las transiciones radiativas aplican
+            a todos los elementos químicos; el número atómico $Z$ modula la escala energética absoluta
+            ($\text{keV}$).<br>
+            · <b>Validación experimental:</b> la ley de Moseley probó que $Z$ es la carga nuclear real descubierta por
+            Rutherford en 1911.
           </div>
         </div>
 
         <!-- Tabla comparativa de Saltos Cuánticos -->
         <div style="overflow-x:auto; margin-top:14px;">
-          <table class="data-table" style="width:100%; font-size:0.78rem; border-collapse:collapse; border-radius:6px; overflow:hidden; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08);">
+          <table class="data-table"
+            style="width:100%; font-size:0.78rem; border-collapse:collapse; border-radius:6px; overflow:hidden; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08);">
             <thead>
               <tr style="background:rgba(255,255,255,0.05); color:var(--cyan); text-align:left;">
                 <th style="padding:6px 10px; border-bottom:1px solid rgba(255,255,255,0.1);">Salto</th>
                 <th style="padding:6px 10px; border-bottom:1px solid rgba(255,255,255,0.1);">Transición en el Átomo</th>
-                <th style="padding:6px 10px; border-bottom:1px solid rgba(255,255,255,0.1);">Energía liberada ($\Delta E = h\nu$)</th>
-                <th style="padding:6px 10px; border-bottom:1px solid rgba(255,255,255,0.1);">Comportamiento en pantalla</th>
+                <th style="padding:6px 10px; border-bottom:1px solid rgba(255,255,255,0.1);">Energía liberada ($\Delta E
+                  = h\nu$)</th>
+                <th style="padding:6px 10px; border-bottom:1px solid rgba(255,255,255,0.1);">Comportamiento en pantalla
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -915,48 +971,53 @@
                 <td style="padding:6px 10px; font-weight:700; color:var(--amber);">$K_\alpha$</td>
                 <td style="padding:6px 10px;">Capa $L \to K$ ($n=2 \to 1$)</td>
                 <td style="padding:6px 10px;">$\approx \frac{3}{4} R_y (Z-1)^2$</td>
-                <td style="padding:6px 10px;">Salto a capa $K$. <b>Peak principal</b> más intenso en elementos ligeros y medios ($\text{Ti}, \text{Fe}, \text{Cu}$).</td>
+                <td style="padding:6px 10px;">Salto a capa $K$. <b>Peak principal</b> más intenso en elementos ligeros y
+                  medios ($\text{Ti}, \text{Fe}, \text{Cu}$).</td>
               </tr>
               <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
                 <td style="padding:6px 10px; font-weight:700; color:var(--amber);">$K_\beta$</td>
                 <td style="padding:6px 10px;">Capa $M \to K$ ($n=3 \to 1$)</td>
                 <td style="padding:6px 10px;">$\approx \frac{8}{9} R_y (Z-1)^2$</td>
-                <td style="padding:6px 10px;">Salto largo a capa $K$. Mayor energía liberada que $K_\alpha$; <b>peak secundario desplazado a la derecha</b>.</td>
+                <td style="padding:6px 10px;">Salto largo a capa $K$. Mayor energía liberada que $K_\alpha$; <b>peak
+                    secundario desplazado a la derecha</b>.</td>
               </tr>
               <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
                 <td style="padding:6px 10px; font-weight:700; color:var(--amber);">$L_\alpha$</td>
                 <td style="padding:6px 10px;">Capa $M \to L$ ($n=3 \to 2$)</td>
                 <td style="padding:6px 10px;">$\approx \frac{5}{36} R_y (Z-7.4)^2$</td>
-                <td style="padding:6px 10px;">Salto a capa $L$. <b>Peak medible en el rango $0\text{--}25\,\text{keV}$ para elementos pesados</b> ($\text{Au}, \text{Hg}, \text{Pb}$).</td>
+                <td style="padding:6px 10px;">Salto a capa $L$. <b>Peak medible en el rango $0\text{--}25\,\text{keV}$
+                    para elementos pesados</b> ($\text{Au}, \text{Hg}, \text{Pb}$).</td>
               </tr>
               <tr>
                 <td style="padding:6px 10px; font-weight:700; color:var(--amber);">$L_\beta$</td>
                 <td style="padding:6px 10px;">Capa $N \to L$ ($n=4 \to 2$)</td>
                 <td style="padding:6px 10px;">Mayor energía que $L_\alpha$</td>
-                <td style="padding:6px 10px;">Salto largo a capa $L$. <b>Peak secundario</b> visible en metales nobles y pesados ($\text{Au}, \text{Hg}, \text{Pb}$).</td>
+                <td style="padding:6px 10px;">Salto largo a capa $L$. <b>Peak secundario</b> visible en metales nobles y
+                  pesados ($\text{Au}, \text{Hg}, \text{Pb}$).</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="note" style="margin-top:12px;">
-          · <b>RBS + PIXE en tándem:</b> Con el mismo haz de partículas $\alpha$, <b>RBS</b> mide la masa y espesor del núcleo ($M_2, x$), y <b>PIXE</b> identifica los elementos químicos mediante sus electrones sin dañar la obra de arte.
+          · <b>RBS + PIXE en tándem:</b> Con el mismo haz de partículas $\alpha$, <b>RBS</b> mide la masa y espesor del
+          núcleo ($M_2, x$), y <b>PIXE</b> identifica los elementos químicos mediante sus electrones sin dañar la obra
+          de arte.
         </div>
 
       </div>
     </section>
 
 
-    <!-- ══════════════ HILO CUÁNTICO — LÍNEA DE TIEMPO ══════════════ -->
-    <section class="panel" id="panel-timeline">
+    <!-- ══════════════ PANEL F — HILO CUÁNTICO: LÍNEA DE TIEMPO ══════════════ -->
+    <section class="panel" id="panel-f">
       <div class="panel-header">
-        <span class="badge" style="background:linear-gradient(135deg,var(--cyan),#a78bfa)">∞</span>
-        <h2>El hilo cuántico — de Planck a la mecánica cuántica</h2>
+        <span class="badge" style="background:linear-gradient(135deg,var(--cyan),#a78bfa);color:#000">F</span>
+        <h2>El hilo cuántico — De Planck y Rutherford a la física contemporánea</h2>
       </div>
       <div class="panel-body">
         <div class="formula-box">
-          <div class="flabel">Planck (1900: Catástrofe UV) → Rutherford (1911: Núcleo) → Bohr (1913: Cuantización
-            Atómica)</div>
+          <div class="flabel">Evolución Histórica: De la Crisis Clásica de Larmor a las Técnicas Analíticas IBA</div>
           <div class="quantum-timeline">
 
             <div class="tl-row">
@@ -965,12 +1026,11 @@
                 <div class="tl-line"></div>
               </div>
               <div class="tl-content">
-                <div class="tl-year">1900</div>
-                <div class="tl-title">Planck — $E = nh\nu$ (Catástrofe ultravioleta)</div>
-                <p class="tl-desc">Para resolver la <b>catástrofe ultravioleta</b> de la radiación de cuerpo negro
-                  (donde la física clásica predecía energía infinita a altas frecuencias), Max Planck postula que la
-                  energía electromagnética se emite y absorbe en paquetes discretos ($E = nh\nu$). Primer quiebre con la
-                  física clásica.</p>
+                <div class="tl-year">1900 · Planck</div>
+                <div class="tl-title">Cuantización de la radiación ($E = nh\nu$)</div>
+                <p class="tl-desc">Para resolver la <b>catástrofe ultravioleta</b> del cuerpo negro (donde la física
+                  clásica predecía energía infinita a altas frecuencias), Max Planck postula que la energía
+                  electromagnética se emite en paquetes discretos ($E = nh\nu$), iniciando la física cuántica.</p>
               </div>
             </div>
 
@@ -980,11 +1040,11 @@
                 <div class="tl-line"></div>
               </div>
               <div class="tl-content">
-                <div class="tl-year">1905</div>
-                <div class="tl-title">Einstein — efecto fotoeléctrico ($E = h\nu$)</div>
-                <p class="tl-desc">Albert Einstein establece que la propia luz está constituida por fotones
-                  corpusculares. Explica por qué la energía de los fotoelectrones depende de la frecuencia y no de la
-                  intensidad (Premio Nobel 1921).</p>
+                <div class="tl-year">1905 · Einstein</div>
+                <div class="tl-title">Efecto fotoeléctrico y naturaleza del fotón ($E = h\nu$)</div>
+                <p class="tl-desc">Albert Einstein establece que la propia luz está compuesta por cuantos corpusculares
+                  de energía (fotones), explicando por qué la energía cinética de los fotoelectrones depende de la
+                  frecuencia $\nu$ y no de la intensidad de la luz (Premio Nobel 1921).</p>
               </div>
             </div>
 
@@ -994,27 +1054,26 @@
                 <div class="tl-line red"></div>
               </div>
               <div class="tl-content red-border">
-                <div class="tl-year amber">1911</div>
-                <div class="tl-title">Rutherford — modelo nuclear ← <em>Panel A de esta aplicación</em></div>
-                <p class="tl-desc">El experimento de Geiger y Marsden demuestra que la carga positiva y la masa del
-                  átomo están concentradas en un núcleo denso y puntual. Resuelve la dispersión de partículas alfa pero
-                  crea una crisis en la física clásica.</p>
+                <div class="tl-year amber">1911 · Rutherford</div>
+                <div class="tl-title">Descubrimiento del núcleo atómico ← <em>Panel A de esta aplicación</em></div>
+                <p class="tl-desc">El experimento de dispersión $\alpha$ de Geiger y Marsden demuestra que la masa y la
+                  carga positiva están concentradas en un núcleo puntual y denso. Resuelve la dispersión elástica pero
+                  detona la gran crisis de estabilidad en la física clásica.</p>
               </div>
             </div>
 
             <div class="tl-crisis-box">
               ⚡ <b>¿Por qué el electromagnetismo clásico (Larmor) exigía el colapso del electrón?</b><br>
-              · <b>Aceleración centrípeta:</b> para orbitar el núcleo a distancia $r$, el electrón experimenta una
+              · <b>Aceleración centrípeta:</b> para orbitar el núcleo a distancia $r$, el electrón experimenta
               aceleración continua $a = v^2/r$.<br>
-              · <b>Pérdida de energía (Fórmula de Larmor):</b> según Maxwell y Larmor ($P = \frac{e^2
-              a^2}{6\pi\varepsilon_0 c^3}$), toda carga eléctrica acelerada <em>debe</em> emitir radiación
-              electromagnética ininterrumpidamente, perdiendo energía mecánica.<br>
-              · <b>Espiral hacia el núcleo:</b> al perder energía, la órbita se encoge velozmente. La física clásica
-              predice que el electrón colapsaría en espiral contra el núcleo en solo $\tau \approx 1.6 \times
-              10^{-11}\,\text{s}$.<br>
-              · <b>La paradoja insalvable:</b> la física clásica dictaba que la materia no podía existir y que los
-              átomos debían emitir radiación continua. La estabilidad observada y los espectros de líneas discretas
-              forzaron a <b>Niels Bohr (1913)</b> a postular órbitas cuánticas no radiantes ($L=n\hbar$).
+              · <b>Pérdida continua de energía (Fórmula de Larmor):</b> según Maxwell y Larmor ($P = \frac{e^2
+              a^2}{6\pi\varepsilon_0 c^3}$), toda carga acelerada emite ondas electromagnéticas ininterrumpidamente,
+              perdiendo energía mecánica.<br>
+              · <b>Colapso instantáneo:</b> la física clásica dictaba que la órbita se encogería en espiral hasta
+              colapsar contra el núcleo en solo $\tau \approx 1.6 \times 10^{-11}\,\text{s}$.<br>
+              · <b>La solución cuántica:</b> la estabilidad de la materia y los espectros atómicos discretos forzaron a
+              <b>Niels Bohr (1913)</b> a postular órbitas estacionarias cuantizadas ($L=n\hbar$) que no radian mientras
+              el electrón permanezca en su nivel.
             </div>
 
             <div class="tl-row" style="margin-top:6px">
@@ -1023,12 +1082,27 @@
                 <div class="tl-line"></div>
               </div>
               <div class="tl-content">
-                <div class="tl-year amber">1913</div>
-                <div class="tl-title">Bohr — cuantización de la materia</div>
+                <div class="tl-year amber">1913 · Bohr</div>
+                <div class="tl-title">Cuantización del átomo y niveles estacionarios ($L = n\hbar$)</div>
                 <p class="tl-desc">Niels Bohr resuelve la crisis fusionando el núcleo de Rutherford con la constante $h$
-                  de Planck. Postula órbitas estacionarias no radiantes con momento angular $L = n\hbar$, deduciendo los
-                  niveles energéticos $E_n = -\frac{13.6}{n^2}\,\text{eV}$ y la emisión por saltos cuánticos ($\Delta E
-                  = h\nu$).</p>
+                  de Planck. Modela niveles de energía discretos $E_n = -\frac{13.6}{n^2}\,\text{eV}$ y explica las
+                  líneas de emisión mediante saltos cuánticos radiativos ($\Delta E = h\nu$).</p>
+              </div>
+            </div>
+
+            <div class="tl-row">
+              <div class="tl-dot-col">
+                <div class="tl-dot amber"></div>
+                <div class="tl-line"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-year amber">1913 · Moseley</div>
+                <div class="tl-title">Ley de Moseley y ordenamiento de la Tabla Periódica ← <em>Panel E de esta
+                    aplicación</em></div>
+                <p class="tl-desc">En el laboratorio de Rutherford en Manchester, Henry Moseley mide las frecuencias de
+                  Rayos X característicos ($K_\alpha, L_\alpha$), demostrando experimentalmente que la energía escala
+                  con $(Z-1)^2$. Confirma que el número atómico $Z$ es la carga nuclear real descubierta por Rutherford.
+                </p>
               </div>
             </div>
 
@@ -1038,11 +1112,11 @@
                 <div class="tl-line"></div>
               </div>
               <div class="tl-content">
-                <div class="tl-year">1924</div>
-                <div class="tl-title">de Broglie — $\lambda = \frac{h}{p}$</div>
-                <p class="tl-desc">Louis de Broglie postula que la dualidad onda-partícula es universal: toda partícula
-                  material con momento $p$ tiene asociada una longitud de onda de materia $\lambda = h/p$ (Premio Nobel
-                  1929).</p>
+                <div class="tl-year">1924 · de Broglie</div>
+                <div class="tl-title">Dualidad onda-partícula ($\lambda = \frac{h}{p}$)</div>
+                <p class="tl-desc">Louis de Broglie postula que toda partícula material con momento lineal $p$ posee una
+                  longitud de onda asociada $\lambda = h/p$, unificando la óptica ondulatoria y la mecánica corpuscular
+                  (Premio Nobel 1929).</p>
               </div>
             </div>
 
@@ -1052,11 +1126,11 @@
                 <div class="tl-line"></div>
               </div>
               <div class="tl-content">
-                <div class="tl-year violet">1925–26</div>
-                <div class="tl-title">Heisenberg · Schrödinger — mecánica cuántica completa</div>
-                <p class="tl-desc">Formulación rigurosa mediante mecánica matricial y ecuación de ondas ($\hat{H}\Psi =
-                  E\Psi$). La función de onda $\Psi$ describe probabilidades del sistema. Principio de indeterminación:
-                  $\Delta x \cdot \Delta p \ge \hbar/2$.</p>
+                <div class="tl-year violet">1925–26 · Heisenberg &amp; Schrödinger</div>
+                <div class="tl-title">Mecánica cuántica ondulatoria y matricial ($\hat{H}\Psi = E\Psi$)</div>
+                <p class="tl-desc">Formulación matemática completa de la física cuántica mediante mecánica matricial y
+                  ecuación de ondas. La función de onda $\Psi$ describe probabilidades espaciales y el Principio de
+                  Indeterminación fija $\Delta x \cdot \Delta p \ge \hbar/2$.</p>
               </div>
             </div>
 
@@ -1066,12 +1140,12 @@
                 <div class="tl-line"></div>
               </div>
               <div class="tl-content">
-                <div class="tl-year violet">1928 · Gamow</div>
-                <div class="tl-title">Efecto túnel cuántico — desintegración alfa</div>
-                <p class="tl-desc">George Gamow demuestra que las alfas escapan del núcleo atravesando la barrera de
-                  Coulomb por efecto túnel ($T \approx e^{-2G}$). En análisis por haces de iones, la técnica <b>NRA</b>
-                  aprovecha el túnel inverso y resonancias de Breit-Wigner para detectar elementos ligeros
-                  ($^{12}\text{C}$, $^{16}\text{O}$) con resolución nanométrica.</p>
+                <div class="tl-year violet">1928 · Gordon &amp; Gamow</div>
+                <div class="tl-title">Coincidencia cuántica de Coulomb y efecto túnel $\alpha$</div>
+                <p class="tl-desc">Walter Gordon demuestra que la sección eficaz cuántica de Coulomb coincide
+                  exactamente con la fórmula clásica de Rutherford, validando matemáticamente la espectrometría
+                  <b>RBS</b>. George Gamow demuestra que las partículas $\alpha$ escapan del núcleo por efecto túnel
+                  cuántico ($T \approx e^{-2G}$).</p>
               </div>
             </div>
 
@@ -1082,10 +1156,10 @@
               </div>
               <div class="tl-content">
                 <div class="tl-year violet">1928 · Dirac</div>
-                <div class="tl-title">Mecánica cuántica relativista — antimateria</div>
-                <p class="tl-desc">Paul Dirac formula la ecuación relativista del electrón y predice el positrón
-                  ($e^+$), descubierto en 1932 por Carl Anderson. Hoy, emisores de positrones ($^{18}\text{F}$-FDG) se
-                  usan en tomografía PET para medicina nuclear.</p>
+                <div class="tl-title">Mecánica cuántica relativista y antimateria ($e^+$)</div>
+                <p class="tl-desc">Paul Dirac formula la ecuación relativista del electrón combinando relatividad
+                  especial y cuántica, prediciendo la existencia del positrón ($e^+$), base de la tomografía por emisión
+                  de positrones (PET).</p>
               </div>
             </div>
 
@@ -1094,15 +1168,60 @@
                 <div class="tl-dot amber"></div>
               </div>
               <div class="tl-content">
-                <div class="tl-year amber">1930 · Bethe</div>
-                <div class="tl-title">Fórmula de Bethe-Bloch — poder de frenado cuántico</div>
+                <div class="tl-year amber">1930 · Bethe &amp; Bloch</div>
+                <div class="tl-title">Fórmula de Bethe-Bloch — poder de frenado inelástico</div>
                 <p class="tl-desc">Hans Bethe formula la teoría cuántica de pérdida de energía de iones en la materia
-                  por ionizaciones atómicas. Gobierna el perfil de profundidad en RBS (Paneles B–D) y el Peak de Bragg
-                  en hadronterapia (<b>Panel E</b>).</p>
+                  ($dE/dx$). Gobierna el Factor de Parada $[S]$ que permite resolver perfiles de concentración y
+                  espesores nanométricos en la espectrometría RBS (<b>Paneles B, C y D</b>).</p>
               </div>
             </div>
 
           </div><!-- fin quantum-timeline -->
+
+          <!-- Tabla de Síntesis Conceptual de los Paneles -->
+          <table class="tl-panel-table">
+            <thead>
+              <tr>
+                <th>Panel</th>
+                <th>Nombre del Módulo</th>
+                <th>Fenómeno Físico Modelado</th>
+                <th>Vínculo con la Teoría Cuántica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Panel A</td>
+                <td>Dispersión de Rutherford</td>
+                <td>Colisión elástica Coulombiana ($1/r$) sobre núcleo puntual</td>
+                <td>Descubre el núcleo y detona la crisis clásica del colapso de Larmor.</td>
+              </tr>
+              <tr>
+                <td>Panel B</td>
+                <td>Cinemática de Retroceso</td>
+                <td>Conservación de energía y momento ($K$)</td>
+                <td>La coincidencia cuántica de Gordon (1928) valida el uso del formalismo clásico.</td>
+              </tr>
+              <tr>
+                <td>Panel C</td>
+                <td>Espectro RBS y Estequiometría</td>
+                <td>Rendimiento de Chu y sección eficaz ($\sigma \propto Z_2^2$)</td>
+                <td>Cuantificación no destructiva sin patrones basada en el campo central nuclear.</td>
+              </tr>
+              <tr>
+                <td>Panel D</td>
+                <td>Perfilado en Profundidad</td>
+                <td>Frenado inelástico continuo y Factor de Parada $[S]$</td>
+                <td>Fundamentado en la teoría cuántica de ionización de Bethe-Bloch (1930).</td>
+              </tr>
+              <tr>
+                <td>Panel E</td>
+                <td>Espectrometría PIXE</td>
+                <td>Vacancia electrónica y desexcitación radiativa ($\Delta E = h\nu$)</td>
+                <td>Ley de Moseley (1913) y cuantización de niveles atómicos de Bohr.</td>
+              </tr>
+            </tbody>
+          </table>
+
         </div><!-- fin formula-box -->
       </div>
     </section>
@@ -1113,7 +1232,8 @@
     <p>Evaluación 2 · Módulo 2 · Diplomado en Física Moderna</p>
     <p>Referencias: Chu, Mayer &amp; Nicolet (1978); Feldman &amp; Mayer (1986); Bethe (1930); Particle Data Group
       (2022); ICRU 37/73
-      · Constante $ke^2=1.44\,\text{MeV·fm}$ · Integración numérica RK4 y Bethe-Bloch en tiempo real</p>
+      · Constante $ke^2=1.44\,\text{MeV·fm}$ · Integración numérica RK4 y Bethe-Bloch en tiempo real</p><br>
+    <p>Powered by <a href="https://github.com/georaiser" target="_blank" rel="noopener noreferrer">https://github.com/georaiser</a></p>
   </footer>
 
   <!-- JavaScript modular -->

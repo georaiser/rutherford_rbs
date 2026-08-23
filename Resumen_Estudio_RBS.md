@@ -167,7 +167,7 @@ $$E_{K\alpha} \approx \frac{3}{4} R_y \, (Z - 1)^2 \qquad [R_y = 13.6\,\text{eV}
 
 ---
 
-## 6. El Hilo Cuántico: De la Crisis de Larmor a la Cuantización de Bohr
+## 6. Panel F — El Hilo Cuántico: De la Crisis de Larmor a la Cuantización de Bohr
 
 ### La paradoja del átomo clásico
 El experimento de Rutherford (1911) demostró el núcleo atómico usando mecánica clásica newtoniana. Sin embargo, este modelo planetario generó una **crisis teórica insalvable**:
