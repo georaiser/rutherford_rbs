@@ -410,46 +410,65 @@
     <section class="panel" id="panel-c">
       <div class="panel-header">
         <span class="badge">C</span>
-        <h2>Espectro RBS resultante</h2>
+        <h2>Espectro RBS — identidad y composición</h2>
       </div>
       <div class="panel-body">
 
         <p class="note">
-          <b>Lectura dual del espectro RBS:</b><br>
-          Al acumular las colisiones detectadas, se obtiene un histograma $Y(E_1)$ que desacopla identidad y
-          cantidad:<br>
-          1. <b>Posición del peak ($E_1 = K(M_2)\cdot E_0$):</b> depende únicamente de la masa nuclear $M_2$. Invariante
-          ante cambios de concentración.<br>
-          2. <b>Rendimiento / Área del peak ($A_i \propto Z_2^2\cdot N_i$):</b> cuantifica la densidad atómica
-          superficial $N_i$ (átomos/$\text{cm}^2$), modulada por la sección eficaz de Rutherford ($\propto
-          Z_2^2$).<br><br>
-          <b>Laboratorio interactivo:</b> ajusta las concentraciones relativas de C, Si, Fe, Ag y Au para analizar la
-          combinación entre la cinemática ($K$) y la probabilidad nuclear de interacción ($\sigma \propto Z_2^2$).
+          <b>El espectro RBS como instrumento analítico:</b><br>
+          Al detectar las partículas alfa retrodispersadas y registrar su energía $E_1$, se construye un
+          histograma de eventos: el <b>espectro RBS</b>. Cada elemento presente en la muestra origina un peak
+          diferenciado. Ese peak contiene simultáneamente dos informaciones independientes:<br><br>
+
+          1. <b>Posición del peak — identidad elemental:</b>
+          $$E_1 = K(M_2)\cdot E_0$$
+          La posición en el eje de energía depende exclusivamente de la masa nuclear $M_2$ a través del factor
+          cinemático $K$. Núcleos más pesados retienen mayor fracción de energía, desplazando su peak hacia la
+          derecha. Esta posición es <em>invariante</em> ante cambios en la concentración del elemento.<br><br>
+
+          2. <b>Área del peak — cantidad de materia:</b>
+          $$A_i \;\propto\; N_i \cdot Z_2^2$$
+          El área integrada es proporcional a la densidad superficial $N_i$ (átomos/cm²) y al cuadrado del número
+          atómico $Z_2^2$. Este último factor refleja la sección eficaz diferencial de Rutherford: núcleos con
+          mayor carga nuclear desvían más partículas alfa, amplificando la señal independientemente de su abundancia.
         </p>
 
         <canvas id="canvasC" width="800" height="280"></canvas>
 
         <div class="controls" style="margin-top:14px">
           <p class="note" style="margin-bottom:10px; border-left-color:var(--cyan)">
-            <b>Concentración superficial $N_i$:</b> modula la abundancia atómica de cada elemento. Pasa el cursor sobre
-            un peak para consultar sus valores exactos de $K$, $E_1$ y $Z_2^2$. Haz clic para resaltarlo.
+            <b>Concentración superficial $N_i$:</b> varía la abundancia de cada elemento y observa cómo la
+            altura del peak cambia sin alterar su posición en energía — confirmando la independencia entre
+            identidad y composición. Pasa el cursor sobre un peak para consultar sus parámetros exactos.
           </p>
           <div id="concSliders"></div>
         </div>
 
         <div class="formula-box">
-          <div class="flabel">Rendimiento de los Peaks (Área y Altura) — ¿De qué depende la señal?</div>
-          $$\text{Rendimiento / Área del Peak } (A_i) \;\propto\; \text{Altura } (H_i) \;\propto\; N_i \cdot Z_2^2$$
+          <div class="flabel">Las dos leyes del espectro RBS — posición e intensidad</div>
+          $$E_1 = K(M_2)\cdot E_0 \qquad\qquad A_i \;\propto\; N_i \cdot Z_2^2$$
           <div class="formula-meta">
-            · <b>Área vs. Altura:</b> en el análisis físico se integra el <b>Área $A_i$</b> (cuentas totales detectadas); al tener el detector una resolución gaussiana fija ($\sigma$), la <b>Altura</b> es directamente proporcional al área.<br>
-            · <b>$N_i$ (Concentración superficial):</b> a mayor número de átomos en la muestra, mayor es el peak (relación lineal directa).<br>
-            · <b>$Z_2^2$ (Carga nuclear al cuadrado):</b> núcleos con más protones desvían muchas más partículas alfa ($\text{Au}$ produce $173.4\times$ más cuentas que $\text{C}$ a igual abundancia).
+            · <b>Posición $E_1$ (eje $X$):</b> firma energética única de cada elemento, determinada por su masa
+            $M_2$. Invariante ante cambios de concentración.<br>
+            · <b>Área $A_i$ y Altura $H_i$ (eje $Y$):</b> proporcionales entre sí dado que el detector tiene
+            resolución gaussiana fija ($\sigma \approx 28\,\text{keV}$, $A_i = H_i \cdot \sigma\sqrt{2\pi}$).
+            Escalan linealmente con $N_i$ y cuadráticamente con $Z_2$.<br>
+            · <b>Sensibilidad elemental:</b> el oro ($Z_2 = 79$) genera $173\times$ más señal que el carbono
+            ($Z_2 = 6$) a igual concentración: $(79/6)^2 \approx 173$.
           </div>
         </div>
 
         <div class="note">
-          · <b>Cuantificación absoluta directa (*standardless*):</b> como la probabilidad de dispersión ($Z_2^2$) proviene de la ley electrostática de Coulomb pura, el RBS permite determinar la composición química de cualquier material desconocido comparando las áreas de los peaks, sin necesidad de calibrar con muestras patrón previas.<br><br>
-          <b>→ Conexión con Panel D:</b> a continuación se analiza cómo el flujo estocástico del haz y la estratificación multicapa construyen este espectro en tiempo real.
+          · <b>Cuantificación absoluta sin muestras de referencia (<i>standardless</i>):</b> la sección eficaz
+          de Rutherford es calculable analíticamente a partir de la ley de Coulomb, sin necesidad de calibrar
+          con materiales patrón. La razón estequiométrica entre dos elementos se obtiene directamente:
+          $$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
+          Esta independencia de patrones externos constituye una ventaja distintiva del RBS frente a otras
+          técnicas de análisis elemental superficial.<br><br>
+          <b>→ Conexión con Panel D:</b> el análisis anterior corresponde a átomos en la superficie. Cuando
+          los elementos se distribuyen en profundidad, las partículas pierden energía al atravesar el material
+          antes y después de la colisión, desplazando y ensanchando los peaks. Este efecto permite medir
+          espesores de capas delgadas con resolución nanométrica.
         </div>
 
       </div>
