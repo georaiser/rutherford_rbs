@@ -729,19 +729,28 @@
     <section class="panel" id="panel-d">
       <div class="panel-header">
         <span class="badge">D</span>
-        <h2>RBS en acción — adquisición estocástica y multicapas</h2>
+        <h2>RBS en acción — síntesis interactiva y multicapas</h2>
       </div>
       <div class="panel-body">
 
         <p class="note">
-          <b>Metrología nanométrica y análisis multicapa no destructivo:</b><br>
-          En la práctica industrial (microelectrónica, recubrimientos y espintrónica), las muestras son estratos
-          sucesivos. Aquí se simula la interacción con una heteroestructura: sustrato de <b>Si</b>, película delgada de
-          <b>Au</b> y capa superficial de <b>C</b> (con <b>Ag</b> y <b>Fe</b> opcionales).<br><br>
-          · <b>Dinámica en tiempo real:</b> a la izquierda se generan los eventos estocásticos individuales; a la
-          derecha se acumula el espectro conforme a la estadística de conteo.<br>
-          · <b>Controles:</b> haz clic en cualquier capa para destacarla. Al variar $E_0$, la escala de energías se
-          recalibra linealmente. Modifica la corriente $I$ para observar la velocidad de adquisición y convergencia.
+          <b>El mismo principio, 115 años después — Síntesis interactiva:</b><br>
+          En 1909–1911, Rutherford disparó partículas $\alpha$ para descubrir el núcleo atómico. Hoy, esa misma física
+          —colisión elástica y repulsión electrostática de Coulomb— permite analizar microchips, catalizadores y películas
+          delgadas capa por capa sin destruir la muestra.<br><br>
+
+          <b>Síntesis de los paneles anteriores:</b><br>
+          · <b>Panel A:</b> Demostró que el núcleo existe, es diminuto y concentra toda la carga positiva del átomo.<br>
+          · <b>Panel B:</b> Explicó cómo la colisión elástica identifica un elemento mediante el factor cinemático
+          $K(M_2,\theta)$ y el balance de retroceso ($E_{\text{rec}}$).<br>
+          · <b>Panel C:</b> Mostró cómo las colisiones forman el espectro RBS en superficie, desacoplando masa ($E_1$) y
+          estequiometría ($A_i \propto N_i Z_2^2$).<br>
+          · <b>Aquí (Panel D):</b> Se integra todo en una <b>heteroestructura real multicapa</b> (sustrato de <b>Si</b> con
+          películas de <b>Fe</b>, <b>Au</b>, <b>Ag</b> y superficie de <b>C</b>). Al penetrar, los iones experimentan
+          <b>frenado inelástico continuo ($dE/dx$)</b> con los electrones, ensanchando las señales ($\Delta E = [S]\cdot
+          x$) para medir el <b>espesor nanométrico</b> de cada estrato.<br><br>
+          · <b>Dinámica estocástica en vivo:</b> la animación izquierda modela los eventos individuales de Monte Carlo; la
+          gráfica derecha acumula el espectro conforme a la <b>estadística de Poisson</b> ($\sigma_N/N = 1/\sqrt{N}$).
         </p>
 
         <div class="rbs-view">
@@ -769,10 +778,15 @@
             <span class="slider-val" id="valI_nA">20 nA</span>
           </div>
           <p class="note" style="margin:10px 0 8px;border-left-color:var(--cyan)">
-            <b>Corriente del haz $I$:</b> rige el flujo de proyectiles: $\dot{N}_\text{haz} = \frac{I}{Z_1 e} \approx
-            6.24 \times 10^{10}\,\text{alfas/s}$ a $20\,\text{nA}$. La tasa de spawn se calibra según $\Delta t =
-            \frac{9200}{I[\text{nA}]}\,\text{ms}$. A mayor corriente o tiempo, la fluctuación de Poisson disminuye
-            ($\sigma_N/N = 1/\sqrt{N}$) y el espectro converge.
+            <b>Parámetros del haz:</b><br>
+            · <b>Energía $E_0$ (Alcance y profundidad):</b> al subir $E_0$, las partículas $\alpha$ tienen mayor energía
+            para vencer el frenado electrónico y penetrar hasta estratos profundos ($R \propto \int \frac{dE}{dE/dx}$, de
+            $\sim 1.5\,\mu\text{m}$ a $1\,\text{MeV}$ hasta $>8\,\mu\text{m}$ a $3\,\text{MeV}$). Se mantiene $E_0 \le
+            3.0\,\text{MeV}$ para no superar la barrera de Coulomb nuclear y asegurar repulsión $100\%$ pura.<br>
+            · <b>Corriente $I$ (Flujo y convergencia de Poisson):</b> rige la tasa de proyectiles
+            ($\dot{N}_\text{haz} = \frac{I}{Z_1 e} \approx 6.24 \times 10^{10}\,\text{alfas/s}$ a $20\,\text{nA}$). A
+            mayor corriente o tiempo, la fluctuación estocástica disminuye ($\sigma_N/N = 1/\sqrt{N}$) y el espectro
+            converge suavemente a las proporciones analíticas teóricas.
           </p>
           <div id="panelD-sliders"></div>
         </div>
@@ -783,25 +797,30 @@
         </div>
 
         <div class="formula-box" style="margin-top:16px">
-          <div class="flabel">Perfilado en profundidad — Factor de Parada $[S]$</div>
-          $$\Delta E = [S] \cdot x, \qquad [S] =
-          \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} +
-          \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
+          <div class="flabel">Triple desacoplamiento RBS — Identidad, Cantidad y Espesor</div>
+          $$\underbrace{E_1 = K(M_2,\theta)\cdot E_0}_{\text{Posición: identifica masa } M_2} \qquad
+          \underbrace{A_i \;\propto\; N_i \cdot Z_2^2}_{\text{Área: mide cantidad } N_i} \qquad
+          \underbrace{\Delta E = [S] \cdot x}_{\text{Anchura: mide espesor } x}$$
+          <div style="margin:6px 0 2px; text-align:center;">
+            $$[S] = \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} +
+            \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
+          </div>
           <div class="formula-meta">
-            $[S]$ (en $\text{eV/\AA}$) transforma directamente la anchura en energía $\Delta E$ de un peak en el espesor
-            físico $x$ de la película.
+            · <b>Identificación ($M_2$):</b> la energía de borde $E_1$ es la firma cinemática unívoca del núcleo.<br>
+            · <b>Estequiometría ($N_i$):</b> el rendimiento relativo escala con Coulomb ($\sigma \propto Z_2^2$), permitiendo cuantificar sin patrones.<br>
+            · <b>Metrología ($x$):</b> el Factor de Parada $[S]$ ($\text{eV/\AA}$) transforma la pérdida inelástica continua $\Delta E$ en nanómetros de película.
           </div>
         </div>
 
         <div class="note" style="margin-top:12px">
-          · <b>Resolución en profundidad:</b> mientras $K(M_2)$ identifica qué elemento compone cada capa (eje de
-          energía), el Factor de Parada $[S]$ determina su espesor físico a partir de la pérdida de energía inelástica
-          al entrar y salir de la matriz.<br>
-          · <b>Sensibilidad elemental ponderada ($Z_2^2$):</b> la probabilidad de interacción estocástica escala con la
-          sección eficaz de Rutherford ($\propto Z_2^2$). Por ello, el Oro acumula $\sim 79\%$ de las detecciones frente
-          al $\sim 0.5\%$ del Carbono a igual concentración.<br><br>
-          <b>→ Cierre y proyección (Panel E):</b> el mismo fenómeno de frenado electrónico continuo que define $[S]$
-          aquí en nanómetros, gobierna la deposición macroscópica de dosis en hadronterapia oncológica.
+          · <b>De la física fundamental a la tecnología:</b> una propiedad que Rutherford utilizó para revelar la
+          existencia del núcleo —la dispersión elástica de partículas cargadas— se convierte aquí en una herramienta de
+          metrología no destructiva que resuelve simultáneamente <b>identidad ($M_2$)</b>, <b>concentración ($N_i$)</b> y
+          <b>espesor nanométrico ($x$)</b>.<br>
+          · <b>Sensibilidad electrostática ($Z_2^2$):</b> el Oro acumula $173.4\times$ más cuentas que el Carbono a
+          igual concentración debido a la mayor intensidad de su campo de Coulomb.<br><br>
+          <b>→ Conexión con Panel E:</b> el mismo frenado inelástico continuo ($dE/dx$) que permite perfilar nanómetros
+          aquí es el que concentra la dosis destructiva en el tumor profundo (pico de Bragg) en hadronterapia.
         </div>
 
       </div>

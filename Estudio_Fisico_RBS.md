@@ -225,75 +225,75 @@ A $180°$ la sensibilidad de masa $dK/dM_2$ es máxima pero bloquearía el haz i
 
 ---
 
-### 3. Panel C — Espectro RBS
+### 3. Panel C — Espectro RBS y Cuantificación de Superficie
 
 #### 3.1 ¿Qué mide el espectro RBS?
-El espectro es un histograma de frecuencias: en el eje X se representa la energía de las partículas retrodispersadas detectadas ($E_1$), y en el eje Y el número de cuentas (rendimiento o *Yield*). 
+El espectro es un histograma continuo de energía: en el eje X se representa la energía de las partículas alfa retrodispersadas detectadas ($E_1$), y en el eje Y el número de cuentas (rendimiento o *Yield*).
 
 #### 3.2 Posición de los peaks: energía $E_1 = K\cdot E_0$
-Cada elemento químico presente en la muestra superficial genera una señal (peak) a una energía específica, determinada unívocamente por su factor cinemático $K$. Elementos pesados (Au) aparecen a la derecha del espectro (alta energía), y los ligeros (C, O) a la izquierda (baja energía).
+Cada elemento químico presente en la muestra genera un peak centrado en una energía específica, determinada unívocamente por su factor cinemático $K(M_2,\theta)$. Los elementos pesados ($\text{Au}$) aparecen a la derecha del espectro (alta energía residual), y los ligeros ($\text{C}$) a la izquierda (baja energía). Esta posición es **estrictamente invariante** ante cambios de concentración.
 
-#### 3.3 Altura y rendimiento de los peaks: sección eficaz diferencial $\sigma$
-La altura o área integrada bajo el peak cuantifica la abundancia atómica de ese elemento. La probabilidad de retrodispersión por unidad de ángulo sólido viene dada por la sección eficaz diferencial de Rutherford, que escala con $Z_2^2$:
-$$ \frac{d\sigma}{d\Omega} = \left( \frac{Z_1 Z_2 e^2}{16 \pi \epsilon_0 E_0} \right)^2 \frac{1}{\sin^4(\theta/2)} \propto Z_2^2 $$
+#### 3.3 Altura y rendimiento de los peaks: sección eficaz de Coulomb ($\sigma \propto Z_2^2$)
+El área bajo cada peak ($A_i$) es el producto de dos factores desacoplados:
+$$ A_i \;\propto\; \underbrace{N_i}_{\text{Densidad atómica}} \;\times\; \underbrace{Z_2^2}_{\text{Sección eficaz de Coulomb}} $$
 
 **Fórmula canónica de rendimiento (Chu, Mayer & Nicolet, 1978):**
 El área integrada $A_i$ (número total de cuentas) del peak correspondiente al elemento $i$ en una película delgada se expresa analíticamente como:
 $$A_i = Q \cdot N_i \cdot \left(\frac{d\sigma}{d\Omega}\right)_i \cdot \Delta\Omega$$
-donde $Q$ es la carga total integrada del haz incidente, $N_i$ es la densidad atómica superficial ($\text{átomos/cm}^2$), $(d\sigma/d\Omega)_i$ es la sección eficaz diferencial y $\Delta\Omega$ es el ángulo sólido subtendido por el detector. Dado que la sección eficaz se deriva exactamente de la electrostática pura, el RBS permite una **cuantificación elemental absoluta sin necesidad de patrones previos de calibración (*standardless*)**.
+donde $Q$ es la carga total integrada del haz incidente, $N_i$ es la densidad atómica superficial ($\text{átomos/cm}^2$), $(d\sigma/d\Omega)_i$ es la sección eficaz diferencial y $\Delta\Omega$ es el ángulo sólido subtendido por el detector.
 
-**Valor verificado:** La relación de intensidades entre el oro y el carbono a igual concentración estequiométrica es:
-$$ \frac{(d\sigma/d\Omega)_{\text{Au}}}{(d\sigma/d\Omega)_{\text{C}}} = \left(\frac{79}{6}\right)^2 = \frac{6241}{36} = 173.36 \approx 173.4 $$
-Esta tremenda diferencia en la sección eficaz hace que el RBS sea extremadamente sensible a trazas de elementos pesados sobre sustratos ligeros, pero poco sensible a elementos ligeros sobre sustratos pesados.
+**Cuantificación absoluta sin patrones (*standardless*):**
+Dado que la sección eficaz $\sigma \propto Z_2^2$ se deriva analíticamente a partir de la ley de Coulomb pura sin contacto físico, RBS permite determinar la **fórmula estequiométrica exacta directamente in situ sin destruir la muestra ni requerir patrones de calibración externos**:
+$$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
 
-#### 3.4 Anchura de los peaks: resolución energética del detector
-Los peaks simulados no son líneas de Dirac infinitamente estrechas. Se ensanchan según una distribución Gaussiana impulsada por la resolución instrumental intrínseca del detector de barrera de superficie de silicio (PIPS, con energía media de creación de pares $w = 3.62\,\text{eV}/\text{par}$ y resolución típica $\text{FWHM} \approx 15\text{-}20\text{ keV}$).
+**Fases y materiales reales integrados:**
+- $\text{Fe}_3\text{C}$ (Cementita / Acero templado): $N_{\text{Fe}} : N_{\text{C}} = 3 : 1$ ($75\%$ Fe, $25\%$ C atómico).
+- $\text{Au}_2\text{Si}$ (Siliciuro de oro): $N_{\text{Au}} : N_{\text{Si}} = 2 : 1$ ($67\%$ Au, $33\%$ Si atómico).
+- $\text{SiC}$ (Carburo de silicio semiconductor): $N_{\text{Si}} : N_{\text{C}} = 1 : 1$ ($50\%$ Si, $50\%$ C atómico).
+- $\text{Ag}_3\text{Au}$ (Electrum / Aleación noble): $N_{\text{Ag}} : N_{\text{Au}} = 3 : 1$ ($75\%$ Ag, $25\%$ Au atómico).
 
-#### 3.5 El espectro completo: suma de gaussianas
-Matemáticamente, el perfil transversal en el Panel C se modela como una superposición de funciones Gaussianas:
+**Valor verificado de sensibilidad:**
+$$\frac{(d\sigma/d\Omega)_{\text{Au}}}{(d\sigma/d\Omega)_{\text{C}}} = \left(\frac{79}{6}\right)^2 = \frac{6241}{36} = 173.36 \approx \mathbf{173.4}$$
+A igual concentración, el Oro genera $173.4\times$ más cuentas que el Carbono.
+
+#### 3.4 Anchura y resolución del detector
+Los peaks se modelan como funciones gaussianas convolucionadas con la resolución instrumental del detector semiconductor de silicio (PIPS, $\sigma_{\text{det}} \approx 28\text{--}30\,\text{keV}$, $\text{FWHM} \approx 65\text{--}70\,\text{keV}$):
 $$ Y(E) = \sum_{i} A_i \exp\left( - \frac{(E - K_i E_0)^2}{2\sigma_{\text{det}}^2} \right) $$
-Donde la amplitud $A_i$ está escalada con $N_i Z_i^2$ de cada elemento de la muestra.
-
-#### 3.6 Simplificaciones declaradas
-- **Solo dispersión en superficie:** El panel C es estático y no muestra las colas de dispersión producidas por la pérdida de energía en profundidad (tratadas en el Panel D).
-- **Rutherford ideal:** Se ignoran posibles resonancias nucleares no-Rutherford que suelen ocurrir en elementos ligeros a ciertas energías específicas.
 
 ---
 
-### 4. Panel D — RBS en acción (simulación dinámica)
+### 4. Panel D — RBS en acción (Adquisición estocástica y perfilado en profundidad)
 
-#### 4.1 Del espectro estático a la acumulación dinámica
-El Panel D integra la cinemática de una forma continua, simulando un experimento RBS vivo. Las partículas "llueven" aleatoriamente sobre una muestra con 5 capas o elementos predefinidos, y el espectrómetro se dibuja evento a evento.
+#### 4.1 De la monocapa al perfilado en profundidad
+Mientras el Panel C describe átomos en superficie ideal ($x=0$), el Panel D simula la interacción con una **heteroestructura multicapa real** (sustrato de $\text{Si}$ con capas de $\text{Fe}$, $\text{Au}$, $\text{Ag}$ y superficie de $\text{C}$, con espesor uniforme de $40\,\text{nm}$ por estrato, cubriendo de $0\text{ a }200\,\text{nm}$).
 
-#### 4.2 Corriente del haz y tasa de eventos
-En un experimento de RBS real, la tasa de partículas del haz es:
-$$\dot{N}_\text{haz} = \frac{I}{Z_1 e}$$
-Para alfa ($Z_1=2$) con $I=20\text{ nA}$: $\dot{N} \approx 6.25\times10^{10}$ partículas/s.
+#### 4.2 Física de los parámetros del haz ($E_0$ e $I$)
 
-La simulación reproduce este efecto con la relación:
-$$\Delta t_\text{spawn} = \frac{9200}{I[\text{nA}]} \text{ ms}$$
-A mayor corriente, menor intervalo entre eventos computacionales y mayor velocidad de acumulación del espectro. El factor 9200 está calibrado para que la dinámica visual sea comparable a la de un experimento real de caracterización rápida. Rango del slider: $I = 5$–$100\text{ nA}$.
+1. **Energía del haz $E_0$ (Alcance y profundidad):**
+   Al ingresar al sólido, los iones pierden energía por interacción inelástica continua con la nube electrónica (fórmula de Bethe-Bloch). El alcance máximo $R(E_0)$ es:
+   $$R(E_0) = \int_0^{E_0} \frac{dE}{dE/dx}$$
+   - A $1.0\,\text{MeV}$, penetra $\sim 1.5\,\mu\text{m}$ en $\text{Si}$.
+   - A $2.0\,\text{MeV}$, penetra $\sim 4.5\,\mu\text{m}$.
+   - A $3.0\,\text{MeV}$, penetra $>8.0\,\mu\text{m}$.
+   - **Límite de la barrera de Coulomb:** Se mantiene $E_0 \le 3.0\,\text{MeV}$ para asegurar que la partícula $\alpha$ nunca supere la barrera electrostática nuclear ($E_{\text{barrera}} \approx 5.5\,\text{MeV}$ para C), garantizando una dispersión $100\%$ elástica de Coulomb pura.
 
-#### 4.3 Selección estocástica de la capa (pickup layer)
-Para que el proceso sea realista, la probabilidad de que una partícula simulada se disperse en la capa $i$ está ponderada matemáticamente por la sección eficaz de dicho elemento:
-$$ P(\text{capa } i) = \frac{Z_{2,i}^2}{\sum Z_{2,j}^2} $$
-Por consiguiente, el algoritmo estocástico selecciona la interacción con el Oro con mucha más frecuencia que con el Oxígeno, haciendo crecer su peak gaussiano más rápidamente ante los ojos del usuario.
+2. **Corriente del haz $I$ (Flujo y convergencia de Poisson):**
+   El flujo incidente de partículas por segundo es:
+   $$\dot{N}_\text{haz} = \frac{I}{Z_1 e} \approx \mathbf{6.24 \times 10^{10} \;\text{alfas/s}} \quad (\text{a } 20\,\text{nA})$$
+   El registro estocástico de pulsos sigue la **distribución de Poisson**, con incertidumbre relativa:
+   $$\frac{\sigma_N}{N} = \frac{1}{\sqrt{N}}$$
+   A mayor corriente o tiempo de integración, el ruido estadístico disminuye y el histograma converge suavemente a la curva teórica del Panel C.
 
-#### 4.4 Pérdida de energía en profundidad: el Factor de Parada $[S]$
-Un proyectil que interacciona a profundidad $x$ pierde energía en tres etapas:
-1. **Entrada:** llega con energía reducida $E(x) = E_0 - x(dE/dx)_{\text{in}}$
-2. **Colisión elástica:** rebota con $E' = K \cdot E(x)$
-3. **Salida:** emerge con $E_1(x) = E' - \frac{x}{\cos\theta}(dE/dx)_{\text{out}}$
+#### 4.3 Factor de Parada $[S]$ y espesor físico ($x$)
+Un proyectil que retrodispersa a profundidad $x$ sufre frenado al entrar y al salir:
+$$\Delta E = [S] \cdot x, \qquad [S] = \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} + \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
+El Factor de Parada $[S]$ (en $\text{eV/\AA}$) transforma directamente la anchura en energía $\Delta E$ en el **espesor físico nanométrico $x$** de la película.
 
-La diferencia de energía respecto a un choque en superficie es lineal en $x$:
-$$\Delta E = [S] \cdot x, \quad [S] = \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} + \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
-El Factor de Parada $[S]$ (en eV/Å) convierte el desplazamiento espectral en espesor de película. Una capa de Au de 50 nm produce un peak con ancho $\Delta E = [S] \cdot 50\,\text{nm}$ medible en el detector. Esta relación es la base del análisis de profundidad no destructivo del RBS.
-
-#### 4.5 Aplicaciones reales del RBS
-Como se evidencia en la acumulación de datos en este panel, el RBS se ha convertido en una técnica invaluable en la industria de los semiconductores y nanomateriales. Permite realizar perfiles de profundidad sin destruir la muestra (no-destructivo), identificar contaminantes metálicos, analizar la estequiometría de películas delgadas (como óxidos en puertas de transistores), y estudiar la difusión térmica entre multicapas.
-
-#### 4.6 Simplificaciones declaradas
-- **Frenado electrónico constante:** No se resuelve formalmente la dependencia energética del frenado electrónico $\frac{dE}{dx}(E)$ para calcular la geometría de los perfiles de profundidad con rigor absoluto; se utiliza una abstracción geométrica y de probabilidad para fines didácticos.
+#### 4.4 El Triple Desacoplamiento No Destructivo
+En una sola medición no destructiva, RBS desacopla simultáneamente:
+1. **Identidad química ($M_2$):** Borde de energía $E_{\text{borde}} = K(M_2,\theta)\cdot E_0$.
+2. **Estequiometría ($N_i$):** Rendimiento integrado $A_i \propto N_i \cdot Z_2^2$.
+3. **Espesor nanométrico ($x$):** Anchura espectral $\Delta E = [S] \cdot x$.
 
 ---
 

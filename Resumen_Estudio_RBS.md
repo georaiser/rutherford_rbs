@@ -99,37 +99,37 @@ Para blancos más ligeros que el proyectil ($M_2 < M_1 = 4\,\text{u}$, como $^1\
 ## 3. Panel C — Espectro RBS y Cuantificación de Superficie
 
 ### Desacoplamiento de identidad y cantidad
-1. **Posición del pico ($E_1 = K \cdot E_0$):** Identifica unívocamente la masa nuclear $M_2$.
+1. **Posición del pico ($E_1 = K \cdot E_0$):** Identifica unívocamente la masa nuclear $M_2$ (invariante ante la concentración).
 2. **Área o Rendimiento del pico ($A_i \propto N_i Z_2^2$):** Determina la concentración atómica superficial $N_i$ (átomos/$\text{cm}^2$).
 
-### Sección eficaz diferencial de Rutherford
+### Sección eficaz diferencial de Coulomb
 $$\frac{d\sigma}{d\Omega} = \left(\frac{Z_1 Z_2 ke^2}{4E_0}\right)^2 \frac{1}{\sin^4(\theta/2)} \;\propto\; Z_2^2$$
 *Sensibilidad relativa:* A igual densidad atómica, la señal del oro frente al carbono es:
-$$\frac{\sigma_{\text{Au}}}{\sigma_{\text{C}}} = \left(\frac{79}{6}\right)^2 \approx 173.4\times$$
+$$\frac{\sigma_{\text{Au}}}{\sigma_{\text{C}}} = \left(\frac{79}{6}\right)^2 \approx \mathbf{173.4\times}$$
 
-### Fórmula canónica de rendimiento (Chu, Mayer & Nicolet, 1978)
-$$A_i = Q \cdot N_i \cdot \left(\frac{d\sigma}{d\Omega}\right)_i \cdot \Delta\Omega$$
-donde $Q$ es la carga integrada del haz y $\Delta\Omega$ el ángulo sólido del detector. Como la sección eficaz se deriva exactamente de la ley de Coulomb, RBS permite una **cuantificación absoluta sin patrones previos de calibración (*standardless*)**.
+### Cuantificación estequiométrica no destructiva (*Standardless*)
+Dado que $\sigma \propto Z_2^2$ surge de primeros principios de Coulomb, RBS deduce la fórmula química exacta **sin destruir la muestra ni requerir patrones de calibración**:
+$$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
+*Materiales reales integrados:* $\text{Fe}_3\text{C}$ (Cementita / Acero), $\text{Au}_2\text{Si}$ (Siliciuro de oro), $\text{SiC}$ (Carburo de silicio), $\text{Ag}_3\text{Au}$ (Electrum).
 
 ---
 
 ## 4. Panel D — Adquisición Estocástica y Perfilado en Profundidad ($[S]$)
 
-### Dinámica del haz y corriente $I$
-El flujo de proyectiles incidentes está dado por:
-$$\dot{N}_{\text{haz}} = \frac{I}{Z_1 e}$$
-A una corriente típica de $I = 20\,\text{nA}$ con partículas alfa ($Z_1=2$):
-$$\dot{N}_{\text{haz}} \approx \frac{20 \times 10^{-9}\,\text{A}}{2 \times 1.602 \times 10^{-19}\,\text{C}} \approx 6.24 \times 10^{10} \text{ alfas/segundo}$$
+### Parámetros físicos del haz
+- **Energía $E_0$ (Alcance y profundidad):** A mayor $E_0$, las partículas $\alpha$ tienen mayor energía para vencer el frenado inelástico de los electrones ($R \propto \int \frac{dE}{dE/dx}$, alcanzando desde $\sim 1.5\,\mu\text{m}$ a $1\,\text{MeV}$ hasta $>8\,\mu\text{m}$ a $3\,\text{MeV}$). Se mantiene $E_0 \le 3.0\,\text{MeV}$ para no superar la barrera de Coulomb nuclear y asegurar repulsión $100\%$ pura.
+- **Corriente $I$ (Flujo y convergencia de Poisson):** Rige el flujo de proyectiles ($\dot{N}_{\text{haz}} = \frac{I}{Z_1 e} \approx 6.24 \times 10^{10} \text{ alfas/s}$ a $20\,\text{nA}$). La incertidumbre de Poisson $\frac{\sigma_N}{N} = \frac{1}{\sqrt{N}}$ decrece al acumular cuentas, convergiendo el espectro suavemente.
 
-### Fluctuaciones y estadística de Poisson
-Cada canal del histograma acumula $N$ cuentas con una desviación estándar relativa:
-$$\frac{\sigma_N}{N} = \frac{1}{\sqrt{N}}$$
-A mayor tiempo de adquisición o mayor corriente, las fluctuaciones estadísticas disminuyen y el espectro converge.
-
-### Factor de Parada $[S]$ y resolución en profundidad
-Cuando una partícula se dispersa a una profundidad $x$, pierde energía inelásticamente con los electrones al entrar y al salir de la matriz:
+### Factor de Parada $[S]$ y espesor nanométrico ($x$)
+El frenado inelástico continuo ($dE/dx$) ensancha cada pico en una meseta de energía:
 $$\Delta E = [S] \cdot x, \qquad [S] = \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} + \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
-El Factor de Parada $[S]$ (en $\text{eV/\AA}$) transforma directamente la anchura en energía del pico $\Delta E$ en el espesor físico nanométrico $x$ de la película.
+El Factor de Parada $[S]$ (en $\text{eV/\AA}$) transforma directamente la anchura $\Delta E$ en el espesor físico $x$ ($40\,\text{nm}$ por estrato en la muestra de $0\text{--}200\,\text{nm}$).
+
+### Triple desacoplamiento no destructivo
+En una sola medición no destructiva, RBS determina simultáneamente:
+1. **Identidad química ($M_2$):** Borde superior en energía ($E_{\text{borde}} = K E_0$).
+2. **Estequiometría ($N_i$):** Área bajo la curva ($A_i \propto N_i Z_2^2$).
+3. **Espesor ($x$):** Anchura del peak ($\Delta E = [S] \cdot x$).
 
 ---
 

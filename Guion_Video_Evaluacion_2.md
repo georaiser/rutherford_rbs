@@ -46,7 +46,7 @@
 | 3:10–3:20 | Cámara al estudiante. | "Identificada la masa con el factor $K$ y el balance de retroceso, el siguiente paso es cuantificar concentraciones y analizar muestras reales multicapa, como mostrará mi compañero." |
 
 > **Traspaso a Estudiante 3** (frase fija):
-> *"Identificada la masa con el factor $K$, el siguiente paso es cuantificar concentraciones y analizar muestras reales multicapa, como mostrará mi compañero."*
+> *"Identificada la masa con el factor $K$, el siguiente paso es cuantificar concentraciones, deducir estequiometrías y analizar muestras reales multicapa, como mostrará mi compañero."*
 
 ---
 
@@ -54,8 +54,8 @@
 
 | Tiempo | Acción en pantalla | Texto hablado |
 |:---:|:---|:---|
-| 3:20–3:45 | **Panel C.** Explorar espectro interactivo y mover sliders de concentración. | "Al acumular las detecciones obtenemos el espectro RBS. La posición del pico en el eje de energía revela la masa $M_2$ mediante el factor $K$. Su área o rendimiento es proporcional a la concentración atómica y al cuadrado del número atómico ($Z_2^2$). A igual abundancia, el oro produce una señal 173 veces más intensa que el carbono. Gracias a la fórmula canónica de Chu de 1978, RBS permite cuantificación absoluta directa sin necesidad de patrones previos de calibración." |
-| 3:45–4:10 | **Panel D.** Simulación C/Au/Si en vivo. Variar corriente $I$ de 20 a 60 nA y pausar. | "En el Panel D vemos el análisis de una multicapa real: silicio, oro y carbono. La corriente del haz regula el flujo de partículas —más de sesenta mil millones por segundo a 20 nA—. Al acumular cuentas, las fluctuaciones de Poisson disminuyen según uno sobre raíz de $N$, convergiendo el espectro. Además, el Factor de Parada $[S]$ transforma la pérdida continua de energía inelástica en el espesor físico nanométrico de cada estrato." |
+| 3:20–3:45 | **Panel C.** Clic en preset $\text{Fe}_3\text{C}$ (Acero), mostrar tarjeta estequiométrica en vivo y ganancia $\times 5$. | "Al acumular las detecciones obtenemos el espectro RBS. La posición del pico revela la masa $M_2$ mediante el factor $K$, mientras que el área escala con $N_i \cdot Z_2^2$: a igual abundancia, el oro produce una señal 173 veces más intensa que el carbono. Observen cómo al seleccionar el preset $\text{Fe}_3\text{C}$, la app deduce la estequiometría exacta en tiempo real mediante un análisis no destructivo y sin requerir patrones de calibración externos." |
+| 3:45–4:10 | **Panel D.** Muestra multicapa homogénea ($0\text{--}200\,\text{nm}$). Variar energía $E_0$ (2.0 a 3.0 MeV) y corriente $I$ (20 a 60 nA). | "En el Panel D vemos la gran síntesis interactiva: 115 años después de Rutherford, la misma dispersión elástica de Coulomb analiza heteroestructuras reales. Al subir la energía $E_0$, los iones vencen el frenado electrónico alcanzando estratos más profundos sin superar la barrera nuclear. La corriente regula el flujo del haz —sesenta mil millones de alfas por segundo a 20 nA—; al acumular cuentas, la fluctuación de Poisson disminuye según $1/\sqrt{N}$. Y el Factor de Parada $[S]$ traduce la pérdida inelástica en el espesor nanométrico de cada capa, logrando el triple desacoplamiento de masa, cantidad y espesor." |
 | 4:10–4:35 | **Panel E.** Curva de Bragg con protones a 150 MeV. Variar slider y alternar a $^{12}\mathrm{C}^{6+}$. | "La misma interacción de Coulomb gobierna la frontera médica moderna: la Hadronterapia. Según el principio de Bethe-Bloch, el frenado $-\frac{dE}{dx}$ es proporcional a $z^2/v^2$. Al desacelerar en el tejido, la partícula deposita casi toda su energía en una zona terminal estrecha: el Pico de Bragg, con dosis cero detrás del tumor. A diferencia de los rayos X convencionales que dañan tejido sano a la entrada, los protones y los iones de carbono 12 ($z^2=36$) destruyen tumores profundos y radiorresistentes con precisión milimétrica." |
 | 4:35–5:00 | **Scroll a Línea de Tiempo (Panel ∞) y cámara al estudiante.** | "En conclusión: el núcleo de Rutherford en 1911 creó la crisis clásica del colapso del electrón por radiación de Larmor, obligando a Niels Bohr en 1913 a postular las órbitas cuánticas de la materia. Irónicamente, las alfas usadas por Rutherford solo escapan del radio por efecto túnel cuántico. Así, el experimento que inauguró la Teoría Cuántica Temprana fundamenta hoy la metrología de materiales por RBS y los tratamientos oncológicos más avanzados." |
 
@@ -74,6 +74,8 @@
 | Factor $K$ (Oro $^{197}\text{Au}$, $170^\circ$) | $0.9226$ | $E_1 = 1.845\,\text{MeV}$ (retiene 92.3% de energía). |
 | Relación de secciones eficaces $\sigma_{\text{Au}}/\sigma_{\text{C}}$ | $173.4 = (79/6)^2$ | Modulación $Z_2^2$ en el rendimiento espectral. |
 | Flujo del haz $I = 20\,\text{nA}$ | $6.24 \times 10^{10}\,\alpha/\text{s}$ | Tasa de spawn estocástico y convergencia de Poisson. |
+| Alcance en Si ($E_0 = 1.0 \to 3.0\,\text{MeV}$) | $1.5\,\mu\text{m} \to >8\,\mu\text{m}$ | Penetración en profundidad por integral de frenado. |
+| Límite barrera de Coulomb ($^{12}\text{C}$) | $E_{\text{barrera}} \approx 5.5\,\text{MeV}$ | Límite para dispersión elástica electrostática pura. |
 | Poder de frenado (Bethe-Bloch) | $-\frac{dE}{dx} \propto \frac{z^2}{v^2}$ | Origen físico del Pico de Bragg terminal. |
 | Carga de iones $^{12}\mathrm{C}^{6+}$ | $z^2 = 36$ | RBE elevado para tumores radiorresistentes. |
 | Tiempo de colapso clásico de Larmor | $\tau \approx 1.6 \times 10^{-11}\,\text{s}$ | Paradoja clásica resuelta por la cuantización de Bohr ($L=n\hbar$). |
