@@ -127,56 +127,70 @@ const panelC = (() => {
 
     if (active.length === 0) {
       formulaEl.textContent = 'Muestra vacía (Nᵢ = 0)';
-      ratioEl.textContent   = 'Sin señal detectada';
+      ratioEl.textContent   = 'Sin señal nuclear detectada';
       return;
     }
 
+    const totalConc = active.reduce((sum, el) => sum + concentrations[el.sym], 0);
+
+    // 1. Caso de un solo elemento activo (Elemento puro)
     if (active.length === 1) {
       const el = active[0];
       const pct = Math.round(concentrations[el.sym] * 100);
-      formulaEl.textContent = `${el.sym} elemental (${pct}%)`;
-      ratioEl.textContent   = `Monocapa pura de ${el.name || el.sym}`;
+      formulaEl.innerHTML = `<b style="color:${el.color}">${el.name} (${el.sym})</b> — Elemento puro`;
+      ratioEl.textContent   = `Concentración superficial relativa: ${pct}% (100% fracción atómica de ${el.sym})`;
       return;
     }
 
-    // Normalizar respecto al elemento de menor abundancia activa
-    const minConc = Math.min(...active.map(el => concentrations[el.sym]));
-    
-    // Generar clave canónica para buscar en la base de datos de fases reales
-    let formulaCleanKey = '';
-    const parts = active.map(el => {
-      const rawRatio = concentrations[el.sym] / minConc;
-      const rounded = Math.round(rawRatio);
-      const isInteger = Math.abs(rawRatio - rounded) < 0.08;
-      
-      let subStr = '';
-      if (isInteger) {
-        formulaCleanKey += el.sym + (rounded > 1 ? rounded : '');
-        subStr = rounded > 1 ? toSubscript(rounded.toString()) : '';
-      } else {
-        const dec = rawRatio.toFixed(2);
-        formulaCleanKey += el.sym + dec;
-        subStr = toSubscript(dec);
-      }
-      return `${el.sym}${subStr}`;
-    });
-
-    const formulaFormatted = parts.join(' ');
-    const knownName = KNOWN_PHASES[formulaCleanKey] || (active.length === 5 ? 'Mezcla Multicomponente' : '');
-
-    formulaEl.innerHTML = formulaFormatted + (knownName ? ` <span style="font-weight:400; color:var(--text); font-size:0.76rem;">— ${knownName}</span>` : '');
-
-    // Razón directa entre los dos elementos principales
+    // 2. Caso de 2 elementos activos (Compuesto binario / Aleación)
     if (active.length === 2) {
+      // Ordenar por número atómico o masa para convención química
       const elA = active[0], elB = active[1];
       const nA = concentrations[elA.sym], nB = concentrations[elB.sym];
-      const pctA = Math.round((nA / (nA + nB)) * 100);
-      const pctB = Math.round((nB / (nA + nB)) * 100);
-      const rAB = (nA / nB).toFixed(2);
-      ratioEl.textContent = `N(${elA.sym})/N(${elB.sym}) = ${rAB} (${pctA}% ${elA.sym}, ${pctB}% ${elB.sym} atómico)`;
-    } else {
-      ratioEl.textContent = `Cálculo N_i ∝ A_i / Z_i² (análisis sin patrones)`;
+      const pctA = Math.round((nA / totalConc) * 100);
+      const pctB = Math.round((nB / totalConc) * 100);
+      const rAB = nA / nB;
+
+      // Identificación de fases estequiométricas conocidas
+      let phaseName = '';
+      let formulaTag = '';
+
+      if (elA.sym === 'C' && elB.sym === 'Fe' || elA.sym === 'Fe' && elB.sym === 'C') {
+        const rFeC = elA.sym === 'Fe' ? rAB : 1 / rAB;
+        if (Math.abs(rFeC - 3.0) < 0.20) { formulaTag = 'Fe₃C'; phaseName = 'Cementita en Acero'; }
+        else if (Math.abs(rFeC - 2.0) < 0.20) { formulaTag = 'Fe₂C'; phaseName = 'Carburo de hierro (Hägg)'; }
+        else if (Math.abs(rFeC - 1.0) < 0.15) { formulaTag = 'FeC'; phaseName = 'Carburo de hierro equiatómico'; }
+      } else if (elA.sym === 'Si' && elB.sym === 'Au' || elA.sym === 'Au' && elB.sym === 'Si') {
+        const rAuSi = elA.sym === 'Au' ? rAB : 1 / rAB;
+        if (Math.abs(rAuSi - 2.0) < 0.20) { formulaTag = 'Au₂Si'; phaseName = 'Siliciuro de oro (Fase interfacial)'; }
+        else if (Math.abs(rAuSi - 1.0) < 0.15) { formulaTag = 'AuSi'; phaseName = 'Siliciuro de oro equiatómico'; }
+      } else if (elA.sym === 'C' && elB.sym === 'Si' || elA.sym === 'Si' && elB.sym === 'C') {
+        const rSiC = elA.sym === 'Si' ? rAB : 1 / rAB;
+        if (Math.abs(rSiC - 1.0) < 0.15) { formulaTag = 'SiC'; phaseName = 'Carburo de silicio (Semiconductor)'; }
+      } else if (elA.sym === 'Ag' && elB.sym === 'Au' || elA.sym === 'Au' && elB.sym === 'Ag') {
+        const rAgAu = elA.sym === 'Ag' ? rAB : 1 / rAB;
+        if (Math.abs(rAgAu - 3.0) < 0.25) { formulaTag = 'Ag₃Au'; phaseName = 'Electrum (Aleación noble histórica)'; }
+        else if (Math.abs(rAgAu - 1.0) < 0.15) { formulaTag = 'AgAu'; phaseName = 'Aleación Plata-Oro 50:50'; }
+      }
+
+      if (formulaTag && phaseName) {
+        formulaEl.innerHTML = `<b style="color:var(--amber); font-size:0.95rem;">${formulaTag}</b> <span style="font-weight:400; color:var(--text); font-size:0.78rem;">— ${phaseName}</span>`;
+      } else {
+        formulaEl.innerHTML = `<span style="font-weight:600; color:var(--cyan);">Aleación binaria ${elA.sym}–${elB.sym}</span> <span style="font-size:0.78rem; color:var(--muted);">(${pctA}% ${elA.sym} · ${pctB}% ${elB.sym} atómico)</span>`;
+      }
+
+      ratioEl.textContent = `Razón atómica N(${elA.sym})/N(${elB.sym}) = ${rAB.toFixed(2)} (${pctA}% ${elA.sym}, ${pctB}% ${elB.sym} atómico)`;
+      return;
     }
+
+    // 3. Caso de 3 o más elementos activos (Multicomponente)
+    const breakdown = active.map(el => {
+      const pct = Math.round((concentrations[el.sym] / totalConc) * 100);
+      return `<span style="color:${el.color};font-weight:600;">${pct}% ${el.sym}</span>`;
+    }).join(' · ');
+
+    formulaEl.innerHTML = `<b>Muestra Multicomponente</b> <span style="font-size:0.75rem; color:var(--muted);">(Análisis estequiométrico global)</span>`;
+    ratioEl.innerHTML   = `Fracción atómica: ${breakdown} (deducida vía Nᵢ ∝ Aᵢ / Zᵢ²)`;
   }
 
   // ── Renderizado principal ──────────────────────────────────────────────────

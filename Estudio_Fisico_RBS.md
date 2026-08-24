@@ -246,6 +246,9 @@ donde $Q$ es la carga total integrada del haz incidente, $N_i$ es la densidad at
 Dado que la sección eficaz $\sigma \propto Z_2^2$ se deriva analíticamente a partir de la ley de Coulomb pura sin contacto físico, RBS permite determinar la **fórmula estequiométrica exacta directamente in situ sin destruir la muestra ni requerir patrones de calibración externos**:
 $$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
 
+**Distinción física fundamental (Núcleos vs. Enlaces químicos):**
+RBS es una técnica **nuclear**: la energía de retroceso elástico del proyectil $\alpha$ ($E_0 \sim 2\,\text{MeV}$) supera por seis órdenes de magnitud las energías de enlace químico ($\sim \text{eV}$). Por tanto, RBS es completamente insensible a los enlaces químicos, moléculas o estados de valencia (no distingue $\text{Fe}^{2+}$ de $\text{Fe}^{3+}$, ni enlaces covalentes de metálicos). Lo que RBS cuantifica es el número absoluto de **núcleos atómicos individuales $N_i$**. En aleaciones o compuestos, la razón atómica resultante ($N_A/N_B$) permite deducir la fase estequiométrica del material cristalino (ej. $N_{\text{Fe}}/N_{\text{C}} = 3 \implies \text{Fe}_3\text{C}$).
+
 **Fases y materiales reales integrados:**
 - $\text{Fe}_3\text{C}$ (Cementita / Acero templado): $N_{\text{Fe}} : N_{\text{C}} = 3 : 1$ ($75\%$ Fe, $25\%$ C atómico).
 - $\text{Au}_2\text{Si}$ (Siliciuro de oro): $N_{\text{Au}} : N_{\text{Si}} = 2 : 1$ ($67\%$ Au, $33\%$ Si atómico).
@@ -290,10 +293,11 @@ $$\Delta E = [S] \cdot x, \qquad [S] = \left[\frac{K}{\cos\theta_{\text{in}}}\le
 El Factor de Parada $[S]$ (en $\text{eV/\AA}$) transforma directamente la anchura en energía $\Delta E$ en el **espesor físico nanométrico $x$** de la película.
 
 #### 4.4 El Triple Desacoplamiento No Destructivo
-En una sola medición no destructiva, RBS desacopla simultáneamente:
-1. **Identidad química ($M_2$):** Borde de energía $E_{\text{borde}} = K(M_2,\theta)\cdot E_0$.
-2. **Estequiometría ($N_i$):** Rendimiento integrado $A_i \propto N_i \cdot Z_2^2$.
-3. **Espesor nanométrico ($x$):** Anchura espectral $\Delta E = [S] \cdot x$.
+En una sola medición no destructiva, el espectro multicanal acumulado de RBS desacopla simultáneamente:
+1. **Identidad química ($M_2$):** Borde superior de energía $E_{\text{borde}} = K(M_2,\theta)\cdot E_0$.
+2. **Concentración y estequiometría ($N_i$):** El área integrada $A_i$ de cada meseta responde a la fórmula canónica de Chu ($A_i = Q (N_i x) \sigma_i \Delta\Omega$). Al normalizar por la sección eficaz de Coulomb ($\sigma \propto Z_2^2$), la proporción atómica se deduce de forma absoluta sin patrones:
+   $$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
+3. **Espesor nanométrico ($x$):** Anchura espectral continua $\Delta E = [S] \cdot x$.
 
 ---
 

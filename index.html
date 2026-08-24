@@ -31,9 +31,7 @@
     <div class="tag">Módulo 2 · Teoría Cuántica Temprana · Evaluación 2</div>
     <h1>Del experimento de Rutherford a la espectroscopía RBS</h1>
     <p>Simulación interactiva: desde el descubrimiento del núcleo atómico por Rutherford (1911) hasta los fundamentos de
-      la espectroscopía RBS, su aplicación al análisis de nanomateriales y la espectrometría PIXE en patrimonio
-      cultural. Las
-      simplificaciones pedagógicas se indican con ⚠.</p>
+      la espectroscopía RBS, su aplicación al análisis de nanomateriales y la espectrometría PIXE.</p>
   </header>
 
   <main>
@@ -727,18 +725,11 @@
 
         <div class="note">
           <b>Importancia en la práctica de laboratorio (RBS):</b><br>
-          · <b>Análisis no destructivo:</b> permite descubrir la estequiometría y fórmula química exacta directamente
-          <i>in situ</i> sin destruir, pulverizar, disolver ni alterar químicamente la muestra (fundamental para obleas
-          de semiconductores, películas delgadas y piezas arqueológicas o de arte).<br>
-          · <b>Alta sensibilidad a elementos pesados:</b> RBS puede detectar trazas mínimas (partes por millón, ppm) de
-          impurezas pesadas sobre sustratos livianos (como metales pesados en silicio o carbono).<br>
-          · <b>Cuantificación absoluta sin patrones (<i>standardless</i>):</b> como la sección eficaz de Coulomb
-          ($\sigma \propto Z_2^2$) se calcula analíticamente a partir de la ley de Coulomb pura, <b>no se necesitan
-            patrones de calibración externos</b> para determinar la estequiometría exacta de la muestra:
+          · <b>Cuantificación atómica (RBS mide núcleos, no enlaces químicos):</b> La dispersión de Rutherford es insensible a los orbitales de valencia o tipos de enlace químico (no distingue $\text{Fe}^{2+}$ de $\text{Fe}^{3+}$). Lo que RBS cuantifica es el número absoluto de <b>núcleos atómicos $N_i$</b> por $\text{cm}^2$. En mezclas o aleaciones, la proporción de átomos ($N_A/N_B$) permite deducir la fase estequiométrica del material (ej. $N_{\text{Fe}}/N_{\text{C}} = 3 \implies \text{Fe}_3\text{C}$).<br>
+          · <b>Alta sensibilidad a elementos pesados:</b> RBS puede detectar trazas mínimas (partes por millón, ppm) de impurezas pesadas sobre matrices livianas.<br>
+          · <b>Cuantificación absoluta sin patrones (<i>standardless</i>):</b> como la sección eficaz de Coulomb ($\sigma \propto Z_2^2$) se calcula analíticamente a partir de la ley de Coulomb pura, <b>no se necesitan patrones de calibración externos</b> para determinar la composición atómica exacta de la muestra:
           $$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
-          <b>→ Conexión con Panel D:</b> este modelo describe átomos en superficie. Cuando los iones penetran en el
-          material, experimentan frenado inelástico continuo con los electrones, ensanchando los peaks hacia energías
-          menores para revelar el perfil de profundidad y espesor nanométrico.
+          <b>→ Conexión con Panel D:</b> este modelo describe átomos en superficie. Cuando los iones penetran en el material, experimentan frenado inelástico continuo con los electrones, ensanchando los peaks hacia energías menores para revelar el perfil de profundidad y espesor nanométrico.
         </div>
 
       </div>
@@ -748,40 +739,25 @@
     <section class="panel" id="panel-d">
       <div class="panel-header">
         <span class="badge">D</span>
-        <h2>RBS en acción — síntesis interactiva y multicapas</h2>
+        <h2>RBS en acción — Síntesis interactiva y análisis multicapa</h2>
       </div>
       <div class="panel-body">
 
         <p class="note">
-          <b>El mismo principio, 115 años después — Síntesis interactiva:</b><br>
-          En 1909–1911, Rutherford disparó partículas $\alpha$ para descubrir el núcleo atómico. Hoy, esa misma física
-          —colisión elástica y repulsión electrostática de Coulomb— permite analizar microchips, catalizadores y
-          películas
-          delgadas capa por capa sin destruir la muestra.<br><br>
-
-          <b>Síntesis de los paneles anteriores:</b><br>
-          · <b>Panel A:</b> Demostró que el núcleo existe, es diminuto y concentra toda la carga positiva del átomo.<br>
-          · <b>Panel B:</b> Explicó cómo la colisión elástica identifica un elemento mediante el factor cinemático
-          $K(M_2,\theta)$ y el balance de retroceso ($E_{\text{rec}}$).<br>
-          · <b>Panel C:</b> Mostró cómo las colisiones forman el espectro RBS en superficie, desacoplando masa ($E_1$) y
-          estequiometría ($A_i \propto N_i Z_2^2$).<br>
-          · <b>Aquí (Panel D):</b> Se integra todo en una <b>heteroestructura real multicapa</b> (sustrato de <b>Si</b>
-          con
-          películas de <b>Fe</b>, <b>Au</b>, <b>Ag</b> y superficie de <b>C</b>). Al penetrar, los iones experimentan
-          <b>frenado inelástico continuo ($dE/dx$)</b> con los electrones, ensanchando las señales ($\Delta E = [S]\cdot
-          x$) para medir el <b>espesor nanométrico</b> de cada estrato.<br><br>
-          · <b>Dinámica estocástica en vivo:</b> la animación izquierda modela los eventos individuales de Monte Carlo;
-          la
-          gráfica derecha acumula el espectro conforme a la <b>estadística de Poisson</b> ($\sigma_N/N = 1/\sqrt{N}$).
+          <b>Metrología nuclear no destructiva en heteroestructuras reales:</b><br>
+          En este módulo se sintetiza la física de los paneles anteriores sobre una muestra multicapa (películas de <b>C</b>, <b>Ag</b>, <b>Au</b> y <b>Fe</b> de $40\,\text{nm}$ sobre sustrato de <b>Si</b>). Al penetrar el sólido, los iones sufren dos procesos independientes:<br>
+          1. <b>Colisión elástica con los núcleos:</b> fija la energía máxima de borde ($E_1 = K E_0$) identificando cada elemento.<br>
+          2. <b>Frenado inelástico continuo ($dE/dx$) con los electrones:</b> ensancha la señal ($\Delta E = [S]\cdot x$) midiendo el <b>espesor nanométrico</b>.<br>
+          · <b>Dinámica estocástica:</b> la animación modela los eventos individuales de Monte Carlo; el espectro derecho acumula las detecciones siguiendo la <b>estadística de Poisson</b> ($\sigma_N/N = 1/\sqrt{N}$).
         </p>
 
         <div class="rbs-view">
           <div class="rbs-col">
-            <div class="canvas-label">Interacción α con la muestra — clic en una capa para resaltarla</div>
+            <div class="canvas-label">Interacción del haz α con la muestra — clic en estrato</div>
             <canvas id="canvasDsamp" width="520" height="300"></canvas>
           </div>
           <div class="rbs-col">
-            <div class="canvas-label">Espectro acumulado — pasar cursor sobre peaks para ver detalles</div>
+            <div class="canvas-label">Espectro multicanal acumulado — pasar cursor para ver datos</div>
             <canvas id="canvasDspec" width="520" height="300"></canvas>
           </div>
         </div>
@@ -799,17 +775,11 @@
               oninput="panelD.setCurrent(this.value)">
             <span class="slider-val" id="valI_nA">20 nA</span>
           </div>
+
           <p class="note" style="margin:10px 0 8px;border-left-color:var(--cyan)">
-            <b>Parámetros del haz:</b><br>
-            · <b>Energía $E_0$ (Alcance y profundidad):</b> al subir $E_0$, las partículas $\alpha$ tienen mayor energía
-            para vencer el frenado electrónico y penetrar hasta estratos profundos ($R \propto \int \frac{dE}{dE/dx}$,
-            de
-            $\sim 1.5\,\mu\text{m}$ a $1\,\text{MeV}$ hasta $>8\,\mu\text{m}$ a $3\,\text{MeV}$). Se mantiene $E_0 \le
-            3.0\,\text{MeV}$ para no superar la barrera de Coulomb nuclear y asegurar repulsión $100\%$ pura.<br>
-            · <b>Corriente $I$ (Flujo y convergencia de Poisson):</b> rige la tasa de proyectiles
-            ($\dot{N}_\text{haz} = \frac{I}{Z_1 e} \approx 6.24 \times 10^{10}\,\text{alfas/s}$ a $20\,\text{nA}$). A
-            mayor corriente o tiempo, la fluctuación estocástica disminuye ($\sigma_N/N = 1/\sqrt{N}$) y el espectro
-            converge suavemente a las proporciones analíticas teóricas.
+            <b>Parámetros experimentales del haz:</b><br>
+            · <b>Energía $E_0$ (Profundidad analizable):</b> permite alcanzar estratos profundos sin superar la barrera de Coulomb nuclear ($E_0 \le 3.0\,\text{MeV}$ asegura repulsión $100\%$ elástica pura).<br>
+            · <b>Corriente $I$ (Convergencia estadística):</b> a $20\,\text{nA}$ inciden $6.24 \times 10^{10}\,\text{alfas/s}$. Al acumular más cuentas, el ruido de Poisson disminuye ($\sigma_N/N = 1/\sqrt{N}$) y el espectro converge al perfil analítico exacto.
           </p>
           <div id="panelD-sliders"></div>
         </div>
@@ -820,31 +790,23 @@
         </div>
 
         <div class="formula-box" style="margin-top:16px">
-          <div class="flabel">Triple desacoplamiento RBS — Identidad, Cantidad y Espesor</div>
-          $$\underbrace{E_1 = K(M_2,\theta)\cdot E_0}_{\text{Posición: identifica masa } M_2} \qquad
-          \underbrace{A_i \;\propto\; N_i \cdot Z_2^2}_{\text{Área: mide cantidad } N_i} \qquad
-          \underbrace{\Delta E = [S] \cdot x}_{\text{Anchura: mide espesor } x}$$
-          <div style="margin:6px 0 2px; text-align:center;">
+          <div class="flabel">El Triple Desacoplamiento RBS — Extracción de Datos del Espectro</div>
+          $$\underbrace{E_1 = K(M_2,\theta)\cdot E_0}_{\text{1. Borde: Identidad del núcleo } M_2} \qquad
+          \underbrace{A_i = Q (N_i \cdot x) \sigma_i \Delta\Omega}_{\text{2. Área / Altura: Concentración } N_i} \qquad
+          \underbrace{\Delta E = [S] \cdot x}_{\text{3. Anchura: Espesor nanométrico } x}$$
+          
+          <div style="margin:6px 0 4px; text-align:center;">
             $$[S] = \left[\frac{K}{\cos\theta_{\text{in}}}\left(\frac{dE}{dx}\right)_{\text{in}} +
             \frac{1}{\cos\theta_{\text{out}}}\left(\frac{dE}{dx}\right)_{\text{out}}\right]$$
           </div>
+
           <div class="formula-meta">
             · <b>Identificación ($M_2$):</b> la energía de borde $E_1$ es la firma cinemática unívoca del núcleo.<br>
-            · <b>Estequiometría ($N_i$):</b> el rendimiento relativo escala con Coulomb ($\sigma \propto Z_2^2$),
-            permitiendo cuantificar sin patrones.<br>
-            · <b>Metrología ($x$):</b> el Factor de Parada $[S]$ ($\text{eV/\AA}$) transforma la pérdida inelástica
-            continua $\Delta E$ en nanómetros de película.
+            · <b>Cálculo de concentración ($N_i$):</b> al normalizar el área acumulada $A_i$ por la sección eficaz de Coulomb ($\sigma \propto Z_2^2$), la proporción atómica se deduce de forma absoluta <b>sin necesidad de patrones de calibración</b>:<br>
+            $$\frac{N_A}{N_B} = \frac{A_A / Z_A^2}{A_B / Z_B^2}$$
+            · <b>Metrología de espesor ($x$):</b> el Factor de Parada $[S]$ ($[S] = \Delta E / x$, expresado en $\text{eV/Å}$ o $\text{keV/nm}$) traduce la pérdida inelástica continua $\Delta E$ en el espesor nanométrico de la película.<br><br>
+            <b>→ Conexión con Panel E:</b> mientras RBS analiza núcleos mediante dispersión elástica, el haz $\alpha$ ioniza la nube electrónica atómica para identificar trazas (PPM) mediante <b>PIXE</b> y la <b>Ley de Moseley</b>.
           </div>
-        </div>
-
-        <div class="note" style="margin-top:12px">
-          · <b>De la física fundamental a la tecnología:</b> la dispersión elástica de Coulomb que reveló el núcleo
-          atómico en 1911 se convierte aquí en una técnica de metrología no destructiva de precisión nanométrica.<br>
-          · <b>Sensibilidad electrostática ($Z_2^2$):</b> el Oro acumula $173.4\times$ más cuentas que el Carbono a
-          igual concentración debido a la mayor intensidad de su campo de Coulomb.<br><br>
-          <b>→ Conexión con Panel E:</b> el mismo haz de partículas $\alpha$ ioniza las capas atómicas internas en la
-          espectrometría <b>PIXE</b> (Panel E), donde la desexcitación de electrones emite Rayos X característicos según
-          la <b>Ley de Moseley</b>.
         </div>
 
       </div>
